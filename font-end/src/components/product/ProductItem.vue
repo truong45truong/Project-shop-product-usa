@@ -2,16 +2,22 @@
     <div class="d-flex flex-column">
         <img class="img-product-item" :src="'http://127.0.0.1:8000'+`${photo.data}`" alt="name">
     </div>
-    <div v-if="isShowDetail == true" class="info-product d-flex flex-column align-items-center">
-            <p class="text-product">{{name}}</p>
+    <div v-if="isShowDetail == true" class="info-product d-flex flex-column align-items-start">
+            <div class="d-flex w-100 card-sale">
+                <div class="triangle_left"></div>
+                <div class="rectangle mt-3"><p class="text-product my-1">{{name}}</p></div>
+                <div class="pacman mt-3"></div>
+            </div>
+            <div class="d-flex w-100 card-price">
+                <div class="triangle_left"></div>
+                <div class="rectangle mt-3"><p class="text-product my-1">{{price.price}} VNĐ</p></div>
+                <div class="pacman mt-3"></div>
+            </div>
             <font-awesome-icon class="icon-heart-product fs-2 my-2" icon="fa-regular fa-heart" />
             <button class="btn btn-dark btn-product m-0"><p class="m-0 text-btn-product">Mua Ngay</p></button>
     </div>
-    <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border']" @click="isShowProduct" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice">
+    <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border ']" @click="isShowProduct" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice">
 
-    </div>
-    <div class="price-product shadow-sm" :class="[isHoverPrice == false  ? 'none-hover-price' : 'hover-price']">
-        <p class="text-price-product">{{price.price}} VNĐ</p>
     </div>
 </template>
   
@@ -40,11 +46,13 @@ export default ({
             this.isHoverPrice = true;
         },
         isNoneHoverPrice(){
-            his.isHoverPrice = false;
+            this.isHoverPrice = false;
         }
     },
     created(){
         console.log(this.photo)
+        const image = document.getElementsByClassName("img-product-item");
+        //image.style.filter = "brightness(0)";
     }
     
 })
@@ -81,17 +89,16 @@ export default ({
   to {top:0%;}
 }
 .info-product{
-    border:20px solid rgba(43, 26, 0, 0);
+    border:none;
     position:absolute;
-    overflow:hidden;
     width:100%;
     height:100%;
-    background-color: rgba(43, 26, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     animation-name: showDetail;
     animation-duration: 0.5s;
 }
 .text-product{
-    color:#F56A79;
+    color:rgb(253, 249, 249);
     font-size:larger;
     font-weight: 800;
 }
@@ -99,11 +106,11 @@ export default ({
     border:none;
 }
 .btn-product{
-    background-color:#F56A79 !important;
-    border-color: #F56A79 !important;
+    background-color:brown !important;
+    border-color: brown !important;
 }
 .icon-heart-product {
-    color:#F56A79
+    color:brown
 }
 .text-price-product{
     font-size: 14px;
@@ -123,5 +130,103 @@ export default ({
     width:fit-content;
     background-color: rgb(241, 236, 236);
 }
-
+.rectangle {
+    position:relative;
+    width: 40%;
+    height:fit-content;
+    background: brown;
+}
+.triangle_left {
+    position:absolute;
+    top:30%;
+    left : -12.4%;
+    border-top: 1.563rem solid transparent;
+    border-right: 2.5rem solid brown;
+    border-bottom: 1.563rem solid transparent;
+    z-index:-1;
+}
+.pacman {
+    height:35px;
+    border-right: 0.813rem solid transparent;
+    border-top: 1.156rem solid brown;
+    border-left: 0.813rem solid brown;
+    border-bottom: 1.156rem solid brown;
+}
+.card-sale {
+    position:relative;
+}
+.card-price {
+    position:relative;
+}
+.card-price .pacman {
+    border-top: 1.156rem solid rgb(16, 167, 187);
+    border-left: 0.813rem solid rgb(16, 167, 187);
+    border-bottom: 1.156rem solid rgb(16, 167, 187);
+}
+.card-price .rectangle {
+    background :  rgb(16, 167, 187);
+}
+.card-price .triangle_left {
+    border-right: 2.5rem solid  rgb(16, 167, 187);;
+}
 </style>
+
+
+<!-- /* CSS */
+.button-56 {
+  align-items: center;
+  background-color: #fee6e3;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-56:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.button-56:hover:after {
+  transform: translate(0, 0);
+}
+
+.button-56:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.button-56:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .button-56 {
+    padding: 0 40px;
+  }
+} -->

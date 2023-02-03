@@ -38,10 +38,6 @@
                 <p :id="`${item.id}`" v-if='item.level==3 & isShowChild[item.id].value == true' class="text-white title-name   m-0 me-2" >
                     {{ item.name }}
                 </p>
-                <div v-if='item.level==3 & isShowChild[item.id].value == true'>
-                    <font-awesome-icon v-if="isShowChild[item.id].expand == false " class="text-white icon-expand" :id='"icon-"+`${item.id}`' icon="fa-solid fa-plus" @click="checkChildCategogy(item.id,item.level)" />
-                </div>
-                <div v-if='item.level==3 & isShowChild[item.id].value == true' class="hr-category ms-2" :class="[ isShowChild[item.id].expand == true ? 'activate-expand' : 'non-activate-expand']" ></div>
             </div>
         </div>
     </div>
