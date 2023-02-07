@@ -125,7 +125,17 @@ export default {
 		/* -------------------------------------------------------------------------- */
 		/*                                   ACTIONS                                  */
 		/* -------------------------------------------------------------------------- */
-
+		/* -------------------------- method register user -------------------------- */
+		register (){
+			this.register_user.then(() => {
+				if (this.get_error == false) {
+					this.message = "Register Success"
+				}
+			}).catch( error => {
+				console.error("error",error)
+				this.message = "Register Failure"
+			})
+		},
 		/* ----------------------------- method sign up ----------------------------- */
 
 		signUp() {

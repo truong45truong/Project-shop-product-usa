@@ -6,6 +6,9 @@ export const UserApiService = {
     },
 
     async reggisterUser (params){
-        return await  ApiService.post('user/',params)
+        return await  ApiService.post('register-user/',params)
     }
+}
+export const actionUser = {
+    
 }

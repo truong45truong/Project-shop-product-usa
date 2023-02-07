@@ -1,19 +1,19 @@
 <template>
     <div class="d-flex">
         <div class="timer" id="timer-date">
-            <p class="text-white m-0 ms-1 time-show-sec"> {{date_prop}} </p>
+            <p class="text-white m-0 ms-1 time-show-sec"> 0 </p>
         </div>
         <p class="text-white m-0 ms-1 time-show"> : </p>
         <div class="timer" id="timer-hour">
-            <p class="text-white m-0 ms-1 time-show"> {{hour_prop}} </p>
+            <p class="text-white m-0 ms-1 time-show">0 </p>
         </div>
         <p class="text-white m-0 ms-1 time-show"> : </p>
         <div class="timer" id="timer-min">
-            <p class="text-white m-0 ms-1 time-show"> {{mins_prop}} </p>
+            <p class="text-white m-0 ms-1 time-show"> 0 </p>
         </div>
         <p class="text-white m-0 ms-1 time-show"> : </p>
         <div class="timer" id="timer-sec">
-            <p class="text-white m-0 ms-1 time-show"> {{secs_prop}} </p>
+            <p class="text-white m-0 ms-1 time-show"> 0 </p>
         </div>
     </div>
 </template>
@@ -23,7 +23,7 @@
 export default ({
     name: 'CountDownFLashSale',
     props: {
-        hour_deadline : new Date("2023-02-03T17:30:00"),
+        hour_deadline : new Date("2023-02-05T17:30:00"),
         date_prop : '',
         hour_prop : '',
         mins_prop : '',
@@ -37,15 +37,11 @@ export default ({
         isFinish : false,
     }),
     methods : {
+        
     },
     mounted (){
-        this.date = this.date_prop
-        this.hour = this.hour_prop
-        this.mins = this.mins_prop
-        this.secs = this.secs_prop
-    },
-    created(){
-        let time = new Date("2023-02-03T17:30:00");
+
+        let time = new Date("2023-02-05T17:30:00");
         setInterval(() => {
             const currentTime = new Date();
             let day = time.getDate()
@@ -79,7 +75,6 @@ export default ({
             } else {
                 p_sec.innerText = sec
             }
-
             timer_sec.innerContent = ''
             timer_sec.appendChild(p_sec)
             timer_sec.removeChild(timer_sec.firstChild);
@@ -118,6 +113,12 @@ export default ({
                 this.date= day; 
             }
         }, 1000);
+    },
+    created(){
+        this.date = this.date_prop
+        this.hour = this.hour_prop
+        this.mins = this.mins_prop
+        this.secs = this.secs_prop
     }
     
 })

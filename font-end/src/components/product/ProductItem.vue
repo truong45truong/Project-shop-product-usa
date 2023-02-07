@@ -136,15 +136,6 @@ export default ({
     height:fit-content;
     background: brown;
 }
-.triangle_left {
-    position:absolute;
-    top:30%;
-    left : -12.4%;
-    border-top: 1.563rem solid transparent;
-    border-right: 2.5rem solid brown;
-    border-bottom: 1.563rem solid transparent;
-    z-index:-1;
-}
 .pacman {
     height:35px;
     border-right: 0.813rem solid transparent;
@@ -170,63 +161,3 @@ export default ({
     border-right: 2.5rem solid  rgb(16, 167, 187);;
 }
 </style>
-
-
-<!-- /* CSS */
-.button-56 {
-  align-items: center;
-  background-color: #fee6e3;
-  border: 2px solid #111;
-  border-radius: 8px;
-  box-sizing: border-box;
-  color: #111;
-  cursor: pointer;
-  display: flex;
-  font-family: Inter,sans-serif;
-  font-size: 16px;
-  height: 48px;
-  justify-content: center;
-  line-height: 24px;
-  max-width: 100%;
-  padding: 0 25px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-56:after {
-  background-color: #111;
-  border-radius: 8px;
-  content: "";
-  display: block;
-  height: 48px;
-  left: 0;
-  width: 100%;
-  position: absolute;
-  top: -2px;
-  transform: translate(8px, 8px);
-  transition: transform .2s ease-out;
-  z-index: -1;
-}
-
-.button-56:hover:after {
-  transform: translate(0, 0);
-}
-
-.button-56:active {
-  background-color: #ffdeda;
-  outline: 0;
-}
-
-.button-56:hover {
-  outline: 0;
-}
-
-@media (min-width: 768px) {
-  .button-56 {
-    padding: 0 40px;
-  }
-} -->

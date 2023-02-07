@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from login.models import User
 from .serializers import UserSerializer
 from django.conf import settings
-
+import uuid
 import json
 import base64
 import uuid 
@@ -15,39 +15,11 @@ import os
 
 path_upload_image = str(settings.BASE_DIR)+"/media/photos"
 path_upload_video = str(settings.BASE_DIR)+"/media/videos"
-
-class UserViewSet (viewsets.ModelViewSet):
+class RegisterUserViewSet (viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-    # ---------------------------------------------------------------------------- #
-    #                                   GET USER                                   #
-    # ---------------------------------------------------------------------------- #
     
-    @action(methods = ["GET"], detail = False, url_path = "user", url_name = "get_user")
-    def get_user(self,request,*args, **kwargs):
-        
-        username = request.GET['username']
-        password = request.GET['password']
-        #check username
-        try:
-            user_current = User.objects.get(username = username)
-        except:
-            return Response({ 'user' : False , 'error' : { 'value' : 'username is wrong' , 'type' : 1 }})
-        #check password
-        if user_current :
-            if user_current.check_password(password):
-                serializer = UserSerializer(user_current,many=False)
-                return Response({'user': serializer.data , 'error' : { 'value' : None , 'type' : None }})
-            else:
-                return Response({ 'user' : False , 'error' : { 'value' : 'password is wrong' , 'type' : 2 }})
-        return Response({ 'user' : False , 'error' : { 'value' : None , 'type' : None }})
-    # ---------------------------------------------------------------------------- #
-    #                                   POST USER                                  #
-    # ---------------------------------------------------------------------------- #
-    
-    @action(methods = ['POST'], detail = False, url_path = 'user', url_name = "post_user")
+    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = "post_user")
     def post_user(self, request, *args, **kwargs):
         
         list_name_file_blog = []
@@ -103,3 +75,50 @@ class UserViewSet (viewsets.ModelViewSet):
         
         serializer = UserSerializer(user,many=False)
         return Response({'user'    : serializer.data , 'error': { 'value': None , 'type': None }})
+class UserViewSet (viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    # ---------------------------------------------------------------------------- #
+    #                                   GET USER                                   #
+    # ---------------------------------------------------------------------------- #
+    @action(methods = ["GET"], detail = False, url_path = "user", url_name = "get_user")
+    def get_user(self,request,*args, **kwargs):
+        
+        username = request.GET['username']
+        password = request.GET['password']
+        #check username
+        try:
+            user_current = User.objects.get(username = username)
+        except:
+            return Response({ 'user' : False , 'error' : { 'value' : 'username is wrong' , 'type' : 1 }})
+        #check password
+        if user_current :
+            if user_current.check_password(password):
+                user_current.token_permission_infor_user = uuid.uuid4()
+                user_current.save()
+                serializer = UserSerializer(user_current,many=False)
+                return Response({'user': serializer.data , 'error' : { 'value' : None , 'type' : None }})
+            else:
+                return Response({ 'user' : False , 'error' : { 'value' : 'password is wrong' , 'type' : 2 }})
+        return Response({ 'user' : False , 'error' : { 'value' : None , 'type' : None }})
+            
+class InforUserViewSet (viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    # ---------------------------------------------------------------------------- #
+    #                                GET INFOR USER                                #
+    # ---------------------------------------------------------------------------- #
+    @action(methods = ["GET"], detail = False, url_path = "user", url_name = "get_infor_user")
+    def get_infor_user(self,request,*args, **kwargs):
+        token_permission_infor_user = request.GET['token_permission_infor_user']
+        email_user = request.GET['email_user']
+        try:
+            user_current = User.objects.get(email = email_user,token_permission_infor_user=token_permission_infor_user)
+            serializer = UserSerializer(user_current,many=False)
+        except:
+            return Response({ 'user' : serializer.data , 'error' : { 'value' : None , 'type' : None }})
+        return Response({ 'user' : serializer.data  , 'error' : { 'value' : None , 'type' : None }})

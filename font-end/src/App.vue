@@ -6,6 +6,8 @@ import { RouterLink, RouterView } from "vue-router";
   <RouterView />
 </template>
 
-<style scoped>
-
+<style>
+  .container {
+    max-width: 1440px !important;
+  }
 </style>

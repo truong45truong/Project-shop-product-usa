@@ -6,7 +6,8 @@ const photo = localStorage.getItem('userProfile');
 const initialState = { user :  user
   ? { status: { loggedIn: true , error : false}, user : user , userProfilePhoto : photo}
   : { status: { loggedIn: false , error : false}, user: null , userProfilePhoto : null },
-  isLoading : false
+  isLoading : false,
+  tokenGetInfor : false,
  }
 // Promise.resolve(user);
 export const auth = {
@@ -33,6 +34,7 @@ export const auth = {
             if( response.data.user){
                 localStorage.setItem('user',response.data.user.email);
                 localStorage.setItem('userProfile',response.data.user.photo);
+                localStorage.setItem('token_permission_infor_user',response.data.user.token_permission_infor_user)
                 commit('loginSuccess',response.data.user)
             }
             if (response.data.error.value){
@@ -50,6 +52,8 @@ export const auth = {
 
     logout({ commit }) {
       localStorage.removeItem('user')
+      localStorage.removeItem('userProfile')
+      localStorage.removeItem('token_permission_infor_user')
       commit('logout');
     },
 
@@ -102,8 +106,8 @@ export const auth = {
       state.user.userProfilePhoto = null
     },
     registerSuccess(state) {
-      state.status.loggedIn = false;
-      state.status.error = false;
+      state.user.status.loggedIn = false;
+      state.user.status.error = false;
       state.user.user = null;
       state.userEmail = null;
       state.userProfilePhoto = null
