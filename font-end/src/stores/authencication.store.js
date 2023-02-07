@@ -18,7 +18,7 @@ export const auth = {
     currentUser : state => state.user,
     errorAuthenticated : state => state.user.status.error ,
     getProfilePhoto : state => state.user.userProfilePhoto 
-  },
+  },  
   actions: {
     /* login */
     async login({ commit }, payload) {
@@ -32,6 +32,7 @@ export const auth = {
       }}).then(
          response => {
             if( response.data.user){
+                console.log("response",response)
                 localStorage.setItem('user',response.data.user.email);
                 localStorage.setItem('userProfile',response.data.user.photo);
                 localStorage.setItem('token_permission_infor_user',response.data.user.token_permission_infor_user)

@@ -218,6 +218,7 @@ export default ({
   to {top : -100%;}
 }
 .info-user{
+    width : 75%;
     position:absolute;
     background-color: white ;
     border: 3px solid black;
@@ -232,5 +233,9 @@ export default ({
     top : -100%;
     animation-name: inforUserHide;
     animation-duration: .5s;
+}
+.icon-market:hover {
+    cursor: pointer;
+    color :brown !important;   
 }
 </style>

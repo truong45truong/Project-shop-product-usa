@@ -4,15 +4,24 @@ import VueAxios from "vue-axios";
 //import JwtService from "./jwt.service";
 import API_URL  from "./config";
 
+const getCookie = (name) => {
+    let value = "; " + document.cookie;
+    let parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
+  
+const csrfToken = getCookie('csrftoken');
 const ApiService = {
     init() {
         app.use(VueAxios, axios)
-        app.axios.defaults.baseURL = API_URL
+        axios.defaults.baseURL = API_URL
     },
     setHeader(jwt_token) {
+        console.log(document.cookie)
         app.axios.defaults.headers.common[
             "Authorization"
         ] = `Bearer ${jwt_token}`;
+        app.axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
     },
     query(resource, params) {
         return app.axios.get(`${resource}`,params).catch(error => {
