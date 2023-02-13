@@ -95,7 +95,9 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
-
+# -------------------------------- CONFIG CSRF ------------------------------- #
+CSRF_COOKIE_DOMAIN = ['http://localhost:5173/','http://127.0.0.1:8000/']
+CSRF_COOKIE_HTTPONLY = False
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 

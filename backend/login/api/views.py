@@ -1,4 +1,5 @@
 from rest_framework.decorators import api_view,parser_classes,action
+from django.middleware.csrf import get_token
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import make_password
@@ -6,21 +7,33 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from login.models import User,PhoneUser,Address
 from .serializers import UserSerializer,PhoneUserSerializer,AddressSerializer
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt,csrf_protect,requires_csrf_token
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.conf import settings
 import uuid
 import json
 import base64
 import uuid 
 import os
-
+class CustomBackend(ModelBackend):
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        try:
+            user = User.objects.get(username=username)
+            if user.check_password(password):
+                return user
+        except Exception as e:
+            return None
+        
 path_upload_image = str(settings.BASE_DIR)+"/media/photos"
 path_upload_video = str(settings.BASE_DIR)+"/media/videos"
 class RegisterUserViewSet (viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
-    @csrf_exempt
     @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = "post_user")
     def post_user(self, request, *args, **kwargs):
         
@@ -87,24 +100,31 @@ class UserViewSet (viewsets.ModelViewSet):
     # ---------------------------------------------------------------------------- #
     @action(methods = ["GET"], detail = False, url_path = "user", url_name = "get_user")
     def get_user(self,request,*args, **kwargs):
+        
         username = request.GET['username']
         password = request.GET['password']
         #check username
         try:
             user_current = User.objects.get(username = username)
-            csrf_token = request.META.get('CSRF_COOKIE', '')
         except:
             return Response({ 'user' : False , 'error' : { 'value' : 'username is wrong' , 'type' : 1 }})
         #check password
         if user_current :
             if user_current.check_password(password):
+                user = authenticate(request, username=username, password=password)
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
                 user_current.token_permission_infor_user = uuid.uuid4()
                 user_current.save()
+                print(request.META.get('CSRF_COOKIE'))
+                # csrf_token = request.META.get('CSRF_COOKIE')
+                csrf_token = get_token(request)
                 serializer = UserSerializer(user_current,many=False)
-                return Response({'user': serializer.data ,'csrf_token': csrf_token, 'error' : { 'value' : None , 'type' : None }})
+                response = Response({'user': serializer.data ,'csrf_token': csrf_token, 'error' : { 'value' : None , 'type' : None }})
+                response.set_cookie('csrftoken', csrf_token)
+                return response
             else:
                 return Response({ 'user' : False ,'csrf_token': request.META.get('CSRF_COOKIE') , 'error' : { 'value' : 'password is wrong' , 'type' : 2 }})
-        return Response({ 'user' : False , 'error' : { 'value' : None , 'type' : None }})
+        return Response(request,{ 'user' : False , 'error' : { 'value' : None , 'type' : None }})
             
 class InforUserViewSet (viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -154,8 +174,7 @@ class PhoneUserViewSet(viewsets.ModelViewSet):
     # ---------------------------------------------------------------------------- #
     #                          METHOD DELETE PHONE OF USER                         #
     # ---------------------------------------------------------------------------- #
-    @csrf_exempt
-    @action(method = ['DELETE'] , detail= False , url_path='delete_phone_user' , url_name= 'delete_phone_user')
+    @action(method = ['POST'] , detail= False , url_path='delete_phone_user' , url_name= 'delete_phone_user')
     def delete_phone_user(self , request ,  *args, **kwargs):
         data_request = json.loads(request.body.decode('utf-8'))
         phone_user_id = data_request['params']['phone_user_id']
@@ -174,7 +193,7 @@ class PhoneUserViewSet(viewsets.ModelViewSet):
     #                           METHOD UPDATE PHONE USER                           #
     # ---------------------------------------------------------------------------- #
      
-    @action(method = ['PUT'] , detail= False , url_name= 'update_phone_user', url_path= 'update_phone_user')
+    @action(method = ['POST'] , detail= False , url_name= 'update_phone_user', url_path= 'update_phone_user')
     def update_phone_user(self , request , *args, **kwargs):
         data_request = json.loads(request.body.decode('utf-8'))
         phone_user_id = data_request['params']['phone_user_id']
@@ -223,14 +242,16 @@ class AddressUserViewset (viewsets.ModelViewSet):
     #                          METHOD DELETE ADDRESS USER                          #
     # ---------------------------------------------------------------------------- #
     
-    @csrf_exempt
-    @action(method = ['DELETE'] , detail= False , url_path='delete_address_user' , url_name= 'delete_address_user')
-    def delete_address_user(self , request ,address_user_id, token_permission_infor_user , *args, **kwargs):
-        print(address_user_id,token_permission_infor_user)
-        
+    @action(method = ['POST'] , detail= False , url_path='delete_address_user' , url_name= 'delete_address_user')
+    def delete_address_user(self , request , *args, **kwargs):
+        data_request = json.loads(request.body.decode('utf-8'))
+        print(data_request)
+        address_user_id = data_request['address_user_id']
+        token_permission_infor_user = data_request['token_permission_infor_user']
+
         try:
             user_delete_address = User.objects.get(token_permission_infor_user=token_permission_infor_user)
-            address_user_delete = Address.objects.create(id = address_user_id , user_id = user_delete_address , status = False)
+            address_user_delete = Address.objects.get(id = address_user_id , user_id = user_delete_address , status = False)
             address_user_delete.delete()
             return Response({'address' : 'Delete address success', 'error' : { 'value' : None , 'type' : None}})
         except:
@@ -240,7 +261,7 @@ class AddressUserViewset (viewsets.ModelViewSet):
     #                          METHOD UPDATE ADDRESS USER                          #
     # ---------------------------------------------------------------------------- #
 
-    @action(methods= ['PUT'] , detail = False , url_name='update_address_user', url_path='update_address_user')
+    @action(methods= ['POST'] , detail = False , url_name='update_address_user', url_path='update_address_user')
     def update_address_user(self , request , *args, **kwargs):
         data_request = json.loads(request.body.decode('utf-8'))
         address_user_id = data_request['params']['address_user_id']

@@ -1,4 +1,4 @@
-import ApiService from './api.service'
+import {ApiService} from './api.service'
 import {actionJWT} from './jwt.service'
 export const UserApiService = {
     async get (params){
@@ -15,8 +15,8 @@ export const UserApiService = {
     async createAddress(params){
         return await  ApiService.post('address-user/',params)
     },
-    async deleteAddress(url){
-        return await ApiService.delete(url,)
+    async deleteAddress(params){
+        return await ApiService.post('address-user/delete/',params)
     }
 }
 export const actionUser = {
@@ -40,14 +40,14 @@ export const actionUser = {
               json = response.data
             })
           })
-        return json
+        return JSON
     },
-    async deteleAddressUser(url) {
+    async deteleAddressUser(params) {
         let json = false
         await actionJWT.verifyTokenJWT().then(async ()=>{
             let jwt_token_access = localStorage.getItem('jwt_token_access')
             ApiService.setHeader(jwt_token_access)
-            await UserApiService.deleteAddress(url).then((response)=>{
+            await UserApiService.deleteAddress(params).then((response)=>{
               infor = response.data
             })
           })

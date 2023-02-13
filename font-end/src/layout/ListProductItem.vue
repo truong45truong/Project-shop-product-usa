@@ -1,7 +1,8 @@
 <template>
     <div class="d-flex flex-column mt-5" :class="[ toMarket == true ? 'market' : 'container flash-sale-top' ]">
         <div class="info-user-layout w-100 d-flex flex-column align-items-center">
-            <InforUserLayout :class="[ isInforUser == true ? 'info-user' : 'info-user-hide' ]" @hide="isShowInforUser"/>
+            <InforUserLayout v-if="inforUser != false " :name="inforUser.name"  :address ="inforUser.address" :phone="inforUser.phones" :photo="inforUser.photo"
+            :class="[ isInforUser == true ? 'info-user' : 'info-user-hide' ]" @hide="isShowInforUser"/>
         </div>
         <div class="row  d-flex mx-3 justify-content-between">
             <div class="col-lg-3 d-flex align-items-center bulletin-board ">
@@ -40,6 +41,8 @@
   
 <script>
 import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel'
+import { actionUser } from './../common/user.service'
+import { mapGetters} from 'vuex'
 import { ProductApiService } from '../common/product.service'
 import CountDownFLashSale from '../components/other/CountDowmFLashSale.vue'
 import InforUserLayout from './InforUserLayout.vue'
@@ -57,12 +60,16 @@ export default ({
         CountDownFLashSale,
         InforUserLayout
     },
+    computed: {
+		...mapGetters('auth', {
+			get_user         : 'currentUser',
+		}),
+	},
     data: () => ({
         listProductItem : [],
         toMarket : false ,
         isInforUser : false,
-
-
+        inforUser : false,
         settings: {
             itemsToShow: 2,
             snapAlign: 'center',
@@ -89,22 +96,34 @@ export default ({
     methods: {
         toTheMaket(){
             this.toMarket = ! this.toMarket;
-            console.log("vao chợ")
         },
-        isShowInforUser() {
+        async isShowInforUser() {
             this.isInforUser = ! this.isInforUser
-            console.log("show infor user",this.isInforUser)
+            if( this.get_user.inforUser == false){
+                await actionUser.getInforUser({
+                    params: {
+                        email_user: localStorage.getItem('user'),
+                        token_permission_infor_user: localStorage.getItem('token_permission_infor_user')
+                    }
+                }).then(async (response) => {
+                        
+                    this.inforUser = {
+                        photo : 'http://127.0.0.1:8000' + response.user.photo,
+                        address : response.user.address,
+                        phones : response.user.phones,
+                        name : response.user.name,
+                    }
+                })
+            }
         }
     },
     async created(){
         await ProductApiService.get().then(res => {
             let array = []
             for(let item of res.data){
-                console.log(item)
                 array.push(item)
             }
             this.listProductItem = array
-            console.log(this.listProductItem)
         })
     }
 })

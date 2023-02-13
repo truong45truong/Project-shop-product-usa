@@ -39,7 +39,6 @@ export default ({
     }),
     methods : {
         isShowProduct(){
-            console.log(this.isShowDetail)
             this.isShowDetail = !this.isShowDetail
         },
         isShowHoverPrice(){
@@ -50,7 +49,6 @@ export default ({
         }
     },
     created(){
-        console.log(this.photo)
         const image = document.getElementsByClassName("img-product-item");
         //image.style.filter = "brightness(0)";
     }

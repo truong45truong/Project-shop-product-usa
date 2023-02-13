@@ -14,22 +14,26 @@ get_infor_user = InforUserViewSet.as_view({
 })
 address_user = AddressUserViewset.as_view({
     'post': 'create_address_user',
-    'delete' : 'delete_phone_user',
-    'put' : 'update_address_user' 
+})
+update_address_user =  AddressUserViewset.as_view({
+    'post' : 'update_address_user' 
 })
 phone_user = PhoneUserViewSet.as_view({
     'post' : 'create_phone_user',
-    'put' :  'update_phone_user'
+})
+update_phone_user = PhoneUserViewSet.as_view({
+    'post' : 'update_phone_user',
 })
 delete_address_user = AddressUserViewset.as_view({
-    'delete' : 'delete_address_user'
+    'post' : 'delete_address_user'
 })
 urlpatterns = [
     path('user/', user, name = "user_logs"),
     path('register-user/', register_user, name = "register_user"),
     path('get-infor-user/', get_infor_user, name = "infor_user"),
     path('address-user/', address_user, name = "address_user"),
-    path('address-user/<str:address_user_id>/<str:token_permission_infor_user>/', delete_address_user, name = "delete_address_user"),
+    path('address-user/delete/', delete_address_user, name = "delete_address_user"),
+    path('address-user/update/',update_address_user, name = "update_address_user"),
     path('phone-user/', phone_user, name = "phone_user"),
     
 ]

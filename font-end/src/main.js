@@ -16,7 +16,7 @@ import './assets/Sassy_Frass/SassyFrass-Regular.ttf'
 // Make BootstrapVue available throughout your project
 import storeConfig from './stores/index'
 
-import ApiService from './common/api.service'
+import {ApiService } from './common/api.service'
 library.add(fas, far, fab)
 dom.watch();
 const app = createApp(App);

@@ -18,7 +18,6 @@ class User(AbstractUser):
     name     = models.CharField( max_length=200 )
     password = models.CharField( max_length = 200)
     email    = models.EmailField(max_length = 254)
-    phone    = models.CharField(max_length=12,blank=True)
     token_permission_infor_user = models.UUIDField(default=uuid.uuid4 , unique=True)
     USERNAME_FIELD = 'username'
     
@@ -56,4 +55,5 @@ class PhoneUser(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     phone = models.CharField(max_length=10)
     name = models.CharField(max_length=100)
+    status = models.BooleanField(null = False)
     user_id=models.ForeignKey(User, on_delete=models.SET_NULL, null=True , related_name='phones')

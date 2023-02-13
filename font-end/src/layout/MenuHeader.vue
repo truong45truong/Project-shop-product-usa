@@ -11,10 +11,9 @@
                         <img class="img-flag mx-2" src="./../assets/images/flagflag.webp" alt="">
                         <p v-if="!isAuthenticated" class="m-0 btn-login" @click="showLogin" >Đăng nhập</p>
                         <p v-if="isAuthenticated" class="m-0"> {{get_user.user}}  </p>
-                        <p v-if="isAuthenticated" class="m-0 ms-2 btn-login" @click="logoutUser" > Đăng xuất  </p>
+                        <p v-if="isAuthenticated" class="m-0 ms-2 btn-login" @click="logoutUser()" > Đăng xuất  </p>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="menu-top">
@@ -43,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <category-layout  class="m-0" :class="[isShowCategory ? 'show-list-category' : 'list-category']" />
+        <category-layout :class="[isShowCategory ? 'show-list-category' : 'list-category']" />
         <sign-in class="active-login" v-if="isShowLogin" @login = "login"/>
     </header>
 </template>
@@ -98,8 +97,9 @@ export default {
 			})
 		},
         logoutUser () {
-            this.logout_user;
-            this.isAuthenticated = this.get_authenticated;
+            this.$store.dispatch('auth/logout').then(() => {
+                this.isAuthenticated = this.get_authenticated;
+            })
         }
     },
     computed: {

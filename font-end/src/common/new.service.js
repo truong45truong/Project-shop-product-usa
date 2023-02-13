@@ -1,4 +1,4 @@
-import ApiService from './api.service'
+import { ApiService } from './api.service'
 import  { actionJWT } from './jwt.service'
 export const NewApiService = {
     async get (params){

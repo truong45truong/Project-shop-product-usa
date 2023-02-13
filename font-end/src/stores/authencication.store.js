@@ -1,11 +1,11 @@
 import { UserApiService } from "../common/user.service";
 import {actionJWT} from "../common/jwt.service";
-
+import {ApiService} from './../common/api.service'
 const user = localStorage.getItem('user');
 const photo = localStorage.getItem('userProfile');
 const initialState = { user :  user
-  ? { status: { loggedIn: true , error : false}, user : user , userProfilePhoto : photo}
-  : { status: { loggedIn: false , error : false}, user: null , userProfilePhoto : null },
+  ? { status: { loggedIn: true , error : false}, user : user , userProfilePhoto : photo ,inforUser : false}
+  : { status: { loggedIn: false , error : false}, user: null , userProfilePhoto : null , inforUser : false},
   isLoading : false,
   tokenGetInfor : false,
  }
@@ -32,10 +32,11 @@ export const auth = {
       }}).then(
          response => {
             if( response.data.user){
-                console.log("response",response)
                 localStorage.setItem('user',response.data.user.email);
                 localStorage.setItem('userProfile',response.data.user.photo);
                 localStorage.setItem('token_permission_infor_user',response.data.user.token_permission_infor_user)
+                localStorage.setItem('csrf_token',response.data.csrf_token)
+                ApiService.setHeaderCookieCsrf()
                 commit('loginSuccess',response.data.user)
             }
             if (response.data.error.value){
@@ -55,6 +56,7 @@ export const auth = {
       localStorage.removeItem('user')
       localStorage.removeItem('userProfile')
       localStorage.removeItem('token_permission_infor_user')
+      console.log('logout')
       commit('logout');
     },
 
@@ -71,7 +73,6 @@ export const auth = {
       }).then(
         response => {
           if (response.data.error.value){
-            console.log(response.data.error.value)
             commit('registerActionsFailure',response.data.error)
           }
           else {
@@ -90,6 +91,7 @@ export const auth = {
       state.user.status.loggedIn = true;
       state.user.status.error = false;
       state.user.user = user.email;
+      state.user.inforUser = false;
       state.user.userProfilePhoto = user.photo
     },
     loginFailure(state,error) {
@@ -97,6 +99,7 @@ export const auth = {
       state.user.status.error = error;
       state.user.user = null;
       state.user.userEmail = null;
+      state.user.inforUser = false
       state.user.userProfilePhoto = null
     },
     logout(state) {
@@ -104,6 +107,7 @@ export const auth = {
       state.user.status.error = false;
       state.user.user = null;
       state.user.userEmail = null;
+      state.user.inforUser = false
       state.user.userProfilePhoto = null
     },
     registerSuccess(state) {
@@ -111,6 +115,7 @@ export const auth = {
       state.user.status.error = false;
       state.user.user = null;
       state.userEmail = null;
+      state.user.inforUser = false
       state.userProfilePhoto = null
     },
     registerActionsFailure(state,error) {
@@ -118,7 +123,8 @@ export const auth = {
       state.user.status.error = error;
       state.user.user = null;
       state.user.userEmail = null;
-      state.user.userProfilePhoto = null
+      state.user.userProfilePhoto = null;
+      state.user.inforUser = false
     }
   }
 };

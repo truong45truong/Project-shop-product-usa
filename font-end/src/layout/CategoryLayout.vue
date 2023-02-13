@@ -55,12 +55,12 @@ export default {
         isShowChild : []
     }),
     async created (){
-        await CategoryApiService.get().then(res => {
+        return await CategoryApiService.get().then(res => {
             this.listCateogry = res.data.category
-        })
-        for (let item of this.listCateogry){
+            for (let item of this.listCateogry){
                 this.isShowChild[item.id] = {value : false , level : item.level , expand : false}
         }
+        })
     },
     methods : {
         checkChildCategogy(category_id,level) {

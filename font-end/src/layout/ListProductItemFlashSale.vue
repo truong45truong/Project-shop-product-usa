@@ -47,13 +47,13 @@ export default ({
     },
     data: () => ({
         listProductItem : [],
+        date_flash_sale : false,
+        hour_flash_sale : false,
+        mins_flash_sale : false,
+        secs_flash_sale : false,
         settings: {
         itemsToShow: 2,
         snapAlign: 'center',
-        date_flash_sale : 3,
-        hour_flash_sale : 17,
-        mins_flash_sale : 30,
-        secs_flash_sale : 60,
       },
       // breakpoints are mobile first
       // any settings not specified will fallback to the carousel settings
@@ -78,12 +78,14 @@ export default ({
         await ProductApiService.get().then(res => {
             let array = []
             for(let item of res.data){
-                console.log(item)
                 array.push(item)
             }
             this.listProductItem = array
-            console.log(this.listProductItem)
         })
+        this.date_flash_sale = 3;
+        this.hour_flash_sale = 17;
+        this.mins_flash_sale = 30;
+        this.secs_flash_sale = 60;
     }
 })
 </script>
