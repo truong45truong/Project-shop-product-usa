@@ -20,10 +20,10 @@
                     </p>
                     <font-awesome-icon v-if="!isSelectAddress &  isSelectPhone != true" icon="fa-solid fa-pencil"
                         class="ms-2 fs-4 icon-select-address" @click="isShowSelectAddress" />
-                    <div v-if="isSelectAddress" class="select-address w-100">
+                    <div v-if="isSelectAddress" class="w-100 select-address" :class = "[ dataAddress.length > 5 & !isAddAddress ? 'select-over-item' : '']">
                         <font-awesome-icon icon="fa-solid fa-xmark" class="ms-2 fs-5 icon-select-address"
                             @click="isShowSelectAddress" />
-                        <div v-if="!isAddAddress" class="my-2 d-flex justify-content-between" v-for="item,index of address">
+                        <div v-if="!isAddAddress" class="my-2 d-flex justify-content-between" v-for="item,index of dataAddress">
                             <p> 
                                 <span class="text-success me-2">{{index + 1}}.</span>
                                 {{ item.address_content }}
@@ -33,7 +33,7 @@
                                 <font-awesome-icon icon="fa-solid fa-circle-check" class="ms-5 fs-5 icon-select-address"
                                     @click="selectedAdress(item.id)" />
                                 <font-awesome-icon icon="fa-solid fa-xmark" class="ms-2 fs-5 icon-select-address"
-                                    @click="deleteAddess(item.id)" />
+                                    @click="deleteAddressUser" />
                             </div>
                         </div>
                         <div class="btn-add-address">
@@ -54,7 +54,7 @@
                                 <div class="m-0 my-1"> Đặt làm địa chỉ mặt định</div>
                             </div>
                             <div class="d-flex">
-                                <div class="btn btn-warning mt-2 mx-3 w-100">
+                                <div class="btn btn-warning mt-2 mx-3 w-100" @click="addAddressUser">
                                     <p class="m-0">Xác nhận</p>
                                     <font-awesome-icon icon="fa-solid fa-circle-check"
                                         class="fs-4 icon-select-address" />
@@ -77,10 +77,10 @@
                     <img class="img-flag-phone-user mx-2" src="./../assets/images/flagflag.webp" alt="">
                     <font-awesome-icon v-if="!isSelectPhone & isSelectAddress != true" icon="fa-solid fa-pencil"
                         class="ms-2 fs-4 icon-select-address" @click="isShowSelectPhone" />
-                    <div v-if="isSelectPhone == true" class="select-phone w-100">
+                    <div v-if="isSelectPhone == true" class="select-phone w-100" :class = "[ dataPhone.length > 5 & !isAddPhone ? 'select-over-item' : '']">
                         <font-awesome-icon icon="fa-solid fa-xmark" class="ms-2 fs-5 icon-select-address"
                             @click="isShowSelectPhone" />
-                        <div v-if="!isAddPhone" class="my-2 d-flex justify-content-between" v-for="item,index of phone">
+                        <div v-if="!isAddPhone" class="my-2 d-flex justify-content-between" v-for="item,index of dataPhone">
                             <div class="d-flex">
                                 <p> 
                                     <span class="text-success me-2">{{index + 1}}.</span>
@@ -146,7 +146,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters,mapActions } from 'vuex'
 import { actionUser } from './../common/user.service'
 export default ({
     name: 'InforUserLayout',
@@ -157,7 +157,6 @@ export default ({
         name: false,
     },
     components: {
-
     },
     data: () => ({
         address_selected: false,
@@ -176,7 +175,10 @@ export default ({
             phone : '',
             error : false
         },
-
+        dataAddress : new Array(),
+        dataPhone : new Array(),
+        isValueNotify : false ,
+        isShowNotice : false ,
     }),
     methods: {
         isShowSelectAddress() {
@@ -204,6 +206,50 @@ export default ({
             } else {
                 this.contentPhone.error = false
             }
+        },
+        async addAddressUser(){
+            return await actionUser.createAdressUser({params : {
+                address_content : this.contentAddAdress,
+                token_permission_infor_user : localStorage.getItem('token_permission_infor_user') ,
+                status : this.statusAddress
+            }}).then(res => {
+                this.dataAddress.push(res.address)
+                console.log(this.dataAddress)
+                this.isShowAddAddress()
+            })
+        },
+        deleteAddressUser(address_user_id) {
+            function waitUntilValueIsTrue() {
+                return new Promise((resolve) => {
+                    const checkValue = () => {
+                    console.log(this.get_accept)
+                    if (this.get_accept === true) {
+                        actionUser.deteleAddressUser({
+                            params : {
+                                address_user_id : address_user_id ,
+                                token_permission_infor_user : localStorage.getItem('token_permission_infor_user')
+                            }
+                        }).then(res => {
+                            this.$store.dispatch('notice/actionComplete')
+                        })
+                        resolve();
+                    } else {
+                        setTimeout(checkValue, 500); // kiểm tra lại giá trị của value sau mỗi 100ms
+                    }
+                    };
+
+                    checkValue();
+                });
+            }
+            this.isShowNoticeCarefully()
+            waitUntilValueIsTrue()
+        },
+        updateValueNotice(value){
+            this.isValueNotify = value
+        },
+        isShowNoticeCarefully(){
+            this.$store.dispatch('notice/actionTypeNotice',{content : 'Bạn có chắc chắn muốn xóa địa chỉ này',type : 'Xóa'})
+            this.$store.dispatch('notice/activateShow')
         }
     },
     computed: {
@@ -212,15 +258,23 @@ export default ({
             get_authenticated: 'isAuthenticated',
             get_error: 'errorAuthenticated'
         }),
+        ...mapGetters('notice', {
+            get_accept : 'isAccept'
+        }),
+        ...mapActions('notice', {
+			activateNotice   : 'activateShow',
+            actionTypeNotice : 'actionTypeNotice'
+		})
     },
     created() {
+        this.dataAddress = Array.from(this.address)
+        this.dataPhone = Array.from(this.phone)
         for (let item of this.address) {
             if (item.status == true) {
                 this.address_selected = item
             }
         }
         for(let item of this.phone){
-            console.log("tiem",item)
             if (item.status == true) {
                 this.phone_selected = item
             }
@@ -270,6 +324,9 @@ export default ({
     padding: 15px;
     overflow-y: scroll;
     border: 1px solid black;
+}
+.select-over-item {
+    height : 400px;
 }
 .select-phone{
     max-width: 100%;

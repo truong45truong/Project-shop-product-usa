@@ -228,14 +228,15 @@ class AddressUserViewset (viewsets.ModelViewSet):
         data_request = json.loads(request.body.decode('utf-8'))
         token_permission_infor_user_access = data_request['params']['token_permission_infor_user']
         address_content = data_request['params']['address_content']
-        
+        status = data_request['params']['status']
         try:
             user_create_address = User.objects.get(token_permission_infor_user=token_permission_infor_user_access)
             address_user_create = Address.objects.create(address_content= address_content, user_id = user_create_address , status = False)
             address_user_create.save()
-            serializer = AddressSerializer(queryset = address_user_create, many = False)
+            serializer = AddressSerializer(address_user_create,many=False)
             return Response({'address' : serializer.data , 'error' : { 'value' : None , 'type' : None}})
-        except:
+        except Exception as e:
+            print(e)
             return Response({ 'address' : 'Create address wrong'  , 'error' : { 'value' : 'Failure Create' , 'type' : 'CA1' }})
     
     # ---------------------------------------------------------------------------- #
@@ -245,9 +246,8 @@ class AddressUserViewset (viewsets.ModelViewSet):
     @action(method = ['POST'] , detail= False , url_path='delete_address_user' , url_name= 'delete_address_user')
     def delete_address_user(self , request , *args, **kwargs):
         data_request = json.loads(request.body.decode('utf-8'))
-        print(data_request)
-        address_user_id = data_request['address_user_id']
-        token_permission_infor_user = data_request['token_permission_infor_user']
+        address_user_id = data_request['params']['address_user_id']
+        token_permission_infor_user = data_request['params']['token_permission_infor_user']
 
         try:
             user_delete_address = User.objects.get(token_permission_infor_user=token_permission_infor_user)

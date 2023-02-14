@@ -40,7 +40,7 @@ export const actionUser = {
               json = response.data
             })
           })
-        return JSON
+        return json
     },
     async deteleAddressUser(params) {
         let json = false
@@ -48,7 +48,7 @@ export const actionUser = {
             let jwt_token_access = localStorage.getItem('jwt_token_access')
             ApiService.setHeader(jwt_token_access)
             await UserApiService.deleteAddress(params).then((response)=>{
-              infor = response.data
+              json = response.data
             })
           })
         return json

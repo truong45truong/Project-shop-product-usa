@@ -4,7 +4,7 @@ from login.models import User,Address,PhoneUser
 class AddressSerializer(ModelSerializer):
     class Meta:
         model = Address
-        fields = '__all__'
+        fields = ['id','address_content','status']
 class PhoneUserSerializer(ModelSerializer):
     class Meta:
         model = PhoneUser
