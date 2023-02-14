@@ -157,17 +157,26 @@ class PhoneUserViewSet(viewsets.ModelViewSet):
     @action(method = ['POST'], detail = False , url_path='create_phone_user', url_name='create_phone_user')
     def create_phone_user(self , request , *args, **kwargs):
         data_request= json.loads(request.body.decode('utf-8'))
+        print(data_request)
         token_permission_infor_user = data_request['params']['token_permission_infor_user']
         phone_user = data_request['params']['phone_user']
         name_user = data_request['params']['name_user']
+        status = data_request['params']['status']
         
         try:
             user = User.objects.get(token_permission_infor_user=token_permission_infor_user)
-            phone_user_create = PhoneUser.objects.create(phone = phone_user , name = name_user , user_id = user)
+            if status == True :
+                list_phone_status_true = PhoneUser.objects.filter(user_id = user , status = status)
+                for item in list_phone_status_true:
+                    phone_status_true = PhoneUser.objects.get(id = item.id)
+                    phone_status_true.status = False
+                    phone_status_true.save()
+            phone_user_create = PhoneUser.objects.create(phone = phone_user , name = name_user , user_id = user , status = status)
             phone_user_create.save()
-            serializer = PhoneUserSerializer(queryset = phone_user_create,many = False)
+            serializer = PhoneUserSerializer(phone_user_create,many = False)
             return Response({'phone' : serializer.data , 'error' : { 'value' : None , 'type' : None}})
-        except:
+        except Exception as e:
+            print(e)
             return Response({ 'phone' : 'Creatte phone wrong'  , 'error' : { 'value' : 'Failure Create' , 'type' : 'P1' }})
 
     
@@ -231,7 +240,11 @@ class AddressUserViewset (viewsets.ModelViewSet):
         status = data_request['params']['status']
         try:
             user_create_address = User.objects.get(token_permission_infor_user=token_permission_infor_user_access)
-            address_user_create = Address.objects.create(address_content= address_content, user_id = user_create_address , status = False)
+            if status == True:
+                address_status_true = Address.objects.get(user_id = user_create_address , status = True)
+                address_status_true.status = False
+                address_status_true.save()
+            address_user_create = Address.objects.create(address_content= address_content, user_id = user_create_address , status = status)
             address_user_create.save()
             serializer = AddressSerializer(address_user_create,many=False)
             return Response({'address' : serializer.data , 'error' : { 'value' : None , 'type' : None}})
@@ -248,13 +261,13 @@ class AddressUserViewset (viewsets.ModelViewSet):
         data_request = json.loads(request.body.decode('utf-8'))
         address_user_id = data_request['params']['address_user_id']
         token_permission_infor_user = data_request['params']['token_permission_infor_user']
-
         try:
             user_delete_address = User.objects.get(token_permission_infor_user=token_permission_infor_user)
             address_user_delete = Address.objects.get(id = address_user_id , user_id = user_delete_address , status = False)
             address_user_delete.delete()
             return Response({'address' : 'Delete address success', 'error' : { 'value' : None , 'type' : None}})
-        except:
+        except Exception as e:
+            print(e)
             return Response({ 'address' : 'Delete address wrong'  , 'error' : { 'value' : 'Failure Delete' , 'type' : 'DA1' }})
         
     # ---------------------------------------------------------------------------- #

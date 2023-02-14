@@ -4,6 +4,10 @@
             <InforUserLayout v-if="inforUser != false " :name="inforUser.name"  :address ="inforUser.address" :phone="inforUser.phones" :photo="inforUser.photo"
             :class="[ isInforUser == true ? 'info-user' : 'info-user-hide' ]" @hide="isShowInforUser"/>
         </div>
+        <div class="info-user-layout w-100 d-flex flex-column align-items-center">
+            <InforUserLayout v-if="inforUser != false " :name="inforUser.name"  :address ="inforUser.address" :phone="inforUser.phones" :photo="inforUser.photo"
+            :class="[ isInforUser == true ? 'info-user' : 'info-user-hide' ]" @hide="isShowInforUser"/>
+        </div>
         <div class="row  d-flex mx-3 justify-content-between">
             <div class="col-lg-3 d-flex align-items-center bulletin-board ">
                 <font-awesome-icon icon="fa-solid fa-bookmark" class="text-dark bulletin-content" />

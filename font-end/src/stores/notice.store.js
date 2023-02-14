@@ -28,6 +28,9 @@ export const notice = {
         actionAccept({commit}){
             commit('accept')
         },
+        actionCancel({commit}){
+            commit('cancel')
+        },
         actionComplete({commit}){
             commit('complete')
         }
@@ -44,8 +47,10 @@ export const notice = {
             state.type = payload.type;
             state.content = payload.content;
         },
+        cancel(state){
+            state.isAccept = false
+        },
         accept(state){
-            console.log("accept success")
             state.isAccept = true
         },
         complete(state){

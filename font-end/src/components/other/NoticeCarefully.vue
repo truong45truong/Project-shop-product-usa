@@ -26,15 +26,16 @@ export default ({
 		...mapActions('notice', {
 			activateNotice   : 'activateShow',
             hideNotice : 'activateHide',
-            acceptNotice : 'actionAccept'
+            acceptNotice : 'actionAccept',
+            cancelNotice : 'actionCancel'
 		})
 	},
     methods: {
         backNoticeCarefully() {
+            this.cancelNotice
             this.hideNotice
         },
         acceptNoticeCarefully() {
-            console.log("aceppt")
             this.acceptNotice
             this.hideNotice
     

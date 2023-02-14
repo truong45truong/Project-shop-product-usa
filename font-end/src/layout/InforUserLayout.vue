@@ -33,7 +33,7 @@
                                 <font-awesome-icon icon="fa-solid fa-circle-check" class="ms-5 fs-5 icon-select-address"
                                     @click="selectedAdress(item.id)" />
                                 <font-awesome-icon icon="fa-solid fa-xmark" class="ms-2 fs-5 icon-select-address"
-                                    @click="deleteAddressUser" />
+                                    @click="deleteAddressUser(item.id)" />
                             </div>
                         </div>
                         <div class="btn-add-address">
@@ -93,9 +93,9 @@
                             </div>
                             <div class="d-flex">
                                 <font-awesome-icon icon="fa-solid fa-circle-check" class="ms-5 fs-5 icon-select-address"
-                                    @click="selectedAdress(item.id)" />
+                                    @click="selectedPhone(item.id)" />
                                 <font-awesome-icon icon="fa-solid fa-xmark" class="ms-2 fs-5 icon-select-address"
-                                    @click="deleteAddess(item.id)" />
+                                    @click="deletePhoneUser(item.id)" />
                             </div>
                         </div>
                         <div v-if="!isAddPhone" class="btn-add-address">
@@ -120,11 +120,11 @@
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <input v-model="statusPhone" type="checkbox" class="checkbox-status m-1">
+                                <input v-model="this.contentPhone.status" type="checkbox" class="checkbox-status m-1">
                                 <div class="m-0 my-1"> Đặt làm di động mặt định</div>
                             </div>
                             <div class="d-flex w-100">
-                                <div class="btn btn-warning mt-2 mx-3 w-100">
+                                <div class="btn btn-warning mt-2 mx-3 w-100" @click="addPhoneUser">
                                     <p class="m-0">Xác nhận</p>
                                     <font-awesome-icon icon="fa-solid fa-circle-check"
                                         class="fs-4 icon-select-address" />
@@ -163,7 +163,6 @@ export default ({
         isSelectAddress: false,
         isSelectPhone : false,
         statusAddress : false,
-        statusPhone : false,
         isSave: false,
         isAddAddress: false,
         isAddPhone : false ,
@@ -173,7 +172,8 @@ export default ({
         contentPhone :  {
             name : '',
             phone : '',
-            error : false
+            error : false,
+            status:false
         },
         dataAddress : new Array(),
         dataPhone : new Array(),
@@ -181,23 +181,81 @@ export default ({
         isShowNotice : false ,
     }),
     methods: {
+        /* -------------------------------------------------------------------------- */
+        /*                               ADDRESS METHODS                              */
+        /* -------------------------------------------------------------------------- */
         isShowSelectAddress() {
             this.isSelectAddress = !this.isSelectAddress
         },
-        isShowSelectPhone(){
-            this.isSelectPhone = !this.isSelectPhone
-        },
         selectedAdress(id) {
             this.isShowSelectAddress()
-            this.address_selected = this.address.filter((address) => {
-                return address.id == id
+            this.address_selected = this.dataAddress.filter((phone) => {
+                return phone.id == id
             })[0]
         },
         isShowAddAddress() {
             this.isAddAddress = !this.isAddAddress;
         },
+        async addAddressUser(){
+            return await actionUser.createAdressUser({params : {
+                address_content : this.contentAddAdress,
+                token_permission_infor_user : localStorage.getItem('token_permission_infor_user') ,
+                status : this.statusAddress
+            }}).then(res => {
+                if(this.statusAddress == true){
+                    this.dataAddress = this.dataAddress.filter((address) => {
+                                                            address.status = false
+                                                            return address
+                                                        })
+                }
+                this.dataAddress.push(res.address)
+                this.isShowAddAddress()
+            })
+        },
+        deleteAddressUser(address_user_id) {
+            this.isShowNoticeCarefully()
+            return new Promise((resolve) => {
+                const checkValue = () => {
+                    if (this.get_accept === true) {
+                        actionUser.deteleAddressUser({
+                            params : {
+                                address_user_id : address_user_id ,
+                                token_permission_infor_user : localStorage.getItem('token_permission_infor_user')
+                            }
+                        }).then(res => {
+                            this.$store.dispatch('notice/actionComplete')
+                            this.dataAddress = this.dataAddress.filter((address) => {
+                                                    return address.id != address_user_id
+                                                })
+                        })
+                        resolve();
+                    }
+                    if(this.get_accept === false || this.get_accept === true){
+                        this.$store.dispatch('notice/actionComplete')
+                    }
+                    else {
+                        setTimeout(checkValue, 500);
+                    }
+                };
+
+                checkValue();
+            });
+        },
+        /* -------------------------------------------------------------------------- */
+        /*                                PHONE METHODS                               */
+        /* -------------------------------------------------------------------------- */
+
+        isShowSelectPhone(){
+            this.isSelectPhone = !this.isSelectPhone
+        },
         isShowAddphone(){
             this.isAddPhone = !this.isAddPhone
+        },
+        selectedPhone(id){
+            this.isShowSelectPhone()
+            this.phone_selected = this.dataPhone.filter((address) => {
+                return address.id == id
+            })[0]
         },
         checkPhone() {
             const pattern = /^(\+84|0)\d{9}$/;
@@ -207,46 +265,55 @@ export default ({
                 this.contentPhone.error = false
             }
         },
-        async addAddressUser(){
-            return await actionUser.createAdressUser({params : {
-                address_content : this.contentAddAdress,
+        async addPhoneUser(){
+            return await actionUser.createPhoneUser({params : {
+                phone_user : this.contentPhone.phone,
+                name_user : this.contentPhone.name,
                 token_permission_infor_user : localStorage.getItem('token_permission_infor_user') ,
-                status : this.statusAddress
+                status : this.contentPhone.status
             }}).then(res => {
-                this.dataAddress.push(res.address)
-                console.log(this.dataAddress)
+                if(this.contentPhone.status == true){
+                    this.dataPhone = this.dataPhone.filter((phone) => {
+                                                            phone.status = false
+                                                            return phone
+                                                        })
+                }
+                this.dataPhone.push(res.phone)
                 this.isShowAddAddress()
             })
         },
-        deleteAddressUser(address_user_id) {
-            function waitUntilValueIsTrue() {
-                return new Promise((resolve) => {
-                    const checkValue = () => {
-                    console.log(this.get_accept)
+        deletePhoneUser(phone_user_id) {
+            this.isShowNoticeCarefully()
+            return new Promise((resolve) => {
+                const checkValue = () => {
                     if (this.get_accept === true) {
-                        actionUser.deteleAddressUser({
+                        actionUser.detelePhoneUser({
                             params : {
-                                address_user_id : address_user_id ,
+                                phone_user_id : phone_user_id ,
                                 token_permission_infor_user : localStorage.getItem('token_permission_infor_user')
                             }
                         }).then(res => {
                             this.$store.dispatch('notice/actionComplete')
+                            this.dataPhone = this.dataPhone.filter((phone) => {
+                                                    return phone.id != phone_user_id
+                                                })
                         })
                         resolve();
-                    } else {
-                        setTimeout(checkValue, 500); // kiểm tra lại giá trị của value sau mỗi 100ms
                     }
-                    };
+                    if(this.get_accept === false || this.get_accept === true){
+                        this.$store.dispatch('notice/actionComplete')
+                    }
+                    else {
+                        setTimeout(checkValue, 500);
+                    }
+                };
 
-                    checkValue();
-                });
-            }
-            this.isShowNoticeCarefully()
-            waitUntilValueIsTrue()
+                checkValue();
+            });
         },
-        updateValueNotice(value){
-            this.isValueNotify = value
-        },
+        /* -------------------------------------------------------------------------- */
+        /*                               NOTICE METHODS                               */
+        /* -------------------------------------------------------------------------- */
         isShowNoticeCarefully(){
             this.$store.dispatch('notice/actionTypeNotice',{content : 'Bạn có chắc chắn muốn xóa địa chỉ này',type : 'Xóa'})
             this.$store.dispatch('notice/activateShow')
