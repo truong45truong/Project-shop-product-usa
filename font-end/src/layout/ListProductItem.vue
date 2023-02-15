@@ -5,8 +5,7 @@
             :class="[ isInforUser == true ? 'info-user' : 'info-user-hide' ]" @hide="isShowInforUser"/>
         </div>
         <div class="info-user-layout w-100 d-flex flex-column align-items-center">
-            <InforUserLayout v-if="inforUser != false " :name="inforUser.name"  :address ="inforUser.address" :phone="inforUser.phones" :photo="inforUser.photo"
-            :class="[ isInforUser == true ? 'info-user' : 'info-user-hide' ]" @hide="isShowInforUser"/>
+            <cart-inside-market-layout v-if="isCart != false " :dataItem="listProductItem" :class="[ isCart == true ? 'info-user' : 'info-user-hide' ]" @hideCart="isShowCart"/>
         </div>
         <div class="row  d-flex mx-3 justify-content-between">
             <div class="col-lg-3 d-flex align-items-center bulletin-board ">
@@ -19,7 +18,7 @@
             </div>
             <div class="col-lg-3 d-flex align-items-center btn-market-layout justify-content-end">
                 <font-awesome-icon v-if="toMarket" icon="fa-solid fa-user" class="text-dark fs-2 icon-market me-5" @click="isShowInforUser"/>
-                <font-awesome-icon v-if="toMarket" icon="fa-solid fa-basket-shopping" class="text-dark fs-2 icon-market me-5" />
+                <font-awesome-icon v-if="toMarket" icon="fa-solid fa-basket-shopping" class="text-dark fs-2 icon-market me-5" @click="isShowCart" />
                 <div class="btn-market d-flex align-items-center" @click="toTheMaket">
                     <p v-if="!toMarket" class="text-white m-0 btn-market-inside">Vào chợ </p>
                     <p v-if="toMarket" class="text-white m-0 btn-market-inside">Ra chợ </p>
@@ -51,6 +50,7 @@ import { ProductApiService } from '../common/product.service'
 import CountDownFLashSale from '../components/other/CountDowmFLashSale.vue'
 import InforUserLayout from './InforUserLayout.vue'
 import ProductItem from '../components/product/ProductItem.vue'
+import CartInsideMarketLayout from './CartInsideMarketLayout.vue'
 import 'vue3-carousel/dist/carousel.css'
 import 'vue3-carousel/dist/carousel.js'
 export default ({
@@ -62,7 +62,8 @@ export default ({
         Slide,
         Navigation,
         CountDownFLashSale,
-        InforUserLayout
+        InforUserLayout,
+        CartInsideMarketLayout
     },
     computed: {
 		...mapGetters('auth', {
@@ -74,6 +75,7 @@ export default ({
         toMarket : false ,
         isInforUser : false,
         inforUser : false,
+        isCart : false,
         settings: {
             itemsToShow: 2,
             snapAlign: 'center',
@@ -119,6 +121,9 @@ export default ({
                     }
                 })
             }
+        },
+        isShowCart(){
+            this.isCart = ! this.isCart
         }
     },
     async created(){

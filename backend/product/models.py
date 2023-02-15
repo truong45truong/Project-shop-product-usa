@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from mptt.models import MPTTModel, TreeForeignKey
+from login.models import User
 # Create your models here.
 
 class Category(MPTTModel):
@@ -40,3 +41,7 @@ class Photo_product(models.Model):
     product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True,blank=True,related_name='photo_products')
 
     fields = ['data']
+class Heart( models.Model):
+    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')
+    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')

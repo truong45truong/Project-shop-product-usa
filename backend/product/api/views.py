@@ -28,6 +28,7 @@ class Productviewset(viewsets.ModelViewSet):
             queryset = Product.objects.filter(slug=slug)
         else:
             queryset = Product.objects.all()
-        serializer = ProductSerializer(queryset,many=True)
+        user_test = "test"
+        serializer = ProductSerializer(queryset,many=True,context={'user_id': 'false'})
         return Response(serializer.data)
     
