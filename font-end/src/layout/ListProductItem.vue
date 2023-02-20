@@ -26,11 +26,16 @@
                 </div>
             </div>
         </div>
-        <div class="row mx-3">
-            <Carousel :settings="settings" :breakpoints="breakpoints">
+        <div class="row mx-3 h-50 layout-list-product-market scroll-list-product">
+            <div v-if="toMarket" v-for="item in listProductItem"  class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-0 my-3 h-sm-25 item-cart-market-grid px-2">
+                <product-item-cart-inside-market :slug="item.slug" :photo="item.data" :name="item.name"
+                        :price="item.price" :numberProduct=3 :status="item.status_heart" :hearts="item.count_heart"
+                    />
+            </div>
+            <Carousel v-if="!toMarket" :settings="settings" :breakpoints="breakpoints">
                 <Slide v-for="item in listProductItem" :key="item" :class="'mx-1 shawdo'">
-                    <product-item :slug="item.slug" :photo="item.photo_products[0]" :name="item.name"
-                        :price="item.prices[0]"
+                    <product-item :slug="item.slug" :photo="item.data" :name="item.name" :sale='item.sale'
+                        :price="item.price" :status="item.status_heart" :hearts="item.count_heart"
                     />
                 </Slide>
                 <template #addons>
@@ -38,6 +43,9 @@
                     <Navigation class= "pagination-container" />
                 </template>
             </Carousel>
+        </div>
+        <div v-if=" toMarket == true" class="d-flex flex-column align-items-center mt-5">
+            <button class="btn btn-dark">1</button>
         </div>
     </div>
 </template>
@@ -51,6 +59,7 @@ import CountDownFLashSale from '../components/other/CountDowmFLashSale.vue'
 import InforUserLayout from './InforUserLayout.vue'
 import ProductItem from '../components/product/ProductItem.vue'
 import CartInsideMarketLayout from './CartInsideMarketLayout.vue'
+import ProductItemCartInsideMarket from './../components/product/ProductItemCartInsideMarket.vue'
 import 'vue3-carousel/dist/carousel.css'
 import 'vue3-carousel/dist/carousel.js'
 export default ({
@@ -63,7 +72,8 @@ export default ({
         Navigation,
         CountDownFLashSale,
         InforUserLayout,
-        CartInsideMarketLayout
+        CartInsideMarketLayout,
+        ProductItemCartInsideMarket
     },
     computed: {
 		...mapGetters('auth', {
@@ -84,7 +94,7 @@ export default ({
       // any settings not specified will fallback to the carousel settings
       breakpoints: {
         400: {
-          itemsToShow: 1,
+          itemsToShow: 2,
           snapAlign: 'center',
         },
         // 700px and up
@@ -112,7 +122,6 @@ export default ({
                         token_permission_infor_user: localStorage.getItem('token_permission_infor_user')
                     }
                 }).then(async (response) => {
-                        
                     this.inforUser = {
                         photo : 'http://127.0.0.1:8000' + response.user.photo,
                         address : response.user.address,
@@ -127,12 +136,13 @@ export default ({
         }
     },
     async created(){
-        await ProductApiService.get().then(res => {
-            let array = []
-            for(let item of res.data){
-                array.push(item)
+        await ProductApiService.get({
+            params : {
+                token_permission_infor_user: localStorage.getItem('token_permission_infor_user') ? localStorage.getItem('token_permission_infor_user') : "nono"
             }
-            this.listProductItem = array
+        }).then(res => {
+            console.log(res)
+            this.listProductItem = Array.from(res.data.products)
         })
     }
 })
@@ -265,5 +275,8 @@ export default ({
 .icon-market:hover {
     cursor: pointer;
     color :brown !important;   
+}
+.layout-list-product-market {
+    overflow-y: scroll;
 }
 </style>

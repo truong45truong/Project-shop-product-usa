@@ -10,14 +10,14 @@
                 <font-awesome-icon icon="fa-solid fa-solar-panel" class="text-white fs-5" />
             </button>
         </div>
-        <div v-if="isShowListItem" class="d-flex flex-column w-75 list-item-product mb-5">
+        <div v-if="isShowListItem" class="d-flex flex-column w-75 list-item-product scroll-list-product mb-5">
             <div v-for="item in dataItem"  class="mt-0 border border-2 my-2">
                 <div class="d-flex flex-row align-items-center">
-                    <div class="col-infor-item text-center"><img class="img-cart-market" :src="'http://127.0.0.1:8000'+`${item.photo_products[0].data}`" alt=""></div>
+                    <div class="col-infor-item text-center"><img class="img-cart-market" :src="'http://127.0.0.1:8000/'+`${item.data}`" alt=""></div>
                     <div class="col-infor-item name-product-cart d-flex flex-column align-items-center text-center">
                         <span class="text-name-product-cart"> {{item.name}}</span>
-                        <div class="text-price-product-cart"> <b>{{item.prices[0].price}}vnđ</b> </div>
-                        <div class="text-price-product-cart"> <b> <span class="text-info">Sale </span> {{item.prices[0].sale}}%</b> </div>
+                        <div class="text-price-product-cart"> <b>{{item.price}}vnđ</b> </div>
+                        <div class="text-price-product-cart"> <b> <span class="text-info">Sale </span> {{item.sale}}%</b> </div>
                     </div>
                     <div class="col-infor-item d-flex align-items-center">
                         <div class="btn btn-dark me-1 fs-3 btn-number-product-cart d-flex align-items-center text-center p-0">
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="col-infor-item">
-                        <p class="text-danger m-0 text-center"><i><b>{{item.prices[0].price * 3}}</b></i></p>
+                        <p class="text-danger m-0 text-center"><i><b>{{item.price * 3}}</b></i></p>
                     </div>
                     <div class="col-infor-item d-flex align-items-center justify-content-around">
                         <div class="button-45 w-25 d-flex flex-column align-items-center">
@@ -40,10 +40,10 @@
                 </div>
             </div>
         </div>
-        <div v-if="isShowGridItem" class="row w-75 list-item-product mb-5">
-            <div v-for="item in dataItem"  class="col-3 mt-0 border border-2 my-2 item-cart-market-grid">
-                <product-item-cart-inside-market :slug="item.slug" :photo="item.photo_products[0]" :name="item.name"
-                        :price="item.prices[0]" :numberProduct=3
+        <div v-if="isShowGridItem" class="row w-75 list-item-product scroll-list-product mb-5">
+            <div v-for="item in dataItem"  class="col-lg-3 col-sm-4 col-6 mt-0 my-3 h-sm-25 item-cart-market-grid px-2">
+                <product-item-cart-inside-market :slug="item.slug" :photo="item.data" :name="item.name"
+                        :price="item.price" :numberProduct=3 :status="item.status_heart" :hearts="item.count_heart"
                     />
             </div>
         </div>
@@ -145,11 +145,14 @@ export default ({
 .item-cart-market-grid{
     position :relative;
     overflow: hidden;
-    
+    padding: 0 calc(100% - 15px );
 }
 .btn-view-product-cart-activate {
     background-color: #b9b7b7 !important;
+}
+.btn-view-product-cart-activate svg{
     color:#D33A2C !important;
+
 }
 .img-cart-market {
     width:20%;
@@ -236,20 +239,20 @@ export default ({
     overflow-y: scroll;
     height:300px;
 }
-.list-item-product::-webkit-scrollbar-track {
+.scroll-list-product::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-.list-item-product::-webkit-scrollbar {
+.scroll-list-product::-webkit-scrollbar {
   background-color: transparent;
   transition: .3s;
 }
 
-.list-item-product:hover::-webkit-scrollbar {
+.scroll-list-product:hover::-webkit-scrollbar {
   width: 15px !important;
 }
 
-.list-item-product::-webkit-scrollbar-thumb {
+.scroll-list-product::-webkit-scrollbar-thumb {
   border-radius: 10px;
   border: 2px solid #444;
 }

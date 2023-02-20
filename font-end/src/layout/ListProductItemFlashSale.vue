@@ -6,16 +6,12 @@
                 <h3 class="text-white m-0 me-1">Flash Sale:</h3>
                 <CountDownFLashSale :date_prop="date_flash_sale" :hour_prop="hour_flash_sale" :mins_prop="mins_flash_sale" :secs_prop="secs_flash_sale"/>
             </div>
-            <div class="col-lg-6 my-5 d-flex align-items-center justify-content-end">
-                <p class="show-all-product-flash-sale m-0 text-white fs-5">Xem tất cả</p>
-                <font-awesome-icon icon="fa-solid fa-arrow-right" class="text-white fs-3 ms-4" />
-            </div>
         </div>
         <div class="row mx-3">
             <Carousel :settings="settings" :breakpoints="breakpoints">
                 <Slide v-for="item in listProductItem" :key="item" :class="'mx-1 shawdo'">
-                    <product-item :slug="item.slug" :photo="item.photo_products[0]" :name="item.name"
-                        :price="item.prices[0]"
+                    <product-item :slug="item.slug" :photo="item.data" :name="item.name"
+                        :price="item.price"
                     />
                 </Slide>
             
@@ -59,7 +55,7 @@ export default ({
       // any settings not specified will fallback to the carousel settings
       breakpoints: {
         400: {
-          itemsToShow: 1,
+          itemsToShow: 2,
           snapAlign: 'center',
         },
         // 700px and up
@@ -75,12 +71,13 @@ export default ({
       },
     }),
     async created(){
-        await ProductApiService.get().then(res => {
-            let array = []
-            for(let item of res.data){
-                array.push(item)
+        await ProductApiService.get({
+          params : {
+                token_permission_infor_user: localStorage.getItem('token_permission_infor_user') ? localStorage.getItem('token_permission_infor_user') : "nono"
             }
-            this.listProductItem = array
+        }).then(res => {
+            this.listProductItem = Array.from(res.data.products)
+            console.log(this.listProductItem )
         })
         this.date_flash_sale = 3;
         this.hour_flash_sale = 17;
