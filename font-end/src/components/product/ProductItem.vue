@@ -1,5 +1,10 @@
 <template>
    <div class="d-flex flex-column align-items-center justify-content-center h-100 infor-item-box border border-2 w-100">
+        <div class="d-flex align-items-center heart-content">
+            <span class="text-btn-product fs-5 me-2"> {{numberHeart}}</span>
+            <font-awesome-icon v-if="!status_heart" class="fs-4 my-2 icon-heart" icon="fa-regular fa-heart" @click="postHeart" />
+            <font-awesome-icon v-if="status_heart" class="fs-4 my-2 icon-heart" icon="fa-solid fa-heart" @click="postHeart" />
+        </div>
         <div class="h-100 d-flex flex-column align-items-center justify-content-center">
             <img class="img-product-item text-center" :src="'http://127.0.0.1:8000/'+`${photo}`" alt="name">
         </div>
@@ -23,16 +28,11 @@
                 <button class="button-45 m-0"><p class="m-0 text-btn-product">Thêm vào Giỏ</p></button>
             </div>
         </div>
-        <div class="d-flex align-items-center heart-content">
-            <span class="text-btn-product fs-4 me-2"> {{hearts}}</span>
-            <font-awesome-icon v-if="!status_heart" class="fs-4 my-2" icon="fa-regular fa-heart" />
-            <font-awesome-icon v-if="status_heart" class="fs-4 my-2" icon="fa-solid fa-heart" />
-        </div>
     </div>
 </template>
   
 <script>
-
+import {ProductAction} from './../../common/product.service'
 export default ({
     name: 'ProductItem',
     props: {
@@ -50,6 +50,7 @@ export default ({
         isShowDetail : false,
         isHoverPrice : false,
         status_heart : false,
+        numberHeart : false ,
     }),
     methods : {
         isShowProduct(){
@@ -60,10 +61,23 @@ export default ({
         },
         isNoneHoverPrice(){
             this.isHoverPrice = false;
+        },
+        async postHeart(){
+            let json = await ProductAction.actionPostHeart({
+                params : {
+                    token_permission_infor_user : localStorage.getItem('token_permission_infor_user') ? localStorage.getItem('token_permission_infor_user') : "nono",
+                    product_slug : this.slug
+                }
+            })
+            if ( json.status == true ){
+                this.status_heart = ! this.status_heart
+                this.numberHeart = this.status_heart == false ? this.numberHeart - 1 : this.numberHeart + 1
+            }
         }
     },
     created(){
         this.status_heart = this.status
+        this.numberHeart = this.hearts
     }
     
 })
@@ -157,5 +171,9 @@ export default ({
     position:absolute;
     top:0%;
     right:5%;
+    z-index: 999;
+}
+.icon-heart:hover {
+    cursor:pointer;
 }
 </style>
