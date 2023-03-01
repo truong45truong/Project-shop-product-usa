@@ -14,7 +14,10 @@
         <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border ']" @click="isShowProduct" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice">
 
         </div>
-        <div v-if="isShowDetail == true" class="info-product-item d-flex flex-column align-items-center justify-content-center" @click="isShowProduct">
+        <div v-if="isShowDetail == true" class="info-product-item d-flex flex-column align-items-center justify-content-center">
+            <div class="btn-cancel-product-detail" @click="isShowProduct">
+                <font-awesome-icon icon="fa-solid fa-xmark" class="fs-4 btn-cancel text-dark" />
+            </div>
             <div class="d-flex w-100 my-1">
                 <div class="w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark py-1">Tên : {{name}} vnđ</p></div>
             </div>
@@ -25,7 +28,8 @@
                 <div class="w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark py-1">Tổng : {{(100 - 10) / 100 * price}} vnđ</p></div>
             </div>
             <div class="w-100 d-flex justify-content-around">
-                <button class="button-45 m-0"><p class="m-0 text-btn-product">Thêm vào Giỏ</p></button>
+                <button class="button-45 m-0"><p class="m-0 text-btn-product" @click="addToCard">Thêm vào Giỏ</p></button>
+                <button class="button-45 m-0"><p class="m-0 text-btn-product" @click="nextPageDetailProduct">Chi tiết</p></button>
             </div>
         </div>
     </div>
@@ -53,6 +57,10 @@ export default ({
         numberHeart : false ,
     }),
     methods : {
+
+        nextPageDetailProduct(){
+            this.$router.push('/product/'+ this.slug)
+        },
         isShowProduct(){
             this.isShowDetail = !this.isShowDetail
         },
@@ -72,7 +80,17 @@ export default ({
             if ( json.status == true ){
                 this.status_heart = ! this.status_heart
                 this.numberHeart = this.status_heart == false ? this.numberHeart - 1 : this.numberHeart + 1
+                if(this.status_heart == true ) {
+                    this.$store.dispatch('heart/actionlikeItems')
+                }else {
+                    this.$store.dispatch('heart/actionUnlikeItems')
+                }
             }
+        },
+        async addToCard(){
+            return await this.$store.dispatch('cart/actionAddToCart', {
+                product_slug : this.slug
+            })
         }
     },
     created(){
@@ -84,7 +102,7 @@ export default ({
 </script>
 <style>
 .img-product-item{
-    width : 100%;
+    max-width : 375px;
     height : auto;
 }
 @keyframes borderHover {
@@ -119,7 +137,9 @@ export default ({
 }
 .infor-item-box{
     position:relative;
+    height:100%;
     overflow: hidden;
+    max-width: 100%;
 }
 .info-product-item{
     border:none;
@@ -142,6 +162,9 @@ export default ({
 .btn-product{
     background-color:brown !important;
     border-color: brown !important;
+}
+.button-46 {
+    max-width: fit-content;
 }
 .icon-heart-product {
     color:brown
@@ -171,9 +194,19 @@ export default ({
     position:absolute;
     top:0%;
     right:5%;
-    z-index: 999;
+    z-index: 99;
 }
 .icon-heart:hover {
     cursor:pointer;
+}
+.btn-cancel-product-detail {
+    position:absolute;
+    left:5%;
+    top:2%;
+    cursor:pointer;
+    max-width: fit-content;
+}
+.btn-cancel-product-detail .btn-cancel:hover {
+    color:rgb(139, 135, 135) !important;
 }
 </style>

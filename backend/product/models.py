@@ -27,7 +27,7 @@ class Product(models.Model):
 class Price(models.Model):
     id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     price=models.FloatField(null=True)
-    sale=models.FloatField(null=True)
+    sale =models.FloatField(null=True)
     status=models.BooleanField(null=True)
     datetime_create=models.DateTimeField(null=True)
     price_total=models.FloatField(null=True)

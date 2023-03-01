@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column mt-5" :class="[ toMarket == true ? 'market' : 'container flash-sale-top' ]">
+    <div class="d-flex flex-column mt-5 " :class="[ toMarket == true ? 'market bg-list-item-heart' : 'container flash-sale-top' ]">
         <div class="info-user-layout w-100 d-flex flex-column align-items-center">
             <InforUserLayout v-if="inforUser != false " :name="inforUser.name"  :address ="inforUser.address" :phone="inforUser.phones" :photo="inforUser.photo"
             :class="[ isInforUser == true ? 'info-user' : 'info-user-hide' ]" @hide="isShowInforUser"/>
@@ -26,23 +26,25 @@
                 </div>
             </div>
         </div>
-        <div class="row mx-3 h-50 layout-list-product-market scroll-list-product">
-            <div v-if="toMarket" v-for="item in listProductItem"  class="col-xl-2 col-lg-3 col-sm-4 col-6 mt-0 my-3 h-sm-25 item-cart-market-grid px-2">
-                <product-item-cart-inside-market :slug="item.slug" :photo="item.data" :name="item.name"
-                        :price="item.price" :numberProduct=3 :status="item.status_heart" :hearts="item.count_heart"
-                    />
+        <div class="container">
+            <div class="row h-75 layout-list-product-market scroll-list-product">
+                <div v-if="toMarket" v-for="item in listProductItem"  class="col-lg-3 col-sm-4 col-6 mt-0 my-3 h-sm-25 item-cart-market-grid px-2">
+                    <product-item :slug="item.slug" :photo="item.data" :name="item.name" class="layout-product-item bg-white"
+                            :price="item.price" :numberProduct=3 :status="item.status_heart" :hearts="item.count_heart"
+                        />
+                </div>
+                <Carousel v-if="!toMarket" :settings="settings" :breakpoints="breakpoints">
+                    <Slide v-for="item in listProductItem" :key="item" :class="'mx-1 shawdo'">
+                        <product-item :slug="item.slug" :photo="item.data" :name="item.name" :sale='item.sale'
+                            :price="item.price" :status="item.status_heart" :hearts="item.count_heart"
+                        />
+                    </Slide>
+                    <template #addons>
+                        <Pagination />
+                        <Navigation class= "pagination-container" />
+                    </template>
+                </Carousel>
             </div>
-            <Carousel v-if="!toMarket" :settings="settings" :breakpoints="breakpoints">
-                <Slide v-for="item in listProductItem" :key="item" :class="'mx-1 shawdo'">
-                    <product-item :slug="item.slug" :photo="item.data" :name="item.name" :sale='item.sale'
-                        :price="item.price" :status="item.status_heart" :hearts="item.count_heart"
-                    />
-                </Slide>
-                <template #addons>
-                    <Pagination />
-                    <Navigation class= "pagination-container" />
-                </template>
-            </Carousel>
         </div>
         <div v-if=" toMarket == true" class="d-flex flex-column align-items-center mt-5">
             <button class="btn btn-dark">1</button>
@@ -73,7 +75,8 @@ export default ({
         CountDownFLashSale,
         InforUserLayout,
         CartInsideMarketLayout,
-        ProductItemCartInsideMarket
+        ProductItemCartInsideMarket,
+        
     },
     computed: {
 		...mapGetters('auth', {
@@ -133,6 +136,16 @@ export default ({
         },
         isShowCart(){
             this.isCart = ! this.isCart
+        },
+        async changeStatusHeartProduct(){
+            await ProductApiService.get({
+            params : {
+                token_permission_infor_user: localStorage.getItem('token_permission_infor_user') ? localStorage.getItem('token_permission_infor_user') : "nono"
+            }
+            }).then(res => {
+                console.log(res)
+                this.listProductItem = Array.from(res.data.products)
+            })
         }
     },
     async created(){
@@ -160,6 +173,12 @@ export default ({
     border:5px solid rgb(36,41,47);
     transition:all 0.5s;
     align-content: center;
+}
+.info-user-layout {
+    z-index: 1000;
+}
+.layout-product-item {
+    max-width: 400px;
 }
 .box-demo {
     height:85%;
@@ -256,7 +275,7 @@ export default ({
   to {top : -100%;}
 }
 .info-user{
-    width : 75%;
+    max-width : 1440px;
     position:absolute;
     background-color: white ;
     border: 3px solid black;

@@ -3,19 +3,25 @@
         <div class="h-100 d-flex flex-column align-items-center justify-content-center">
             <img class="img-product-item text-center" :src="'http://127.0.0.1:8000/'+`${photo}`" alt="name">
         </div>
+        <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border ']" @click="isShowProduct" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice">
+
+        </div>
         <div :class="[isShowDetail ? 'ribbon-hide' : 'ribbon']">
             <span>Sale 10%</span>
         </div>
-        <div v-if="isShowDetail == true" class="info-product infor-item-box d-flex flex-column align-items-center justify-content-center" @click="isShowProduct">
+        <div v-if="isShowDetail == true" class="info-product infor-item-box d-flex flex-column align-items-center justify-content-center">
+            <div class="btn-cancel-product-detail" @click="isShowProduct">
+                <font-awesome-icon icon="fa-solid fa-xmark" class="fs-4 btn-cancel text-dark" />
+            </div>
             <div class="d-flex w-100 justify-content-between">
                 <div class="mt-1 w-100"><p class="text-product-cart-inside-market my-1 text-center">{{name}}</p></div>
                 <div class="mt-1 w-100"><p class="text-product-cart-inside-market text-danger my-1 text-center">Sale: {{sale}} %</p></div>
             </div>
             <div class="d-flex w-100">
-                <div class="mt-1 w-100"><p class="text-product-cart-inside-market my-1 text-center">{{ numberProduct}}</p></div>
+                <div class="mt-1 w-100"><p class="text-product-cart-inside-market my-1 text-center" v-if="numberProduct" >{{ numberProduct}}</p></div>
                 <div class="mt-1 w-100"><p class="text-product-cart-inside-market text-dark my-1 text-center">Giá: {{price}} vnđ</p></div>
             </div>
-            <div class="d-flex w-100">
+            <div class="d-flex w-100" v-if="numberProduct" >
                 <div class="mt-1 w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark">Tổng : {{price * numberProduct}} vnđ</p></div>
             </div>
             <div class="w-100 d-flex justify-content-around">
@@ -24,11 +30,11 @@
                     <font-awesome-icon v-if="!status_heart" class="icon-item-heart-cart fs-2 my-2" icon="fa-regular fa-heart" />
                     <font-awesome-icon v-if="status_heart" class="icon-item-heart-cart fs-2 my-2" icon="fa-solid fa-heart" />
                 </div>
-                <button class="button-45 m-0"><p class="m-0 text-btn-product">Xóa</p></button>
             </div>
-        </div>
-        <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border ']" @click="isShowProduct" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice">
-
+            <div class="w-100 d-flex justify-content-around">
+                <button class="button-45 m-0"><p class="m-0 text-btn-product">Thêm vào giỏ</p></button>
+                <button class="button-45 m-0"><p class="m-0 text-btn-product" @click="nextPageDetailProduct">Chi tiết</p></button>
+            </div>
         </div>
     </div>
 </template>
@@ -62,7 +68,10 @@ export default ({
         },
         isNoneHoverPrice(){
             this.isHoverPrice = false;
-        }
+        },
+        nextPageDetailProduct(){
+            this.$router.push('/product/'+ this.slug)
+        },
     },
     created(){
         this.status_heart = this.status

@@ -34,10 +34,15 @@
                             <input type="text" class="input-search border" placeholder="Tìm kiếm sản phẩm">
                             <font-awesome-icon class="d-inline text-white icon-search" icon="fa-solid fa-magnifying-glass" />
                         </div>
-                        <font-awesome-icon class="text-white fs-4 ms-3" icon="fa-regular fa-heart" />
-                        <font-awesome-icon class="text-white fs-4 ms-3" icon="fa-regular fa-user" />
-                        <font-awesome-icon class="text-white fs-4 ms-3" icon="fa-solid fa-basket-shopping" />
-
+                        <div class="position-relative" @click="$emit('hideListItemHeart',true)" >
+                            <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-regular fa-heart"/>
+                            <div class="number-product-cart text-white text-center m-0">{{get_is_number_product_heart}}</div> 
+                        </div>
+                        <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-regular fa-user" />
+                        <div class="position-relative" @click="$emit('hideCart',true)">
+                            <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-solid fa-basket-shopping" /> 
+                            <div class="number-product-cart text-white text-center m-0">{{get_is_number_product}}</div> 
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -86,8 +91,8 @@ export default {
 		},
 		/* ------------------------------ method login ------------------------------ */
 
-		login(username,password) {
-			this.$store.dispatch('auth/login', { username: username ,  password : password}).then((res) => {
+		async login(username,password) {
+			return await this.$store.dispatch('auth/login', { username: username ,  password : password}).then((res) => {
 				if (this.get_authenticated == true) {
 					this.isAuthenticated = true;
 					this.isShowLogin=false;
@@ -108,6 +113,12 @@ export default {
 			get_authenticated: 'isAuthenticated',
 			get_error        : 'errorAuthenticated'
 		}),
+        ...mapGetters('cart', {
+        get_is_number_product: 'getNumberProduct',
+        }),
+        ...mapGetters('heart', {
+        get_is_number_product_heart: 'getNumberProduct',
+        }),
 		...mapActions('auth', {
 			login_user   : 'login',
 			register_user: 'register',
@@ -125,6 +136,30 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+@keyframes bgNumberProductCart {
+    0%{
+        background-color:#30CFD0;
+    }
+
+    50% {
+        background-color: #1071a8
+    }
+    100% {
+        background-color: #30CFD0
+    }
+}
+.number-product-cart {
+    position:absolute;
+    width:1.75rem;
+    height:1.75rem;
+    padding-top: 0.2rem;
+    border-radius: 50%;
+    top:-30%;
+    right:-30%;
+    font-weight: 600;
+    animation: bgNumberProductCart 5s infinite;
+    cursor:pointer;
+}
 header {
     background-color: #212529;
     font-family: 'Alumni Sans', sans-serif;
@@ -240,5 +275,10 @@ header {
     color :rgb(0, 230, 230) !important;
     cursor:pointer;
 }
-
+.icon-cursor{
+    cursor:pointer;
+}
+.icon-cursor:hover {
+    color:#F56A79 !important;
+}
 </style>

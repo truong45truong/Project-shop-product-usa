@@ -26,26 +26,7 @@ class User(AbstractUser):
 
     def __unicode__(self):
         return self
-    # def save(self, *args , **kwargs):
-    #     def handleImageUpload(file_upload):
-    #         nameFile = str(uuid4()) + '.' + file_upload.split('.')[-1]
-    #         print("handle",file_upload,nameFile)
-    #         old_name = path_root + '/user/' + file_upload
-    #         new_name = path_root + '/user/' +  nameFile
-    #         os.rename(old_name, new_name)
-    #         return nameFile
-    #     print("create user running",self.photo)
-    #     try :
-    #         if self.photo == None:
-    #            self.photo = settings.DOMAIN + "media/photos/user/avt.png"
-    #         else:
-    #             print(self.photo)
-    #             self.photo = settings.DOMAIN + "media/photos/user/" + str(self.photo)
-    #             print(self.photo)
-    #     except Exception as e:
-    #         print(e)
 
-    #     return super().save(*args,**kwargs)
 class Address(models.Model):
     id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     address_content =models.CharField(max_length=500,null=False)

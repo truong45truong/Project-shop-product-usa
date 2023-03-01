@@ -6,12 +6,12 @@
                 <h3 class="text-white m-0 me-1">Flash Sale:</h3>
                 <CountDownFLashSale :date_prop="date_flash_sale" :hour_prop="hour_flash_sale" :mins_prop="mins_flash_sale" :secs_prop="secs_flash_sale"/>
             </div>
-        </div>
+        </div>  
         <div class="row mx-3">
             <Carousel :settings="settings" :breakpoints="breakpoints">
                 <Slide v-for="item in listProductItem" :key="item" :class="'mx-1 shawdo'">
                     <product-item :slug="item.slug" :photo="item.data" :name="item.name"
-                        :price="item.price"
+                        :price="item.price" :status="item.status_heart" :hearts="item.count_heart"
                     />
                 </Slide>
             
@@ -70,6 +70,18 @@ export default ({
         },
       },
     }),
+    methods :{
+      async changeStatusHeartProduct(){
+            await ProductApiService.get({
+            params : {
+                token_permission_infor_user: localStorage.getItem('token_permission_infor_user') ? localStorage.getItem('token_permission_infor_user') : "nono"
+            }
+            }).then(res => {
+                console.log(res)
+                this.listProductItem = Array.from(res.data.products)
+            })
+        }
+    },
     async created(){
         await ProductApiService.get({
           params : {
@@ -146,13 +158,16 @@ export default ({
   color:white;
   font-size: larger;
 }
-.pagination-button {
+.carousel__prev,
+.carousel__next {
   background-color: rgb(36,41,47);
   color: white;
   font-size: 14px;
-  padding: 8px 16px;
-  border: 1px solid #ccc;
+  padding: 2px 4px;
+  border: 1px solid rgb(36,41,47);
   border-radius: 5px;
   margin-right: 8px;
+  border-radius: 50%;
 }
+
 </style>

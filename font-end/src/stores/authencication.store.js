@@ -25,7 +25,9 @@ export const auth = {
       await actionJWT.setLocalTokenJWT({params : {
         username : payload.username,
         password : payload.password
-      }})
+      }}).catch(res => {
+        return commit('loginFailure',"Wrong username or password")
+      })
       await UserApiService.get({params : {
         username : payload.username,
         password : payload.password

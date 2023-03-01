@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'login',
     'historyAction',
-    'flashSaleProduct'
+    'flashSaleProduct',
+    'order'
 ]
 
 MIDDLEWARE = [

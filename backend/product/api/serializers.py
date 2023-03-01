@@ -21,38 +21,14 @@ class HeartSerializer(ModelSerializer):
 class ProductSerializer(serializers.Serializer):
     data = serializers.CharField()
     status_heart =  serializers.BooleanField()
+    description = serializers.CharField()
     price = serializers.FloatField()
     id = UUIDField()
     slug=serializers.CharField()
     name = serializers.CharField()
     sex = serializers.IntegerField()
+    sale = serializers.FloatField()
     count_heart = serializers.IntegerField()
-    # def checkUserLike(self, instance ):
-    #     user_id = self.context.get('user_id')
-    #     print(instance.hearts)
-    #     return False
-    # class Meta:
-    #     model = Product
-    #     fields = ['slug','name','sex','description','category_id','data','status_heart','price']
-        
-    # def get_prefetch_queryset(self, queryset):
-    #     print("queryset")
-    #     queryset = queryset.prefetch_related(
-    #         Prefetch('prices', queryset=Price.objects.all(), to_attr='prefetched_prices'),
-    #         Prefetch('photo_products', queryset=Photo_product.objects.all(), to_attr='prefetched_photo_products'),
-    #     )
-    #     return queryset
-        
-    # def to_internal_value(self, data):
-    #     # Call the parent class's to_internal_value() method to perform the default validation
-    #     print("to_internal_value")
-    #     validated_data = super().to_internal_value(data)
-
-    #     # Perform additional validation
-    #     if validated_data['my_field'] == 'invalid':
-    #         raise serializers.ValidationError('my_field cannot be "invalid"')
-
-    #     return validated_data
     
         
 
@@ -61,14 +37,9 @@ class CategorySerializer(ModelSerializer):
         model = Category
         fields = "__all__"
 
-class ProductListSerializer(ListSerializer):
-    price = PriceSerializer(many=False)
-    photo_products = PhotoProductSerializer(many=False)
-    status = serializers.BooleanField()
+class ProductHeartSerializer(serializers.Serializer):
+    prices__price = serializers.FloatField()
+    photo_products__data = serializers.CharField()
     name = serializers.CharField()
     slug = serializers.CharField()
-    heart = HeartSerializer(many = True)
-    # def get_queryset(self):
-    #         queryset = super().get_queryset()
-    #         queryset = queryset.prefetch_related(['prices','photo_products','hearts'])
-    #         return queryset
+    prices__sale = serializers.FloatField()
