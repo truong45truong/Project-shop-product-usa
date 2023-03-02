@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/',include('login.api.urls')),
     path('api/',include('new.api.urls')),
     path('api/',include('order.api.urls')),
+    path('api/',include('flashSaleProduct.api.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),

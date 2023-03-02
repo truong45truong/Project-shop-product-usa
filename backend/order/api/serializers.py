@@ -44,7 +44,7 @@ class OrderHandleDataSerializer(serializers.Serializer):
     order = OrderSerializer(many = False)
     transport = TransportSerializer(many = False)
     products = ProductSerializer(many = True)
-
+    
 class TransportModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transport

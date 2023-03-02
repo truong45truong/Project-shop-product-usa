@@ -18,6 +18,7 @@ class User(AbstractUser):
     name     = models.CharField( max_length=200 )
     password = models.CharField( max_length = 200)
     email    = models.EmailField(max_length = 254)
+    level = models.IntegerField()
     token_permission_infor_user = models.UUIDField(default=uuid.uuid4 , unique=True)
     USERNAME_FIELD = 'username'
     

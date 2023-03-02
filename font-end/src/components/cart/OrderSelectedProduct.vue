@@ -57,58 +57,8 @@
                 </div>
             </div>
         </div>
-        <div v-if="isExpandDetailTotalSelectProduct" class="container">
-            <div class="row my-3">
-                <div class="col-sm-2 text-center">
-                    <p class="fw-semibold" :class="{'text-selected-infor-order' : !isActiveInforOrder.product }">Sản phẩm</p>
-                    <p class="fw-semibold" :class="{'text-selected-infor-order' : !isActiveInforOrder.voucher }">Voucher </p>
-                    <p class="fw-semibold" :class="{'text-selected-infor-order' : !isActiveInforOrder.address }">Địa chỉ </p>
-                    <p class="fw-semibold" :class="{'text-selected-infor-order' : !isActiveInforOrder.transport }">Nhà vận chuyển </p>
-                </div>
-                <div class="col layout-product-order">
-                    <div class="col mt-2" v-for="product in get_is_order_selected_product.data" :key="product" >
-                        <product-order
-                            :slug ="product.product_slug" :name="product.product_name"
-                            :category="product.category_name" :photo="product.photo_product"
-                            :price="product.product_price" :sale='product.product_sale'
-                            :total_price="product.product_price_total" :price_status="product.product_price_status"
-                            :indexOrder="indexOrder" :index="index"
-                        />
-                        <hr>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div v-if="isExpandDetailTotalSelectProduct" class="container">
-            <div class="row w-100">
-                <div class="col-sm-4">
-                    <voucher-information />
-                </div>
-                <div class="col-sm-4">
-                    <div class="d-flex flex-column">
-                        <div class="d-flex align-items-center">
-                            <p class="my-2 ms-2 fs-4">Chọn sản phẩm</p>
-                            <input type="checkbox" class="my-2 ms-2 fs-4">
-                            <span> (Tất cá : {{ get_is_number_product }}) </span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <p class="my-2 ms-2 fs-5">
-                                Thanh toán : {{ get_is_order_selected_product.numberProduct }}
-                                <span class="text-span-modify"> (Sản phẩm) </span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="d-flex flex-column justify-content-between align-items-end">
-                        <div class="total-price-layout text-center py-1 ms-2 mt-2">
-                            {{ get_is_order_selected_product.totalPrice }} <span>vnđ</span>
-                        </div>
-                        <button class="button-57 ms-2 mt-3" role="button"><span class="text">Mua Ngay</span><span>Click để chuyển
-                                trang</span></button>
-                    </div>
-                </div>
-            </div>
+        <div class="layout-expand-selected-product">
+            <order-selected-product-expand v-if="isExpandDetailTotalSelectProduct" />
         </div>
     </div>
     <font-awesome-icon v-if="!isShowDetailTotalSelectProduct" class="pull-up-detail fs-3 text-white"
@@ -120,6 +70,7 @@ import VoucherInformation from './../other/VoucherInformation.vue'
 import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel'
 import { mapGetters, mapActions } from 'vuex'
 import ProductOrder from './../product/ProductOrder.vue'
+import OrderSelectedProductExpand from './OrderSelectedProductExpand.vue'
 export default ({
     name: 'OrderSelectedProduct',
     props: {
@@ -163,7 +114,8 @@ export default ({
         Carousel,
         Slide,
         Navigation,
-        ProductOrder
+        ProductOrder,
+        OrderSelectedProductExpand
     },
     computed: {
         ...mapGetters('cart', {
@@ -347,80 +299,13 @@ export default ({
     border-radius: 5px;
     margin-right: 8px;
 }
-
-/* CSS */
-.button-57 {
-    max-width: 200px;
-    min-width: 200px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid #18181a;
-    color: #18181a;
-    display: inline-block;
-    font-size: 15px;
-    line-height: 15px;
-    padding: 18px 18px 17px;
-    text-decoration: none;
-    cursor: pointer;
-    background: #fff;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+.layout-expand-selected-product {
+    position:fixed;
+    width:100%;
+    height:100%;
+    overflow-y:auto;
 }
-
-.button-57 span:first-child {
-    position: relative;
-    transition: color 600ms cubic-bezier(0.48, 0, 0.12, 1);
-    z-index: 10;
+.layout-expand-selected-product::-webkit-scrollbar {
+  display: none;
 }
-
-.button-57 span:last-child {
-    color: white;
-    display: block;
-    position: absolute;
-    bottom: 0;
-    transition: all 500ms cubic-bezier(0.48, 0, 0.12, 1);
-    z-index: 100;
-    opacity: 0;
-    top: 50%;
-    left: 50%;
-    transform: translateY(225%) translateX(-50%);
-    height: 14px;
-    line-height: 13px;
-}
-
-.button-57:after {
-    content: "";
-    position: absolute;
-    bottom: -50%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to right bottom, #3d3d3d, #181717, #444444, #0e0c0c) !important;
-    transform-origin: bottom center;
-    transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
-    transform: skewY(9.3deg) scaleY(0);
-    z-index: 50;
-}
-
-.button-57:hover:after {
-    transform-origin: bottom center;
-    transform: skewY(9.3deg) scaleY(2);
-}
-
-.button-57:hover span:last-child {
-    transform: translateX(-50%) translateY(-100%);
-    opacity: 1;
-    transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
-}
-.text-selected-infor-order {
-    opacity:0.5;
-    cursor:pointer;
-}
-.text-selected-infor-order:hover {
-    opacity:1;
-}
-.layout-product-order {
-    max-height: 500px;
-} 
 </style>

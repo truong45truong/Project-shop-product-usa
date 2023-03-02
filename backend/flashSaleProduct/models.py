@@ -25,7 +25,7 @@ class Voucher(models.Model):
     sale = models.FloatField()
     description = models.TextField()
     quantity = models.IntegerField()
-    
+    level = models.IntegerField()
     def __str__(self):
         return self.name
     
@@ -33,3 +33,5 @@ class DetailVoucher(models.Model):
     id = models.UUIDField(primary_key = True , default = uuid.uuid4 , editable=False )
     product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True , related_name='detail_vouchers')
     voucher_id = models.ForeignKey(Voucher, on_delete=models.SET_NULL, null=True , related_name='detail_vouchers')
+    def __str__(self):
+        return str(self.voucher_id) + "-" + str(self.product_id)
