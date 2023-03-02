@@ -58,7 +58,8 @@
             </div>
         </div>
         <div class="layout-expand-selected-product">
-            <order-selected-product-expand v-if="isExpandDetailTotalSelectProduct" />
+            <order-selected-product-expand 
+            ref="expandOrderSelectedProduct" v-if="isExpandDetailTotalSelectProduct" />
         </div>
     </div>
     <font-awesome-icon v-if="!isShowDetailTotalSelectProduct" class="pull-up-detail fs-3 text-white"
@@ -234,7 +235,7 @@ export default ({
     position: fixed;
     bottom: 0%;
     right: 4%;
-    width: 5vw;
+    width: 50px;
     background: linear-gradient(to bottom, #d1d2d3, #7a7a7a 100%);
 
 }
@@ -246,7 +247,7 @@ export default ({
 .pull-down-detail {
     position: absolute;
     top: 0%;
-    width: 5vw;
+    width: 50px;
     right: 4%;
     background: linear-gradient(to top, #afafaf, #777777 100%);
 }

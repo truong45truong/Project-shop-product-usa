@@ -9,6 +9,7 @@ const initialState = {
         data : [],
         totalPrice : 0,
         numberProduct : 0,
+        voucher : false,
     }
 }
 // Promise.resolve(user);
@@ -89,6 +90,10 @@ export const cart = {
             else {
                 commit('removeSeletedProductInCartFailure');
             }
+        },
+        actionSelectedVoucher({commit,state},payload){
+            if( state.isLoading )  return ;
+            commit('selectVoucerSucess',{voucher : payload.voucher});
         }
     },
 
@@ -165,6 +170,11 @@ export const cart = {
         },
         removeSeletedProductInCartFailure(state){
             state.isLoanding = false;
+        },
+        /* --------------------- voucher selectedproduct in cart -------------------- */
+        selectVoucerSucess(state,payload){
+            state.isLoanding = false;
+            state.orderSelectedProduct.voucher = payload.voucher
         }
     }
 };

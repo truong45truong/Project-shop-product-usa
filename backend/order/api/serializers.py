@@ -1,12 +1,6 @@
 from rest_framework.serializers import ModelSerializer,SerializerMethodField,ListSerializer,UUIDField
 from order.models import Order, Transport , DetailOrder
 from rest_framework import serializers
-
-class TransportSerializer(serializers.Serializer):
-    transport_slug = serializers.CharField(max_length=50)
-    transport_name = serializers.CharField(max_length=50)
-    transport_price = serializers.FloatField()
-    transport_logo = serializers.CharField()
     
 class TransportSerializer(serializers.Serializer):
     # ------------------------- params model detail order ------------------------ #

@@ -2,8 +2,9 @@
     <div class="voucher">
         <div class="voucher-body bg-orange-gradient">
             <div class="voucher-text">
-                <h5 class="text-white mb-0 font-weight-bold">chưa</h5>
-                <p class="text-white mb-0" style="line-height: 1;"><strong style="font-size: 1.25rem">Chọn</strong><br>Voucher</p>
+                <h5 v-if="get_is_order_selected_product.voucher == false" class="text-white mb-0 font-weight-bold">chưa</h5>
+                <h5 v-if="get_is_order_selected_product.voucher != false" class="text-white mb-0 font-weight-bold">Giảm: {{get_is_order_selected_product.voucher.voucher.sale}}%</h5>
+                <p  v-if="get_is_order_selected_product.voucher != false" class="text-white mb-0" style="line-height: 1;"><strong style="font-size: 1.25rem">Tối đa</strong><br>{{get_is_order_selected_product.voucher.voucher.limited_price}}k</p>
             </div>
             <div class="voucher-overlay d-none">
                 <button class="btn btn-primary btn-sm">View Details</button>
@@ -73,9 +74,15 @@
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default ({
     name: 'VoucherInformation',
-
+    computed: {
+        ...mapGetters('cart', {
+            get_is_number_product: 'getNumberProduct',
+            get_is_order_selected_product: 'getorderSelectedProduct',
+        }),
+    },
 })
 </script>
 <style>

@@ -11,7 +11,8 @@
                 <p class="fw-semibold" :class="{ 'text-selected-infor-order': !isActiveInforOrder.transport }"
                     @click="loadData(4)">Nhà vận chuyển </p>
             </div>
-            <div v-if="isActiveInforOrder.product" class="col layout-product-order">
+            <div v-if="isActiveInforOrder.product" class="col layout-product-order border border-1">
+                <hr classs="mt-2">
                 <div class="col mt-2" v-for="product in get_is_order_selected_product.data" :key="product">
                     <product-order :slug="product.product_slug" :name="product.product_name"
                         :category="product.category_name" :photo="product.photo_product" :price="product.product_price"
@@ -20,7 +21,7 @@
                     <hr>
                 </div>
             </div>
-            <div v-if="isActiveInforOrder.receiver" class="col">
+            <div v-if="isActiveInforOrder.receiver" class="col border border-1">
                 <div class="selected-infor-receiver">
                     <div class="row">
                         <div class="col-sm-6">
@@ -59,17 +60,51 @@
                     </div>
                 </div>
             </div>
+            <div v-if="isActiveInforOrder.voucher" class="col border border-1">
+                <div class="row mb-2">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mt-2 d-flex justify-content-center" v-for="voucher in isDataInforOrder.voucher" :key="voucher">
+                        <input type="radio" class="me-2 form-control-radio" 
+                        name="selectVoucher" @click="selectVoucher(voucher)">
+                        <div class="voucher-item border-none">
+                            <p class="m-0 text-voucher-main text-white my-2 mx-2">
+                                Giảm :{{voucher.voucher.sale}}%
+                                <span>(tối đa {{voucher.voucher.limited_price}}k)</span>
+                            </p>
+                            <div class="voucher-item-left"></div>
+                            <div class="voucher-item-right"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="isActiveInforOrder.transport"  class="col border border-1 d-flex flex-column">
+                <div class="row mb-2">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mt-2 d-flex flex-column justify-content-center"
+                    v-for="transport in isDataInforOrder.transport" :key="transport"
+                    >
+                        <div class="m-auto mt-2 content-name-transport text-center" >
+                            <div class="text-white">{{transport.name}}</div>
+                        </div>
+                        <div class="m-auto content-price-transport text-center">
+                            <span class="text-white">
+                                {{transport.price}} vnđ
+                            </span>
+                        </div>
+                        <input type="radio" class="mt-2 form-control-radio2" 
+                        name="selectTransport" @click="selectTransport(transport)">
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </div>  
     <div class="container position-relative mb-5">
         <div class="row w-100">
             <div class="col-sm-4">
-                <voucher-information />
+                <voucher-information/>
             </div>
             <div class="col-sm-4">
                 <div class="d-flex flex-column">
                     <div class="d-flex align-items-center">
-                        <p class="my-2 ms-2 fs-4">Chọn sản phẩm</p>
+                        <p class="my-2 ms-2 fs-5">Chọn sản phẩm</p>
                         <input type="checkbox" class="my-2 ms-2 fs-4">
                         <span> (Tất cá : {{ get_is_number_product }}) </span>
                     </div>
@@ -91,6 +126,12 @@
                             <span class="text-span-modify"> {{ inForReceiver.phone.name }}  ({{inForReceiver.phone.phone}}) </span>
                         </p>
                     </div>
+                    <div class="d-flex align-items-center">
+                        <p v-if="inForReceiver.transport != false " class="my-2 ms-2 fs-5">
+                            ĐV Vận Chuyển :
+                            <span class="text-span-modify"> {{ inForReceiver.transport.name }}({{inForReceiver.transport.price}}vnđ) </span>
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-4">
@@ -110,6 +151,8 @@
   
 <script>
 import VoucherInformation from './../other/VoucherInformation.vue'
+import {VoucherAction}  from './../../common/voucher.service'
+import  { ApiService } from './../../common/api.service'
 import { mapGetters, mapActions } from 'vuex'
 import { actionUser } from './../../common/user.service'
 import ProductOrder from './../product/ProductOrder.vue'
@@ -132,7 +175,8 @@ export default ({
         },
         inForReceiver: {
             address: false,
-            phone: false
+            phone: false,
+            transport : false
         }
     }),
     components: {
@@ -166,6 +210,12 @@ export default ({
                     this.isActiveInforOrder.transport = false;
                     this.isActiveInforOrder.voucher = false;
                     break;
+                case 4:
+                    this.isActiveInforOrder.receiver = false;
+                    this.isActiveInforOrder.product = false;
+                    this.isActiveInforOrder.transport = true;
+                    this.isActiveInforOrder.voucher = false;
+                    break;
             }
         },
         changeAddress(address){
@@ -173,6 +223,12 @@ export default ({
         },
         changePhone(phone){
             this.inForReceiver.phone = phone
+        },
+        selectVoucher(voucher){
+            this.$store.dispatch('cart/actionSelectedVoucher', { voucher: voucher})
+        },
+        selectTransport(transport){
+            this.inForReceiver.transport = transport
         }
     },
     async created() {
@@ -198,7 +254,20 @@ export default ({
             })
             console.log(this.isDataInforOrder.receiver.id_selected_address)
 
+        });
+        await VoucherAction.actionGetVoucher({
+            params: {
+                email_user: localStorage.getItem('user'),
+                token_permission_infor_user: localStorage.getItem('token_permission_infor_user')
+            }
+        }).then(res => {
+            this.isDataInforOrder.voucher = res.data
+            console.log(this.isDataInforOrder.voucher)
         })
+        await ApiService.query('transport/').then(res => {
+            this.isDataInforOrder.transport = res.data.data
+        })
+
     }
 
 })
@@ -280,5 +349,66 @@ export default ({
 
 .text-selected-infor-order:hover {
     opacity: 1;
+}
+.voucher-item {
+    background-image: linear-gradient(to right bottom, #d61717, #c41a1a, #e9700c, #fdbd5d) !important; 
+    position:relative;
+    overflow:hidden;
+    padding: 0 15px;
+    max-width:200px;
+}
+.voucher-item-left:before {
+    content: "";
+    position: absolute;
+    left:93%;
+    top:17%;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #e5e9ec;
+    border-radius: 50%;
+    background: #f8f9fa;
+}
+.voucher-item-right:before {
+    content: "";    
+    position: absolute;
+    left:-7%;
+    top:17%;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #e5e9ec;
+    border-radius: 50%;
+    background: #f8f9fa;
+    /* Change THIS when changing container background color*/
+}
+.text-voucher-main{
+    font-size: 14px;
+}
+.content-name-transport {
+    background-image: linear-gradient(to right bottom, #d61717, #c41a1a, #e9700c, #fdbd5d) !important; 
+    min-width:200px;
+    padding: 0 15px;
+    max-width:200px;
+}
+.content-price-transport{
+    min-width:200px;
+    background-image: linear-gradient(to right bottom, #4e4f50, #2c2f33, #282929, #5e5f5f) !important; 
+}
+.form-control-radio {
+  font-family: system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1.5rem;
+  gap: 0.5em;
+}
+.form-control-radio2 {
+  font-family: system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1.5rem;
+  gap: 0.5rem;
 }
 </style>

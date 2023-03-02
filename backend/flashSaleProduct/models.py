@@ -26,6 +26,7 @@ class Voucher(models.Model):
     description = models.TextField()
     quantity = models.IntegerField()
     level = models.IntegerField()
+    limited_price = models.IntegerField()
     def __str__(self):
         return self.name
     

@@ -30,13 +30,34 @@ from product.models import Product , Price ,Photo_product
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .serializers import OrderHandleDataSerializer ,ProductSerializer
+from .serializers import OrderHandleDataSerializer ,ProductSerializer ,TransportModelSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from datetime import datetime
 from uuid import uuid4
 import json
 from . import data_processing
+class TransportViewSet(viewsets.ViewSet):
+    @action(method=["GET"],detail=False,url_path="get_transport",url_name="get_transport")
+    def get_transport(self, request,*args, **kwargs):
+        querySql = """
+                SELECT 
+                    `order_transport`.`id` as transport_id, 
+                    `order_transport`.`slug` as transport_slug, 
+                    `order_transport`.`name` as transport_name, 
+                    `order_transport`.`logo` as transport_logo,
+                    `order_transport`.`price`as transport_price
+                FROM 
+                    `order_transport`
+        """
+        try:
+            queryset = Transport.objects.all()
+            serializer = TransportModelSerializer(queryset , many = True)
+            return Response({"data" : serializer.data})
+        except Exception as e:
+            print(e)
+            return Response({"data" : False})
+
 class OrderViewSet (viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderHandleDataSerializer
