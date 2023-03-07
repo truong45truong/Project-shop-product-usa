@@ -15,9 +15,9 @@
                 <hr classs="mt-2">
                 <div class="col mt-2" v-for="product in get_is_order_selected_product.data" :key="product">
                     <product-order :slug="product.product_slug" :name="product.product_name"
-                        :category="product.category_name" :photo="product.photo_product" :price="product.product_price"
-                        :sale='product.product_sale' :total_price="product.product_price_total"
-                        :price_status="product.product_price_status" :indexOrder="indexOrder" :index="index" />
+                        :category="product.category_name" :photo="product.photo_product" :price="product.product_price" :numberProduct="product.product_quantity"
+                        :sale='product.product_sale' :total_price="product.product_price_total" :voucher_activate = "product.voucher_activate"
+                        :price_status="product.product_price_status" :indexOrder="indexOrder" :index="index" :price_after_voucher ="product.price_after_voucher" />
                     <hr>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                             <div class="w-100" v-for="address in isDataInforOrder.receiver.address" :key="address">
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" :id="address.id"
-                                        :checked="address.id == inForReceiver.address.id"
+                                        :checked="address.id == get_is_order_selected_product.address.address.id"
                                         name="defaultExampleRadios" @click="changeAddress(address)">
                                     <label class="custom-control-label" :for="address.id">
                                         <p class="m-0">
@@ -45,7 +45,7 @@
                             <div class="w-100" v-for="phone in isDataInforOrder.receiver.phones" :key="phone">
                                 <div class="custom-control custom-radio cursor">
                                     <input type="radio" class="custom-control-input" :id="phone.id"
-                                        :checked="phone.id == inForReceiver.phone.id"
+                                        :checked="phone.id == get_is_order_selected_product.address.phone.id"
                                         name="defaultPhoneRadios" @click="changePhone(phone)">
                                     <label class="custom-control-label" :for="phone.id">
                                         <p class="m-0">
@@ -63,13 +63,17 @@
             <div v-if="isActiveInforOrder.voucher" class="col border border-1">
                 <div class="row mb-2">
                     <div class="col-lg-3 col-md-4 col-sm-6 mt-2 d-flex justify-content-center" v-for="voucher in isDataInforOrder.voucher" :key="voucher">
-                        <input type="radio" class="me-2 form-control-radio" 
-                        name="selectVoucher" @click="selectVoucher(voucher)">
+                        <input v-if="get_is_order_selected_product.voucher != false" type="radio" class="me-2 form-control-radio" 
+                        name="selectVoucher" @click="selectVoucher(voucher)"
+                        :checked="get_is_order_selected_product.voucher.voucher.id == voucher.voucher.id" >
+                        <input  v-if="get_is_order_selected_product.voucher == false" type="radio" class="me-2 form-control-radio" 
+                        name="selectVoucher" @click="selectVoucher(voucher)"
+                        >
                         <div class="voucher-item border-none">
                             <p class="m-0 text-voucher-main text-white my-2 mx-2">
                                 Giảm :{{voucher.voucher.sale}}%
                                 <span>(tối đa {{voucher.voucher.limited_price}}k)</span>
-                            </p>
+                            </p>    
                             <div class="voucher-item-left"></div>
                             <div class="voucher-item-right"></div>
                         </div>
@@ -90,7 +94,8 @@
                             </span>
                         </div>
                         <input type="radio" class="mt-2 form-control-radio2" 
-                        name="selectTransport" @click="selectTransport(transport)">
+                        name="selectTransport" @click="selectTransport(transport)"
+                        :checked="get_is_order_selected_product.transport.id == transport.id">
                     </div>
                 </div>
             </div>
@@ -127,17 +132,20 @@
                         </p>
                     </div>
                     <div class="d-flex align-items-center">
-                        <p v-if="inForReceiver.transport != false " class="my-2 ms-2 fs-5">
+                        <p v-if="get_is_order_selected_product.transport != false " class="my-2 ms-2 fs-5">
                             ĐV Vận Chuyển :
-                            <span class="text-span-modify"> {{ inForReceiver.transport.name }}({{inForReceiver.transport.price}}vnđ) </span>
+                            <span class="text-span-modify"> {{ get_is_order_selected_product.transport.name }}({{get_is_order_selected_product.transport.price}}vnđ) </span>
                         </p>
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="d-flex flex-column justify-content-between align-items-end">
-                    <div class="total-price-layout text-center py-1 ms-2 mt-2">
+                    <div v-if="get_is_order_selected_product.numberProduct == 0 " class="total-price-layout text-center py-1 ms-2 mt-2">
                         {{ get_is_order_selected_product.totalPrice }} <span>vnđ</span>
+                    </div>
+                    <div v-if="get_is_order_selected_product.numberProduct > 0" class="total-price-layout text-center py-1 ms-2 mt-2">
+                        {{ get_is_order_selected_product.totalPrice  +  get_is_order_selected_product.transport.price }} <span>vnđ</span>
                     </div>
                     <button v-if="get_is_order_selected_product.numberProduct > 0" class="button-57 ms-2 mt-3" role="button"><span class="text">Mua Ngay</span><span>Click để
                             chuyển
@@ -220,15 +228,24 @@ export default ({
         },
         changeAddress(address){
             this.inForReceiver.address = address
+            this.$store.dispatch('cart/actionSelectedAddress', { address: {
+                address : this.inForReceiver.address,
+                phone : this.inForReceiver.phone
+            }})
         },
         changePhone(phone){
             this.inForReceiver.phone = phone
+            this.$store.dispatch('cart/actionSelectedAddress', { address: {
+                address : this.inForReceiver.address,
+                phone : this.inForReceiver.phone
+            }})
         },
         selectVoucher(voucher){
             this.$store.dispatch('cart/actionSelectedVoucher', { voucher: voucher})
         },
         selectTransport(transport){
             this.inForReceiver.transport = transport
+            this.$store.dispatch('cart/actionSelectedTransport', { transport: transport})
         }
     },
     async created() {
@@ -252,7 +269,12 @@ export default ({
                     this.inForReceiver.phone = phone
                 }
             })
-            console.log(this.isDataInforOrder.receiver.id_selected_address)
+            if(this.get_is_order_selected_product.address == false){
+                this.$store.dispatch('cart/actionSelectedAddress', { address: {
+                    address : this.inForReceiver.address,
+                    phone : this.inForReceiver.phone
+                }})
+            }
 
         });
         await VoucherAction.actionGetVoucher({
@@ -262,10 +284,11 @@ export default ({
             }
         }).then(res => {
             this.isDataInforOrder.voucher = res.data
-            console.log(this.isDataInforOrder.voucher)
+            console.log(res.data)
         })
         await ApiService.query('transport/').then(res => {
             this.isDataInforOrder.transport = res.data.data
+            this.$store.dispatch('cart/actionSelectedTransport', { transport: res.data.data[0]})
         })
 
     }

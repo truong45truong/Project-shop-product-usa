@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class=" px-1 mt-2">
-                <p class="my-0 text-center btn-remove-item-in-cart text-center text-dark fw-bolder">Xóa</p>
+                <p class="my-0 text-center btn-remove-item-in-cart text-center text-dark fw-bolder" @click="removeProductInCart">Xóa</p>
             </div>
         </div>
         <div class="my-2 col-4 d-flex flex-column justify-content-between align-items-center ">
@@ -27,7 +27,9 @@
 
                 <div class="button-48 mt-2" @click="nextPageDetailProduct"><span>Chi tiết</span></div>
         </div>  
-        <input v-model="checkedSelected" type="checkbox" class="check-box-cart" @click="selectedProduct">
+        <input v-model="checkedSelected" type="checkbox" class="check-box-cart" @click="selectedProduct"
+        :checked="isSelectOrder == true"
+        >
     </div>
 </template>
   
@@ -43,12 +45,14 @@ export default ({
         category: false,
         price: false,
         photo: false,
-        numberProduct: 1,
+        quantity: 1,
         sale: 0,
         total_price : false,
         price_status : false,
         indexOrder : false,
         index : false ,
+        name_order : false,
+        isSelectOrder : false
     },
     components: {
       Pagination,
@@ -101,15 +105,27 @@ export default ({
         },
         icreasingQuantity(){
             this.numberQuantity += 1
+            this.$store.dispatch('cart/actionChangeQuangtityProductInCart', { value: 1 , indexOrder : this.indexOrder ,index : this.index });
         },
         decliningQuantity(){
-            if(this.numberQuantity > 1)
-            this.numberQuantity -=1
+            if(this.numberQuantity > 1){
+                this.numberQuantity -=1;
+                this.$store.dispatch('cart/actionChangeQuangtityProductInCart', { value: -1 , indexOrder : this.indexOrder ,index : this.index });
+                
+            }
+            
         },
         nextPageDetailProduct(){
             this.$router.push('/product/'+ this.slug)
         },
+        removeProductInCart(){
+            this.$store.dispatch('cart/actionRemoveProductInCart', { product_slug: this.slug ,name_order : this.name_order , indexOrder : this.indexOrder ,index : this.index})
+        }
     },
+    created(){
+        this.numberQuantity = this.quantity;
+        this.checkedSelected = this.isSelectOrder;
+    }
 
 })
 </script>

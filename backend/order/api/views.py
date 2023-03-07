@@ -6,7 +6,8 @@ queryRawSql = """
         product_price.sale as 'product_sale' , product_price.status as 'product_price_status',
         product_price.price_total as 'product_price_total' , product_photo_product.data as 'photo_product',
         order_transport.slug as 'transport_slug' , order_transport.name as 'transport_name' ,
-        order_transport.logo as 'transport_logo' , order_transport.price as 'transport_price'
+        order_transport.logo as 'transport_logo' , order_transport.price as 'transport_price',
+        `order_detailorder`.`quantity` as 'product_quantity'
     FROM
         order_detailorder,product_product,product_price, order_transport,
         product_photo_product , product_category,order_order,login_user
@@ -23,7 +24,6 @@ queryRawSql = """
         order_order.datetime DESC
 """
 
-
 from order.models import Order , Transport , DetailOrder
 from login.models import User , Address , PhoneUser 
 from product.models import Product , Price ,Photo_product
@@ -37,21 +37,33 @@ from datetime import datetime
 from uuid import uuid4
 import json
 from . import data_processing
+
+# ---------------------------------------------------------------------------- #
+#                             GENERAL USAGE METHOD                             #
+# ---------------------------------------------------------------------------- #
+# ------------------ method check order is available to day ------------------ #
+def checkTheOrderIsAvailebleToDay(curent_user,now):
+    start_datetime = datetime(
+        now.year,now.month , now.day, 0, 0, 0
+    ) 
+    end_datetime = datetime(
+        now.year,now.month , now.day, 23, 59, 59
+    )
+    
+    order_current = Order.objects.filter(datetime__range=[start_datetime, end_datetime] , user_id = curent_user)
+    if len(order_current) > 0 :
+        return order_current[0]
+    else:
+        return False
+# ---------------------------------------------------------------------------- #
+#                           END GENERAL USAGE METHOD                           #
+# ---------------------------------------------------------------------------- #
+
 class TransportViewSet(viewsets.ViewSet):
     @action(method=["GET"],detail=False,url_path="get_transport",url_name="get_transport")
     def get_transport(self, request,*args, **kwargs):
-        querySql = """
-                SELECT 
-                    `order_transport`.`id` as transport_id, 
-                    `order_transport`.`slug` as transport_slug, 
-                    `order_transport`.`name` as transport_name, 
-                    `order_transport`.`logo` as transport_logo,
-                    `order_transport`.`price`as transport_price
-                FROM 
-                    `order_transport`
-        """
         try:
-            queryset = Transport.objects.all()
+            queryset = Transport.objects.all().order_by('price')
             serializer = TransportModelSerializer(queryset , many = True)
             return Response({"data" : serializer.data})
         except Exception as e:
@@ -73,11 +85,14 @@ class OrderViewSet (viewsets.ModelViewSet):
             curent_user = User.objects.get(token_permission_infor_user=token_permission_infor_user)
         except:
             return Response({"success":False})
+        check_order_today = checkTheOrderIsAvailebleToDay(curent_user,datetime.now())
+        if check_order_today != False :
+           check_order_today = True
         queryset,numberProduct = data_processing.handleRawQuery(Order.objects.raw(queryRawSql,[curent_user.id]))
         
         serializer = OrderHandleDataSerializer(queryset,many = True)
         
-        return Response({"success":serializer.data , "number_product" : numberProduct})
+        return Response({"success":serializer.data , "number_product" : numberProduct , "check_order_today" : check_order_today })
     
     # ---------------------------------------------------------------------------- #
     #                              METHOD ADD TO CART                              #
@@ -85,9 +100,58 @@ class OrderViewSet (viewsets.ModelViewSet):
     
     @action(method=['POST'],detail=False, url_path="add_to_cart",url_name="add_to_cart")
     def add_to_cart(self, request,*args, **kwargs):
+        # ---------------------------------------------------------------------------- #
+        #                                global variable                               #
+        # ---------------------------------------------------------------------------- #
+        check_detail_order = False 
+        now = datetime.now()
+        quantity = 1
+        orderInDetailOrder = False
+        # ---------------------------------------------------------------------------- #
+        #                              method in function                              #
+        # ---------------------------------------------------------------------------- #
+
+
+        # -------------- method check detail order is available product -------------- #
+        def checkDetailOrderIsAvailableProduct(curent_product,curent_order):
+            detailOrderProduct = DetailOrder.objects.filter(order_id = curent_order , product_id = curent_product)
+            if len(detailOrderProduct) > 0 :
+                return detailOrderProduct[0] ,curent_product.slug
+            else :
+                return False , False
+        # ------------ method check product is already in orders previous ------------ #\
+        def checkProductIsAlreadyInOrderPrevios(curent_product):
+            
+            quantity_total = 0
+            start_datetime = datetime(
+                now.year,now.month , now.day, 0, 0, 0
+            )
+            detail_orders = DetailOrder.objects.filter(
+                order_id__datetime__lt= start_datetime, 
+                order_id__user_id = curent_user,
+                product_id__slug= curent_product.slug
+            )
+            orderInDetailOrder = dict()
+            if len(detail_orders) > 0 :
+                for i in detail_orders:
+                    if( i.order_id.id not in orderInDetailOrder):
+                        orderInDetailOrder[str(i.order_id.id)] = i.order_id.id
+                    quantity_total += i.quantity
+                    i.delete()
+                return quantity_total,orderInDetailOrder
+            else:
+                return False,False
+        
+        # ---------------------------------------------------------------------------- #
+        #                            handle logic in fuction                           #
+        # ---------------------------------------------------------------------------- #
+        # -------------------------------- get params -------------------------------- #
+        
         data_request= json.loads(request.body.decode('utf-8'))
         token_permission_infor_user = data_request['params']['token_permission_infor_user']
         product_slug = data_request['params']['product_slug']
+
+        # ----------------------- check information in database ---------------------- #
         try:
             curent_user = User.objects.get(token_permission_infor_user=token_permission_infor_user)
             product = Product.objects.get(slug = product_slug)
@@ -96,30 +160,32 @@ class OrderViewSet (viewsets.ModelViewSet):
             address_default = Address.objects.filter(user_id = curent_user , status = True )
             phone_user_default = PhoneUser.objects.filter(user_id = curent_user , status = True)
             transport = Transport.objects.all()
+            quantity_check,orderInDetailOrder = checkProductIsAlreadyInOrderPrevios(product)
+            if quantity_check !=  False :
+                    quantity += quantity_check
+            
         except Exception as e:
+            # ------------------ failure if information not in database ------------------ #
             print("ERROR :", e)
             return Response({"success":False})
-        now = datetime.now()
-        print(now)
-        start_datetime = datetime(
-            now.year,now.month , now.day, 0, 0, 0
-        ) 
-        end_datetime = datetime(
-            now.year,now.month , now.day, 23, 59, 59
-        )
-        
-        order_current = Order.objects.filter(datetime__range=[start_datetime, end_datetime] , user_id = curent_user)
-        if len(order_current) > 0:
-            
-            detailproduct = DetailOrder.objects.create(
-                product_id = product , 
-                order_id = order_current[0] , 
-                status = False ,
-                quantity = 1
-            )
-            print(order_current)
-            detailproduct.save()
+        # ------------------- check the order is available today ------------------ #
+        order_id = checkTheOrderIsAvailebleToDay(curent_user,now)
+        if order_id != False:
+            # ------------------ check detail order is available product ----------------- #
+            checkDetailProduct,check_detail_order = checkDetailOrderIsAvailableProduct(product,order_id)
+            if checkDetailProduct != False:
+                checkDetailProduct.quantity += 1
+                checkDetailProduct.save()
+            else :   
+                detailproduct = DetailOrder.objects.create(
+                    product_id = product , 
+                    order_id = order_id , 
+                    status = False ,
+                    quantity = quantity
+                )
+                detailproduct.save()
         else :
+            # ------------- if not order is available today create order new ------------- #
             try:
                 order_new = Order.objects.create(
                     name = uuid4(),
@@ -143,7 +209,7 @@ class OrderViewSet (viewsets.ModelViewSet):
                     product_id = product , 
                     order_id = order_new, 
                     status = False ,
-                    quantity = 1
+                    quantity = quantity
                 )
                     detailproduct.save()
                 except Exception as e:
@@ -164,10 +230,13 @@ class OrderViewSet (viewsets.ModelViewSet):
             'product_price_status' : price_product[0].status,
             'product_price_total' : price_product[0].price_total,
             'product_sale' : price_product[0].sale ,
-            'product_slug' : product.slug
+            'product_slug' : product.slug,
+            'product_quantity' : quantity
         }
         serializer = ProductSerializer(product_response,many= False)
-        return Response({"success": serializer.data})
+        return Response({"success": serializer.data , "check_detail_order" : check_detail_order ,
+                         'order_in_detail_order' : orderInDetailOrder
+                         })
 
     # ---------------------------------------------------------------------------- #
     #                         METHOD REMOVE PRODUCT IN CART                        #
@@ -184,10 +253,10 @@ class OrderViewSet (viewsets.ModelViewSet):
             curent_user = User.objects.get(token_permission_infor_user = token_permission_infor_user)
             curent_order = Order.objects.get(name = name_order,user_id = curent_user)
             curent_detail_order = DetailOrder.objects.filter(order_id = curent_order , product_id__slug = product_slug )
-            print(curent_detail_order)
+            curent_detail_order.delete()
         except Exception as e:
             return Response({"sucess" : False})
         
-        return Response({"success": curent_detail_order})
+        return Response({"success": True })
 
         

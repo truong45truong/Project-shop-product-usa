@@ -34,6 +34,7 @@ class VoucherViewSet (viewsets.ViewSet):
                 WHERE
                     `flashSaleProduct_voucher`.`level` = %s 
                     and `product_product`.`id` = `flashSaleProduct_detailvoucher`.`product_id_id`
+                    and `flashSaleProduct_voucher`.`id` = `flashSaleProduct_detailvoucher`.`voucher_id_id`
         """
         queryset,numberVoucher = data_processing.handleRawQueryVoucher(Voucher.objects.raw(querySql,[user_current.level]))
         serializer = VoucherHandleRawSQL(queryset,many =True)

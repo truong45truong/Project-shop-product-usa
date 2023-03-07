@@ -29,7 +29,7 @@
                         <p class="text-white m-0 ms-4 py-4  title-menu">LIÊN HỆ</p>
                         <p class="text-white m-0 ms-4 py-4  title-menu">THEO DÕI</p>
                     </div>
-                    <div class="col-lg-4 my-3 d-flex justify-content-end align-items-center">
+                    <div class="col-lg-4 my-3 d-flex justify-content-end align-items-center position-relative">
                         <div class="search-control">
                             <input type="text" class="input-search border" placeholder="Tìm kiếm sản phẩm">
                             <font-awesome-icon class="d-inline text-white icon-search" icon="fa-solid fa-magnifying-glass" />
@@ -43,6 +43,9 @@
                             <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-solid fa-basket-shopping" /> 
                             <div class="number-product-cart text-white text-center m-0">{{get_is_number_product}}</div> 
                         </div> 
+                        <div class="position-absolute py-2 px-4 bg-white text-bg-white text-dark border border-white rounded w-50 start-50 notify-menu shadow">
+                                Thông báo 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -147,6 +150,21 @@ export default {
     100% {
         background-color: #30CFD0
     }
+}
+@keyframes notifyActivate {
+    0%{
+        opacity: 1;
+        display:block;
+    }
+    100% {
+        opacity : 0;
+        display:none;
+    }
+}
+.notify-menu{
+    top:120%;   
+    opacity : 0;
+    animation: notifyActivate 5s;
 }
 .number-product-cart {
     position:absolute;

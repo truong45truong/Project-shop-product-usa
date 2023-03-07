@@ -27,7 +27,8 @@
                 :category="product.category_name" :photo="product.photo_product"
                 :price="product.product_price" :sale='product.product_sale'
                 :total_price="product.product_price_total" :price_status="product.product_price_status"
-                :indexOrder="indexOrder" :index="index"
+                :indexOrder="indexOrder" :index="index" :quantity="product.product_quantity"
+                :name_order = "name" :isSelectOrder ="product.isSelectOrder"
               />
           </div>
         </div>

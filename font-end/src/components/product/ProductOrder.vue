@@ -32,9 +32,17 @@
         </div>
         <div class="col-sm-3 d-flex flex-column align-items-center">
             <h5>voucher</h5>
-            <p class="m-0 text-danger">Chưa đủ điều kiện</p>
+            <p v-if="voucher_activate == false" class="m-0 text-danger">Chưa đủ điều kiện</p>
+            <p v-if="voucher_activate != false" class="m-0 text-danger"> Đủ điều kiện</p>
         </div>
         <div class="col">
+            <h5 class="mb-1 text-danger"><b>Tổng</b></h5>
+            <b>
+                <p v-if="voucher_activate != false" class="m-0 text-danger"> {{price_after_voucher*numberQuantity}}</p>
+            </b>
+            <b>
+                <p v-if="voucher_activate == false" class="m-0 text-danger"> {{total_price*numberQuantity}}</p>
+            </b>
             <h5 class="m-0 btn-remove-item-in-cart">Xóa</h5>
         </div>
     </div>
@@ -57,6 +65,8 @@ export default ({
         price_status : false,
         indexOrder : false,
         index : false ,
+        voucher_activate : false,
+        price_after_voucher : false
     },
     components: {
       SlideImageProduct
@@ -83,12 +93,24 @@ export default ({
         },
         icreasingQuantity(){
             this.numberQuantity += 1
+            this.$store.dispatch('cart/actionChangeQuangtityProductInOrder', { 
+                product_slug: this.slug ,indexOrder : this.indexOrder ,
+                index : this.index  , value : 1
+            })
         },
         decliningQuantity(){
-            if(this.numberQuantity > 1)
-            this.numberQuantity -=1
+            if(this.numberQuantity > 1){
+                this.numberQuantity -=1
+                this.$store.dispatch('cart/actionChangeQuangtityProductInOrder', { 
+                    product_slug: this.slug ,indexOrder : this.indexOrder ,
+                    index : this.index ,value : -1
+                })
+            }
         }
     },
+    created(){
+        this.numberQuantity = this.numberProduct
+    }
 
 })
 </script>

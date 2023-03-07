@@ -32,7 +32,8 @@ def handleRawQuery(queryset):
                         "product_price_status" : i.product_price_status,
                         "product_price_total" : i.product_price_total ,
                         "photo_product" : i.photo_product,
-                        "category_name" : i.category_name
+                        "category_name" : i.category_name,
+                        "product_quantity" : i.product_quantity
                     }
                 ]
             }
@@ -46,7 +47,8 @@ def handleRawQuery(queryset):
                 "product_price_status" : i.product_price_status,
                 "product_price_total" : i.product_price_total ,
                 "photo_product" : i.photo_product,
-                "category_name" : i.category_name
+                "category_name" : i.category_name,
+                "product_quantity" : i.product_quantity
             })
         order_list = []
     for i in order_dict:

@@ -20,6 +20,7 @@ class ProductSerializer(serializers.Serializer):
     product_price_total = serializers.FloatField()
     photo_product = serializers.CharField()
     category_name = serializers.CharField()
+    product_quantity = serializers.IntegerField()
 class OrderSerializer (serializers.Serializer):
     # ---------------------------- params model order ---------------------------- #
     name = serializers.CharField(max_length=200)
