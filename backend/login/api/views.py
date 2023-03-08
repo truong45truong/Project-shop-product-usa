@@ -125,7 +125,33 @@ class UserViewSet (viewsets.ModelViewSet):
             else:
                 return Response({ 'user' : False ,'csrf_token': request.META.get('CSRF_COOKIE') , 'error' : { 'value' : 'password is wrong' , 'type' : 2 }})
         return Response(request,{ 'user' : False , 'error' : { 'value' : None , 'type' : None }})
-            
+    
+    # ---------------------------------------------------------------------------- #
+    #                             CHANGE PASSWORD USER                             #
+    # ---------------------------------------------------------------------------- #
+    @action(methods = ["POST"], detail = False, url_path = "change_password_user", url_name = "change_password_user")
+    def change_password_user(self,request,*args, **kwargs):
+        data_request= json.loads(request.body.decode('utf-8'))
+        token_permission_infor_user = data_request['params']['token_permission_infor_user']
+        email_user = data_request['params']['email_user']
+        password = data_request['params']['password']
+        password_new = data_request['params']['password_new']
+        print("data_request",data_request)
+        try:
+            user_current = User.objects.get(email = email_user,token_permission_infor_user=token_permission_infor_user)
+            if user_current.check_password(password) :
+                
+                user_current.password  = make_password(password_new)
+                user_current.token_permission_infor_user = uuid.uuid4()
+                user_current.save()
+            else:
+                return Response({'user': False ,'error' : { 'value' : "Nhập sai password" , 'type' : "ChangePassWordFailure" }})
+            serializer = UserSerializer(user_current,many=False)
+            return Response({'user': serializer.data ,'error' : { 'value' : None , 'type' : None }})
+        except Exception as e:
+            print(e)
+            return Response({'user': False ,'error' : { 'value' : str(e) , 'type' : "ChangePassWordFailure" }})
+        
 class InforUserViewSet (viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer

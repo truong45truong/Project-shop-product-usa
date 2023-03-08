@@ -11,6 +11,9 @@ user = UserViewSet.as_view({
     'get' : 'get_user',
     # 'get' : 'get_infor_user'
 })
+change_password_user = UserViewSet.as_view({
+    'post' : 'change_password_user',
+})
 register_user = RegisterUserViewSet.as_view({
     'post': 'post_user',
 })
@@ -40,6 +43,7 @@ update_phone_user = PhoneUserViewSet.as_view({
 
 urlpatterns = [
     path('user/', user, name = "user_logs"),
+    path('user/change-password/', change_password_user, name = "change_password_user"),
     path('register-user/', register_user, name = "register_user"),
     path('get-infor-user/', get_infor_user, name = "infor_user"),
     path('address-user/create/', create_address_user, name = "create_address_user"),

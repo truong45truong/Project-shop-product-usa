@@ -87,10 +87,12 @@ export default ({
                 }
             }
         },
-        async addToCard(){
-            return await this.$store.dispatch('cart/actionAddToCart', {
+        addToCard(){
+            this.$store.dispatch('cart/actionAddToCart', {
                 product_slug : this.slug
             })
+            this.$store.dispatch('notice/actionTypeNotice',{content : 'Sản phẩm ' + this.name +' vừa dc thêm vào giỏ hàng',type : 'addtocart'})
+            this.$store.dispatch('notice/activateShowMenu')
         }
     },
     created(){

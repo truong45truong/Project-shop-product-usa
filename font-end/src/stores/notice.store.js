@@ -1,6 +1,7 @@
 
 const initialState = {
     isActivate: false,
+    isActivateMenu : false,
     isAccept : null ,
     type : null,
     content : null ,
@@ -14,6 +15,7 @@ export const notice = {
         isContent : state => state.content,
         isType : state => state.type,
         isAccept : state => state.isAccept,
+        isActivateMenu : state => state.isActivateMenu
     },
     actions: {
         activateShow({commit}){
@@ -33,7 +35,13 @@ export const notice = {
         },
         actionComplete({commit}){
             commit('complete')
-        }
+        },
+        activateShowMenu({commit}){
+            commit('activateMenuSuccess')
+        },
+        actionShowMenuCancel({commit}){
+            commit('cancelShowMenu')
+        },
     },
 
     mutations: {
@@ -58,6 +66,12 @@ export const notice = {
             state.type = null;
             state.content = null;
             state.isAccept = null;
+        },
+        activateMenuSuccess(state){
+            state.isActivateMenu = true
+        },
+        cancelShowMenu(state){
+            state.isActivateMenu = false
         }
     }
 };

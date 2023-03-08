@@ -1,11 +1,13 @@
 
 <template>
+  <menu-header @hideListItemHeart="activeShowListHeart" @hideCart="activeShowCart"
+              @hideChangePassword = "activeChangePassword"
+  />
   <main>
     <div class="d-flex flex-column" :class="[get_is_activate == true ? 'top-action-on-web' : '']">
       <notice-carefully v-if="get_is_activate" class="m-auto">
       </notice-carefully>
     </div>
-    <menu-header @hideListItemHeart="activeShowListHeart" @hideCart="activeShowCart"/>
     <banner-home />
     <list-product-item-flash-sale ref="list_product_item_flash_sale" />
     <list-product-item ref="list_product_item" />
@@ -14,8 +16,9 @@
     />
     <shopping-cart-layout v-if="isShowCart" class="h-100" @hideCart="activeShowCart" 
     :isShowComponent="isShowCart" />
-    <footer-layout />
   </main>
+  <footer-layout />
+  <change-password @hide = "activeChangePassword" v-if="isShowChangePassword" />
 </template>
 
 <script>
@@ -28,6 +31,7 @@ import ListProductItem from './../layout/ListProductItem.vue'
 import NoticeCarefully from './../components/other/NoticeCarefully.vue'
 import ListItemHeart from './../layout/ListItemHeart.vue'
 import ShoppingCartLayout from './../layout/ShoppingCartLayout.vue'
+import ChangePassword from './../components/login/ChangePassword.vue'
 import { mapGetters} from 'vuex'
 export default {
   name: "HomeView",
@@ -42,6 +46,7 @@ export default {
   data: () => ({
     isShowListHeart : null,
     isShowCart : null,
+    isShowChangePassword : null ,
     }),
   components: {
     MenuHeader,
@@ -51,11 +56,13 @@ export default {
     FooterLayout,
     NoticeCarefully,
     ListItemHeart,
-    ShoppingCartLayout
+    ShoppingCartLayout,
+    ChangePassword
   },
   computed: {
     ...mapGetters('notice', {
       get_is_activate: 'isActivate',
+      get_activate_menu : 'isActivateMenu'
     }),
     ...mapGetters('cart', {
       get_is_data_cart: 'getIsHaveData',
@@ -74,9 +81,17 @@ export default {
       listProductItem.changeStatusHeartProduct(product_slug);
     },
     activeShowCart( status ){
-      this.isShowCart = status;
+      if(this.get_authenticated != true){
+        this.$store.dispatch('notice/actionTypeNotice',{content : 'Đăng nhập để vào giỏ hàng',type : 'addtocart'})
+        this.$store.dispatch('notice/activateShowMenu')
+      } else {
+        this.isShowCart = status;
+      }
     },
-
+    activeChangePassword( status ){
+      console.log("activeChangePassword", status)
+      this.isShowChangePassword = status;
+    },
   }
 }
 </script>

@@ -113,10 +113,8 @@ export const cart = {
         actionRemoveSelectedProductInCart({commit,state},payload){
             if( state.isLoading )  return ;
             commit('startRemoveSeletedProductInCart');
-            let productSelected = state.data[payload.indexOrder].products[payload.index];
-            state.data[payload.indexOrder].products[payload.index].isSelectOrder = false
-            if( productSelected != null){
-                commit('removeSeletedProductInCartSucess',{product_slug :productSelected.product_slug });
+            if( payload.product_slug  != null){
+                commit('removeSeletedProductInCartSucess',{product_slug : payload.product_slug });
             }
             else {
                 commit('removeSeletedProductInCartFailure');
@@ -268,6 +266,15 @@ export const cart = {
             state.isLoading = true;
         },
         removeSeletedProductInCartSucess(state,payload){
+            state.data = state.data.filter((order) => {
+                order = order.products.filter((product) => {
+                    if(product.product_slug == payload.product_slug){
+                        product.isSelectOrder = false
+                    }
+                    return product
+                })
+                return order
+            })
             state.orderSelectedProduct.data = state.orderSelectedProduct.data.filter((product) => {
                 if(product.product_slug == payload.product_slug){
                     console.log("product select",product)

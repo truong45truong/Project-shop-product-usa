@@ -26,7 +26,8 @@
 								</div>
 								<div class="mt-4 flex flex-column w-100 align-items-center">
 									<div class="d-flex flex-column">
-										<span v-if="message != '' " class="text-danger text-center mb-2"> {{ message}}</span>
+										<span v-if="get_error != false " class="text-danger text-center mb-2"> Tài khoản hoặc mật khẩu sai</span>
+										<span v-if="message != false " class="text-danger text-center mb-2"> Tài khoản hoặc mật khẩu sai</span>
 									</div>
 									<div class="d-flex flex-column">
 										<button type="button"
@@ -147,10 +148,6 @@ export default {
 		/* -------------------------- method register user -------------------------- */
 		login(){
 			this.$emit('login', this.username, this.password)
-			if (this.notifyAfferLogin() == false){
-				this.message = "Tài khoản hoặc mật khẩu sai"	
-			}
-		
 		},
 		checkData() {
 			console.log("check data running")

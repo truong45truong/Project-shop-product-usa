@@ -33,6 +33,7 @@ export const auth = {
         password : payload.password
       }}).then(
          response => {
+          console.log("response.data",response.data)
             if( response.data.user){
                 localStorage.setItem('user',response.data.user.email);
                 localStorage.setItem('userProfile',response.data.user.photo);
@@ -40,14 +41,18 @@ export const auth = {
                 localStorage.setItem('csrf_token',response.data.csrf_token)
                 ApiService.setHeaderCookieCsrf()
                 commit('loginSuccess',response.data.user)
+                console.log('loginSuccess')
             }
             if (response.data.error.value){
+              console.log("response.data",response.data)
               commit('loginFailure',response.data.error)
             }
+            return response
          }, 
          error => {
             localStorage.removeItem('user')
             commit('loginFailure',error)
+            return error
          }
       );
     },

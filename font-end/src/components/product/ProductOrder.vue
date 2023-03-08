@@ -43,13 +43,14 @@
             <b>
                 <p v-if="voucher_activate == false" class="m-0 text-danger"> {{total_price*numberQuantity}}</p>
             </b>
-            <h5 class="m-0 btn-remove-item-in-cart">Xóa</h5>
+            <h5 class="m-0 btn-remove-item-in-cart" @click="removeProduct">Xóa</h5>
         </div>
     </div>
 </template>
   
 <script>
 import SlideImageProduct from './../other/SlideImageProduct.vue'
+import {mapGetters } from 'vuex'
 export default ({
     name: 'ProductOrder',
     props: {
@@ -78,6 +79,13 @@ export default ({
         checkedSelected : false,
         numberQuantity: 1,
     }),
+    computed: {
+        ...mapGetters('notice', {
+			get_type         : 'isType',
+			get_content: 'isContent',
+            get_accept : 'isAccept'
+		}),
+	},
     methods: {
         showDetail(){
             this.isShowDetail = ! this.isShowDetail
@@ -106,6 +114,28 @@ export default ({
                     index : this.index ,value : -1
                 })
             }
+        },
+        removeProduct(){
+            this.$store.dispatch('notice/actionTypeNotice',{content : 'Bạn có muốn xóa sản phẩm : ' +this.name,type : 'Xóa'})
+            
+            return new Promise((resolve) => {
+                this.$store.dispatch('notice/activateShow')
+                const checkValue = () => {
+                    if (this.get_accept === true) {
+                        this.$store.dispatch('cart/actionRemoveSelectedProductInCart', { product_slug: this.slug ,indexOrder : this.indexOrder ,index : this.index });      
+                        
+                        resolve();
+                    }
+                    if(this.get_accept === false || this.get_accept === true){
+                        this.$store.dispatch('notice/actionComplete')
+                    }
+                    else {
+                        setTimeout(checkValue, 500);
+                    }
+                };
+
+                checkValue();
+            });
         }
     },
     created(){

@@ -38,13 +38,17 @@
                             <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-regular fa-heart"/>
                             <div class="number-product-cart text-white text-center m-0">{{get_is_number_product_heart}}</div> 
                         </div>
-                        <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-regular fa-user" />
-                        <div class="position-relative" @click="$emit('hideCart',true)">
+                        <div class="position-relative" @click="showUser">
+                            <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-regular fa-user" />
+                        </div>
+                        <div class="position-relative" @click="$emit('hideCart',true)" >
                             <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-solid fa-basket-shopping" /> 
                             <div class="number-product-cart text-white text-center m-0">{{get_is_number_product}}</div> 
                         </div> 
-                        <div class="position-absolute py-2 px-4 bg-white text-bg-white text-dark border border-white rounded w-50 start-50 notify-menu shadow">
-                                Thông báo 
+                        <notice-menu />
+                        <div v-if="isShowUser" class="position-absolute bg-white rounded shadow top-100 p-2 w-50 start-50 py-4 text-center">
+                            <p class="text-dark action-menu-user" >Thông tin các nhân</p>
+                            <p class="text-dark action-menu-user mb-0" @click="$emit('hideChangePassword',true)">Đổi mật khẩu</p>
                         </div>
                     </div>
                 </div>
@@ -59,6 +63,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import CategoryLayout from './CategoryLayout.vue'
 import SignIn from './../components/login/SignIn.vue'
+import NoticeMenu from './../components/other/NoticeMenu.vue'
 export default {
     name: "MenuHeader",
     props: {
@@ -69,12 +74,18 @@ export default {
         currentTime : new Date().toLocaleString(),
         isAuthenticated : false,
         isShowCategory : false,
+        isShowNotify : false,
+        isShowUser : false ,
     }),
     components : {
         CategoryLayout,
-        SignIn
+        SignIn,
+        NoticeMenu
     },
     methods : {
+        showUser(){
+            this.isShowUser = ! this.isShowUser
+        },
         showCategory (){
             this.isShowCategory = ! this.isShowCategory
         },
@@ -151,21 +162,7 @@ export default {
         background-color: #30CFD0
     }
 }
-@keyframes notifyActivate {
-    0%{
-        opacity: 1;
-        display:block;
-    }
-    100% {
-        opacity : 0;
-        display:none;
-    }
-}
-.notify-menu{
-    top:120%;   
-    opacity : 0;
-    animation: notifyActivate 5s;
-}
+
 .number-product-cart {
     position:absolute;
     width:1.75rem;
@@ -298,5 +295,11 @@ header {
 }
 .icon-cursor:hover {
     color:#F56A79 !important;
+}
+.action-menu-user {
+    cursor:pointer;
+}
+.action-menu-user:hover {
+    color:rgb(3, 101, 182) !important;
 }
 </style>
