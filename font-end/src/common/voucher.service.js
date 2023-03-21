@@ -10,13 +10,24 @@ export const VoucherApiService = {
 export const VoucherAction = {
     async actionGetVoucher(params){
         let json = ''
-        await actionJWT.verifyTokenJWT().then(async ()=>{
+        let numberRequest = 0
+        let check = false
+        while(check == false && numberRequest < 2){
+            numberRequest += 1
             let jwt_token_access = localStorage.getItem('jwt_token_access')
             ApiService.setHeader(jwt_token_access)
             await VoucherApiService.get(params).then((response)=>{
-                json = response.data
+                console.log(response)
+                json =  response.data
+                check = true
+            }, async (error) => {
+                await actionJWT.refreshTokenJWT().then(response => {
+                    if(response == 404){
+                        check = true
+                    }
+                })
             })
-          })
-        return json
+        }
+        return json;
     },
 }

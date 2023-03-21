@@ -10,32 +10,51 @@ export const ProductApiService = {
         return json
     },
     async getProductHeart(params){
-        let json = await ApiService.query('product-heart/',params)
+        let json = await ApiService.query('product-heart/')
         return json
     }
 }
 export const ProductAction = {
     async actionPostHeart(params){
         let json = ''
-        await actionJWT.verifyTokenJWT().then(async ()=>{
+        let check = false
+        let numberRequest = 0
+        while(check == false && numberRequest < 2){
+            numberRequest += 1
             let jwt_token_access = localStorage.getItem('jwt_token_access')
             ApiService.setHeader(jwt_token_access)
             await ProductApiService.post(params).then((response)=>{
-                json = response.data
+                json =  response.data
+                check = true
+            }, async (error) => {
+                await actionJWT.refreshTokenJWT().then(response => {
+                    if(response == 404){
+                        check = true
+                    }
+                })
             })
-          })
+        }
         return json
     },
     async actionGetProductHeart(params){
-        let json =''
-        await actionJWT.verifyTokenJWT().then(async ()=>{
+        let json = ''
+        let check = false
+        let numberRequest = 0
+        while(check == false && numberRequest < 2){
+            numberRequest += 1
             let jwt_token_access = localStorage.getItem('jwt_token_access')
             ApiService.setHeader(jwt_token_access)
-            await ProductApiService.getProductHeart(params).then((response)=>{
-                json = response.data
+            await ProductApiService.getProductHeart().then((response)=>{
+                json =  response.data.data
+                check = true
+            }, async (error) => {
+                await actionJWT.refreshTokenJWT().then(response => {
+                    if(response == 404){
+                        check = true
+                    }
+                })
             })
-          })
+        }
         return json
-
     }
 }

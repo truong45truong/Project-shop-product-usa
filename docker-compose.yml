@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  mysql-db:
+    build:
+        context: .
+        dockerfile: ./docker/mysql/Dockerfile
+    volumes:
+        - mysql_data:/var/lib/mysql
+        # - ./db:/var/lib/mysql
+    restart: unless-stopped
+    image: mysql:8.0.28
+    container_name: mysql-db
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+
+  backend:
+    container_name: backend-server
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file: ./backend/.env
+    restart: always
+    volumes:
+      - ./backend/:/app/
+    depends_on:
+      - mysql-db
+    working_dir: "/app"
+    expose:
+      - 8000
+    ports:
+      - "8000:8000"
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+volumes:
+  mysql_data:

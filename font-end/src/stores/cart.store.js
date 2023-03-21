@@ -53,10 +53,10 @@ export const cart = {
             commit('startAddToCart')
             return await OrderAction.actionAddToCart({
                 params : {
-                    token_permission_infor_user: localStorage.getItem('token_permission_infor_user'),
                     product_slug : payload.product_slug
                 }
             }).then(res => {
+                console.log("addtocart",res)
                 if(res.success == false){
                     commit('addToCartFailure')
                 }
@@ -66,7 +66,15 @@ export const cart = {
                         console.log("startGetData")
                         dispatch('actionGetData')
                     }
-                    commit('addToCartSuccess',{product : res.success, checkProductAlreadyInCart : res.check_detail_order})
+                    if(res.order_in_detail_order != false){
+                        dispatch('actionGetData')
+                    }
+                    if(state.numberProduct == 0){
+                        dispatch('actionGetData')
+                        commit('addToCartSuccess',{product : res.success, checkProductAlreadyInCart : res.check_detail_order , loadCart : true })
+                    }else {
+                        commit('addToCartSuccess',{product : res.success, checkProductAlreadyInCart : res.check_detail_order , loadCart : false })
+                    }
                 }
             }).catch(error => {
                 commit('addToCartFailure')
@@ -81,7 +89,6 @@ export const cart = {
             commit('startRemoveProductInCart')
             return await OrderAction.actionRemoveProductInCart({
                 params : {
-                    token_permission_infor_user: localStorage.getItem('token_permission_infor_user'),
                     product_slug : payload.product_slug,
                     name_order : payload.name_order
                 }
@@ -152,9 +159,14 @@ export const cart = {
         /*                    ACTION CHANG QUANTITY PRODUCT IN CART                   */
         /* -------------------------------------------------------------------------- */
         actionChangeQuangtityProductInCart({commit,state},payload){
-            if( state.isLoading )  return ;
             commit('startChangeQuantityProductInCart')
             commit('changeQuantityProductInCartSuccess' , {indexOrder : payload.indexOrder, index : payload.index , value : payload.value})
+        },
+        /* -------------------------------------------------------------------------- */
+        /*                              ACTION EXIT CART                              */
+        /* -------------------------------------------------------------------------- */
+        actionExitCart({commit}){
+            commit('exitCartSuccess')
         }
     },
 
@@ -206,17 +218,19 @@ export const cart = {
             state.isLoading = true;
         },
         addToCartSuccess(state,payload){
-            if (payload.checkProductAlreadyInCart == false){
-                state.data[0].products.push(payload.product);
-                state.numberProduct = state.numberProduct + 1;
-            }else {
-                state.data[0].products = state.data[0].products.filter((product) => {
-                    if(product.product_slug == payload.checkProductAlreadyInCart){
-                        product.product_quantity += 1;
-                        console.log("checkProductAlreadyInCart",payload.checkProductAlreadyInCart)
-                    }
-                    return product;
-                })
+            if(payload.loadCart == false){
+                if (payload.checkProductAlreadyInCart == false){
+                    state.data[0].products.push(payload.product);
+                    state.numberProduct = state.numberProduct + 1;
+                }else {
+                    state.data[0].products = state.data[0].products.filter((product) => {
+                        if(product.product_slug == payload.checkProductAlreadyInCart){
+                            product.product_quantity += 1;
+                            console.log("checkProductAlreadyInCart",payload.checkProductAlreadyInCart)
+                        }
+                        return product;
+                    })
+                }
             }
             state.isLoading = false;
         },
@@ -231,10 +245,13 @@ export const cart = {
         },
         removeProductInCartSuccess(state,payload){
             console.log("product",state.data[payload.indexOrder][payload.index])
+            state.numberProduct = state.numberProduct - 1;
+            state.data[payload.indexOrder].order.total_price 
+            -= state.data[payload.indexOrder].products[payload.index].product_quantity* state.data[payload.indexOrder].products[payload.index].product_price_total
             state.data[payload.indexOrder].products=state.data[payload.indexOrder].products.filter(product => {
                 return (product.product_slug != state.data[payload.indexOrder].products[payload.index].product_slug)
             })
-            state.numberProduct = state.numberProduct - state.data[payload.indexOrder].products[payload.index].product_quantity;
+            
             state.isLoading  = false;
         },
         removeProductInCartFailure(state){
@@ -360,5 +377,24 @@ export const cart = {
         selectedTransportSuccess(state,payload){
             state.orderSelectedProduct.transport = payload.transport
         },
+        /* -------------------------------------------------------------------------- */
+        /*                             MUTATION EXIT CART                             */
+        /* -------------------------------------------------------------------------- */
+        exitCartSuccess(state){
+            state.data = [];
+            state.indexOrder = false;
+            state.numberProduct = 0;
+            state.isLoading = false ;
+            state.isHaveData = false;
+            state.isOrderToday = false ;
+            state.orderSelectedProduct = {
+                data : [],
+                totalPrice : 0,
+                numberProduct : 0,
+                voucher : false,
+                address : false,
+                transport : false
+            }
+        }
     }
 };

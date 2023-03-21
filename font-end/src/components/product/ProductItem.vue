@@ -11,8 +11,9 @@
         <div :class="[isShowDetail ? 'ribbon-hide' : 'ribbon']">
             <span>Sale 10%</span>
         </div>
-        <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border ']" @click="isShowProduct" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice">
-
+        <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border ']" @click="isShowProduct" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice"
+        class="icon-heart">
+            
         </div>
         <div v-if="isShowDetail == true" class="info-product-item d-flex flex-column align-items-center justify-content-center">
             <div class="btn-cancel-product-detail" @click="isShowProduct">
@@ -29,13 +30,14 @@
             </div>
             <div class="w-100 d-flex justify-content-around">
                 <button class="button-45 m-0"><p class="m-0 text-btn-product" @click="addToCard">Thêm vào Giỏ</p></button>
-                <button class="button-45 m-0"><p class="m-0 text-btn-product" @click="nextPageDetailProduct">Chi tiết</p></button>
+                <a class="button-45 m-0" :href="linkDetailProduct"><p class="m-0 text-btn-product" @click="nextPageDetailProduct">Chi tiết</p></a>
             </div>
         </div>
     </div>
 </template>
   
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import {ProductAction} from './../../common/product.service'
 export default ({
     name: 'ProductItem',
@@ -55,7 +57,15 @@ export default ({
         isHoverPrice : false,
         status_heart : false,
         numberHeart : false ,
+        linkDetailProduct: '',
     }),
+    computed: {
+		...mapGetters('auth', {
+			get_user: 'currentUser',
+			get_authenticated: 'isAuthenticated',
+			get_error: 'errorAuthenticated'
+		}),
+	},
     methods : {
 
         nextPageDetailProduct(){
@@ -71,33 +81,43 @@ export default ({
             this.isHoverPrice = false;
         },
         async postHeart(){
-            let json = await ProductAction.actionPostHeart({
-                params : {
-                    token_permission_infor_user : localStorage.getItem('token_permission_infor_user') ? localStorage.getItem('token_permission_infor_user') : "nono",
-                    product_slug : this.slug
-                }
-            })
-            if ( json.status == true ){
-                this.status_heart = ! this.status_heart
-                this.numberHeart = this.status_heart == false ? this.numberHeart - 1 : this.numberHeart + 1
-                if(this.status_heart == true ) {
-                    this.$store.dispatch('heart/actionlikeItems')
-                }else {
-                    this.$store.dispatch('heart/actionUnlikeItems')
+            if(this.get_authenticated == false){
+                this.$store.dispatch('auth/actionShowLogin')
+            } else {
+                let json = await ProductAction.actionPostHeart({
+                    params : {
+                        product_slug : this.slug
+                    }
+                })
+                if ( json.status == true ){
+                    this.status_heart = ! this.status_heart
+                    this.numberHeart = this.status_heart == false ? this.numberHeart - 1 : this.numberHeart + 1
+                    if(this.status_heart == true ) {
+                        this.$store.dispatch('heart/actionlikeItems')
+                    }else {
+                        this.$store.dispatch('heart/actionUnlikeItems')
+                    }
                 }
             }
         },
         addToCard(){
-            this.$store.dispatch('cart/actionAddToCart', {
-                product_slug : this.slug
-            })
-            this.$store.dispatch('notice/actionTypeNotice',{content : 'Sản phẩm ' + this.name +' vừa dc thêm vào giỏ hàng',type : 'addtocart'})
-            this.$store.dispatch('notice/activateShowMenu')
+            if(this.get_authenticated == true){
+                this.$store.dispatch('cart/actionAddToCart', {
+                    product_slug : this.slug
+                })
+                this.$store.dispatch('notice/actionTypeNotice',{content : 'Sản phẩm ' + this.name +' vừa dc thêm vào giỏ hàng',type : 'addtocart'})
+                this.$store.dispatch('notice/activateShowMenu')
+            }
+            else {
+                this.$store.dispatch('auth/actionShowLogin')
+            }
+           
         }
     },
     created(){
         this.status_heart = this.status
         this.numberHeart = this.hearts
+        this.linkDetailProduct = "/product/" + this.slug
     }
     
 })

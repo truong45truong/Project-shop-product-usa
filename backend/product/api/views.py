@@ -1,17 +1,17 @@
-from rest_framework import viewsets
+from .serializers import CategorySerializer,ProductSerializer,HeartSerializer,ProductHeartSerializer
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets
 from product.models import Category,Product,Heart
-from django.db.models import Q,F, Func,Exists ,Subquery , OuterRef ,Count , FilteredRelation
-from .serializers import CategorySerializer,ProductSerializer,HeartSerializer,ProductHeartSerializer
-from django.core import serializers
-import querycount
 from login.models import User
+from . import query_raw
 import json
-import time
 class CategoryViewSet(viewsets.ModelViewSet):
+    authentication_classes = []
+    permission_classes = []
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     
@@ -32,9 +32,11 @@ class ProductHeartViewSet(viewsets.ViewSet):
     
     @action(method=['GET'], detail = False , url_name= 'product_heart' , url_path='product_heart')
     def get_product_heart(self , request , *args, **kwargs):
-        token_permission_infor_user = request.GET['token_permission_infor_user']
+        jwtToken = request.COOKIES.get('refresh_token')
+        refresh_token = RefreshToken(jwtToken)
+        decoded_token = refresh_token.payload
         try:
-            user = User.objects.get(token_permission_infor_user=token_permission_infor_user)
+            user = User.objects.get(id = decoded_token['user_id'])
             queryset = Product.objects.prefetch_related('prices','photo_products','hearts').filter(
                             prices__isnull = False,photo_products__isnull = False , hearts__user_id = user
                             ).values(
@@ -48,32 +50,30 @@ class ProductHeartViewSet(viewsets.ViewSet):
         
     
 class Productviewset(viewsets.ViewSet):
+    authentication_classes = []
+    permission_classes = []
     @action(method=["GET"],detail=False,url_path="product",url_name="get_product")
+    
     def get_product(self, request,*args, **kwargs):
+        # ---------------------------------------------------------------------------- #
+        #                                   QUERY RAW                                  #
+        # ---------------------------------------------------------------------------- #
+        rawQuerySqlProductSlug = query_raw.QUERY_SQL_GET_PRODUCT_DETAIL_NOT_USER
+        rawQuerySql =  query_raw.QUERY_SQL_GET_ALL_PRODUCT_FOR_USER
+        # ------------------------------------ END ----------------------------------- #
 
-        token_permission_infor_user = request.GET['token_permission_infor_user']
-        print('token_permission_infor_user',token_permission_infor_user)
-        if token_permission_infor_user == False:
-            token_permission_infor_user =''
         try:
-            user_get = User.objects.get(token_permission_infor_user = token_permission_infor_user)
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            user_get = User.objects.get(id = decoded_token['user_id'])
         except:
             user_get = False
-        print(user_get)
         try:
             slug = request.GET['product_slug']
         except:
             slug = False
         if slug != False and user_get != False :
-            rawQuerySqlProductSlug = """
-                SELECT  `product_product`.`id`, `product_product`.`slug`, `product_product`.`name`, `product_product`.`sex`, 
-                        `product_product`.`description`, `product_photo_product`.`data`, `product_price`.`price`, `product_price`.`sale`, `product_product`.`description`,
-                        (SELECT COUNT(U0.`id`) AS `heart_count` FROM `product_heart` U0 WHERE U0.`product_id_id` = `product_product`.`id`) 
-                            AS `count_heart` FROM `product_product` 
-                INNER JOIN `product_photo_product` ON (`product_product`.`id` = `product_photo_product`.`product_id_id`) 
-                INNER JOIN `product_price` ON (`product_product`.`id` = `product_price`.`product_id_id`) 
-                WHERE (`product_photo_product`.`id` IS NOT NULL AND `product_price`.`id` IS NOT NULL AND `product_product`.`slug` = %s )
-            """
             if  ' ' in slug :
                 return Response({"products" : False , "error" : "slug_product Wrong"})
             else:
@@ -82,43 +82,22 @@ class Productviewset(viewsets.ViewSet):
                 serializer = ProductSerializer(queryset,many=True)
                 return Response({"products" : serializer.data })
                 
-        rawQuerySql =  """
-            SELECT  `product_product`.`id`, `product_product`.`slug`, `product_product`.`name`, `product_product`.`sex`, 
-                    `product_product`.`description`, `product_photo_product`.`data`, `product_price`.`price`, `product_price`.`sale`, `product_product`.`description`,
-                    EXISTS(SELECT (1) AS `a` FROM `product_heart` U0 
-                        WHERE (U0.`user_id_id` = %s AND U0.`product_id_id` = `product_product`.`id`) LIMIT 1) AS `status_heart`, 
-                    (SELECT COUNT(U0.`id`) AS `heart_count` FROM `product_heart` U0 WHERE U0.`product_id_id` = `product_product`.`id`) 
-                        AS `count_heart` FROM `product_product` 
-            INNER JOIN `product_photo_product` ON (`product_product`.`id` = `product_photo_product`.`product_id_id`) 
-            INNER JOIN `product_price` ON (`product_product`.`id` = `product_price`.`product_id_id`) 
-            WHERE (`product_photo_product`.`id` IS NOT NULL AND `product_price`.`id` IS NOT NULL)
-        """
         if(user_get == False ) :
-            rawQuerySql =  """
-                SELECT  `product_product`.`id`, `product_product`.`slug`, `product_product`.`name`, `product_product`.`sex`, 
-                        `product_product`.`description`, `product_photo_product`.`data`, `product_price`.`price`, `product_price`.`sale`, `product_product`.`description` ,
-                        (SELECT COUNT(U0.`id`) AS `heart_count` FROM `product_heart` U0 WHERE U0.`product_id_id` = `product_product`.`id`) 
-                            AS `count_heart` FROM `product_product` 
-                INNER JOIN `product_photo_product` ON (`product_product`.`id` = `product_photo_product`.`product_id_id`) 
-                INNER JOIN `product_price` ON (`product_product`.`id` = `product_price`.`product_id_id`) 
-                WHERE (`product_photo_product`.`id` IS NOT NULL AND `product_price`.`id` IS NOT NULL)
-            """
+            rawQuerySql =  query_raw.QUERY_SQL_GET_ALL_PRODUCT_NOT_USER
             queryset = Product.objects.raw(rawQuerySql)
             if slug:
-                pass
+                if  ' ' in slug:
+                    return Response({"products" : False , "error" : "slug_product Wrong"})
+                queryset = Product.objects.raw(rawQuerySqlProductSlug,[slug])
+                queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
             else:
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
         else:
             if slug:
-                pass
+                queryset = Product.objects.raw(rawQuerySqlProductSlug,[slug])
+                queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
             else:
                 queryset = Product.objects.raw(rawQuerySql,[user_get.id])
-        # queryset = Product.objects.prefetch_related('prices','photo_products').filter(
-        #         prices__isnull = False,photo_products__isnull = False ,).values(
-        #         'id','slug','name','sex','description','photo_products__data','prices__price').annotate(status_heart=Exists(
-        #         Heart.objects.filter(user_id=user_get.id).filter(product_id =  OuterRef('id')))).annotate(
-        #             count_heart =Subquery(Heart.objects.filter(product_id = OuterRef('id')).annotate(heart_count = Count('id')).values('heart_count')[:1]
-        #             ))
 
         serializer = ProductSerializer(queryset,many=True,context={'user_id': user_get})
         return Response({"products" : serializer.data})
@@ -132,11 +111,13 @@ class HeartViewSet(viewsets.ModelViewSet):
     @action(method=["POST"],detail=False,url_path="heart",url_name="post_heart")
     def post_heart(self, request,*args, **kwargs):
         data_request= json.loads(request.body.decode('utf-8'))
-        token_permission_infor_user = data_request['params']['token_permission_infor_user']
+        jwtToken = request.COOKIES.get('refresh_token')
+        refresh_token = RefreshToken(jwtToken)
+        decoded_token = refresh_token.payload
         product_slug = data_request['params']['product_slug']
         try:
             product = Product.objects.get(slug = product_slug)
-            user = User.objects.get(token_permission_infor_user = token_permission_infor_user)
+            user = User.objects.get(id  = decoded_token['user_id'])
             heart_product = Heart.objects.filter(product_id = product.id , user_id = user.id)
             if len(heart_product) == 1 :
                 Heart.objects.get(id = heart_product[0].id).delete()

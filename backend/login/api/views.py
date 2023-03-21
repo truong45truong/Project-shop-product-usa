@@ -1,33 +1,23 @@
-from rest_framework.decorators import api_view,parser_classes,action
-from django.middleware.csrf import get_token
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import make_password
-from rest_framework import viewsets
-from rest_framework.response import Response
-from login.models import User,PhoneUser,Address
-from .serializers import UserSerializer,PhoneUserSerializer,AddressSerializer
-from django.views.decorators.csrf import csrf_exempt,csrf_protect,requires_csrf_token
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.contrib.auth.backends import ModelBackend
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.contrib.auth import authenticate
+from django.middleware.csrf import get_token
+from django.middleware import csrf
 from django.conf import settings
+from rest_framework.decorators import api_view,action,permission_classes,authentication_classes
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework import viewsets
+from rest_framework import status
+from rest_framework.response import Response
+from login.models import User,PhoneUser , Address
+from .serializers import UserSerializer
 import uuid
 import json
 import base64
 import uuid 
 import os
-class CustomBackend(ModelBackend):
-    def authenticate(self, request, username=None, password=None, **kwargs):
-        try:
-            user = User.objects.get(username=username)
-            if user.check_password(password):
-                return user
-        except Exception as e:
-            return None
-        
+from decryptRSA.encryptRSA import decrypt_tokens
+from decryptRSA.models import DeviceClient
 path_upload_image = str(settings.BASE_DIR)+"/media/photos"
 path_upload_video = str(settings.BASE_DIR)+"/media/videos"
 class RegisterUserViewSet (viewsets.ModelViewSet):
@@ -35,7 +25,7 @@ class RegisterUserViewSet (viewsets.ModelViewSet):
     serializer_class = UserSerializer
     
     @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = "post_user")
-    def post_user(self, request, *args, **kwargs):
+    def register_user(self, request, *args, **kwargs):
         
         list_name_file_blog = []
         def decodeFile(image_data,is_image,is_video):
@@ -58,74 +48,87 @@ class RegisterUserViewSet (viewsets.ModelViewSet):
                                                  'name' : name_file,
                                                  'file' : 'media/videos/blogs' + name_file
                     })
-        
-        data_request= json.loads(request.body.decode('utf-8'))
-        print(data_request)
-        username = data_request['params']['username']
-        password = data_request['params']['password']
-        email    = data_request['params']['email']
-        phone    = data_request['params']['phone']
+        # ---------------------------- check params input ---------------------------- #
+        try:
+            data_request= json.loads(request.body.decode('utf-8'))
+            username = data_request['params']['username']
+            name = data_request['params']['name']
+            email    = data_request['params']['email']
+            phone    = data_request['params']['phone']
+            address    = data_request['params']['address']
+            password = data_request['params']['password'].encode('utf-8')
+            deviceId = data_request['params']['device_id']
+            device_curent = DeviceClient.objects.get(id = deviceId)   
+            decrypt_password = decrypt_tokens(password,device_curent.private_key)
+            if (
+                username == '' or name == '' or email == ''
+                or phone == '' or address == '' or password == ''
+            ):  
+                print(data_request)
+                return Response({ 
+                    'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+                    'error' : { 'value' : 'Params input wrong' , 'type' : 'RU-0000' }
+                })
+        except Exception as e:
+            print(e)
+            return Response({ 
+                'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : 'Params input wrong' , 'type' : 'RU-0000' }
+            })
         # -------------------------------- create user ------------------------------- #
         # check username
         try:
-            user = User.objects.create(username=username,photo = None)
-        except:
-            return Response({ 'user' : False , 'error' : { 'value' : 'Username available' , 'type' : 3 }})
+            user = User.objects.create(username=username,photo = None ,level=0, name = name)
+            user.password  = make_password(decrypt_password)
+            user.save()  
+        except Exception as e:
+            print(e)
+            return Response({ 
+                'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : 'Username available' , 'type' : 'RU-0001' }
+            })
         # check email
         try:
             user.email = email
             user.save()
         except:
             user.delete()
-            return Response({ 'user' : False , 'error' : { 'value' : 'Email available' , 'type' : 4 }})
+            return Response({ 
+                'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : 'Email available' , 'type' : 'RU-0002' }
+            })
         # check phone
         try:
             user.phone = phone
-            user.save()
+            phoneUser = PhoneUser.objects.create(name =name , phone = phone , user_id = user , status = True  )
         except:
-            return Response({ 'user' : False , 'error' : { 'value' : 'Phone available' , 'type' : 5 }})
-        user.password  = make_password(password)
-        user.save()      
-        # ------------------------------ end create user ----------------------------- #
-        
-        serializer = UserSerializer(user,many=False)
-        return Response({'user'    : serializer.data , 'error': { 'value': None , 'type': None }})
-class UserViewSet (viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-    # ---------------------------------------------------------------------------- #
-    #                                   GET USER                                   #
-    # ---------------------------------------------------------------------------- #
-    @action(methods = ["GET"], detail = False, url_path = "user", url_name = "get_user")
-    def get_user(self,request,*args, **kwargs):
-        
-        username = request.GET['username']
-        password = request.GET['password']
-        #check username
+            return Response({ 
+                'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : 'Phone available' , 'type' : 'RU-0003' }
+            })
+        #check address
         try:
-            user_current = User.objects.get(username = username)
+            addressUser = Address.objects.create(address_content = address , status = True ,user_id = user)
+        except :
+            return Response({ 
+                'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : 'Address Wrong' , 'type' : 'RU-0004' }
+            })
+        # ------------------------------ end create user ----------------------------- #
+        try:
+            user.save()
+            addressUser.save()
+            phoneUser.save()
+            serializer = UserSerializer(user,many=False)
+            return Response({'user'    : serializer.data , 'status' : status.HTTP_200_OK})
         except:
-            return Response({ 'user' : False , 'error' : { 'value' : 'username is wrong' , 'type' : 1 }})
-        #check password
-        if user_current :
-            if user_current.check_password(password):
-                user = authenticate(request, username=username, password=password)
-                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-                user_current.token_permission_infor_user = uuid.uuid4()
-                user_current.save()
-                print(request.META.get('CSRF_COOKIE'))
-                # csrf_token = request.META.get('CSRF_COOKIE')
-                csrf_token = get_token(request)
-                serializer = UserSerializer(user_current,many=False)
-                response = Response({'user': serializer.data ,'csrf_token': csrf_token, 'error' : { 'value' : None , 'type' : None }})
-                response.set_cookie('csrftoken', csrf_token)
-                return response
-            else:
-                return Response({ 'user' : False ,'csrf_token': request.META.get('CSRF_COOKIE') , 'error' : { 'value' : 'password is wrong' , 'type' : 2 }})
-        return Response(request,{ 'user' : False , 'error' : { 'value' : None , 'type' : None }})
-    
+            return Response({ 
+                'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : 'Information Wrong' , 'type' : 'RU-0004' }
+            })
+class LoginViewSet (viewsets.ViewSet):
+    authentication_classes =[]
+
     # ---------------------------------------------------------------------------- #
     #                             CHANGE PASSWORD USER                             #
     # ---------------------------------------------------------------------------- #
@@ -136,6 +139,7 @@ class UserViewSet (viewsets.ModelViewSet):
         email_user = data_request['params']['email_user']
         password = data_request['params']['password']
         password_new = data_request['params']['password_new']
+        
         print("data_request",data_request)
         try:
             user_current = User.objects.get(email = email_user,token_permission_infor_user=token_permission_infor_user)
@@ -151,169 +155,73 @@ class UserViewSet (viewsets.ModelViewSet):
         except Exception as e:
             print(e)
             return Response({'user': False ,'error' : { 'value' : str(e) , 'type' : "ChangePassWordFailure" }})
-        
-class InforUserViewSet (viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-    # ---------------------------------------------------------------------------- #
-    #                                GET INFOR USER                                #
-    # ---------------------------------------------------------------------------- #
-    @action(methods = ["GET"], detail = False, url_path = "get_infor_user", url_name = "get_infor_user")
-    def get_infor_user(self,request,*args, **kwargs):
-        token_permission_infor_user = request.GET['token_permission_infor_user']
-        email_user = request.GET['email_user']
-        try:
-            user_current = User.objects.get(email = email_user,token_permission_infor_user=token_permission_infor_user)
-            serializer = UserSerializer(user_current,many=False)
-            return Response({ 'user' : serializer.data  , 'error' : { 'value' : None , 'type' : None }})
-        except:
-            return Response({ 'user' : serializer.data , 'error' : { 'value' : None , 'type' : None }})
-class PhoneUserViewSet(viewsets.ModelViewSet):
-    queryset = PhoneUser.objects.all()
-    serializer_class = PhoneUserSerializer
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-    
-    # ---------------------------------------------------------------------------- #
-    #                          METHOD CREATE PHONE OF USER                         #
-    # ---------------------------------------------------------------------------- #
-    
-    @action(method = ['POST'], detail = False , url_path='create_phone_user', url_name='create_phone_user')
-    def create_phone_user(self , request , *args, **kwargs):
-        data_request= json.loads(request.body.decode('utf-8'))
-        print(data_request)
-        token_permission_infor_user = data_request['params']['token_permission_infor_user']
-        phone_user = data_request['params']['phone_user']
-        name_user = data_request['params']['name_user']
-        status = data_request['params']['status']
-        
-        try:
-            user = User.objects.get(token_permission_infor_user=token_permission_infor_user)
-            if status == True :
-                list_phone_status_true = PhoneUser.objects.filter(user_id = user , status = status)
-                for item in list_phone_status_true:
-                    phone_status_true = PhoneUser.objects.get(id = item.id)
-                    phone_status_true.status = False
-                    phone_status_true.save()
-            phone_user_create = PhoneUser.objects.create(phone = phone_user , name = name_user , user_id = user , status = status)
-            phone_user_create.save()
-            serializer = PhoneUserSerializer(phone_user_create,many = False)
-            return Response({'phone' : serializer.data , 'error' : { 'value' : None , 'type' : None}})
-        except Exception as e:
-            print(e)
-            return Response({ 'phone' : 'Creatte phone wrong'  , 'error' : { 'value' : 'Failure Create' , 'type' : 'P1' }})
 
-    
-    # ---------------------------------------------------------------------------- #
-    #                          METHOD DELETE PHONE OF USER                         #
-    # ---------------------------------------------------------------------------- #
-    @action(method = ['POST'] , detail= False , url_path='delete_phone_user' , url_name= 'delete_phone_user')
-    def delete_phone_user(self , request ,  *args, **kwargs):
-        data_request = json.loads(request.body.decode('utf-8'))
-        phone_user_id = data_request['params']['phone_user_id']
-        token_permission_infor_user = data_request['params']['token_permission_infor_user']
-        
-        try:
-            user_delete_phone = User.objects.get(token_permission_infor_user=token_permission_infor_user)
-            phone_user_delete = PhoneUser.objects.get(id = phone_user_id, user_id = user_delete_phone)
-            phone_user_delete.delete()
-            return Response({'phone': 'Delete phone Success' , 'error' : {'value' : None , 'type' : None}})
-        except:
-            return Response({'phone' : 'Delete phone wrong' , 'error' : { 'value' : 'Failure Delete' , 'type' : 'DP1'}})
-        
-    
-    # ---------------------------------------------------------------------------- #
-    #                           METHOD UPDATE PHONE USER                           #
-    # ---------------------------------------------------------------------------- #
-     
-    @action(method = ['POST'] , detail= False , url_name= 'update_phone_user', url_path= 'update_phone_user')
-    def update_phone_user(self , request , *args, **kwargs):
-        data_request = json.loads(request.body.decode('utf-8'))
-        phone_user_id = data_request['params']['phone_user_id']
-        phone_update = data_request['params']['phone_update']
-        name_update = data_request['params']['name_update']
-        token_permission_infor_user = data_request['params']['token_permission_infor_user']
-        
-        try : 
-            user_update_phone = User.objects.get(token_permission_infor_user=token_permission_infor_user)
-            phone_user_update = PhoneUser.objects.get(id = phone_user_id)
-            phone_user_update.phone = phone_update
-            phone_user_update.bane = name_update
-            phone_user_update.save()
-            serializer = PhoneUserSerializer(queryset = phone_user_update , mang = False)
-            return Response({ 'phone' : serializer.data , 'error' : { 'value' : None , 'type' : None } })
-        except:
-            return Response({'phone' : 'Update phone user wrong' , 'error' : { 'value' : 'Failure Update' , 'type' : 'UP1' }})
-        
-        
-class AddressUserViewset (viewsets.ModelViewSet):
-    queryset = Address.objects.all()
-    serializer_class = AddressSerializer
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-    
-    # ---------------------------------------------------------------------------- #
-    #                          METHOD CREATE ADDRESS USER                          #
-    # ---------------------------------------------------------------------------- #
-    
-    @action(method = ['POST'], detail = False , url_path='create_address_user', url_name='create_address_user')
-    def create_address_user(self , request , *args, **kwargs):
-        data_request = json.loads(request.body.decode('utf-8'))
-        token_permission_infor_user_access = data_request['params']['token_permission_infor_user']
-        address_content = data_request['params']['address_content']
-        status = data_request['params']['status']
-        try:
-            user_create_address = User.objects.get(token_permission_infor_user=token_permission_infor_user_access)
-            if status == True:
-                address_status_true = Address.objects.get(user_id = user_create_address , status = True)
-                address_status_true.status = False
-                address_status_true.save()
-            address_user_create = Address.objects.create(address_content= address_content, user_id = user_create_address , status = status)
-            address_user_create.save()
-            serializer = AddressSerializer(address_user_create,many=False)
-            return Response({'address' : serializer.data , 'error' : { 'value' : None , 'type' : None}})
-        except Exception as e:
-            print(e)
-            return Response({ 'address' : 'Create address wrong'  , 'error' : { 'value' : 'Failure Create' , 'type' : 'CA1' }})
-    
-    # ---------------------------------------------------------------------------- #
-    #                          METHOD DELETE ADDRESS USER                          #
-    # ---------------------------------------------------------------------------- #
-    
-    @action(method = ['POST'] , detail= False , url_path='delete_address_user' , url_name= 'delete_address_user')
-    def delete_address_user(self , request , *args, **kwargs):
-        data_request = json.loads(request.body.decode('utf-8'))
-        address_user_id = data_request['params']['address_user_id']
-        token_permission_infor_user = data_request['params']['token_permission_infor_user']
-        try:
-            user_delete_address = User.objects.get(token_permission_infor_user=token_permission_infor_user)
-            address_user_delete = Address.objects.get(id = address_user_id , user_id = user_delete_address , status = False)
-            address_user_delete.delete()
-            return Response({'address' : 'Delete address success', 'error' : { 'value' : None , 'type' : None}})
-        except Exception as e:
-            print(e)
-            return Response({ 'address' : 'Delete address wrong'  , 'error' : { 'value' : 'Failure Delete' , 'type' : 'DA1' }})
-        
-    # ---------------------------------------------------------------------------- #
-    #                          METHOD UPDATE ADDRESS USER                          #
-    # ---------------------------------------------------------------------------- #
 
-    @action(methods= ['POST'] , detail = False , url_name='update_address_user', url_path='update_address_user')
-    def update_address_user(self , request , *args, **kwargs):
-        data_request = json.loads(request.body.decode('utf-8'))
-        address_user_id = data_request['params']['address_user_id']
-        token_permission_infor_user = data_request['params']['token_permission_infor_user']
-        address_content_update = data_request['params']['address_content_update']
-        
-        try :
-            user_update_address = User.objects.get(token_permission_infor_user = token_permission_infor_user)
-            address_user_update = Address.objects.get(id = address_user_id , user_id = address_user_id)
-            address_user_update.address_content = address_content_update
-            address_user_update.save()
-            serializer = AddressSerializer(queryset = address_user_update , many = False)
-            return Response({ 'address' : serializer.data , 'error' : { 'value' : None , 'error' : None } })
-        except :
-            return Response({ 'address' : 'Update adress wrong' , 'error' : { 'value' : 'Failure Update' , 'error' : 'UA1' } })
-        
+# ---------------------------------------------------------------------------- #
+#                                  LOGIN USER                                  #
+# ---------------------------------------------------------------------------- #
+@api_view(['POST'])
+@permission_classes([])
+@authentication_classes([])
+def login(request):
+    def get_tokens_for_user(user):
+        refresh = RefreshToken.for_user(user)
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+    }
+    
+    data_request= json.loads(request.body.decode('utf-8'))
+    print(data_request)
+    response = Response()
+    username = data_request['username']
+    password = data_request['password'].encode('utf-8')
+    deviceId = data_request['device_id']
+    device_curent = DeviceClient.objects.get(id = deviceId)
+    
+    decrypt_password = decrypt_tokens(password,device_curent.private_key)
+
+    user = authenticate(username=username, password=decrypt_password)
+    #check username
+    if user is not None:
+        if user.is_active:
+            queryset = User.objects.get(username = username)
+            tokens = get_tokens_for_user(user)
+            response.set_cookie(
+                key=settings.SIMPLE_JWT['AUTH_COOKIE_REFRESH'],
+                value=tokens["refresh"],
+                expires=settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'],
+                secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+                httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+                samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
+            )
+
+            csrf.get_token(request)
+            response.data = {"success" : "login success" , "access_token" : tokens["access"] , 'status' : status.HTTP_200_OK}
+            response.status_code = status.HTTP_200_OK
+            return response
+        else:
+            return Response({"No active" : "This account is not active!!"}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        return Response({"Invalid" : "Invalid username or password!!"}, status=status.HTTP_404_NOT_FOUND)
+    
+# ---------------------------------------------------------------------------- #
+#                                  LOGOUT USER                                 #
+# ---------------------------------------------------------------------------- #
+@api_view(['POST'])
+def logout(request):
+    try:
+        response = Response()
+        response.delete_cookie('refresh_token')
+        response.delete_cookie('csrftoken')
+        response.data = {
+            "success" : "Logout success" , "status" : status.HTTP_200_OK
+        }
+        response.status_code = status.HTTP_200_OK
+    except Exception as e :
+        print(e)
+        response.data = {
+            "success" : "Logout failure" , "status" : status.HTTP_404_NOT_FOUND
+        }
+        response.status_code = status.HTTP_404_NOT_FOUND
+    return response

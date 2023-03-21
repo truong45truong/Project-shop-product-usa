@@ -1,7 +1,6 @@
 <template>
     <div id="app">
         <div class="align-center">
-            <img src="./../assets/images/bg-login.jpg" id="bg-login" />
             <div><SignIn /></div>
         </div>
     </div>

@@ -8,6 +8,8 @@ from .serializers import NewSerializer,PhotoNewSerializer
 
 class NewViewSet(viewsets.ModelViewSet):
     queryset = New.objects.all()
+    authentication_classes = []
+    permission_classes = []
     
     @action(method=['GET'], detail = False , url_name='new',url_path="get_new")
     def get_new(self, request, *args, **kwargs):

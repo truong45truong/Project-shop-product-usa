@@ -20,7 +20,7 @@
             </div>
             <div class="d-flex w-100 justify-content-between">
                 <div class="mt-1 w-100"><p class="text-price-item-heart my-1 text-center">{{price}} vnđ</p></div>
-                <div class="btn btn-dark btn-detail-item-heart">Chi tiết</div>
+                <a class="btn btn-dark btn-detail-item-heart" :href="linkDetailProduct">Chi tiết</a>
             </div>
         </div>
     </div>
@@ -42,6 +42,7 @@ export default ({
         isHoverPrice : false,
         status_heart : false,
         numberHeart : false ,
+        linkDetailProduct : '/'
     }),
     methods : {
         isShowDetailProduct(status){
@@ -54,6 +55,9 @@ export default ({
             this.isHoverPrice = false;
         }
     },
+    created(){
+        this.linkDetailProduct = "/product/" + this.slug
+    }
     
 })
 </script>

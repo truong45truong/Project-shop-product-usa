@@ -41,13 +41,22 @@
                           </div>
                         </div>
                     </div>
+                    <div class="border p-3 flask-sale-content">
+                      <div class="d-flex">
+                        <font-awesome-icon icon="fa-solid fa-bolt" class="text-danger" />
+                        <p class="ms-2">
+                          Flask Sale Còn :
+                        </p>
+                      </div>
+                      <CountDownFLashSale />
+                    </div>
                 </div>
             </div>
         </div>
         <div class="layout-action mt-5 pb-3">
           <div class="row">
             <div class="col-sm-6 mt-3 d-flex flex-column">
-              <button class="button-48 m-auto">
+              <button class="button-48 m-auto" @click="addToCart">
                 <span class="text"> Thêm vào giỏ hàng</span>
               </button>
             </div>
@@ -58,6 +67,12 @@
             </div>
           </div>
         </div>
+        <div class="border mt-5 pb-3">
+          <div class="row">
+            <h4 class="mb-3 mt-1">Mô tả sản phẩm </h4>
+            <p class="text-dark">{{data.description}}</p>
+          </div>
+        </div>
     </div>
 </template>
   
@@ -65,6 +80,7 @@
 import { useRoute } from 'vue-router';
 import { mapGetters } from 'vuex'
 import { ProductApiService } from './../../common/product.service'
+import CountDownFLashSale from './../other/CountDowmFLashSale.vue'
 export default {
     name: "DetailProduct",
     setup() {
@@ -78,7 +94,6 @@ export default {
     async created() {
         await ProductApiService.get({
             params: {
-                token_permission_infor_user: localStorage.getItem('token_permission_infor_user') ? localStorage.getItem('token_permission_infor_user') : "nono",
                 product_slug: this.route.params.slug
             }
         }).then(res => {
@@ -87,15 +102,30 @@ export default {
         })
     },
     components: {
+      CountDownFLashSale
     },
     computed: {
         ...mapGetters('notice', {
             get_is_activate: 'isActivate',
         }),
+        ...mapGetters('auth', {
+			    get_authenticated: 'isAuthenticated',
+		    }),
     },
     methods: {
       showSelectedVoucher(){
         this.isShowSelectedVoucher = !this.isShowSelectedVoucher
+      },
+      addToCart(){
+        if (this.get_authenticated == false){
+          this.$emit('login')
+        }else {
+          this.$store.dispatch('cart/actionAddToCart', {
+                product_slug : this.route.params.slug
+           })
+           this.$store.dispatch('notice/actionTypeNotice',{content : 'Sản phẩm vừa dc thêm vào giỏ hàng',type : 'addtocart'})
+          this.$store.dispatch('notice/activateShowMenu')
+        }
       }
     }
 }
@@ -154,7 +184,9 @@ export default {
     right: 0;
     border-left: 1em solid #999;
 }
-
+.flask-sale-content {
+  width:fit-content;
+}
 .detail-product .row {
     margin: 0vw 2rem;
 }

@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer';
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { createStore } from 'vuex';
@@ -20,6 +21,7 @@ import {ApiService } from './common/api.service'
 library.add(fas, far, fab)
 dom.watch();
 const app = createApp(App);
+
 const store = createStore(storeConfig)
 export default app;
 app.component('font-awesome-icon', FontAwesomeIcon)

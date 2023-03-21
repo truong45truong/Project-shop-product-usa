@@ -23,14 +23,14 @@
 
 <script>
 
-import MenuHeader from "../layout/MenuHeader.vue";
-import BannerHome from "./../layout/BannerHome.vue"
-import ListProductItemFlashSale from "../layout/ListProductItemFlashSale.vue"
-import FooterLayout from './../layout/FooterLayour.vue'
-import ListProductItem from './../layout/ListProductItem.vue'
+import MenuHeader from "../layout/main/MenuHeader.vue";
+import BannerHome from "../layout/others/BannerHome.vue"
+import ListProductItemFlashSale from "../layout/product/ListProductItemFlashSale.vue"
+import FooterLayout from '../layout/main/FooterLayour.vue'
+import ListProductItem from '../layout/product/ListProductItem.vue'
 import NoticeCarefully from './../components/other/NoticeCarefully.vue'
-import ListItemHeart from './../layout/ListItemHeart.vue'
-import ShoppingCartLayout from './../layout/ShoppingCartLayout.vue'
+import ListItemHeart from '../layout/product/ListItemHeart.vue'
+import ShoppingCartLayout from '../layout/cart/ShoppingCartLayout.vue'
 import ChangePassword from './../components/login/ChangePassword.vue'
 import { mapGetters} from 'vuex'
 export default {

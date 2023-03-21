@@ -1,42 +1,18 @@
-queryRawSql = """
-    SELECT order_order.*, order_detailorder.status as 'detail_order_status' ,
-        product_product.slug as 'product_slug' , product_product.name as 'product_name',
-        product_product.description as 'product_description',
-        product_category.name as 'category_name', product_price.price as 'product_price',
-        product_price.sale as 'product_sale' , product_price.status as 'product_price_status',
-        product_price.price_total as 'product_price_total' , product_photo_product.data as 'photo_product',
-        order_transport.slug as 'transport_slug' , order_transport.name as 'transport_name' ,
-        order_transport.logo as 'transport_logo' , order_transport.price as 'transport_price',
-        `order_detailorder`.`quantity` as 'product_quantity'
-    FROM
-        order_detailorder,product_product,product_price, order_transport,
-        product_photo_product , product_category,order_order,login_user
-    WHERE 
-        order_order.id = order_detailorder.order_id_id 
-        and order_transport.id = order_order.transport_id_id 
-        and login_user.id = %s  
-        and login_user.id = order_order.user_id_id
-        and product_product.id = order_detailorder.product_id_id 
-        and product_product.id = product_photo_product.product_id_id 
-        and product_product.id = product_price.product_id_id
-        and product_product.category_id_id = product_category.id
-    ORDER BY
-        order_order.datetime DESC
-"""
-
-from order.models import Order , Transport , DetailOrder
-from login.models import User , Address , PhoneUser 
-from product.models import Product , Price ,Photo_product
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework.decorators import action
 from .serializers import OrderHandleDataSerializer ,ProductSerializer ,TransportModelSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.decorators import action
+from rest_framework import viewsets
+from rest_framework import status
+from order.models import Order , Transport , DetailOrder
+from product.models import Product , Price ,Photo_product
+from login.models import User , Address , PhoneUser 
 from datetime import datetime
+from rest_framework_simplejwt.tokens import RefreshToken
 from uuid import uuid4
 import json
-from . import data_processing
+from . import data_processing,raw_query
 
 # ---------------------------------------------------------------------------- #
 #                             GENERAL USAGE METHOD                             #
@@ -51,6 +27,7 @@ def checkTheOrderIsAvailebleToDay(curent_user,now):
     )
     
     order_current = Order.objects.filter(datetime__range=[start_datetime, end_datetime] , user_id = curent_user)
+    print(order_current.query)
     if len(order_current) > 0 :
         return order_current[0]
     else:
@@ -80,19 +57,26 @@ class OrderViewSet (viewsets.ModelViewSet):
     # ---------------------------------------------------------------------------- #
     @action(method=["GET"],detail=False,url_path="get_order",url_name="get_order")
     def get_order(self, request,*args, **kwargs):
-        token_permission_infor_user = request.GET['token_permission_infor_user']
+        jwtToken = request.COOKIES.get('refresh_token')
+        refresh_token = RefreshToken(jwtToken)
+        decoded_token = refresh_token.payload
         try:
-            curent_user = User.objects.get(token_permission_infor_user=token_permission_infor_user)
+            curent_user = User.objects.get(id = decoded_token['user_id'])
         except:
             return Response({"success":False})
         check_order_today = checkTheOrderIsAvailebleToDay(curent_user,datetime.now())
         if check_order_today != False :
            check_order_today = True
-        queryset,numberProduct = data_processing.handleRawQuery(Order.objects.raw(queryRawSql,[curent_user.id]))
+        orderQuery = Order.objects.raw(raw_query.QUERY_SQL_GET_ALL_ORDER_FOR_USER,[curent_user.id])
+        print(len(orderQuery))
+        if len(orderQuery) > 0:
+            queryset,numberProduct = data_processing.handleRawQuery(orderQuery)
         
-        serializer = OrderHandleDataSerializer(queryset,many = True)
-        
-        return Response({"success":serializer.data , "number_product" : numberProduct , "check_order_today" : check_order_today })
+            serializer = OrderHandleDataSerializer(queryset,many = True) 
+            
+            return Response({"success":serializer.data , "number_product" : numberProduct , "check_order_today" : check_order_today })
+        else:
+            return Response({"success":[], "number_product" : 0 , "check_order_today" : check_order_today})
     
     # ---------------------------------------------------------------------------- #
     #                              METHOD ADD TO CART                              #
@@ -111,7 +95,16 @@ class OrderViewSet (viewsets.ModelViewSet):
         #                              method in function                              #
         # ---------------------------------------------------------------------------- #
 
-
+        def calcTotalPriceOrder(current_order):
+            detailOrderProduct = DetailOrder.objects.filter(order_id = current_order)
+            total_price = 0
+            for i in detailOrderProduct:
+                total_price = total_price + Price.objects.get(product_id = i.product_id).price_total*i.quantity
+                print(total_price)
+            current_order.total_price = total_price
+            current_order.save()
+            print(current_order.total_price)
+        
         # -------------- method check detail order is available product -------------- #
         def checkDetailOrderIsAvailableProduct(curent_product,curent_order):
             detailOrderProduct = DetailOrder.objects.filter(order_id = curent_order , product_id = curent_product)
@@ -146,14 +139,20 @@ class OrderViewSet (viewsets.ModelViewSet):
         #                            handle logic in fuction                           #
         # ---------------------------------------------------------------------------- #
         # -------------------------------- get params -------------------------------- #
-        
-        data_request= json.loads(request.body.decode('utf-8'))
-        token_permission_infor_user = data_request['params']['token_permission_infor_user']
-        product_slug = data_request['params']['product_slug']
-
+        try:
+            data_request= json.loads(request.body.decode('utf-8'))
+            product_slug = data_request['params']['product_slug']
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+        except :
+            return Response({
+                "success":False , 'status' : status.HTTP_404_NOT_FOUND ,
+                "error" : { "value" : "params wrong" , "type" : "ATC-0001"}
+            })
         # ----------------------- check information in database ---------------------- #
         try:
-            curent_user = User.objects.get(token_permission_infor_user=token_permission_infor_user)
+            curent_user = User.objects.get(id = decoded_token['user_id'])
             product = Product.objects.get(slug = product_slug)
             price_product = Price.objects.filter(product_id = product, status = True)
             photo_product = Photo_product.objects.filter(product_id = product)
@@ -163,11 +162,14 @@ class OrderViewSet (viewsets.ModelViewSet):
             quantity_check,orderInDetailOrder = checkProductIsAlreadyInOrderPrevios(product)
             if quantity_check !=  False :
                     quantity += quantity_check
-            
+        
         except Exception as e:
             # ------------------ failure if information not in database ------------------ #
             print("ERROR :", e)
-            return Response({"success":False})
+            return Response({
+                "success":False , 'status' : status.HTTP_404_NOT_FOUND ,
+                "error" : { "value" : "Information wrong" , "type" : "ATC-0002"}
+            })
         # ------------------- check the order is available today ------------------ #
         order_id = checkTheOrderIsAvailebleToDay(curent_user,now)
         if order_id != False:
@@ -184,6 +186,7 @@ class OrderViewSet (viewsets.ModelViewSet):
                     quantity = quantity
                 )
                 detailproduct.save()
+            calcTotalPriceOrder(order_id)
         else :
             # ------------- if not order is available today create order new ------------- #
             try:
@@ -216,11 +219,11 @@ class OrderViewSet (viewsets.ModelViewSet):
                     print(e)
                     detailproduct.delete()
                     order_new.delete()
-                    return Response({"success": False})
+                    return Response({"success": False , "status" : status.HTTP_404_NOT_FOUND})
             except Exception as e:
                 print(e)
                 order_new.delete()
-                return Response({"success": False})
+                return Response({"success": False , "status" : status.HTTP_404_NOT_FOUND})
         product_response = {
             'category_name' : product.category_id.name,
             'photo_product' : photo_product[0].data ,
@@ -234,29 +237,165 @@ class OrderViewSet (viewsets.ModelViewSet):
             'product_quantity' : quantity
         }
         serializer = ProductSerializer(product_response,many= False)
-        return Response({"success": serializer.data , "check_detail_order" : check_detail_order ,
-                         'order_in_detail_order' : orderInDetailOrder
-                         })
+        
+        return Response({
+            "success": serializer.data , "check_detail_order" : check_detail_order ,
+            'order_in_detail_order' : orderInDetailOrder , "status" : status.HTTP_200_OK
+        })
 
     # ---------------------------------------------------------------------------- #
     #                         METHOD REMOVE PRODUCT IN CART                        #
     # ---------------------------------------------------------------------------- #
     @action(method=['POST'],detail=False, url_path="remove_product_in_cart",url_name="remove_product_in_cart")
     def remove_product_in_cart(self, request,*args, **kwargs):
-        data_request= json.loads(request.body.decode('utf-8'))
-        token_permission_infor_user = data_request['params']['token_permission_infor_user']
-        name_order = data_request['params']['name_order']
-        product_slug = data_request['params']['product_slug']
-        
+        try: 
+            # ---------------------------- check params input ---------------------------- #
+            data_request= json.loads(request.body.decode('utf-8'))
+            name_order = data_request['params']['name_order']
+            product_slug = data_request['params']['product_slug']
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+        except:
+            return Response({
+                "sucess" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : { "value" : "Params wrong" , "type" : "RPIC-0001"}
+            })
         try:
             # -------------------------- check information post -------------------------- #
-            curent_user = User.objects.get(token_permission_infor_user = token_permission_infor_user)
+            curent_user = User.objects.get(id = decoded_token['user_id'])
             curent_order = Order.objects.get(name = name_order,user_id = curent_user)
             curent_detail_order = DetailOrder.objects.filter(order_id = curent_order , product_id__slug = product_slug )
+            priceProduct = Price.objects.filter( product_id__slug = product_slug , status = True)
+            curent_order.total_price = curent_order.total_price - priceProduct[0].price_total*curent_detail_order[0].quantity
             curent_detail_order.delete()
+            curent_order.save()
+            return Response({"success": True , "status" : status.HTTP_200_OK})  
         except Exception as e:
-            return Response({"sucess" : False})
-        
-        return Response({"success": True })
+            print(e)
+            return Response({
+                "sucess" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : { "value" : "Information wrong" , "type" : "RPIC-0002"}
+            })
+    # ---------------------------------------------------------------------------- #
+    #                            METHOD GET ORDER TODAY                            #
+    # ---------------------------------------------------------------------------- #
 
+    @action(method=["GET"],detail=False,url_path="get_order_today",url_name="get_order_today")
+    def get_order_today(self, request,*args, **kwargs):
+        try:
+            # ---------------------------- check params input ---------------------------- #
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+        except:
+            return Response({
+                "sucess" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : { "value" : "Params input wrong" , "type" : "GOT-0001"}
+            })
+        try:
+            # ----------------------------- check information ---------------------------- #
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            now = datetime.now()
+            start_datetime = datetime(
+                now.year,now.month , now.day, 0, 0, 0
+            ) 
+            end_datetime = datetime(
+                now.year,now.month , now.day, 23, 59, 59
+            )
+            orderQuery = Order.objects.raw(
+                raw_query.QUERY_SQL_GET_ALL_ORDER_FOR_USER_BETWEEN_DAYS,
+                [curent_user.id,start_datetime,end_datetime]
+            )
+            if len(orderQuery) > 0:
+                queryset,numberProduct = data_processing.handleRawQuery(orderQuery)
         
+                serializer = OrderHandleDataSerializer(queryset,many = True)
+                
+                return Response({
+                    "data" : serializer.data , "status" : status.HTTP_200_OK , 
+                    'numberProduct' : numberProduct
+                })
+            else :
+                return Response({
+                    "data" : [] , "status" : status.HTTP_200_OK , 'numberProduct' : 0
+                })
+        except:
+           return Response({
+                "sucess" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : { "value" : "Information wrong" , "type" : "GOT-0001"}
+            }) 
+    
+    # ---------------------------------------------------------------------------- #
+    #                           METHOD CHANGE ORDER TODAY                          #
+    # ---------------------------------------------------------------------------- #
+    @action(method=["POST"],detail=False,url_path="get_order_today",url_name="get_order_today")
+    def change_order_today(self, request,*args, **kwargs):
+        try:
+            # ---------------------------- check params input ---------------------------- #
+            data_request= json.loads(request.body.decode('utf-8'))
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            type =data_request['params']['type']
+        except:
+            return Response({
+                "sucess" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : { "value" : "Params input wrong" , "type" : "GOT-0001"}
+            })
+        try:
+            # ----------------------------- check information ---------------------------- #
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            transport = Transport.objects.all()
+            now = datetime.now()
+            order_today = checkTheOrderIsAvailebleToDay(curent_user,now)
+            if order_today != False :
+                # --------------------------------- case type -------------------------------- #
+                match type:
+                    case 1:
+                        address_change = data_request['params']['address_change']
+                        phone_change = data_request['params']['phone_change']
+                        order_today.address_receiver = address_change['address_content']
+                        order_today.receiver = phone_change['name']
+                        order_today.phone_receiver = phone_change['phone']
+                        order_today.save()
+                        return Response({
+                            "success" : "change success" , "status" : status.HTTP_200_OK 
+                        })
+                # --------------------------------- end case --------------------------------- #
+            else :
+                # --------------------------------- case type -------------------------------- #
+                
+                match type:
+                    case 1:
+                        address_change = data_request['params']['address_change']
+                        phone_change = data_request['params']['phone_change']
+                        order_new = Order.objects.create(
+                            name = uuid4(),
+                            datetime = now,
+                            receiver = phone_change.name,
+                            address_receiver = address_change.address_change ,
+                            phone_receiver = phone_change.phone ,
+                            status = False ,
+                            note = 'no',
+                            logs = 'no',
+                            total_price = 0,
+                            cancel = False ,
+                            request_cancel = False ,
+                            user_id = curent_user,
+                            transport_id = transport[0]
+                        )
+                        order_new.save()
+                        return Response({
+                            "success" : "change success" , "status" : status.HTTP_200_OK 
+                        })
+                # --------------------------------- end case --------------------------------- #
+                return Response({
+                    "success" : "created order today" , 'status': status.HTTP_201_CREATED 
+                })
+        except Exception as e:
+            print(e)
+            return Response({
+                "sucess" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : { "value" : "Information wrong" , "type" : "GOT-0001"}
+            }) 

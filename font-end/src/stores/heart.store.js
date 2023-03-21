@@ -17,12 +17,9 @@ export const heart = {
     },
     actions: {
         async actionGetData({commit}){
-            return await ProductAction.actionGetProductHeart({
-                params: {
-                    token_permission_infor_user: localStorage.getItem('token_permission_infor_user') ? localStorage.getItem('token_permission_infor_user') : "nono"
-                }
-            }).then(res => {
-                commit('getDataaSuccess',{data : Array.from(res.data)})
+            return await ProductAction.actionGetProductHeart().then(res => {
+                console.log("product heart",res)
+                commit('getDataaSuccess',{data : Array.from(res)})
               })
         },
         async actionUnlikeItems({commit}){
@@ -30,7 +27,10 @@ export const heart = {
         },
         async actionlikeItems({commit}){
             return commit('likeItems')
-        }
+        },
+        actionExitHeart({commit}){
+            commit('exitHeartSuccess')
+        },
     },
 
     mutations: {
@@ -45,6 +45,12 @@ export const heart = {
         },
         likeItems(state){
             state.numberProduct = state.numberProduct + 1;
+        },
+        exitHeartSuccess(state){
+            state.data =  [];
+            state.numberProduct = 0;
+            state.isLoading = false ;
+            state.isHaveData = false;
         }
     }
 };

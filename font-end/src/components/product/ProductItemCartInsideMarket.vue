@@ -25,13 +25,6 @@
                 <div class="mt-1 w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark">Tổng : {{price * numberProduct}} vnđ</p></div>
             </div>
             <div class="w-100 d-flex justify-content-around">
-                <div class="d-flex align-items-center">
-                    <span class="text-btn-product icon-item-heart-cart fs-4 me-2"> {{hearts}}</span>
-                    <font-awesome-icon v-if="!status_heart" class="icon-item-heart-cart fs-2 my-2" icon="fa-regular fa-heart" />
-                    <font-awesome-icon v-if="status_heart" class="icon-item-heart-cart fs-2 my-2" icon="fa-solid fa-heart" />
-                </div>
-            </div>
-            <div class="w-100 d-flex justify-content-around">
                 <button class="button-45 m-0"><p class="m-0 text-btn-product">Thêm vào giỏ</p></button>
                 <button class="button-45 m-0"><p class="m-0 text-btn-product" @click="nextPageDetailProduct">Chi tiết</p></button>
             </div>
@@ -51,8 +44,7 @@ export default ({
         price : false,
         photo : false,
         numberProduct : 1,
-        status : false,
-        hearts : false,
+        sale: false
     },
     data: () => ({
         isShowDetail : false,
@@ -73,10 +65,6 @@ export default ({
             this.$router.push('/product/'+ this.slug)
         },
     },
-    created(){
-        this.status_heart = this.status
-        this.numberUserHeart = Array.from(this.hearts).length
-    }
     
 })
 </script>

@@ -5,8 +5,8 @@
       <notice-carefully v-if="get_is_activate" class="m-auto">
       </notice-carefully>
     </div>
-    <menu-header @hideListItemHeart="activeShowListHeart" @hideCart="activeShowCart" />
-    <detail-product />
+    <menu-header ref="menuHeader" @hideListItemHeart="activeShowListHeart" @hideCart="activeShowCart" />
+    <detail-product @login=showLogin />
     <list-item-heart v-if="isShowListHeart" class="h-100" @hideListItemHeart="activeShowListHeart"
       @removeProductHeart="fromHomeViewChangeStatutsHeart" :isShowComponent="isShowListHeart" />
     <shopping-cart-layout v-if="isShowCart" class="h-100" @hideCart="activeShowCart" :isShowComponent="isShowCart" />
@@ -15,12 +15,11 @@
 </template>
   
 <script>
-
-import MenuHeader from "../layout/MenuHeader.vue";
-import FooterLayout from './../layout/FooterLayour.vue'
+import MenuHeader from "../layout/main/MenuHeader.vue";
+import FooterLayout from '../layout/main/FooterLayour.vue'
 import NoticeCarefully from './../components/other/NoticeCarefully.vue'
-import ListItemHeart from './../layout/ListItemHeart.vue'
-import ShoppingCartLayout from './../layout/ShoppingCartLayout.vue'
+import ListItemHeart from '../layout/product/ListItemHeart.vue'
+import ShoppingCartLayout from '../layout/cart/ShoppingCartLayout.vue'
 import DetailProduct from './../components/product/ProductDetail.vue'
 import { mapGetters } from 'vuex'
 export default {
@@ -33,9 +32,13 @@ export default {
       }
     }
   },
+  mounted(){
+    console.log(this.$refs.menuHeader.isShowLogin)
+  },
   data: () => ({
     isShowListHeart: null,
     isShowCart: null,
+    isShowLogin : false,
   }),
   components: {
     MenuHeader,
@@ -73,7 +76,11 @@ export default {
         this.isShowCart = status;
       }
     },
+    showLogin(){
+      this.$refs.menuHeader.isShowLogin = true
+    }
   }
 }
 </script>
-<style></style>
+<style>
+</style>
