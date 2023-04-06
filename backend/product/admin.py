@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Product,Category,Price,Photo_product,Heart
 # Register your models here.
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id' , 'name')
+    list_display = ('id' , 'name','slug')
 class PriceAdmin(admin.ModelAdmin):
     list_display = ('id' , 'product_id' , 'price')
 class PhotoProduceAdmin(admin.ModelAdmin):

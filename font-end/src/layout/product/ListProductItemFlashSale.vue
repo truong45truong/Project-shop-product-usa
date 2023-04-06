@@ -1,16 +1,18 @@
 <template>
     <div class="container mt-5 flash-sale-top">
-        <div class="row m-3 flash-sale-inside">
-            <div class="col-lg-6 my-5 d-flex align-items-center ">
+        <div class="row m-3 py-5 flash-sale-inside">
+            <div class="col-sm-6 d-flex align-items-center ">
                 <font-awesome-icon icon="fa-solid fa-bolt" class="text-white fs-3 me-2" />
-                <h3 class="text-white m-0 me-1">Flash Sale:</h3>
-                <CountDownFLashSale :date_prop="date_flash_sale" :hour_prop="hour_flash_sale" :mins_prop="mins_flash_sale" :secs_prop="secs_flash_sale"/>
+                <h3 class="text-white m-0 me-1 text-flash-sale">Flash Sale:</h3>
+            </div>
+            <div class="col-sm-6 mb-2 d-flex align-items-center justify-content-end mt-2 ">
+              <CountDownFLashSale :date_prop="date_flash_sale" :hour_prop="hour_flash_sale" :mins_prop="mins_flash_sale" :secs_prop="secs_flash_sale"/>
             </div>
         </div>  
-        <div class="row mx-3">
+        <div class="row m-0 ">
             <Carousel :settings="settings" :breakpoints="breakpoints">
-                <Slide v-for="item in listProductItem" :key="item" :class="'mx-1 shawdo'">
-                    <product-item :slug="item.slug" :photo="item.data" :name="item.name"
+                <Slide v-for="item in listProductItem" :key="item" :class="'mx-1 shawdo'" >
+                    <product-item :slug="item.slug" :photo="item.data" :name="item.name" :sale="item.sale"
                         :price="item.price" :status="item.status_heart" :hearts="item.count_heart"
                     />
                 </Slide>
@@ -80,8 +82,12 @@ export default ({
     },
     async created(){
         await ProductApiService.get().then(res => {
-            this.listProductItem = Array.from(res.data.products)
-            console.log(this.listProductItem )
+          for( let item of res.data.products){
+            if(item.sale > 0){
+              this.listProductItem.push(item)
+            }
+          }
+           
         })
         this.date_flash_sale = 3;
         this.hour_flash_sale = 17;
@@ -161,5 +167,26 @@ export default ({
   margin-right: 8px;
   border-radius: 50%;
 }
+@media only screen and (max-width: 1024px)
+{
 
+
+}
+@media only screen and (max-width: 768px)
+{
+
+}
+@media only screen and (max-width: 424px)
+{   
+    .flash-sale-inside {
+      padding : 10px 10% !important;
+    }
+    .text-flash-sale {
+      font-size: 18px ;
+    }
+    .carousel__prev,
+    .carousel__next {
+      display:none;
+    }
+}
 </style>

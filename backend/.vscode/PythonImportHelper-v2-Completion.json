@@ -136,6 +136,14 @@
         "documentation": {}
     },
     {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
         "label": "include",
         "importPath": "django.urls",
         "description": "django.urls",
@@ -521,6 +529,14 @@
     },
     {
         "label": "viewsets",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "status",
         "importPath": "rest_framework",
         "description": "rest_framework",
         "isExtraImport": true,
@@ -2001,6 +2017,22 @@
         "documentation": {}
     },
     {
+        "label": "redirect",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
         "label": "render",
         "importPath": "django.shortcuts",
         "description": "django.shortcuts",
@@ -2419,7 +2451,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n    'corsheaders.middleware.CorsMiddleware',\n]",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n    'corsheaders.middleware.CorsMiddleware',\n    'login.middlewares.RequestRateMiddleWare'",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2428,7 +2460,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [",
+        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2437,7 +2469,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
+        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2446,7 +2478,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',",
+        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2455,7 +2487,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],",
+        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2464,7 +2496,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "SESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',",
+        "peekOfCode": "SESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2473,7 +2505,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "SESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',",
+        "peekOfCode": "SESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2482,7 +2514,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',\n                'django.contrib.auth.context_processors.auth',",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2581,7 +2613,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "LANGUAGE_CODE = os.getenv('LANGUAGE_CODE')\nTIME_ZONE = os.getenv('TIME_ZONE')\nUSE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "LANGUAGE_CODE = os.getenv('LANGUAGE_CODE')\nTIME_ZONE = os.getenv('TIME_ZONE')\nUSE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2590,7 +2622,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "TIME_ZONE = os.getenv('TIME_ZONE')\nUSE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "TIME_ZONE = os.getenv('TIME_ZONE')\nUSE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2599,7 +2631,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "USE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "USE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2608,7 +2640,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "USE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "USE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2617,7 +2649,25 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "STATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "STATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_ROOT",
+        "kind": 5,
+        "importPath": "backend.settings",
+        "description": "backend.settings",
+        "peekOfCode": "MEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "backend.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_DIRS",
+        "kind": 5,
+        "importPath": "backend.settings",
+        "description": "backend.settings",
+        "peekOfCode": "STATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -2635,7 +2685,7 @@
         "kind": 5,
         "importPath": "backend.urls",
         "description": "backend.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('api/',include('product.api.urls')),\n    path('api/',include('login.api.urls')),\n    path('api/',include('user.api.urls')),\n    path('api/',include('new.api.urls')),\n    path('api/',include('order.api.urls')),\n    path('api/',include('flashSaleProduct.api.urls')),\n    path('api/', include('JWT.urls')),\n    path('api/', TokenRefreshView.as_view(), name='token_refresh'),",
+        "peekOfCode": "urlpatterns = [\n    path('',include('login.urls')),\n    path('admin/', admin.site.urls),\n    path('api/',include('product.api.urls')),\n    path('api/',include('login.api.urls')),\n    path('api/',include('user.api.urls')),\n    path('api/',include('new.api.urls')),\n    path('api/',include('order.api.urls')),\n    path('api/',include('flashSaleProduct.api.urls')),\n    path('api/', include('JWT.urls')),",
         "detail": "backend.urls",
         "documentation": {}
     },
@@ -2806,7 +2856,7 @@
         "kind": 2,
         "importPath": "decryptRSA.views",
         "description": "decryptRSA.views",
-        "peekOfCode": "def get_public_key_rsa(request):\n    try:\n        # ---------------------------- check params input ---------------------------- #\n        data_request= json.loads(request.body.decode('utf-8'))\n        print(data_request)\n        response = Response()\n        deviceId = data_request['params']['device_id']\n    except:\n        response.data = { \n            'success' : 'success failure' , \"status\" : status.HTTP_404_NOT_FOUND ,",
+        "peekOfCode": "def get_public_key_rsa(request):\n    try:\n        # ---------------------------- check params input ---------------------------- #\n        data_request= json.loads(request.body.decode('utf-8'))\n        ip_address = request.META.get('REMOTE_ADDR')\n        print(ip_address)\n        response = Response()\n        deviceId = data_request['params']['device_id']\n    except:\n        response.data = { ",
         "detail": "decryptRSA.views",
         "documentation": {}
     },
@@ -3306,6 +3356,15 @@
         "documentation": {}
     },
     {
+        "label": "RequestRateMiddleWare",
+        "kind": 6,
+        "importPath": "login.middlewares",
+        "description": "login.middlewares",
+        "peekOfCode": "class RequestRateMiddleWare:\n    def __init__(self, get_response):\n        self.get_response = get_response\n    def __call__(self, request):\n        # Code to be executed for each request before\n        # the view (and later middleware) are called.\n        response = self.get_response(request)\n        # Code to be executed for each request/response after\n        # the view is called.\n        print(response)",
+        "detail": "login.middlewares",
+        "documentation": {}
+    },
+    {
         "label": "User",
         "kind": 6,
         "importPath": "login.models",
@@ -3339,6 +3398,24 @@
         "description": "login.models",
         "peekOfCode": "path_root = str(settings.BASE_DIR)+\"/media/photos\"\n# Create your models here.\nclass User(AbstractUser):\n    id       = uuid4()\n    photo    = models.ImageField(upload_to =  'media/photos/user', height_field = None, width_field = None, max_length = None)\n    name     = models.CharField( max_length=200 )\n    password = models.CharField( max_length = 200)\n    email    = models.EmailField(max_length = 254)\n    level = models.IntegerField()\n    token_permission_infor_user = models.UUIDField(default=uuid.uuid4 , unique=True)",
         "detail": "login.models",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "login.urls",
+        "description": "login.urls",
+        "peekOfCode": "urlpatterns = [\n    path('',views.homePage,name='home'),\n]",
+        "detail": "login.urls",
+        "documentation": {}
+    },
+    {
+        "label": "homePage",
+        "kind": 2,
+        "importPath": "login.views",
+        "description": "login.views",
+        "peekOfCode": "def homePage(request):\n    return render(request,'index.html')",
+        "detail": "login.views",
         "documentation": {}
     },
     {
@@ -3693,6 +3770,15 @@
         "documentation": {}
     },
     {
+        "label": "HandleProductCategory",
+        "kind": 6,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "class HandleProductCategory:\n    def __init__(self,raw_query):\n        self.raw_query = raw_query\n        self.order_by_number = 0\n        self.filter_by_number = 0\n        self.stringQueryOrderBy = \"ORDER BY \"\n        self.stringQueryFilter = ''\n        self.filter_category = False\n        self.stringFilterCategory = ''\n        self.stringInsertTable = ''",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
         "label": "QUERY_SQL_GET_PRODUCT_DETAIL_NOT_USER",
         "kind": 5,
         "importPath": "product.api.query_raw",
@@ -3706,7 +3792,7 @@
         "kind": 5,
         "importPath": "product.api.query_raw",
         "description": "product.api.query_raw",
-        "peekOfCode": "QUERY_SQL_GET_ALL_PRODUCT_FOR_USER =  \"\"\"\n    SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_product`.`description`, `product_photo_product`.`data`, \n            `product_price`.`price`, `product_price`.`sale`, \n            `product_product`.`description`,\n            EXISTS\n                (\n                    SELECT \n                        (1) AS `a` FROM `product_heart` U0 ",
+        "peekOfCode": "QUERY_SQL_GET_ALL_PRODUCT_FOR_USER = \"\"\"\n    SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_product`.`description`, `product_photo_product`.`data`, \n            `product_price`.`price`, `product_price`.`sale`, \n            `product_product`.`description`,\n            EXISTS\n                (\n                    SELECT \n                        (1) AS `a` FROM `product_heart` U0 ",
         "detail": "product.api.query_raw",
         "documentation": {}
     },
@@ -3715,7 +3801,160 @@
         "kind": 5,
         "importPath": "product.api.query_raw",
         "description": "product.api.query_raw",
-        "peekOfCode": "QUERY_SQL_GET_ALL_PRODUCT_NOT_USER =  \"\"\"\n    SELECT  \n        `product_product`.`id`, `product_product`.`slug`, \n        `product_product`.`name`, `product_product`.`sex`, \n        `product_product`.`description`, `product_photo_product`.`data`, \n        `product_price`.`price`, `product_price`.`sale`, \n        `product_product`.`description` ,\n        (\n            SELECT \n                COUNT(U0.`id`) AS `heart_count` ",
+        "peekOfCode": "QUERY_SQL_GET_ALL_PRODUCT_NOT_USER = \"\"\"\n    SELECT  \n        `product_product`.`id`, `product_product`.`slug`, \n        `product_product`.`name`, `product_product`.`sex`, \n        `product_product`.`description`, `product_photo_product`.`data`, \n        `product_price`.`price`, `product_price`.`sale`, \n        `product_product`.`description` ,\n        (\n            SELECT \n                COUNT(U0.`id`) AS `heart_count` ",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_SORT",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_SORT =  dict()\nCONSTANTS_FILTER_SORT['S-1'] = '`product_product`.`name` ASC'\nCONSTANTS_FILTER_SORT['S-2'] = '`product_product`.`name` DESC'\nCONSTANTS_FILTER_SORT['S-3'] = '`product_price`.`price` ASC'\nCONSTANTS_FILTER_SORT['S-4'] = '`product_price`.`price` DESC'\n# CONSTANTS_FILTER_SORT['S-5'] = '`product_product`.`price` ASC'\n# CONSTANTS_FILTER_SORT['S-6'] = '`product_product`.`price` DESC'\nCONSTANTS_FILTER_WHERE =  dict()\nCONSTANTS_FILTER_SORT['S-1'] = '`product_product`.`name` ASC'\nCONSTANTS_FILTER_LIMIT =  dict()",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_SORT['S-1']",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_SORT['S-1'] = '`product_product`.`name` ASC'\nCONSTANTS_FILTER_SORT['S-2'] = '`product_product`.`name` DESC'\nCONSTANTS_FILTER_SORT['S-3'] = '`product_price`.`price` ASC'\nCONSTANTS_FILTER_SORT['S-4'] = '`product_price`.`price` DESC'\n# CONSTANTS_FILTER_SORT['S-5'] = '`product_product`.`price` ASC'\n# CONSTANTS_FILTER_SORT['S-6'] = '`product_product`.`price` DESC'\nCONSTANTS_FILTER_WHERE =  dict()\nCONSTANTS_FILTER_SORT['S-1'] = '`product_product`.`name` ASC'\nCONSTANTS_FILTER_LIMIT =  dict()\nCONSTANTS_FILTER_LIMIT['up'] = 'AND `product_price`.`price` >= '",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_SORT['S-2']",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_SORT['S-2'] = '`product_product`.`name` DESC'\nCONSTANTS_FILTER_SORT['S-3'] = '`product_price`.`price` ASC'\nCONSTANTS_FILTER_SORT['S-4'] = '`product_price`.`price` DESC'\n# CONSTANTS_FILTER_SORT['S-5'] = '`product_product`.`price` ASC'\n# CONSTANTS_FILTER_SORT['S-6'] = '`product_product`.`price` DESC'\nCONSTANTS_FILTER_WHERE =  dict()\nCONSTANTS_FILTER_SORT['S-1'] = '`product_product`.`name` ASC'\nCONSTANTS_FILTER_LIMIT =  dict()\nCONSTANTS_FILTER_LIMIT['up'] = 'AND `product_price`.`price` >= '\nCONSTANTS_FILTER_LIMIT['down'] = 'AND `product_price`.`price` <= '",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_SORT['S-3']",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_SORT['S-3'] = '`product_price`.`price` ASC'\nCONSTANTS_FILTER_SORT['S-4'] = '`product_price`.`price` DESC'\n# CONSTANTS_FILTER_SORT['S-5'] = '`product_product`.`price` ASC'\n# CONSTANTS_FILTER_SORT['S-6'] = '`product_product`.`price` DESC'\nCONSTANTS_FILTER_WHERE =  dict()\nCONSTANTS_FILTER_SORT['S-1'] = '`product_product`.`name` ASC'\nCONSTANTS_FILTER_LIMIT =  dict()\nCONSTANTS_FILTER_LIMIT['up'] = 'AND `product_price`.`price` >= '\nCONSTANTS_FILTER_LIMIT['down'] = 'AND `product_price`.`price` <= '\nCONSTANTS_FILTER_LIMIT['category'] = 'AND `product_category`.`slug` in ('",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_SORT['S-4']",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_SORT['S-4'] = '`product_price`.`price` DESC'\n# CONSTANTS_FILTER_SORT['S-5'] = '`product_product`.`price` ASC'\n# CONSTANTS_FILTER_SORT['S-6'] = '`product_product`.`price` DESC'\nCONSTANTS_FILTER_WHERE =  dict()\nCONSTANTS_FILTER_SORT['S-1'] = '`product_product`.`name` ASC'\nCONSTANTS_FILTER_LIMIT =  dict()\nCONSTANTS_FILTER_LIMIT['up'] = 'AND `product_price`.`price` >= '\nCONSTANTS_FILTER_LIMIT['down'] = 'AND `product_price`.`price` <= '\nCONSTANTS_FILTER_LIMIT['category'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_FILTER_LIMIT['category_main'] = 'AND `product_category`.`slug` in ('",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_WHERE",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_WHERE =  dict()\nCONSTANTS_FILTER_SORT['S-1'] = '`product_product`.`name` ASC'\nCONSTANTS_FILTER_LIMIT =  dict()\nCONSTANTS_FILTER_LIMIT['up'] = 'AND `product_price`.`price` >= '\nCONSTANTS_FILTER_LIMIT['down'] = 'AND `product_price`.`price` <= '\nCONSTANTS_FILTER_LIMIT['category'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_FILTER_LIMIT['category_main'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_INSERT_TABLE = dict()\nCONSTANTS_INSERT_TABLE['category'] = \"\"\"\n    INNER JOIN `product_category`",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_SORT['S-1']",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_SORT['S-1'] = '`product_product`.`name` ASC'\nCONSTANTS_FILTER_LIMIT =  dict()\nCONSTANTS_FILTER_LIMIT['up'] = 'AND `product_price`.`price` >= '\nCONSTANTS_FILTER_LIMIT['down'] = 'AND `product_price`.`price` <= '\nCONSTANTS_FILTER_LIMIT['category'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_FILTER_LIMIT['category_main'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_INSERT_TABLE = dict()\nCONSTANTS_INSERT_TABLE['category'] = \"\"\"\n    INNER JOIN `product_category`\n            ON ( `product_product`.`category_id_id` = `product_category`.`id` )",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_LIMIT",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_LIMIT =  dict()\nCONSTANTS_FILTER_LIMIT['up'] = 'AND `product_price`.`price` >= '\nCONSTANTS_FILTER_LIMIT['down'] = 'AND `product_price`.`price` <= '\nCONSTANTS_FILTER_LIMIT['category'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_FILTER_LIMIT['category_main'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_INSERT_TABLE = dict()\nCONSTANTS_INSERT_TABLE['category'] = \"\"\"\n    INNER JOIN `product_category`\n            ON ( `product_product`.`category_id_id` = `product_category`.`id` )\n\"\"\"",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_LIMIT['up']",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_LIMIT['up'] = 'AND `product_price`.`price` >= '\nCONSTANTS_FILTER_LIMIT['down'] = 'AND `product_price`.`price` <= '\nCONSTANTS_FILTER_LIMIT['category'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_FILTER_LIMIT['category_main'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_INSERT_TABLE = dict()\nCONSTANTS_INSERT_TABLE['category'] = \"\"\"\n    INNER JOIN `product_category`\n            ON ( `product_product`.`category_id_id` = `product_category`.`id` )\n\"\"\"\nQUERY_SQL_GET_ALL_PRODUCT_WITH_CATEGORY_AND_NOT_USER = \"\"\"",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_LIMIT['down']",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_LIMIT['down'] = 'AND `product_price`.`price` <= '\nCONSTANTS_FILTER_LIMIT['category'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_FILTER_LIMIT['category_main'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_INSERT_TABLE = dict()\nCONSTANTS_INSERT_TABLE['category'] = \"\"\"\n    INNER JOIN `product_category`\n            ON ( `product_product`.`category_id_id` = `product_category`.`id` )\n\"\"\"\nQUERY_SQL_GET_ALL_PRODUCT_WITH_CATEGORY_AND_NOT_USER = \"\"\"\n    SELECT  ",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_LIMIT['category']",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_LIMIT['category'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_FILTER_LIMIT['category_main'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_INSERT_TABLE = dict()\nCONSTANTS_INSERT_TABLE['category'] = \"\"\"\n    INNER JOIN `product_category`\n            ON ( `product_product`.`category_id_id` = `product_category`.`id` )\n\"\"\"\nQUERY_SQL_GET_ALL_PRODUCT_WITH_CATEGORY_AND_NOT_USER = \"\"\"\n    SELECT  \n        `product_product`.`id`, `product_product`.`slug`, ",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_FILTER_LIMIT['category_main']",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_FILTER_LIMIT['category_main'] = 'AND `product_category`.`slug` in ('\nCONSTANTS_INSERT_TABLE = dict()\nCONSTANTS_INSERT_TABLE['category'] = \"\"\"\n    INNER JOIN `product_category`\n            ON ( `product_product`.`category_id_id` = `product_category`.`id` )\n\"\"\"\nQUERY_SQL_GET_ALL_PRODUCT_WITH_CATEGORY_AND_NOT_USER = \"\"\"\n    SELECT  \n        `product_product`.`id`, `product_product`.`slug`, \n        `product_product`.`name`, `product_product`.`sex`, ",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_INSERT_TABLE",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_INSERT_TABLE = dict()\nCONSTANTS_INSERT_TABLE['category'] = \"\"\"\n    INNER JOIN `product_category`\n            ON ( `product_product`.`category_id_id` = `product_category`.`id` )\n\"\"\"\nQUERY_SQL_GET_ALL_PRODUCT_WITH_CATEGORY_AND_NOT_USER = \"\"\"\n    SELECT  \n        `product_product`.`id`, `product_product`.`slug`, \n        `product_product`.`name`, `product_product`.`sex`, \n        `product_product`.`description`, `product_photo_product`.`data`, ",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CONSTANTS_INSERT_TABLE['category']",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "CONSTANTS_INSERT_TABLE['category'] = \"\"\"\n    INNER JOIN `product_category`\n            ON ( `product_product`.`category_id_id` = `product_category`.`id` )\n\"\"\"\nQUERY_SQL_GET_ALL_PRODUCT_WITH_CATEGORY_AND_NOT_USER = \"\"\"\n    SELECT  \n        `product_product`.`id`, `product_product`.`slug`, \n        `product_product`.`name`, `product_product`.`sex`, \n        `product_product`.`description`, `product_photo_product`.`data`, \n        `product_price`.`price`, `product_price`.`sale`, ",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_SQL_GET_ALL_PRODUCT_WITH_CATEGORY_AND_NOT_USER",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "QUERY_SQL_GET_ALL_PRODUCT_WITH_CATEGORY_AND_NOT_USER = \"\"\"\n    SELECT  \n        `product_product`.`id`, `product_product`.`slug`, \n        `product_product`.`name`, `product_product`.`sex`, \n        `product_product`.`description`, `product_photo_product`.`data`, \n        `product_price`.`price`, `product_price`.`sale`, \n        `product_product`.`description` ,`product_category`.`slug` as 'category_slug',\n        (\n            SELECT \n                COUNT(U0.`id`) AS `heart_count` ",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_SQL_SEARCH_ALL_PRODUCT",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "QUERY_SQL_SEARCH_ALL_PRODUCT = \"\"\"\n    SELECT  \n        `product_product`.`id`, `product_product`.`slug`, \n        `product_product`.`name`, `product_product`.`sex`, \n        `product_product`.`description`, `product_photo_product`.`data`, \n        `product_price`.`price`, `product_price`.`sale`, \n        `product_product`.`description` ,\n        (\n            SELECT \n                COUNT(U0.`id`) AS `heart_count` ",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_SEARCH_PRODUCT_IN_CATEGORY",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "QUERY_SEARCH_PRODUCT_IN_CATEGORY = \"\"\"\n        SELECT `product_category`.*,\n            (\n                SELECT \n                    COUNT(U.`id`) AS `number_product` \n                FROM \n                    `product_product` U\n                WHERE \n                    U.`category_id_id` = `product_category`.`id`\n                    AND ",
         "detail": "product.api.query_raw",
         "documentation": {}
     },
@@ -3769,7 +4008,16 @@
         "kind": 6,
         "importPath": "product.api.serializers",
         "description": "product.api.serializers",
-        "peekOfCode": "class ProductHeartSerializer(serializers.Serializer):\n    prices__price = serializers.FloatField()\n    photo_products__data = serializers.CharField()\n    name = serializers.CharField()\n    slug = serializers.CharField()\n    prices__sale = serializers.FloatField()",
+        "peekOfCode": "class ProductHeartSerializer(serializers.Serializer):\n    prices__price = serializers.FloatField()\n    photo_products__data = serializers.CharField()\n    name = serializers.CharField()\n    slug = serializers.CharField()\n    prices__sale = serializers.FloatField()\nclass CategoryWithNumberProductSerializer(serializers.Serializer):\n    id =  UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()",
+        "detail": "product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "CategoryWithNumberProductSerializer",
+        "kind": 6,
+        "importPath": "product.api.serializers",
+        "description": "product.api.serializers",
+        "peekOfCode": "class CategoryWithNumberProductSerializer(serializers.Serializer):\n    id =  UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()\n    number_product = serializers.IntegerField()",
         "detail": "product.api.serializers",
         "documentation": {}
     },
@@ -3778,7 +4026,16 @@
         "kind": 5,
         "importPath": "product.api.urls",
         "description": "product.api.urls",
-        "peekOfCode": "category = CategoryViewSet.as_view({\n    'get' : 'get_category'\n})\nproduct = Productviewset.as_view({\n    'get' : 'get_product',\n    #'post' : 'post_product'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart'\n})",
+        "peekOfCode": "category = CategoryViewSet.as_view({\n    'get' : 'get_category'\n})\ncategory_tree = CategoryViewSet.as_view({\n    'get' : 'get_category_tree'\n})\nproduct = Productviewset.as_view({\n    'get' : 'get_product',\n    #'post' : 'post_product'\n})",
+        "detail": "product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "category_tree",
+        "kind": 5,
+        "importPath": "product.api.urls",
+        "description": "product.api.urls",
+        "peekOfCode": "category_tree = CategoryViewSet.as_view({\n    'get' : 'get_category_tree'\n})\nproduct = Productviewset.as_view({\n    'get' : 'get_product',\n    #'post' : 'post_product'\n})\nsearch_product = Productviewset.as_view({\n    'get' : 'search_product',\n    #'post' : 'post_product'",
         "detail": "product.api.urls",
         "documentation": {}
     },
@@ -3787,7 +4044,34 @@
         "kind": 5,
         "importPath": "product.api.urls",
         "description": "product.api.urls",
-        "peekOfCode": "product = Productviewset.as_view({\n    'get' : 'get_product',\n    #'post' : 'post_product'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart'\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})",
+        "peekOfCode": "product = Productviewset.as_view({\n    'get' : 'get_product',\n    #'post' : 'post_product'\n})\nsearch_product = Productviewset.as_view({\n    'get' : 'search_product',\n    #'post' : 'post_product'\n})\nsearch_product_category = Productviewset.as_view({\n    'get' : 'search_product_category',",
+        "detail": "product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "search_product",
+        "kind": 5,
+        "importPath": "product.api.urls",
+        "description": "product.api.urls",
+        "peekOfCode": "search_product = Productviewset.as_view({\n    'get' : 'search_product',\n    #'post' : 'post_product'\n})\nsearch_product_category = Productviewset.as_view({\n    'get' : 'search_product_category',\n    #'post' : 'post_product'\n})\nproduct_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',",
+        "detail": "product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "search_product_category",
+        "kind": 5,
+        "importPath": "product.api.urls",
+        "description": "product.api.urls",
+        "peekOfCode": "search_product_category = Productviewset.as_view({\n    'get' : 'search_product_category',\n    #'post' : 'post_product'\n})\nproduct_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart'",
+        "detail": "product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "product_catogory",
+        "kind": 5,
+        "importPath": "product.api.urls",
+        "description": "product.api.urls",
+        "peekOfCode": "product_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart'\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})",
         "detail": "product.api.urls",
         "documentation": {}
     },
@@ -3805,7 +4089,7 @@
         "kind": 5,
         "importPath": "product.api.urls",
         "description": "product.api.urls",
-        "peekOfCode": "product_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [\n    path('category/',category, name = \"get_category\"), # get categories \n    path('product/',product,name=\"get_product\"), # get all products or product with product_slug\n    path('heart/post/' , heart , name = \"post_heart\"), # like or dislike product",
+        "peekOfCode": "product_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [\n    path('category/',category, name = \"get_category\"), # get categories\n    path('category-tree/',category_tree, name = \"category_tree\"), # get categories  \n    path('product/',product,name=\"get_product\"), # get all products or product with product_slug",
         "detail": "product.api.urls",
         "documentation": {}
     },
@@ -3814,7 +4098,7 @@
         "kind": 5,
         "importPath": "product.api.urls",
         "description": "product.api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('category/',category, name = \"get_category\"), # get categories \n    path('product/',product,name=\"get_product\"), # get all products or product with product_slug\n    path('heart/post/' , heart , name = \"post_heart\"), # like or dislike product\n    path('product-heart/',product_heart , name = \"get_product_heart\") # get product liked\n]",
+        "peekOfCode": "urlpatterns = [\n    path('category/',category, name = \"get_category\"), # get categories\n    path('category-tree/',category_tree, name = \"category_tree\"), # get categories  \n    path('product/',product,name=\"get_product\"), # get all products or product with product_slug\n    path('product/search/',search_product,name=\"search_product\"),\n    path('product/search-product-category/',search_product_category,name=\"search_product_category\"),\n    path('product-category/',product_catogory,name=\"get_product_category\"),# get all products or product with category_slug\n    path('heart/post/' , heart , name = \"post_heart\"), # like or dislike product\n    path('product-heart/',product_heart , name = \"get_product_heart\") # get product liked\n]",
         "detail": "product.api.urls",
         "documentation": {}
     },
@@ -3841,7 +4125,7 @@
         "kind": 6,
         "importPath": "product.api.views",
         "description": "product.api.views",
-        "peekOfCode": "class Productviewset(viewsets.ViewSet):\n    authentication_classes = []\n    permission_classes = []\n    @action(method=[\"GET\"],detail=False,url_path=\"product\",url_name=\"get_product\")\n    def get_product(self, request,*args, **kwargs):\n        # ---------------------------------------------------------------------------- #\n        #                                   QUERY RAW                                  #\n        # ---------------------------------------------------------------------------- #\n        rawQuerySqlProductSlug = query_raw.QUERY_SQL_GET_PRODUCT_DETAIL_NOT_USER\n        rawQuerySql =  query_raw.QUERY_SQL_GET_ALL_PRODUCT_FOR_USER",
+        "peekOfCode": "class Productviewset(viewsets.ViewSet):\n    authentication_classes = []\n    permission_classes = []\n    @action(method=[\"GET\"],detail=False,url_path=\"search_product_category\",url_name=\"search_product_category\")\n    def search_product_category(self, request,*args, **kwargs):\n        rawQuerySql = query_raw.QUERY_SQL_SEARCH_ALL_PRODUCT\n        rawQuerySqlSearchCategory = query_raw.QUERY_SEARCH_PRODUCT_IN_CATEGORY\n        response = Response()\n        try:\n            filter_sort = json.loads(request.GET['filter_sort'])",
         "detail": "product.api.views",
         "documentation": {}
     },
@@ -3886,7 +4170,7 @@
         "kind": 6,
         "importPath": "product.admin",
         "description": "product.admin",
-        "peekOfCode": "class ProductAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name')\nclass PriceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id' , 'price')\nclass PhotoProduceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id')\nclass CategoryAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'name')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')",
+        "peekOfCode": "class ProductAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name','slug')\nclass PriceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id' , 'price')\nclass PhotoProduceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id')\nclass CategoryAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'name')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')",
         "detail": "product.admin",
         "documentation": {}
     },

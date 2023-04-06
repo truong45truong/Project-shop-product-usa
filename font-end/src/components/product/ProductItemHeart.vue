@@ -4,7 +4,7 @@
             <img class="img-product-item text-center" :src="'http://127.0.0.1:8000/'+`${photo}`" alt="name">
         </div>
         <div v-if="sale > 0" :class="[isShowDetail ? 'ribbon-hide' : 'ribbon']">
-            <span>Sale 10%</span>
+            <span>Sale {{sale}}%</span>
         </div>
         <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border ']" @click="isShowDetailProduct(true)" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice">
 
@@ -19,15 +19,21 @@
                 <div class="w-100"><p class="text-white fs-3 my-1 text-center">{{name}}</p></div>
             </div>
             <div class="d-flex w-100 justify-content-between">
-                <div class="mt-1 w-100"><p class="text-price-item-heart my-1 text-center">{{price}} vnđ</p></div>
-                <a class="btn btn-dark btn-detail-item-heart" :href="linkDetailProduct">Chi tiết</a>
+                <div class="mt-1 w-100">
+                    <p class="text-price-item-heart my-1 text-center">
+                    <span :class="[ sale > 0 ? 'price-no-sale ' : '']" >{{price}}</span>
+                    <span v-if="sale > 0" class="ms-2 text-danger">{{Math.ceil((100 - sale) / 100 * price)}}</span> vnđ
+                    </p>
+                </div>
             </div>
+            <a class="btn btn-dark btn-detail-item-heart d-block" @click="nextPageDetailProduct">Chi tiết</a>
         </div>
     </div>
 </template>
 
 <script>
 import { mapGetters,mapActions } from 'vuex'
+import { useRoute } from 'vue-router';
 export default ({
     name: 'ProductItemHeart',
     props: {
@@ -37,6 +43,10 @@ export default ({
         photo : false,
         sale : 0,
     },
+    setup() {
+        const route = useRoute();
+        return { route };
+    },
     data: () => ({
         isShowDetail : null,
         isHoverPrice : false,
@@ -44,7 +54,11 @@ export default ({
         numberHeart : false ,
         linkDetailProduct : '/'
     }),
+    
     methods : {
+        nextPageDetailProduct(){
+            this.$router.push('/product/'+ this.slug)
+        },
         isShowDetailProduct(status){
             this.isShowDetail = status
         },
@@ -105,5 +119,10 @@ export default ({
     position:absolute;
     top:-100%;  
     left:0;
+}
+.price-no-sale {
+    text-decoration:line-through;
+    font-weight: 300;
+    color:rgb(105, 105, 105)
 }
 </style>

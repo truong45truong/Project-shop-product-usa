@@ -8,8 +8,8 @@
         <div class="h-100 d-flex flex-column align-items-center justify-content-center">
             <img class="img-product-item text-center" :src="'http://127.0.0.1:8000/'+`${photo}`" alt="name">
         </div>
-        <div :class="[isShowDetail ? 'ribbon-hide' : 'ribbon']">
-            <span>Sale 10%</span>
+        <div v-if="sale > 0" :class="[isShowDetail ? 'ribbon-hide' : 'ribbon']">
+            <span>Sale {{sale}}%</span>
         </div>
         <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border ']" @click="isShowProduct" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice"
         class="icon-heart">
@@ -20,17 +20,14 @@
                 <font-awesome-icon icon="fa-solid fa-xmark" class="fs-4 btn-cancel text-dark" />
             </div>
             <div class="d-flex w-100 my-1">
-                <div class="w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark py-1">Tên : {{name}} vnđ</p></div>
+                <div class="w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark py-1 name-product-item ">{{name}}</p></div>
             </div>
             <div class="d-flex w-100 my-1">
-                <div class=" w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark py-1">Giá : {{price}} vnđ</p></div>
-            </div>
-            <div class="d-flex w-100 my-1">
-                <div class="w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark py-1">Tổng : {{(100 - 10) / 100 * price}} vnđ</p></div>
+                <div class="w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark py-1">Giá : {{Math.ceil((100 - sale) / 100 * price)}} vnđ</p></div>
             </div>
             <div class="w-100 d-flex justify-content-around">
-                <button class="button-45 m-0"><p class="m-0 text-btn-product" @click="addToCard">Thêm vào Giỏ</p></button>
-                <a class="button-45 m-0" :href="linkDetailProduct"><p class="m-0 text-btn-product" @click="nextPageDetailProduct">Chi tiết</p></a>
+                <button class="button-48 m-0 btn-add-tocard"><span class="m-0 text-btn-product" @click="addToCard">Thêm vào Giỏ</span></button>
+                <a class="button-48 m-0"><span class="m-0 text-btn-product" @click="nextPageDetailProduct">Chi tiết</span></a>
             </div>
         </div>
     </div>
@@ -39,6 +36,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import {ProductAction} from './../../common/product.service'
+import { useRoute } from 'vue-router';
 export default ({
     name: 'ProductItem',
     props: {
@@ -51,6 +49,7 @@ export default ({
         status : false,
         hearts : false,
         status : false,
+        sale : false,
     },
     data: () => ({
         isShowDetail : false,
@@ -228,7 +227,96 @@ export default ({
     cursor:pointer;
     max-width: fit-content;
 }
+.button-48 {
+  width:50%;
+  appearance: none;
+  background-color: #FFFFFF;
+  border-width: 0;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Clarkson,Helvetica,sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1em;
+  margin: 0;
+  opacity: 1;
+  outline: 0;
+  padding: auto;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: geometricprecision;
+  text-transform: uppercase;
+  transition: opacity 300ms cubic-bezier(.694, 0, 0.335, 1),background-color 100ms cubic-bezier(.694, 0, 0.335, 1),color 100ms cubic-bezier(.694, 0, 0.335, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.button-48:before {
+  animation: opacityFallbackOut .5s step-end forwards;
+  backface-visibility: hidden;
+  background-color: #EBEBEB;
+  clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  transition: clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1), -webkit-clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1);
+  width: 100%;
+}
+
+.button-48:hover:before {
+  animation: opacityFallbackIn 0s step-start forwards;
+  clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+}
+
+.button-48:after {
+  background-color: #FFFFFF;
+}
+
+.button-48 span {
+  z-index: 1;
+  position: relative;
+}
 .btn-cancel-product-detail .btn-cancel:hover {
     color:rgb(139, 135, 135) !important;
+}
+@media only screen and (max-width: 1400px)
+{
+    .text-product-cart-inside-market {
+        font-size: 14px;;
+    }
+    .text-btn-product {
+        font-size: 12px;
+    }
+}
+@media only screen and (max-width: 1024px)
+{
+    .text-product-cart-inside-market {
+        font-size: 12px;;
+    }
+}
+@media only screen and (max-width: 600px)
+{
+    .btn-add-tocard {
+        display:none !important;
+    }
+}
+@media only screen and (max-width: 524px)
+{
+    .name-product-item {
+        display:none;
+    }
+    .button-48 span {
+        left: -45%;
+    }
 }
 </style>

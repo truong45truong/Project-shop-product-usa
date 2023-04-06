@@ -11,11 +11,11 @@
         <div class="row shadow position-relative">
             <div class="col-sm-6 position-relative">
                 <img class="img-detail-product" :src="'http://127.0.0.1:8000/' + `${data.data}`" alt="">
-                <div class="promoribon"><br>
+                <div v-if="data.sale > 0" class="promoribon"><br>
                   <img class="img-sale" src="./../../assets/images/sale-product-detail.png" alt="">
                   <p class="text-white m-0">Sale</p>
                   <p class="text-white m-0">
-                      10%
+                      {{data.sale}}%
                   </p>
                 </div>
             </div>
@@ -23,7 +23,10 @@
                 <div class="d-flex flex-column position-relative">
 
                     <p class="m-0 fs-5 text-dark mb-2">
-                        Giá : {{ data.price }} vnđ
+                        Giá : 
+                          <span :class="[ data.sale>0 ? 'price-sale' : '']" > {{ data.price }} </span>
+                          <span class="ms-2 text-danger" v-if="data.sale > 0"> {{Math.ceil(data.price*(( 100 - data.sale)/100))}} </span>
+                        vnđ
                     </p>
                     <p class="m-0 fs-5 text-dark mb-2"> Yêu thích : {{ data.count_heart }}
                         <span> <font-awesome-icon icon="fa-solid fa-heart" class="fs-4" /> </span>
@@ -48,7 +51,7 @@
                           Flask Sale Còn :
                         </p>
                       </div>
-                      <CountDownFLashSale />
+                      <CountDownFLashSale v-if="data.sale > 0" />
                     </div>
                 </div>
             </div>
@@ -70,7 +73,7 @@
         <div class="border mt-5 pb-3">
           <div class="row">
             <h4 class="mb-3 mt-1">Mô tả sản phẩm </h4>
-            <p class="text-dark">{{data.description}}</p>
+            <p class="text-dark text-descript">{{data.description}}</p>
           </div>
         </div>
     </div>
@@ -87,6 +90,23 @@ export default {
         const route = useRoute();
         return { route };
     },
+    watch:{
+      $route (to, from) {
+        (async () => {
+          try {
+            const response = await ProductApiService.get({
+              params: {
+                product_slug: this.route.params.slug
+              }
+            });
+            console.log(response);
+            this.data = response.data.products[0];
+          } catch (error) {
+            console.log(error);
+          }
+        })();
+      }
+    } ,
     data: () => ({
         data: '',
         isShowSelectedVoucher : false,
@@ -351,5 +371,13 @@ export default {
 .button-48 span {
   z-index: 1;
   position: relative;
+}
+.price-sale {
+  text-decoration: line-through;
+  color:rgb(105, 105, 105);
+  font-weight:300;
+}
+.text-descript {
+  white-space: pre-wrap !important;
 }
 </style>

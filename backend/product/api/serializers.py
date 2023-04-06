@@ -43,3 +43,9 @@ class ProductHeartSerializer(serializers.Serializer):
     name = serializers.CharField()
     slug = serializers.CharField()
     prices__sale = serializers.FloatField()
+
+class CategoryWithNumberProductSerializer(serializers.Serializer):
+    id =  UUIDField()
+    slug=serializers.CharField()
+    name = serializers.CharField()
+    number_product = serializers.IntegerField()

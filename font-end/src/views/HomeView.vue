@@ -1,10 +1,9 @@
 
 <template>
   <menu-header @hideListItemHeart="activeShowListHeart" @hideCart="activeShowCart"
-              @hideChangePassword = "activeChangePassword"
-  />
-  <main>
-    <div class="d-flex flex-column" :class="[get_is_activate == true ? 'top-action-on-web' : '']">
+              @hideChangePassword = "activeChangePassword"  />
+  <main >
+    <div class="d-flex flex-column" :class="[get_is_activate == true ? 'top-action-on-web' : '']" >
       <notice-carefully v-if="get_is_activate" class="m-auto">
       </notice-carefully>
     </div>
@@ -32,6 +31,7 @@ import NoticeCarefully from './../components/other/NoticeCarefully.vue'
 import ListItemHeart from '../layout/product/ListItemHeart.vue'
 import ShoppingCartLayout from '../layout/cart/ShoppingCartLayout.vue'
 import ChangePassword from './../components/login/ChangePassword.vue'
+import FilterAndSortLayout from './../layout/others/FilterAndSortLayout.vue'
 import { mapGetters} from 'vuex'
 export default {
   name: "HomeView",
@@ -92,6 +92,9 @@ export default {
       console.log("activeChangePassword", status)
       this.isShowChangePassword = status;
     },
+    handleScroll(event) {
+      // add your scroll event handling code here
+    }
   }
 }
 </script>

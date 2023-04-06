@@ -52,7 +52,8 @@ export default {
     },
     data : () => ({
         listCateogry : false,
-        isShowChild : []
+        isShowChild : [],
+        filterAndSort : false,
     }),
     async created (){
         return await CategoryApiService.get().then(res => {
@@ -61,6 +62,9 @@ export default {
                 this.isShowChild[item.id] = {value : false , level : item.level , expand : false}
         }
         })
+    },
+    mounted(){
+    
     },
     methods : {
         checkChildCategogy(category_id,level) {

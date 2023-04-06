@@ -12,7 +12,7 @@
         :phone_receiver="order.order.phone_receiver" :status="order.order.status" :note="order.order.note"
         :logs="order.order.logs" :cancel="order.order.cancel" :total_price="order.order.total_price"
         :request_cancel="order.order.request_cancel" :transport="order.transport" :products="order.products" 
-        :indexOrder="index"
+        :indexOrder="index" @hideCart="hide"
          />
     </div>
     <div class="h-100">
@@ -49,6 +49,9 @@ export default {
   methods: {
     showDetailTotalSelectedProduct(){
       this.isShowDetailTotalSelectProduct = ! this.isShowDetailTotalSelectProduct
+    },
+    hide(){
+      this.$emit('hideCart', false)
     }
   }
 }

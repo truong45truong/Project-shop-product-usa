@@ -18,7 +18,7 @@
                 <product-cart-inside :product_slug="item.product_slug" :photo_product="item.photo_product" :product_name="item.product_name"
                         :product_price_total="item.product_price_total" :product_quantity="item.product_quantity" :product_sale="item.product_sale"
                         :product_price="item.product_price" :index="index" :name_order="orderInformation.name"
-                        @changePriceTotalOrder="changePriceTotalOrder"
+                        @changePriceTotalOrder="changePriceTotalOrder" @hideCart="hide"
                     />
             </div>
         </div>
@@ -167,6 +167,9 @@ export default ({
                 this.orderInformation.total_price += price
                 this.numberProduct += numberQuantity
             }
+        },
+        hide(){
+            this.$emit('hideCart')
         }
     },
     computed: {

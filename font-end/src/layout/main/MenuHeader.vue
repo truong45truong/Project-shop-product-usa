@@ -19,10 +19,12 @@
         <div class="menu-top">
             <div class="container container-menu">
                 <div class="row container-fluid d-flex align-items-center justify-content-between">
-                    <div class="col-lg-4 my-3">
+                    <div class="col-lg-4 my-3 d-flex justify-content-between">
                         <a class="navbar-brand" href="/">
                             <h2 class="m-0 font-logo"><b><i>ShopKatie</i></b></h2>
-                        </a></div>
+                        </a>
+                        <div v-if="!isAuthenticated" class="btn btn-light btn-login-moblie" @click="showLogin"> Đăng nhập </div>
+                    </div>
                     <div class="col-lg-4 d-flex align-items-center justify-content-around">
                         <a class="text-white m-0 ms-4  py-4 title-menu" href="/" >TRANG CHỦ</a>
                         <a class="text-white m-0 ms-4  py-4 title-menu" @click="showIntroduce"
@@ -44,11 +46,11 @@
                             THEO DÕI
                         </a>
                     </div>
-                    <div class="col-lg-4 my-3 d-flex justify-content-end align-items-center position-relative">
+                    <div class="col-lg-4 my-3 d-flex justify-content-end align-items-center">
                         <div class="search-control">
-                            <input type="text" class="input-search border" placeholder="Tìm kiếm sản phẩm">
-                            <font-awesome-icon class="d-inline text-white icon-search" icon="fa-solid fa-magnifying-glass" />
-                        </div>
+                            <input v-model="keySearch" type="text" class="input-search border" placeholder="Tìm kiếm sản phẩm" @input="handleSearch">
+                            <search-product-layout v-if="keySearch != ''"  :key_search="keySearch"  />
+                        </div> 
                         <div class="position-relative" @click="showHeart" >
                             <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-regular fa-heart"/>
                             <div class="number-product-cart text-white text-center m-0">{{get_is_number_product_heart}}</div> 
@@ -63,7 +65,8 @@
                         <notice-menu />
                         <div v-if="isShowUser" class="position-absolute bg-white rounded shadow top-100 p-2 w-50 start-50 py-4 text-center">
                             <p class="text-dark action-menu-user" >Thông tin các nhân</p>
-                            <p class="text-dark action-menu-user mb-0" @click="showChangePassword">Đổi mật khẩu</p>
+                            <p class="text-dark action-menu-user" @click="showChangePassword">Đổi mật khẩu</p>
+                            <p class="text-dark action-menu-user mb-0" @click="logoutUser()">Đăng xuất</p>
                         </div>
                     </div>
                 </div>
@@ -85,6 +88,7 @@ import NoticeMenu from '../../components/other/NoticeMenu.vue'
 import IntroduceLayout from './IntroduceLayout.vue'
 import ContactLayout from './ContactLayout.vue'
 import FollowLayout from './FollowLayout.vue'
+import SearchProductLayout from './../product/SearchProductLayout.vue'
 export default {
     name: "MenuHeader",
     props: {
@@ -100,6 +104,8 @@ export default {
         isShowIntroduce : false,
         isShowContactLayout : false,
         isShowFollowLayout : false,
+        keySearch : '',
+        isShowSearch : false,
     }),
     components : {
         CategoryLayout,
@@ -107,7 +113,8 @@ export default {
         NoticeMenu,
         IntroduceLayout,
         ContactLayout,
-        FollowLayout
+        FollowLayout,
+        SearchProductLayout,
     },
     methods : {
         showUser(){
@@ -179,11 +186,23 @@ export default {
 			})
 		},
         logoutUser () {
+            this.isShowUser = false
             this.$store.dispatch('auth/logout').then(() => {
                 this.isAuthenticated = this.get_authenticated;
                 this.$store.dispatch('cart/actionExitCart')
                 this.$store.dispatch('heart/actionExitHeart')
             })
+        },
+        handleSearch: _.debounce(function () {
+            this.isShowSearch = false
+            if( this.keySearch == '' ){
+                this.isShowSearch = false
+            } else {
+                this.isShowSearch = true;
+            }
+        },1000),
+        hideSearchLayour(){
+            this.isShowSearch = false
         }
     },
     computed: {
@@ -333,6 +352,9 @@ header {
     border-color: #aaa !important;
     padding : 10px 5px;
     background-color: #45474b;
+    color:white;
+    font-weight: 600;
+    size:16px;
 }
 .input-search::placeholder {
     color : white;
@@ -341,8 +363,8 @@ header {
 .img-flag {
     width:4%;
 }
-.search-control {
-    position:relative;
+.btn-login-moblie {
+    display:none !important;
 }
 .icon-search {
     position:absolute;
@@ -368,5 +390,39 @@ header {
 }
 .action-menu-user:hover {
     color:rgb(3, 101, 182) !important;
+}
+@media only screen and (max-width: 1024px)
+{
+
+    .search-control {
+        width: 100% !important;
+    }
+}
+@media only screen and (max-width: 768px)
+{
+    .title-menu {
+        font-size:small;
+    }
+}
+@media only screen and (max-width: 424px)
+{
+    .search-control{
+        display:flex;
+        justify-content: end;
+    }
+    .input-search {
+        max-width: 80%;
+        
+    }
+    .input-search::placeholder {
+       font-size: 13px !important;
+        
+    }
+    .menu-bottom {
+        display:none;
+    }
+    .btn-login-moblie{
+        display:block !important;
+    }
 }
 </style>

@@ -116,6 +116,7 @@ export default ({
             
         },
         nextPageDetailProduct(){
+            this.$emit('hideCart')
             this.$router.push('/product/'+ this.slug)
         },
         removeProductInCart(){

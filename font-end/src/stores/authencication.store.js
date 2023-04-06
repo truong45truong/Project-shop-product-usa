@@ -99,6 +99,11 @@ export const auth = {
             console.log("logout");
             commit("logout");
           }
+        }).catch(error => {
+          console.log(error)
+          if(error.response.status == 401){
+            commit("logout");
+          }
         })
     },
 
