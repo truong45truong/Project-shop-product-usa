@@ -316,7 +316,7 @@ export default ({
         display:none;
     }
     .button-48 span {
-        left: -45%;
+        left: -12px;
     }
 }
 </style>

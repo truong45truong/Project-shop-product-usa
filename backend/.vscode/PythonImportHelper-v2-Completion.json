@@ -80,51 +80,11 @@
         "documentation": {}
     },
     {
-        "label": "path",
-        "importPath": "django.urls",
-        "description": "django.urls",
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
         "isExtraImport": true,
-        "detail": "django.urls",
-        "documentation": {}
-    },
-    {
-        "label": "path",
-        "importPath": "django.urls",
-        "description": "django.urls",
-        "isExtraImport": true,
-        "detail": "django.urls",
-        "documentation": {}
-    },
-    {
-        "label": "include",
-        "importPath": "django.urls",
-        "description": "django.urls",
-        "isExtraImport": true,
-        "detail": "django.urls",
-        "documentation": {}
-    },
-    {
-        "label": "path",
-        "importPath": "django.urls",
-        "description": "django.urls",
-        "isExtraImport": true,
-        "detail": "django.urls",
-        "documentation": {}
-    },
-    {
-        "label": "path",
-        "importPath": "django.urls",
-        "description": "django.urls",
-        "isExtraImport": true,
-        "detail": "django.urls",
-        "documentation": {}
-    },
-    {
-        "label": "path",
-        "importPath": "django.urls",
-        "description": "django.urls",
-        "isExtraImport": true,
-        "detail": "django.urls",
+        "detail": "django.apps",
         "documentation": {}
     },
     {
@@ -176,6 +136,94 @@
         "documentation": {}
     },
     {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "api_view",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "permission_classes",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "authentication_classes",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "action",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
         "label": "api_view",
         "importPath": "rest_framework.decorators",
         "description": "rest_framework.decorators",
@@ -360,11 +408,11 @@
         "documentation": {}
     },
     {
-        "label": "Response",
-        "importPath": "rest_framework.response",
-        "description": "rest_framework.response",
+        "label": "RefreshToken",
+        "importPath": "rest_framework_simplejwt.tokens",
+        "description": "rest_framework_simplejwt.tokens",
         "isExtraImport": true,
-        "detail": "rest_framework.response",
+        "detail": "rest_framework_simplejwt.tokens",
         "documentation": {}
     },
     {
@@ -421,6 +469,46 @@
         "description": "rest_framework.response",
         "isExtraImport": true,
         "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "serializers",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "viewsets",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
         "documentation": {}
     },
     {
@@ -714,6 +802,14 @@
         "documentation": {}
     },
     {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
         "label": "static",
         "importPath": "django.conf.urls.static",
         "description": "django.conf.urls.static",
@@ -834,6 +930,38 @@
         "documentation": {}
     },
     {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
         "label": "get_wsgi_application",
         "importPath": "django.core.wsgi",
         "description": "django.core.wsgi",
@@ -842,595 +970,613 @@
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "ModelSerializer",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "CharField",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "SerializerMethodField",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "ModelSerializer",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "ModelSerializer",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "ModelSerializer",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "SerializerMethodField",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "ListSerializer",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "UUIDField",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "ModelSerializer",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "SerializerMethodField",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "ListSerializer",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "UUIDField",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "ModelSerializer",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Blog",
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "blog_product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Comment",
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "blog_product.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Photo_blog",
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "blog_product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Heart",
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "blog_product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Blog",
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "blog_product.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Comment",
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "blog_product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Photo_blog",
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "blog_product.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Heart",
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "blog_product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "UserSerializer",
+        "importPath": "login.api.serializers",
+        "description": "login.api.serializers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.api.serializers",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "FileUploadParser",
+        "importPath": "rest_framework.parsers",
+        "description": "rest_framework.parsers",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.parsers",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "JWTAuthentication",
+        "importPath": "rest_framework_simplejwt.authentication",
+        "description": "rest_framework_simplejwt.authentication",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework_simplejwt.authentication",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "JWTAuthentication",
+        "importPath": "rest_framework_simplejwt.authentication",
+        "description": "rest_framework_simplejwt.authentication",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework_simplejwt.authentication",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "JWTAuthentication",
+        "importPath": "rest_framework_simplejwt.authentication",
+        "description": "rest_framework_simplejwt.authentication",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework_simplejwt.authentication",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "JWTAuthentication",
+        "importPath": "rest_framework_simplejwt.authentication",
+        "description": "rest_framework_simplejwt.authentication",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework_simplejwt.authentication",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "JWTAuthentication",
+        "importPath": "rest_framework_simplejwt.authentication",
+        "description": "rest_framework_simplejwt.authentication",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework_simplejwt.authentication",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "JWTAuthentication",
+        "importPath": "rest_framework_simplejwt.authentication",
+        "description": "rest_framework_simplejwt.authentication",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework_simplejwt.authentication",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "JWTAuthentication",
+        "importPath": "rest_framework_simplejwt.authentication",
+        "description": "rest_framework_simplejwt.authentication",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework_simplejwt.authentication",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.permissions",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.permissions",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.permissions",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.permissions",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.permissions",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "rest_framework.permissions",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Address",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "PhoneUser",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "PhoneUser",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Address",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Address",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "PhoneUser",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Address",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "PhoneUser",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "PhoneUser",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Address",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "User",
+        "importPath": "login.models",
+        "description": "login.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "login.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Product",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Product",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Product",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Product",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Product",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Price",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Photo_product",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Product",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Category",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Price",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Photo_product",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Product",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Category",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
         "documentation": {}
     },
     {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
+        "label": "Product",
+        "importPath": "product.models",
+        "description": "product.models",
         "isExtraImport": true,
-        "detail": "django.db",
+        "detail": "product.models",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "base64",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "base64",
+        "description": "base64",
+        "detail": "base64",
         "documentation": {}
     },
     {
@@ -1459,352 +1605,739 @@
         "documentation": {}
     },
     {
-        "label": "django.utils.timezone",
-        "kind": 6,
+        "label": "uuid4",
+        "importPath": "uuid",
+        "description": "uuid",
         "isExtraImport": true,
-        "importPath": "django.utils.timezone",
-        "description": "django.utils.timezone",
-        "detail": "django.utils.timezone",
+        "detail": "uuid",
         "documentation": {}
     },
     {
-        "label": "PKCS1_OAEP",
-        "importPath": "Crypto.Cipher",
-        "description": "Crypto.Cipher",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "Crypto.Cipher",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "RSA",
-        "importPath": "Crypto.PublicKey",
-        "description": "Crypto.PublicKey",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "Crypto.PublicKey",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "base64",
-        "kind": 6,
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "importPath": "base64",
-        "description": "base64",
-        "detail": "base64",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "rsa",
-        "kind": 6,
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "importPath": "rsa",
-        "description": "rsa",
-        "detail": "rsa",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "json",
-        "kind": 6,
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "warnings",
-        "kind": 6,
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "importPath": "warnings",
-        "description": "warnings",
-        "detail": "warnings",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "management",
-        "importPath": "django.core",
-        "description": "django.core",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "django.core",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "csrf_exempt",
-        "importPath": "django.views.decorators.csrf",
-        "description": "django.views.decorators.csrf",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "django.views.decorators.csrf",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "csrf_exempt",
-        "importPath": "django.views.decorators.csrf",
-        "description": "django.views.decorators.csrf",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "django.views.decorators.csrf",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "JWTAuthentication",
-        "importPath": "rest_framework_simplejwt.authentication",
-        "description": "rest_framework_simplejwt.authentication",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "rest_framework_simplejwt.authentication",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "JWTAuthentication",
-        "importPath": "rest_framework_simplejwt.authentication",
-        "description": "rest_framework_simplejwt.authentication",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "rest_framework_simplejwt.authentication",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "JWTAuthentication",
-        "importPath": "rest_framework_simplejwt.authentication",
-        "description": "rest_framework_simplejwt.authentication",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "rest_framework_simplejwt.authentication",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "JWTAuthentication",
-        "importPath": "rest_framework_simplejwt.authentication",
-        "description": "rest_framework_simplejwt.authentication",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "rest_framework_simplejwt.authentication",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "JWTAuthentication",
-        "importPath": "rest_framework_simplejwt.authentication",
-        "description": "rest_framework_simplejwt.authentication",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "rest_framework_simplejwt.authentication",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "JWTAuthentication",
-        "importPath": "rest_framework_simplejwt.authentication",
-        "description": "rest_framework_simplejwt.authentication",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "rest_framework_simplejwt.authentication",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "IsAuthenticated",
-        "importPath": "rest_framework.permissions",
-        "description": "rest_framework.permissions",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "rest_framework.permissions",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "IsAuthenticated",
-        "importPath": "rest_framework.permissions",
-        "description": "rest_framework.permissions",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "rest_framework.permissions",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "IsAuthenticated",
-        "importPath": "rest_framework.permissions",
-        "description": "rest_framework.permissions",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "rest_framework.permissions",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "IsAuthenticated",
-        "importPath": "rest_framework.permissions",
-        "description": "rest_framework.permissions",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "rest_framework.permissions",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "IsAuthenticated",
-        "importPath": "rest_framework.permissions",
-        "description": "rest_framework.permissions",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "rest_framework.permissions",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "Voucher",
-        "importPath": "flashSaleProduct.models",
-        "description": "flashSaleProduct.models",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "flashSaleProduct.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "Address",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "PhoneUser",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "PhoneUser",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "Address",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "Address",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "PhoneUser",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "Address",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "PhoneUser",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "PhoneUser",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "Address",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "User",
-        "importPath": "login.models",
-        "description": "login.models",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "login.models",
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
         "documentation": {}
     },
     {
@@ -1817,115 +2350,68 @@
         "documentation": {}
     },
     {
-        "label": "Product",
-        "importPath": "product.models",
-        "description": "product.models",
+        "label": "mptt.fields",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "product.models",
+        "importPath": "mptt.fields",
+        "description": "mptt.fields",
+        "detail": "mptt.fields",
         "documentation": {}
     },
     {
-        "label": "Product",
-        "importPath": "product.models",
-        "description": "product.models",
+        "label": "create",
+        "importPath": "venv",
+        "description": "venv",
         "isExtraImport": true,
-        "detail": "product.models",
+        "detail": "venv",
         "documentation": {}
     },
     {
-        "label": "Product",
-        "importPath": "product.models",
-        "description": "product.models",
+        "label": "MPTTModel",
+        "importPath": "mptt.models",
+        "description": "mptt.models",
         "isExtraImport": true,
-        "detail": "product.models",
+        "detail": "mptt.models",
         "documentation": {}
     },
     {
-        "label": "Price",
-        "importPath": "product.models",
-        "description": "product.models",
+        "label": "TreeForeignKey",
+        "importPath": "mptt.models",
+        "description": "mptt.models",
         "isExtraImport": true,
-        "detail": "product.models",
+        "detail": "mptt.models",
         "documentation": {}
     },
     {
-        "label": "Photo_product",
-        "importPath": "product.models",
-        "description": "product.models",
+        "label": "MPTTModel",
+        "importPath": "mptt.models",
+        "description": "mptt.models",
         "isExtraImport": true,
-        "detail": "product.models",
+        "detail": "mptt.models",
         "documentation": {}
     },
     {
-        "label": "Product",
-        "importPath": "product.models",
-        "description": "product.models",
+        "label": "TreeForeignKey",
+        "importPath": "mptt.models",
+        "description": "mptt.models",
         "isExtraImport": true,
-        "detail": "product.models",
+        "detail": "mptt.models",
         "documentation": {}
     },
     {
-        "label": "Category",
-        "importPath": "product.models",
-        "description": "product.models",
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
         "isExtraImport": true,
-        "detail": "product.models",
+        "detail": "PIL",
         "documentation": {}
     },
     {
-        "label": "Price",
-        "importPath": "product.models",
-        "description": "product.models",
+        "label": "BytesIO",
+        "importPath": "io",
+        "description": "io",
         "isExtraImport": true,
-        "detail": "product.models",
-        "documentation": {}
-    },
-    {
-        "label": "Photo_product",
-        "importPath": "product.models",
-        "description": "product.models",
-        "isExtraImport": true,
-        "detail": "product.models",
-        "documentation": {}
-    },
-    {
-        "label": "Product",
-        "importPath": "product.models",
-        "description": "product.models",
-        "isExtraImport": true,
-        "detail": "product.models",
-        "documentation": {}
-    },
-    {
-        "label": "Heart",
-        "importPath": "product.models",
-        "description": "product.models",
-        "isExtraImport": true,
-        "detail": "product.models",
-        "documentation": {}
-    },
-    {
-        "label": "Category",
-        "importPath": "product.models",
-        "description": "product.models",
-        "isExtraImport": true,
-        "detail": "product.models",
-        "documentation": {}
-    },
-    {
-        "label": "Product",
-        "importPath": "product.models",
-        "description": "product.models",
-        "isExtraImport": true,
-        "detail": "product.models",
-        "documentation": {}
-    },
-    {
-        "label": "Heart",
-        "importPath": "product.models",
-        "description": "product.models",
-        "isExtraImport": true,
-        "detail": "product.models",
+        "detail": "io",
         "documentation": {}
     },
     {
@@ -1998,6 +2484,22 @@
         "description": "django.test",
         "isExtraImport": true,
         "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
         "documentation": {}
     },
     {
@@ -2049,99 +2551,86 @@
         "documentation": {}
     },
     {
+        "label": "django.utils.timezone",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.utils.timezone",
+        "description": "django.utils.timezone",
+        "detail": "django.utils.timezone",
+        "documentation": {}
+    },
+    {
+        "label": "PKCS1_OAEP",
+        "importPath": "Crypto.Cipher",
+        "description": "Crypto.Cipher",
+        "isExtraImport": true,
+        "detail": "Crypto.Cipher",
+        "documentation": {}
+    },
+    {
+        "label": "RSA",
+        "importPath": "Crypto.PublicKey",
+        "description": "Crypto.PublicKey",
+        "isExtraImport": true,
+        "detail": "Crypto.PublicKey",
+        "documentation": {}
+    },
+    {
+        "label": "rsa",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "rsa",
+        "description": "rsa",
+        "detail": "rsa",
+        "documentation": {}
+    },
+    {
+        "label": "warnings",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "warnings",
+        "description": "warnings",
+        "detail": "warnings",
+        "documentation": {}
+    },
+    {
+        "label": "management",
+        "importPath": "django.core",
+        "description": "django.core",
+        "isExtraImport": true,
+        "detail": "django.core",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "Voucher",
+        "importPath": "flashSaleProduct.models",
+        "description": "flashSaleProduct.models",
+        "isExtraImport": true,
+        "detail": "flashSaleProduct.models",
+        "documentation": {}
+    },
+    {
         "label": "CSRFCheck",
         "importPath": "rest_framework.authentication",
         "description": "rest_framework.authentication",
         "isExtraImport": true,
         "detail": "rest_framework.authentication",
-        "documentation": {}
-    },
-    {
-        "label": "ModelSerializer",
-        "importPath": "rest_framework.serializers",
-        "description": "rest_framework.serializers",
-        "isExtraImport": true,
-        "detail": "rest_framework.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "ModelSerializer",
-        "importPath": "rest_framework.serializers",
-        "description": "rest_framework.serializers",
-        "isExtraImport": true,
-        "detail": "rest_framework.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "ModelSerializer",
-        "importPath": "rest_framework.serializers",
-        "description": "rest_framework.serializers",
-        "isExtraImport": true,
-        "detail": "rest_framework.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "SerializerMethodField",
-        "importPath": "rest_framework.serializers",
-        "description": "rest_framework.serializers",
-        "isExtraImport": true,
-        "detail": "rest_framework.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "ListSerializer",
-        "importPath": "rest_framework.serializers",
-        "description": "rest_framework.serializers",
-        "isExtraImport": true,
-        "detail": "rest_framework.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "UUIDField",
-        "importPath": "rest_framework.serializers",
-        "description": "rest_framework.serializers",
-        "isExtraImport": true,
-        "detail": "rest_framework.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "ModelSerializer",
-        "importPath": "rest_framework.serializers",
-        "description": "rest_framework.serializers",
-        "isExtraImport": true,
-        "detail": "rest_framework.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "SerializerMethodField",
-        "importPath": "rest_framework.serializers",
-        "description": "rest_framework.serializers",
-        "isExtraImport": true,
-        "detail": "rest_framework.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "ListSerializer",
-        "importPath": "rest_framework.serializers",
-        "description": "rest_framework.serializers",
-        "isExtraImport": true,
-        "detail": "rest_framework.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "UUIDField",
-        "importPath": "rest_framework.serializers",
-        "description": "rest_framework.serializers",
-        "isExtraImport": true,
-        "detail": "rest_framework.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "ModelSerializer",
-        "importPath": "rest_framework.serializers",
-        "description": "rest_framework.serializers",
-        "isExtraImport": true,
-        "detail": "rest_framework.serializers",
         "documentation": {}
     },
     {
@@ -2329,31 +2818,6 @@
         "description": "django.db.models",
         "isExtraImport": true,
         "detail": "django.db.models",
-        "documentation": {}
-    },
-    {
-        "label": "mptt.fields",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "mptt.fields",
-        "description": "mptt.fields",
-        "detail": "mptt.fields",
-        "documentation": {}
-    },
-    {
-        "label": "MPTTModel",
-        "importPath": "mptt.models",
-        "description": "mptt.models",
-        "isExtraImport": true,
-        "detail": "mptt.models",
-        "documentation": {}
-    },
-    {
-        "label": "TreeForeignKey",
-        "importPath": "mptt.models",
-        "description": "mptt.models",
-        "isExtraImport": true,
-        "detail": "mptt.models",
         "documentation": {}
     },
     {
@@ -2696,6 +3160,411 @@
         "description": "backend.wsgi",
         "peekOfCode": "application = get_wsgi_application()",
         "detail": "backend.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "handleRawQuery",
+        "kind": 2,
+        "importPath": "blog_product.api.data_processing",
+        "description": "blog_product.api.data_processing",
+        "peekOfCode": "def handleRawQuery(queryset):\n    order_dict = dict()\n    order_list = []\n    for i in queryset:\n        print(\"id\",i.id)\n        if i.id not in order_dict:\n            order_dict[i.id] = {\n                \"blog\" :{\n                    'id' : i.id,\n                    'title' : i.title ,",
+        "detail": "blog_product.api.data_processing",
+        "documentation": {}
+    },
+    {
+        "label": "HandleSqlRaw",
+        "kind": 6,
+        "importPath": "blog_product.api.query_raw",
+        "description": "blog_product.api.query_raw",
+        "peekOfCode": "class HandleSqlRaw:\n    def __init__(self,raw_query):\n        self.raw_query = raw_query\n    def getQuery( self):\n        return self.raw_query",
+        "detail": "blog_product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_SQL_GET_BLOG_OF_PRODUCT_WITH_USER",
+        "kind": 5,
+        "importPath": "blog_product.api.query_raw",
+        "description": "blog_product.api.query_raw",
+        "peekOfCode": "QUERY_SQL_GET_BLOG_OF_PRODUCT_WITH_USER = \"\"\"\n    SELECT \n        `blog_product_blog`.* ,`blog_product_blog`.`id`,\n        `blog_product_blog`.`content` ,`blog_product_blog`.`date_create` , \n        `blog_product_blog`.`user_id_id` , `blog_product_blog`.`title`,\n        `blog_product_comment`.`id` as 'comment_id',\n        `blog_product_comment`.`content` as 'comment_content',\n        `blog_product_comment`.`date_create` as 'comment_date_create',\n        `blog_product_comment`.`level` as 'comment_level',\n        `blog_product_comment`.`heart` as 'comment_heart',",
+        "detail": "blog_product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_SQL_GET_BLOG_OF_PRODUCT",
+        "kind": 5,
+        "importPath": "blog_product.api.query_raw",
+        "description": "blog_product.api.query_raw",
+        "peekOfCode": "QUERY_SQL_GET_BLOG_OF_PRODUCT = \"\"\"\n    SELECT \n        `blog_product_blog`.* ,`blog_product_blog`.`id`,\n        `blog_product_blog`.`content` ,`blog_product_blog`.`date_create` , \n        `blog_product_blog`.`user_id_id` , `blog_product_blog`.`title`,\n        `blog_product_comment`.`id` as 'comment_id',\n        `blog_product_comment`.`content` as 'comment_content',\n        `blog_product_comment`.`date_create` as 'comment_date_create',\n        `blog_product_comment`.`level` as 'comment_level',\n        `blog_product_comment`.`heart` as 'comment_heart',",
+        "detail": "blog_product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_SQL_GET_COMMET_CHILD",
+        "kind": 5,
+        "importPath": "blog_product.api.query_raw",
+        "description": "blog_product.api.query_raw",
+        "peekOfCode": "QUERY_SQL_GET_COMMET_CHILD = \"\"\"\nSELECT \n\t`blog_product_comment`.`id`,\n    `blog_product_comment`.`content`,\n    `blog_product_comment`.`date_create`,\n    `blog_product_comment`.`level`,\n    `blog_product_comment`.`user_profile`,\n    `blog_product_comment`.`user_email`,\n    `blog_product_comment`.`parent_id`,\n    0 as 'status_heart_comment',",
+        "detail": "blog_product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "CommentSerializer",
+        "kind": 6,
+        "importPath": "blog_product.api.serializers",
+        "description": "blog_product.api.serializers",
+        "peekOfCode": "class CommentSerializer(ModelSerializer):\n    user_id =  SerializerMethodField()\n    def get_user_id(self, obj):\n        user = {\n            'email' : obj.user_id.email,\n            'username' : obj.user_id.username,\n            'photo' :\"http://127.0.0.1:8000/\" + str(obj.user_id.photo)\n        }\n        return user\n    class Meta:",
+        "detail": "blog_product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "CommentRawSerializer",
+        "kind": 6,
+        "importPath": "blog_product.api.serializers",
+        "description": "blog_product.api.serializers",
+        "peekOfCode": "class CommentRawSerializer(serializers.Serializer):\n    id = serializers.IntegerField()\n    content = serializers.CharField()\n    date_create = serializers.DateTimeField()\n    level = serializers.IntegerField()\n    parent_id = serializers.IntegerField()\n    user_profile = serializers.CharField()\n    number_heart = serializers.IntegerField()\n    user_email =serializers.CharField()\n    count_comment_child = serializers.IntegerField()",
+        "detail": "blog_product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "PhotoBlogSerializer",
+        "kind": 6,
+        "importPath": "blog_product.api.serializers",
+        "description": "blog_product.api.serializers",
+        "peekOfCode": "class PhotoBlogSerializer(ModelSerializer):\n    class Meta:\n        model = Photo_blog\n        fields = ['name' , 'file' , 'type']\n# ---------------------------------------------------------------------------- #\n#                                Blog serializer                               #\n# ---------------------------------------------------------------------------- #\nclass BlogSerializer(ModelSerializer) :\n    # ----------------------------------- attri ---------------------------------- #\n    comments    = CommentSerializer(many   = True)",
+        "detail": "blog_product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "BlogSerializer",
+        "kind": 6,
+        "importPath": "blog_product.api.serializers",
+        "description": "blog_product.api.serializers",
+        "peekOfCode": "class BlogSerializer(ModelSerializer) :\n    # ----------------------------------- attri ---------------------------------- #\n    comments    = CommentSerializer(many   = True)\n    photo_blogs = PhotoBlogSerializer(many = True)\n    user_id =  SerializerMethodField()\n    def get_user_id(self, obj):\n        user = {\n            'email' : obj.user_id.email,\n            'username' : obj.user_id.username,\n            'photo' : \"http://127.0.0.1:8000/\" + str(obj.user_id.photo)",
+        "detail": "blog_product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "CommentViewSerializer",
+        "kind": 6,
+        "importPath": "blog_product.api.serializers",
+        "description": "blog_product.api.serializers",
+        "peekOfCode": "class CommentViewSerializer(ModelSerializer):\n    class Meta:\n        model = Comment\n        fields = '__all__'\nclass BlogRawSerializer(serializers.Serializer):\n    id = serializers.IntegerField()\n    content = serializers.CharField()\n    date_created =  serializers.DateTimeField()\n    user_id_id =  serializers.CharField()\n    number_heart = serializers.IntegerField()",
+        "detail": "blog_product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "BlogRawSerializer",
+        "kind": 6,
+        "importPath": "blog_product.api.serializers",
+        "description": "blog_product.api.serializers",
+        "peekOfCode": "class BlogRawSerializer(serializers.Serializer):\n    id = serializers.IntegerField()\n    content = serializers.CharField()\n    date_created =  serializers.DateTimeField()\n    user_id_id =  serializers.CharField()\n    number_heart = serializers.IntegerField()\n    number_comment = serializers.IntegerField()\n    status_heart = serializers.BooleanField()\nclass BlogCommentSeializer(serializers.Serializer):\n    comments    = CommentRawSerializer(many   = True)",
+        "detail": "blog_product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "BlogCommentSeializer",
+        "kind": 6,
+        "importPath": "blog_product.api.serializers",
+        "description": "blog_product.api.serializers",
+        "peekOfCode": "class BlogCommentSeializer(serializers.Serializer):\n    comments    = CommentRawSerializer(many   = True)\n    blog = BlogRawSerializer(many=False)\n    img = CharField()\nclass HeartSerializer(ModelSerializer):\n    class Meta:\n        model = Heart\n        fields =['id','user_id']",
+        "detail": "blog_product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "HeartSerializer",
+        "kind": 6,
+        "importPath": "blog_product.api.serializers",
+        "description": "blog_product.api.serializers",
+        "peekOfCode": "class HeartSerializer(ModelSerializer):\n    class Meta:\n        model = Heart\n        fields =['id','user_id']",
+        "detail": "blog_product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "blog",
+        "kind": 5,
+        "importPath": "blog_product.api.urls",
+        "description": "blog_product.api.urls",
+        "peekOfCode": "blog = BlogViewSet.as_view({\n    'get' : 'get_blog',\n    'post': 'post_blog'\n})\ncomment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'",
+        "detail": "blog_product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "comment",
+        "kind": 5,
+        "importPath": "blog_product.api.urls",
+        "description": "blog_product.api.urls",
+        "peekOfCode": "comment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})",
+        "detail": "blog_product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "heart",
+        "kind": 5,
+        "importPath": "blog_product.api.urls",
+        "description": "blog_product.api.urls",
+        "peekOfCode": "heart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})\npost_heart_comment = HeartViewSet.as_view({\n    'post' : 'post_heart_comment'\n})\nurlpatterns = [",
+        "detail": "blog_product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "heart_blog",
+        "kind": 5,
+        "importPath": "blog_product.api.urls",
+        "description": "blog_product.api.urls",
+        "peekOfCode": "heart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})\npost_heart_comment = HeartViewSet.as_view({\n    'post' : 'post_heart_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),",
+        "detail": "blog_product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "post_heart_comment",
+        "kind": 5,
+        "importPath": "blog_product.api.urls",
+        "description": "blog_product.api.urls",
+        "peekOfCode": "post_heart_comment = HeartViewSet.as_view({\n    'post' : 'post_heart_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/',comment, name = 'comment_logs'),\n    path('comment/heart/',post_heart_comment, name = 'comment_heart'),\n    path('comment/child/',get_comment_child, name = 'comment_child'),",
+        "detail": "blog_product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "blog_product.api.urls",
+        "description": "blog_product.api.urls",
+        "peekOfCode": "urlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/',comment, name = 'comment_logs'),\n    path('comment/heart/',post_heart_comment, name = 'comment_heart'),\n    path('comment/child/',get_comment_child, name = 'comment_child'),\n]",
+        "detail": "blog_product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "BlogViewSe",
+        "kind": 6,
+        "importPath": "blog_product.api.views",
+        "description": "blog_product.api.views",
+        "peekOfCode": "class BlogViewSet (viewsets.ModelViewSet):\n    queryset = Blog.objects.all()\n    serializer_class = BlogSerializer\n    # ---------------------------------------------------------------------------- #\n    #                                   POST BLOG                                  #\n    # ---------------------------------------------------------------------------- #\n    @action(method = ['POST'], detail = False, url_path = 'blog', url_name = 'post_blog')\n    def post_blog(self , request, *arg, **kwargs):\n        # ----------------------- handle file is video or image ---------------------- #\n        list_name_file_blog = []",
+        "detail": "blog_product.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "CommentViewSet",
+        "kind": 6,
+        "importPath": "blog_product.api.views",
+        "description": "blog_product.api.views",
+        "peekOfCode": "class CommentViewSet(viewsets.ModelViewSet):\n    queryset = Comment.objects.all()\n    serializer_class = CommentViewSerializer\n    @action(method = ['POST'], detail = False, url_path = 'comment', url_name = 'post_comment')\n    def post_comment(self , request, *arg, **kwargs):\n        response = Response()\n        try:\n            data_request = json.loads(request.body)\n            jwtToken = request.COOKIES.get('refresh_token')\n            refresh_token = RefreshToken(jwtToken)",
+        "detail": "blog_product.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "HeartViewSet",
+        "kind": 6,
+        "importPath": "blog_product.api.views",
+        "description": "blog_product.api.views",
+        "peekOfCode": "class HeartViewSet(viewsets.ModelViewSet):\n    queryset = Heart.objects.all()\n    serializer_class = HeartSerializer\n    authentication_classes = [JWTAuthentication]\n    permission_classes = [IsAuthenticated]\n    @action(method=[\"POST\"],detail=False,url_path=\"heart\",url_name=\"post_heart\")\n    def post_heart_product(self, request,*args, **kwargs):\n        data_request= json.loads(request.body.decode('utf-8'))\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)",
+        "detail": "blog_product.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "get_blog_product",
+        "kind": 2,
+        "importPath": "blog_product.api.views",
+        "description": "blog_product.api.views",
+        "peekOfCode": "def get_blog_product(request):\n    try:\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)\n        decoded_token = refresh_token.payload\n        user_get = User.objects.get(id = decoded_token['user_id'])\n        sqlRaw =  query_raw.QUERY_SQL_GET_BLOG_OF_PRODUCT_WITH_USER\n    except:\n        user_get = False\n        sqlRaw =  query_raw.QUERY_SQL_GET_BLOG_OF_PRODUCT",
+        "detail": "blog_product.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "get_comment_child",
+        "kind": 2,
+        "importPath": "blog_product.api.views",
+        "description": "blog_product.api.views",
+        "peekOfCode": "def get_comment_child(request):\n        response = Response()\n        rawSql = query_raw.QUERY_SQL_GET_COMMET_CHILD\n        try:\n            comment_id = request.GET['id']\n            handleRawSql = HandleSqlRaw(rawSql)\n            if comment_id != False:\n                parent = Comment.objects.get(id =comment_id )\n                queryset = Comment.objects.raw(handleRawSql.getQuery(),[parent.id])\n                print(queryset)",
+        "detail": "blog_product.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "path_upload_image",
+        "kind": 5,
+        "importPath": "blog_product.api.views",
+        "description": "blog_product.api.views",
+        "peekOfCode": "path_upload_image = str(settings.BASE_DIR)+\"/media/photos\"\npath_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass BlogViewSet (viewsets.ModelViewSet):\n    queryset = Blog.objects.all()\n    serializer_class = BlogSerializer\n    # ---------------------------------------------------------------------------- #\n    #                                   POST BLOG                                  #\n    # ---------------------------------------------------------------------------- #\n    @action(method = ['POST'], detail = False, url_path = 'blog', url_name = 'post_blog')\n    def post_blog(self , request, *arg, **kwargs):",
+        "detail": "blog_product.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "path_upload_video",
+        "kind": 5,
+        "importPath": "blog_product.api.views",
+        "description": "blog_product.api.views",
+        "peekOfCode": "path_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass BlogViewSet (viewsets.ModelViewSet):\n    queryset = Blog.objects.all()\n    serializer_class = BlogSerializer\n    # ---------------------------------------------------------------------------- #\n    #                                   POST BLOG                                  #\n    # ---------------------------------------------------------------------------- #\n    @action(method = ['POST'], detail = False, url_path = 'blog', url_name = 'post_blog')\n    def post_blog(self , request, *arg, **kwargs):\n        # ----------------------- handle file is video or image ---------------------- #",
+        "detail": "blog_product.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "blog_product.migrations.0001_initial",
+        "description": "blog_product.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Blog',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),",
+        "detail": "blog_product.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "blog_product.migrations.0002_auto_20230408_0846",
+        "description": "blog_product.migrations.0002_auto_20230408_0846",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('product', '0005_delete_heart'),\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n        ('blog_product', '0001_initial'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='blog',\n            name='product_id',",
+        "detail": "blog_product.migrations.0002_auto_20230408_0846",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "blog_product.migrations.0003_comment_user_profile",
+        "description": "blog_product.migrations.0003_comment_user_profile",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0002_auto_20230408_0846'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='comment',\n            name='user_profile',\n            field=models.TextField(default='media/photos/user/images-12.jpeg'),\n            preserve_default=False,",
+        "detail": "blog_product.migrations.0003_comment_user_profile",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "blog_product.migrations.0004_comment_user_email",
+        "description": "blog_product.migrations.0004_comment_user_email",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0003_comment_user_profile'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='comment',\n            name='user_email',\n            field=models.CharField(default='cart1@gmail.com', max_length=200),\n            preserve_default=False,",
+        "detail": "blog_product.migrations.0004_comment_user_email",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "blog_product.migrations.0005_remove_comment_parent",
+        "description": "blog_product.migrations.0005_remove_comment_parent",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0004_comment_user_email'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='comment',\n            name='parent',\n        ),\n    ]",
+        "detail": "blog_product.migrations.0005_remove_comment_parent",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "blog_product.migrations.0006_comment_parent",
+        "description": "blog_product.migrations.0006_comment_parent",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0005_remove_comment_parent'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='comment',\n            name='parent',\n            field=mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='comment_children', to='blog_product.comment'),\n        ),",
+        "detail": "blog_product.migrations.0006_comment_parent",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "blog_product.migrations.0007_alter_comment_parent",
+        "description": "blog_product.migrations.0007_alter_comment_parent",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0006_comment_parent'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='comment',\n            name='parent',\n            field=models.IntegerField(null=True),\n        ),",
+        "detail": "blog_product.migrations.0007_alter_comment_parent",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "blog_product.migrations.0008_alter_comment_parent",
+        "description": "blog_product.migrations.0008_alter_comment_parent",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0007_alter_comment_parent'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='comment',\n            name='parent',\n            field=mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='blog_product.comment'),\n        ),",
+        "detail": "blog_product.migrations.0008_alter_comment_parent",
+        "documentation": {}
+    },
+    {
+        "label": "BlogAdmin",
+        "kind": 6,
+        "importPath": "blog_product.admin",
+        "description": "blog_product.admin",
+        "peekOfCode": "class BlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'title')\nclass CommentAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'content' ,'blog_id' , 'user_id','level')\nclass PhotoBlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name' , 'file' ,'blog_id')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)",
+        "detail": "blog_product.admin",
+        "documentation": {}
+    },
+    {
+        "label": "CommentAdmin",
+        "kind": 6,
+        "importPath": "blog_product.admin",
+        "description": "blog_product.admin",
+        "peekOfCode": "class CommentAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'content' ,'blog_id' , 'user_id','level')\nclass PhotoBlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name' , 'file' ,'blog_id')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)\nadmin.site.register(Photo_blog,PhotoBlogAdmin)\nadmin.site.register(Heart,HeartAdmin)",
+        "detail": "blog_product.admin",
+        "documentation": {}
+    },
+    {
+        "label": "PhotoBlogAdmin",
+        "kind": 6,
+        "importPath": "blog_product.admin",
+        "description": "blog_product.admin",
+        "peekOfCode": "class PhotoBlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name' , 'file' ,'blog_id')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)\nadmin.site.register(Photo_blog,PhotoBlogAdmin)\nadmin.site.register(Heart,HeartAdmin)",
+        "detail": "blog_product.admin",
+        "documentation": {}
+    },
+    {
+        "label": "HeartAdmin",
+        "kind": 6,
+        "importPath": "blog_product.admin",
+        "description": "blog_product.admin",
+        "peekOfCode": "class HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)\nadmin.site.register(Photo_blog,PhotoBlogAdmin)\nadmin.site.register(Heart,HeartAdmin)",
+        "detail": "blog_product.admin",
+        "documentation": {}
+    },
+    {
+        "label": "BlogProductConfig",
+        "kind": 6,
+        "importPath": "blog_product.apps",
+        "description": "blog_product.apps",
+        "peekOfCode": "class BlogProductConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'blog_product'",
+        "detail": "blog_product.apps",
+        "documentation": {}
+    },
+    {
+        "label": "Blog",
+        "kind": 6,
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
+        "peekOfCode": "class Blog(models.Model):\n    id=uuid4()\n    title = models.CharField(max_length=200, blank=True, null=True)\n    content = models.TextField()\n    user_id = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    product_id = models.ForeignKey(Product, related_name='products', null= True, on_delete=models.CASCADE)\n    def __str__(self):\n        return str(self.id)\n    def __unicode__(self):",
+        "detail": "blog_product.models",
+        "documentation": {}
+    },
+    {
+        "label": "Photo_blog",
+        "kind": 6,
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
+        "peekOfCode": "class Photo_blog(models.Model):\n    id=uuid4()\n    name = models.CharField(max_length=200, blank=True, null=True)\n    file = models.ImageField( upload_to ='media/photos/blogs', height_field=None, width_field=None, max_length=1000)\n    blog_id = models.ForeignKey(Blog, related_name='photo_blogs', on_delete=models.CASCADE)\n    type = models.BooleanField()\n    def __str__(self):\n        return str(self.id)\n    def __unicode__(self):\n        return str(self.id)",
+        "detail": "blog_product.models",
+        "documentation": {}
+    },
+    {
+        "label": "Comment",
+        "kind": 6,
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
+        "peekOfCode": "class Comment(MPTTModel):\n    id = uuid4()\n    parent = TreeForeignKey('self', on_delete = models.CASCADE, null = True, blank = True, related_name = 'children')\n    content = models.TextField()\n    heart = models.IntegerField()\n    blog_id = models.ForeignKey(Blog, related_name='comments', on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    user_id = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)\n    user_profile = models.TextField()\n    user_email = models.CharField(max_length=200)",
+        "detail": "blog_product.models",
+        "documentation": {}
+    },
+    {
+        "label": "Heart",
+        "kind": 6,
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
+        "peekOfCode": "class Heart( models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    type = models.IntegerField()\n    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')\n    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')\n    blog_id = models.ForeignKey(Blog, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')\n    comment_id = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')",
+        "detail": "blog_product.models",
+        "documentation": {}
+    },
+    {
+        "label": "path_upload_image",
+        "kind": 5,
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
+        "peekOfCode": "path_upload_image = str(settings.BASE_DIR)+\"/media/photos\"\npath_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\n# Create your models here.\nclass Blog(models.Model):\n    id=uuid4()\n    title = models.CharField(max_length=200, blank=True, null=True)\n    content = models.TextField()\n    user_id = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    product_id = models.ForeignKey(Product, related_name='products', null= True, on_delete=models.CASCADE)",
+        "detail": "blog_product.models",
+        "documentation": {}
+    },
+    {
+        "label": "path_upload_video",
+        "kind": 5,
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
+        "peekOfCode": "path_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\n# Create your models here.\nclass Blog(models.Model):\n    id=uuid4()\n    title = models.CharField(max_length=200, blank=True, null=True)\n    content = models.TextField()\n    user_id = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    product_id = models.ForeignKey(Product, related_name='products', null= True, on_delete=models.CASCADE)\n    def __str__(self):",
+        "detail": "blog_product.models",
         "documentation": {}
     },
     {
@@ -3783,7 +4652,7 @@
         "kind": 5,
         "importPath": "product.api.query_raw",
         "description": "product.api.query_raw",
-        "peekOfCode": "QUERY_SQL_GET_PRODUCT_DETAIL_NOT_USER = \"\"\"\n    SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_product`.`description`, `product_photo_product`.`data`, \n            `product_price`.`price`, `product_price`.`sale`, \n            `product_product`.`description`,\n            (\n                SELECT COUNT(U0.`id`) AS `heart_count` \n                FROM `product_heart` U0 \n                WHERE U0.`product_id_id` = `product_product`.`id`",
+        "peekOfCode": "QUERY_SQL_GET_PRODUCT_DETAIL_NOT_USER = \"\"\"\n    SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_product`.`description`, `product_photo_product`.`data`, \n            `product_price`.`price`, `product_price`.`sale`, \n            `product_product`.`description`,\n            (\n                SELECT COUNT(U0.`id`) AS `heart_count` \n                FROM `blog_product_heart` U0 \n                WHERE U0.`product_id_id` = `product_product`.`id`",
         "detail": "product.api.query_raw",
         "documentation": {}
     },
@@ -3792,7 +4661,7 @@
         "kind": 5,
         "importPath": "product.api.query_raw",
         "description": "product.api.query_raw",
-        "peekOfCode": "QUERY_SQL_GET_ALL_PRODUCT_FOR_USER = \"\"\"\n    SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_product`.`description`, `product_photo_product`.`data`, \n            `product_price`.`price`, `product_price`.`sale`, \n            `product_product`.`description`,\n            EXISTS\n                (\n                    SELECT \n                        (1) AS `a` FROM `product_heart` U0 ",
+        "peekOfCode": "QUERY_SQL_GET_ALL_PRODUCT_FOR_USER = \"\"\"\n    SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_product`.`description`, `product_photo_product`.`data`, \n            `product_price`.`price`, `product_price`.`sale`, \n            `product_product`.`description`,\n            EXISTS\n                (\n                    SELECT \n                        (1) AS `a` FROM `blog_product_heart` U0 ",
         "detail": "product.api.query_raw",
         "documentation": {}
     },
@@ -3972,16 +4841,7 @@
         "kind": 6,
         "importPath": "product.api.serializers",
         "description": "product.api.serializers",
-        "peekOfCode": "class PhotoProductSerializer(ModelSerializer):\n    class Meta:\n        model = Photo_product\n        fields = ['id']\nclass HeartSerializer(ModelSerializer):\n    class Meta:\n        model = Heart\n        fields =['id','user_id']\nclass ProductSerializer(serializers.Serializer):\n    data = serializers.CharField()",
-        "detail": "product.api.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "HeartSerializer",
-        "kind": 6,
-        "importPath": "product.api.serializers",
-        "description": "product.api.serializers",
-        "peekOfCode": "class HeartSerializer(ModelSerializer):\n    class Meta:\n        model = Heart\n        fields =['id','user_id']\nclass ProductSerializer(serializers.Serializer):\n    data = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()",
+        "peekOfCode": "class PhotoProductSerializer(ModelSerializer):\n    class Meta:\n        model = Photo_product\n        fields = ['id']\nclass ProductSerializer(serializers.Serializer):\n    data = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()",
         "detail": "product.api.serializers",
         "documentation": {}
     },
@@ -4062,7 +4922,7 @@
         "kind": 5,
         "importPath": "product.api.urls",
         "description": "product.api.urls",
-        "peekOfCode": "search_product_category = Productviewset.as_view({\n    'get' : 'search_product_category',\n    #'post' : 'post_product'\n})\nproduct_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart'",
+        "peekOfCode": "search_product_category = Productviewset.as_view({\n    'get' : 'search_product_category',\n    #'post' : 'post_product'\n})\nproduct_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'",
         "detail": "product.api.urls",
         "documentation": {}
     },
@@ -4071,16 +4931,7 @@
         "kind": 5,
         "importPath": "product.api.urls",
         "description": "product.api.urls",
-        "peekOfCode": "product_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart'\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})",
-        "detail": "product.api.urls",
-        "documentation": {}
-    },
-    {
-        "label": "heart",
-        "kind": 5,
-        "importPath": "product.api.urls",
-        "description": "product.api.urls",
-        "peekOfCode": "heart = HeartViewSet.as_view({\n    'post' : 'post_heart'\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [",
+        "peekOfCode": "product_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #",
         "detail": "product.api.urls",
         "documentation": {}
     },
@@ -4098,7 +4949,7 @@
         "kind": 5,
         "importPath": "product.api.urls",
         "description": "product.api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('category/',category, name = \"get_category\"), # get categories\n    path('category-tree/',category_tree, name = \"category_tree\"), # get categories  \n    path('product/',product,name=\"get_product\"), # get all products or product with product_slug\n    path('product/search/',search_product,name=\"search_product\"),\n    path('product/search-product-category/',search_product_category,name=\"search_product_category\"),\n    path('product-category/',product_catogory,name=\"get_product_category\"),# get all products or product with category_slug\n    path('heart/post/' , heart , name = \"post_heart\"), # like or dislike product\n    path('product-heart/',product_heart , name = \"get_product_heart\") # get product liked\n]",
+        "peekOfCode": "urlpatterns = [\n    path('category/',category, name = \"get_category\"), # get categories\n    path('category-tree/',category_tree, name = \"category_tree\"), # get categories  \n    path('product/',product,name=\"get_product\"), # get all products or product with product_slug\n    path('product/search/',search_product,name=\"search_product\"),\n    path('product/search-product-category/',search_product_category,name=\"search_product_category\"),\n    path('product-category/',product_catogory,name=\"get_product_category\"),# get all products or product with category_slug\n    path('product-heart/',product_heart , name = \"get_product_heart\") # get product liked\n]",
         "detail": "product.api.urls",
         "documentation": {}
     },
@@ -4116,7 +4967,7 @@
         "kind": 6,
         "importPath": "product.api.views",
         "description": "product.api.views",
-        "peekOfCode": "class ProductHeartViewSet(viewsets.ViewSet):\n    serializer_class = HeartSerializer\n    authentication_classes = [JWTAuthentication]\n    permission_classes = [IsAuthenticated]\n    @action(method=['GET'], detail = False , url_name= 'product_heart' , url_path='product_heart')\n    def get_product_heart(self , request , *args, **kwargs):\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)\n        decoded_token = refresh_token.payload\n        try:",
+        "peekOfCode": "class ProductHeartViewSet(viewsets.ViewSet):\n    serializer_class = ProductHeartSerializer\n    authentication_classes = [JWTAuthentication]\n    permission_classes = [IsAuthenticated]\n    @action(method=['GET'], detail = False , url_name= 'product_heart' , url_path='product_heart')\n    def get_product_heart(self , request , *args, **kwargs):\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)\n        decoded_token = refresh_token.payload\n        try:",
         "detail": "product.api.views",
         "documentation": {}
     },
@@ -4126,15 +4977,6 @@
         "importPath": "product.api.views",
         "description": "product.api.views",
         "peekOfCode": "class Productviewset(viewsets.ViewSet):\n    authentication_classes = []\n    permission_classes = []\n    @action(method=[\"GET\"],detail=False,url_path=\"search_product_category\",url_name=\"search_product_category\")\n    def search_product_category(self, request,*args, **kwargs):\n        rawQuerySql = query_raw.QUERY_SQL_SEARCH_ALL_PRODUCT\n        rawQuerySqlSearchCategory = query_raw.QUERY_SEARCH_PRODUCT_IN_CATEGORY\n        response = Response()\n        try:\n            filter_sort = json.loads(request.GET['filter_sort'])",
-        "detail": "product.api.views",
-        "documentation": {}
-    },
-    {
-        "label": "HeartViewSet",
-        "kind": 6,
-        "importPath": "product.api.views",
-        "description": "product.api.views",
-        "peekOfCode": "class HeartViewSet(viewsets.ModelViewSet):\n    queryset = Heart.objects.all()\n    serializer_class = HeartSerializer\n    authentication_classes = [JWTAuthentication]\n    permission_classes = [IsAuthenticated]\n    @action(method=[\"POST\"],detail=False,url_path=\"heart\",url_name=\"post_heart\")\n    def post_heart(self, request,*args, **kwargs):\n        data_request= json.loads(request.body.decode('utf-8'))\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)",
         "detail": "product.api.views",
         "documentation": {}
     },
@@ -4166,11 +5008,29 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "product.migrations.0004_auto_20230407_1451",
+        "description": "product.migrations.0004_auto_20230407_1451",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0001_initial'),\n        ('product', '0003_heart'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='heart',\n            name='blog_id',\n            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='hearts', to='blog_product.blog'),",
+        "detail": "product.migrations.0004_auto_20230407_1451",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "product.migrations.0005_delete_heart",
+        "description": "product.migrations.0005_delete_heart",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('product', '0004_auto_20230407_1451'),\n    ]\n    operations = [\n        migrations.DeleteModel(\n            name='Heart',\n        ),\n    ]",
+        "detail": "product.migrations.0005_delete_heart",
+        "documentation": {}
+    },
+    {
         "label": "ProductAdmin",
         "kind": 6,
         "importPath": "product.admin",
         "description": "product.admin",
-        "peekOfCode": "class ProductAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name','slug')\nclass PriceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id' , 'price')\nclass PhotoProduceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id')\nclass CategoryAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'name')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')",
+        "peekOfCode": "class ProductAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name','slug')\nclass PriceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id' , 'price')\nclass PhotoProduceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id')\nclass CategoryAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'name')\nadmin.site.register(Product,ProductAdmin)\nadmin.site.register(Category,CategoryAdmin)",
         "detail": "product.admin",
         "documentation": {}
     },
@@ -4179,7 +5039,7 @@
         "kind": 6,
         "importPath": "product.admin",
         "description": "product.admin",
-        "peekOfCode": "class PriceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id' , 'price')\nclass PhotoProduceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id')\nclass CategoryAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'name')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Product,ProductAdmin)\nadmin.site.register(Category,CategoryAdmin)",
+        "peekOfCode": "class PriceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id' , 'price')\nclass PhotoProduceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id')\nclass CategoryAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'name')\nadmin.site.register(Product,ProductAdmin)\nadmin.site.register(Category,CategoryAdmin)\nadmin.site.register(Price,PriceAdmin)\nadmin.site.register(Photo_product,PhotoProduceAdmin)",
         "detail": "product.admin",
         "documentation": {}
     },
@@ -4188,7 +5048,7 @@
         "kind": 6,
         "importPath": "product.admin",
         "description": "product.admin",
-        "peekOfCode": "class PhotoProduceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id')\nclass CategoryAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'name')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Product,ProductAdmin)\nadmin.site.register(Category,CategoryAdmin)\nadmin.site.register(Price,PriceAdmin)\nadmin.site.register(Photo_product,PhotoProduceAdmin)",
+        "peekOfCode": "class PhotoProduceAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'product_id')\nclass CategoryAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'name')\nadmin.site.register(Product,ProductAdmin)\nadmin.site.register(Category,CategoryAdmin)\nadmin.site.register(Price,PriceAdmin)\nadmin.site.register(Photo_product,PhotoProduceAdmin)",
         "detail": "product.admin",
         "documentation": {}
     },
@@ -4197,16 +5057,7 @@
         "kind": 6,
         "importPath": "product.admin",
         "description": "product.admin",
-        "peekOfCode": "class CategoryAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'name')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Product,ProductAdmin)\nadmin.site.register(Category,CategoryAdmin)\nadmin.site.register(Price,PriceAdmin)\nadmin.site.register(Photo_product,PhotoProduceAdmin)\nadmin.site.register(Heart,HeartAdmin)\n# Register your models here.",
-        "detail": "product.admin",
-        "documentation": {}
-    },
-    {
-        "label": "HeartAdmin",
-        "kind": 6,
-        "importPath": "product.admin",
-        "description": "product.admin",
-        "peekOfCode": "class HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Product,ProductAdmin)\nadmin.site.register(Category,CategoryAdmin)\nadmin.site.register(Price,PriceAdmin)\nadmin.site.register(Photo_product,PhotoProduceAdmin)\nadmin.site.register(Heart,HeartAdmin)\n# Register your models here.",
+        "peekOfCode": "class CategoryAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'name')\nadmin.site.register(Product,ProductAdmin)\nadmin.site.register(Category,CategoryAdmin)\nadmin.site.register(Price,PriceAdmin)\nadmin.site.register(Photo_product,PhotoProduceAdmin)",
         "detail": "product.admin",
         "documentation": {}
     },
@@ -4224,7 +5075,7 @@
         "kind": 6,
         "importPath": "product.models",
         "description": "product.models",
-        "peekOfCode": "class Category(MPTTModel):\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    slug = models.CharField(null=False,max_length=50,unique=True)\n    name=models.CharField(max_length=50)\n    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')\n    def __str__(self):\n        return self.name\nclass Product(models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    slug = models.CharField(null=False,max_length=50)",
+        "peekOfCode": "class Category(MPTTModel):\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    slug = models.CharField(null=False,max_length=50,unique=True)\n    name=models.CharField(max_length=50)\n    parent = TreeForeignKey('self', on_delete = models.CASCADE, null = True, blank = True, related_name = 'children')\n    def __str__(self):\n        return self.name\nclass Product(models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    slug = models.CharField(null=False,max_length=50)",
         "detail": "product.models",
         "documentation": {}
     },
@@ -4251,16 +5102,7 @@
         "kind": 6,
         "importPath": "product.models",
         "description": "product.models",
-        "peekOfCode": "class Photo_product(models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    data=models.ImageField(upload_to='media/photos/')\n    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True,blank=True,related_name='photo_products')\n    fields = ['data']\nclass Heart( models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')\n    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')",
-        "detail": "product.models",
-        "documentation": {}
-    },
-    {
-        "label": "Heart",
-        "kind": 6,
-        "importPath": "product.models",
-        "description": "product.models",
-        "peekOfCode": "class Heart( models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')\n    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')",
+        "peekOfCode": "class Photo_product(models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    data=models.ImageField(upload_to='media/photos/')\n    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True,blank=True,related_name='photo_products')\n    fields = ['data']",
         "detail": "product.models",
         "documentation": {}
     },

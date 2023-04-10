@@ -27,16 +27,17 @@
             </div>
         </div>
         <div class="container">
-            <div class="row h-75 layout-list-product-market scroll-list-product">
+            <div class="row h-75 layout-list-product-market">
                 <div v-if="toMarket & isShowLoginStore == false" v-for="item in listProductItem"  class="col-lg-3 col-sm-4 col-6 mt-0 my-3 h-sm-25 item-cart-market-grid px-2">
                     <product-item :slug="item.slug" :photo="item.data" :name="item.name" class="layout-product-item bg-white"
                             :price="item.price" :numberProduct=3 :status="item.status_heart" :hearts="item.count_heart"
                         />
                 </div>
-                <Carousel v-if="!toMarket || isShowLoginStore == true " :settings="settings" :breakpoints="breakpoints">
-                    <Slide v-for="item in listProductItem" :key="item" :class="'mx-1 shawdo'">
-                        <product-item :slug="item.slug" :photo="item.data" :name="item.name" :sale='item.sale'
-                            :price="item.price" :status="item.status_heart" :hearts="item.count_heart"
+                <Carousel v-if="!toMarket || isShowLoginStore == true" :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
+                    <Slide v-if="listProductItem.length > 0" v-for="index in arrayMarket" :key="index" :class="'mx-1 shawdo'">
+                        <product-item :slug="listProductItem[index].slug" :photo="listProductItem[index].data" :name="listProductItem[index].name" 
+                        :sale='listProductItem[index].sale' :price="listProductItem[index].price" :status="listProductItem[index].status_heart" 
+                        :hearts="listProductItem[index].count_heart"
                         />
                     </Slide>
                     <template #addons>
@@ -91,6 +92,7 @@ export default ({
         isInforUser : false,
         inforUser : false,
         isCart : false,
+        arrayMarket : [],
         settings: {
             itemsToShow: 2,
             snapAlign: 'center',
@@ -145,6 +147,9 @@ export default ({
         await ProductApiService.get().then(res => {
             console.log(res)
             this.listProductItem = Array.from(res.data.products)
+            for( let i = 0 ; i < 7 ; i++){
+                this.arrayMarket.push(Math.floor(Math.random() * 11));
+            }
         })
     }
 })
@@ -207,11 +212,14 @@ export default ({
     font-family: 'Sassy Frass', cursive;
     font-weight: 700;
 }
-
+.carousel {
+    max-width: 100%;;
+}
 .pagination-container {
   background-color: rgb(36,41,47);
   padding: 10px;
   margin-top: 10px;
+  max-width: 100%;;
 }
 .carousel__icon{
   color:white;

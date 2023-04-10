@@ -10,7 +10,7 @@
             </div>
         </div>  
         <div class="row m-0 ">
-            <Carousel :settings="settings" :breakpoints="breakpoints">
+            <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
                 <Slide v-for="item in listProductItem" :key="item" :class="'mx-1 shawdo'" >
                     <product-item :slug="item.slug" :photo="item.data" :name="item.name" :sale="item.sale"
                         :price="item.price" :status="item.status_heart" :hearts="item.count_heart"

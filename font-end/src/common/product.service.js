@@ -6,7 +6,7 @@ export const ProductApiService = {
         return json  
     },
     async post(params){
-        let json = await ApiService.post('heart/post/',params)
+        let json = await ApiService.post('heart-product/post/',params)
         return json
     },
     async getProductHeart(params){

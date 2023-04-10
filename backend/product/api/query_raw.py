@@ -9,7 +9,7 @@ QUERY_SQL_GET_PRODUCT_DETAIL_NOT_USER = """
             `product_product`.`description`,
             (
                 SELECT COUNT(U0.`id`) AS `heart_count` 
-                FROM `product_heart` U0 
+                FROM `blog_product_heart` U0 
                 WHERE U0.`product_id_id` = `product_product`.`id`
             ) AS `count_heart` FROM `product_product` 
     INNER JOIN `product_photo_product` 
@@ -37,7 +37,7 @@ QUERY_SQL_GET_ALL_PRODUCT_FOR_USER = """
             EXISTS
                 (
                     SELECT 
-                        (1) AS `a` FROM `product_heart` U0 
+                        (1) AS `a` FROM `blog_product_heart` U0 
                     WHERE 
                     (
                         U0.`user_id_id` = %s 
@@ -49,7 +49,7 @@ QUERY_SQL_GET_ALL_PRODUCT_FOR_USER = """
                     SELECT 
                         COUNT(U0.`id`) AS `heart_count` 
                     FROM 
-                        `product_heart` U0 
+                        `blog_product_heart` U0 
                     WHERE 
                         U0.`product_id_id` = `product_product`.`id`
                 ) AS `count_heart` FROM `product_product` 
@@ -79,7 +79,7 @@ QUERY_SQL_GET_ALL_PRODUCT_NOT_USER = """
             SELECT 
                 COUNT(U0.`id`) AS `heart_count` 
             FROM 
-                `product_heart` U0 
+                `blog_product_heart` U0 
             WHERE 
                 U0.`product_id_id` = `product_product`.`id`
                 
@@ -131,7 +131,7 @@ QUERY_SQL_GET_ALL_PRODUCT_WITH_CATEGORY_AND_NOT_USER = """
             SELECT 
                 COUNT(U0.`id`) AS `heart_count` 
             FROM 
-                `product_heart` U0 
+                `blog_product_heart` U0 
             WHERE 
                 U0.`product_id_id` = `product_product`.`id`
                 
@@ -165,7 +165,7 @@ QUERY_SQL_SEARCH_ALL_PRODUCT = """
             SELECT 
                 COUNT(U0.`id`) AS `heart_count` 
             FROM 
-                `product_heart` U0 
+                `blog_product_heart` U0 
             WHERE 
                 U0.`product_id_id` = `product_product`.`id`
                 

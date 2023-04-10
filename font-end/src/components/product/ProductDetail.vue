@@ -76,6 +76,9 @@
             <p class="text-dark text-descript">{{data.description}}</p>
           </div>
         </div>
+        <div class="mt-5">
+          <list-blog :product_slug="route.params.slug"/>
+        </div>
     </div>
 </template>
   
@@ -84,6 +87,7 @@ import { useRoute } from 'vue-router';
 import { mapGetters } from 'vuex'
 import { ProductApiService } from './../../common/product.service'
 import CountDownFLashSale from './../other/CountDowmFLashSale.vue'
+import ListBlog from './../../layout/blog/ListBlog.vue'
 export default {
     name: "DetailProduct",
     setup() {
@@ -122,7 +126,8 @@ export default {
         })
     },
     components: {
-      CountDownFLashSale
+      CountDownFLashSale,
+      ListBlog
     },
     computed: {
         ...mapGetters('notice', {

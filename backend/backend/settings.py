@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'login',
     'historyAction',
     'flashSaleProduct',
-    'order'
+    'order',
+    'blog_product'
 ]
 
 MIDDLEWARE = [

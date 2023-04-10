@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer,SerializerMethodField,ListSerializer,UUIDField
-from product.models import Category,Price,Photo_product,Product,Heart
+from product.models import Category,Price,Photo_product,Product
 from rest_framework import serializers
 from django.db.models import Prefetch
 
@@ -14,10 +14,6 @@ class PhotoProductSerializer(ModelSerializer):
     class Meta:
         model = Photo_product
         fields = ['id']
-class HeartSerializer(ModelSerializer):
-    class Meta:
-        model = Heart
-        fields =['id','user_id']
 class ProductSerializer(serializers.Serializer):
     data = serializers.CharField()
     status_heart =  serializers.BooleanField()

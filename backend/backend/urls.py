@@ -34,7 +34,8 @@ urlpatterns = [
     path('api/', include('JWT.urls')),
     path('api/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-    path('api/',include('decryptRSA.urls'))
+    path('api/',include('decryptRSA.urls')),
+    path('api/',include('blog_product.api.urls')),
     
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

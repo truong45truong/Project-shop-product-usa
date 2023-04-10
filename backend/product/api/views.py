@@ -1,4 +1,4 @@
-from .serializers import CategorySerializer,ProductSerializer,HeartSerializer,ProductHeartSerializer,CategoryWithNumberProductSerializer
+from .serializers import CategorySerializer,ProductSerializer,ProductHeartSerializer,CategoryWithNumberProductSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import viewsets
 from rest_framework import status
-from product.models import Category,Product,Heart
+from product.models import Category,Product
 from login.models import User
 from . import query_raw
 from .query_raw import HandleProductCategory
@@ -60,7 +60,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
             response.status_code = status.HTTP_404_NOT_FOUND
             return response
 class ProductHeartViewSet(viewsets.ViewSet):
-    serializer_class = HeartSerializer
+    serializer_class = ProductHeartSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     
@@ -319,29 +319,3 @@ class Productviewset(viewsets.ViewSet):
         serializer = ProductSerializer(queryset,many=True,context={'user_id': user_get})
         return Response({"products" : serializer.data})
             
-class HeartViewSet(viewsets.ModelViewSet):
-    queryset = Heart.objects.all()
-    serializer_class = HeartSerializer
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-    
-    @action(method=["POST"],detail=False,url_path="heart",url_name="post_heart")
-    def post_heart(self, request,*args, **kwargs):
-        data_request= json.loads(request.body.decode('utf-8'))
-        jwtToken = request.COOKIES.get('refresh_token')
-        refresh_token = RefreshToken(jwtToken)
-        decoded_token = refresh_token.payload
-        product_slug = data_request['params']['product_slug']
-        try:
-            product = Product.objects.get(slug = product_slug)
-            user = User.objects.get(id  = decoded_token['user_id'])
-            heart_product = Heart.objects.filter(product_id = product.id , user_id = user.id)
-            if len(heart_product) == 1 :
-                Heart.objects.get(id = heart_product[0].id).delete()
-            else :
-                heart = Heart.objects.create(user_id = user , product_id = product)
-                heart.save()
-            return Response({ 'status' : True})
-        except Exception as e:
-            print(e)
-        return Response({ 'status' : False})
