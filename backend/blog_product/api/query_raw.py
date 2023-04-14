@@ -15,7 +15,7 @@ QUERY_SQL_GET_BLOG_OF_PRODUCT_WITH_USER = """
         `blog_product_comment`.`user_email` as 'comment_user_email',
         `blog_product_comment`.`user_profile` as 'comment_user_profile',
         `blog_product_comment`.`parent_id` as 'parent',
-        
+        `blog_product_comment`.`is_edit` as 'comment_is_edit',
         (
             SELECT 
                 COUNT(U0.`id`) AS `heart_count` 
@@ -80,7 +80,16 @@ QUERY_SQL_GET_BLOG_OF_PRODUCT_WITH_USER = """
                 AND U0.comment_id_id = `blog_product_comment`.`id`
             ) 
             LIMIT 1
-        ) AS `status_heart_comment` 
+        ) AS `status_heart_comment` ,
+        (
+            SELECT 
+                GROUP_CONCAT( CONCAT( `blog_product_media_comment`.`file`, ":" , `blog_product_media_comment`.`type`) SEPARATOR ',' )
+            FROM 
+                `blog_product_media_comment`
+            WHERE 
+                `blog_product_media_comment`.`comment_id_id` = `blog_product_comment`.`id`
+
+        ) AS `file_media_comment` 
     FROM 
         `blog_product_blog`, `blog_product_comment`,`product_product`
     WHERE 
@@ -106,6 +115,7 @@ QUERY_SQL_GET_BLOG_OF_PRODUCT = """
         `blog_product_comment`.`user_email` as 'comment_user_email',
         `blog_product_comment`.`user_profile` as 'comment_user_profile',
         `blog_product_comment`.`parent_id` as 'parent',
+        `blog_product_comment`.`is_edit` as 'comment_is_edit',
         0 as 'status_heart',
         0 as 'status_heart_comment',
         (
@@ -152,7 +162,16 @@ QUERY_SQL_GET_BLOG_OF_PRODUCT = """
             WHERE 
                 U0.`parent_id` = `blog_product_comment`.id
 
-        ) AS `count_comment_child` 
+        ) AS `count_comment_child` ,
+        (
+            SELECT 
+                GROUP_CONCAT( CONCAT( `blog_product_media_comment`.`file`, ":" , `blog_product_media_comment`.`type`) SEPARATOR ',' )
+            FROM 
+                `blog_product_media_comment`
+            WHERE 
+                `blog_product_media_comment`.`comment_id_id` = `blog_product_comment`.`id`
+
+        ) AS `file_media_comment`
     FROM 
         `blog_product_blog`, `blog_product_comment`,`product_product`
     WHERE 
@@ -174,6 +193,7 @@ SELECT
     `blog_product_comment`.`user_email`,
     `blog_product_comment`.`parent_id`,
     0 as 'status_heart_comment',
+    `blog_product_comment`.`is_edit` as 'comment_is_edit',
     (
             SELECT 
                 COUNT(U0.`id`) AS `heart_count` 
@@ -191,11 +211,182 @@ SELECT
                 `blog_product_comment` U0
             WHERE 
                 U0.`parent_id` = `blog_product_comment`.`id`
-        ) AS `count_comment_child`
+        ) AS `count_comment_child`,
+        (
+            SELECT 
+                GROUP_CONCAT( CONCAT( `blog_product_media_comment`.`file`, ":" , `blog_product_media_comment`.`type`) SEPARATOR ',' )
+            FROM 
+                `blog_product_media_comment`
+            WHERE 
+                `blog_product_media_comment`.`comment_id_id` = `blog_product_comment`.`id`
+
+        ) AS `file_media_comment`
       FROM
       	`blog_product_comment`
       WHERE
       	`blog_product_comment`.`parent_id` = %s
+"""
+# ---------------------------------------------------------------------------- #
+#                       PARAMS : [USER_ID,COMMET_PARENT]                       #
+# ---------------------------------------------------------------------------- #
+QUERY_SQL_GET_COMMET_CHILD_WITH_USER = """
+SELECT 
+	`blog_product_comment`.`id`,
+    `blog_product_comment`.`content`,
+    `blog_product_comment`.`date_create`,
+    `blog_product_comment`.`level`,
+    `blog_product_comment`.`user_profile`,
+    `blog_product_comment`.`user_email`,
+    `blog_product_comment`.`parent_id`,
+    0 as 'status_heart_comment',
+    `blog_product_comment`.`is_edit` as 'comment_is_edit',
+    (
+            SELECT 
+                COUNT(U0.`id`) AS `heart_count` 
+            FROM 
+                `blog_product_heart` U0 
+            WHERE 
+                U0.comment_id_id = `blog_product_comment`.`id`
+        		AND U0.type = 2
+
+        ) AS `number_heart` ,
+        (
+            SELECT 
+            COUNT(U0.`id`)
+            FROM 
+                `blog_product_comment` U0
+            WHERE 
+                U0.`parent_id` = `blog_product_comment`.`id`
+        ) AS `count_comment_child`,
+        (
+            SELECT 
+                IF(COUNT(*) > 0, 1, 0) AS `status_heart_comment`
+            FROM `blog_product_heart` U0 
+            WHERE 
+            (
+                U0.user_id_id = %s
+                AND U0.comment_id_id = `blog_product_comment`.id
+            ) 
+            LIMIT 1
+        ) AS `status_heart_comment` ,
+        (
+            SELECT 
+                GROUP_CONCAT( CONCAT( `blog_product_media_comment`.`file`, ":" , `blog_product_media_comment`.`type`) SEPARATOR ',' )
+            FROM 
+                `blog_product_media_comment`
+            WHERE 
+                `blog_product_media_comment`.`comment_id_id` = `blog_product_comment`.`id`
+
+        ) AS `file_media_comment`
+      FROM
+      	`blog_product_comment`
+      WHERE
+      	`blog_product_comment`.`parent_id` = %s
+"""
+QUERY_GET_COMMENT_PRODUCT_WITH_USER = """
+    SELECT 
+	`blog_product_comment`.`id`,
+    `blog_product_comment`.`content`,
+    `blog_product_comment`.`date_create`,
+    `blog_product_comment`.`level`,
+    `blog_product_comment`.`user_profile`,
+    `blog_product_comment`.`user_email`,
+    `blog_product_comment`.`parent_id`,
+    0 as 'status_heart_comment',
+    `blog_product_comment`.`is_edit` as 'comment_is_edit',
+    (
+            SELECT 
+                COUNT(U0.`id`) AS `heart_count` 
+            FROM 
+                `blog_product_heart` U0 
+            WHERE 
+                U0.comment_id_id = `blog_product_comment`.`id`
+        		AND U0.type = 2
+
+        ) AS `number_heart` ,
+        (
+            SELECT 
+            COUNT(U0.`id`)
+            FROM 
+                `blog_product_comment` U0
+            WHERE 
+                U0.`parent_id` = `blog_product_comment`.`id`
+        ) AS `count_comment_child`,
+        (
+            SELECT 
+                IF(COUNT(*) > 0, 1, 0) AS `status_heart_comment`
+            FROM `blog_product_heart` U0 
+            WHERE 
+            (
+                U0.user_id_id = %s
+                AND U0.comment_id_id = `blog_product_comment`.id
+            ) 
+            LIMIT 1
+        ) AS `status_heart_comment` ,
+        (
+            SELECT 
+                GROUP_CONCAT( CONCAT( `blog_product_media_comment`.`file`, ":" , `blog_product_media_comment`.`type`) SEPARATOR ',' )
+            FROM 
+                `blog_product_media_comment`
+            WHERE 
+                `blog_product_media_comment`.`comment_id_id` = `blog_product_comment`.`id`
+
+        ) AS `file_media_comment`
+      FROM
+      	`blog_product_comment`
+      INNER JOIN `product_product` ON `product_product`.`id` = `blog_product_comment`.`product_id_id`
+      WHERE
+      	`product_product`.`slug` = %s
+       AND `blog_product_comment`.`level` = 0
+    ORDER BY 
+        `blog_product_comment`.`date_create` DESC
+"""
+QUERY_GET_COMMENT_PRODUCT_NOT_USER = """
+    SELECT 
+	`blog_product_comment`.`id`,
+    `blog_product_comment`.`content`,
+    `blog_product_comment`.`date_create`,
+    `blog_product_comment`.`level`,
+    `blog_product_comment`.`user_profile`,
+    `blog_product_comment`.`user_email`,
+    `blog_product_comment`.`parent_id`,
+    0 as 'status_heart_comment',
+    `blog_product_comment`.`is_edit` as 'comment_is_edit',
+    (
+            SELECT 
+                COUNT(U0.`id`) AS `heart_count` 
+            FROM 
+                `blog_product_heart` U0 
+            WHERE 
+                U0.comment_id_id = `blog_product_comment`.`id`
+        		AND U0.type = 2
+
+        ) AS `number_heart` ,
+        (
+            SELECT 
+            COUNT(U0.`id`)
+            FROM 
+                `blog_product_comment` U0
+            WHERE 
+                U0.`parent_id` = `blog_product_comment`.`id`
+        ) AS `count_comment_child`,
+        (
+            SELECT 
+                GROUP_CONCAT( CONCAT( `blog_product_media_comment`.`file`, ":" , `blog_product_media_comment`.`type`) SEPARATOR ',' )
+            FROM 
+                `blog_product_media_comment`
+            WHERE 
+                `blog_product_media_comment`.`comment_id_id` = `blog_product_comment`.`id`
+
+        ) AS `file_media_comment`
+      FROM
+      	`blog_product_comment`
+      INNER JOIN `product_product` ON `product_product`.`id` = `blog_product_comment`.`product_id_id`
+      WHERE
+      	`product_product`.`slug` = %s
+       AND `blog_product_comment`.`level` = 0
+    ORDER BY 
+        `blog_product_comment`.`date_create` DESC
 """
 class HandleSqlRaw:
     def __init__(self,raw_query):

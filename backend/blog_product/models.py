@@ -17,10 +17,11 @@ path_upload_video = str(settings.BASE_DIR)+"/media/videos"
 class Blog(models.Model):
     id=uuid4()
     title = models.CharField(max_length=200, blank=True, null=True)
-    content = models.TextField()
+    content = models.CharField(max_length = 8000)
     user_id = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)
     date_create = models.DateTimeField(auto_now=True, auto_now_add=False)
     product_id = models.ForeignKey(Product, related_name='products', null= True, on_delete=models.CASCADE)
+    isEdit = models.DateTimeField(null = True)
     def __str__(self):
         return str(self.id)
 
@@ -60,22 +61,32 @@ class Photo_blog(models.Model):
 class Comment(MPTTModel):
     id = uuid4()
     parent = TreeForeignKey('self', on_delete = models.CASCADE, null = True, blank = True, related_name = 'children')
-    content = models.TextField()
+    content = models.CharField(max_length = 5000)
     heart = models.IntegerField()
-    blog_id = models.ForeignKey(Blog, related_name='comments', on_delete=models.CASCADE)
+    blog_id = models.ForeignKey(Blog, related_name='comments',null=True, on_delete=models.CASCADE)
     date_create = models.DateTimeField(auto_now=True, auto_now_add=False)
-    user_id = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
-    user_profile = models.TextField()
+    user_id = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE , null = True)
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, null=True,blank=True,related_name='comments')
+    user_profile = models.CharField(max_length = 500,null = True)
     user_email = models.CharField(max_length=200)
+    is_edit = models.DateTimeField(null = True)
+    information_customer = models.CharField(max_length=500,null = True)
+    type =models.BooleanField()
     def __str__(self):
         return str(self.content)
 
     def __unicode__(self):
         return str(self.id)
+class Media_Comment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length = 200)
+    file = models.CharField(max_length = 200)
+    type = models.BooleanField()
+    comment_id = models.ForeignKey(Comment, related_name='media_comments', on_delete=models.CASCADE)
 class Heart( models.Model):
     id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     type = models.IntegerField()
-    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')
-    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')
-    blog_id = models.ForeignKey(Blog, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')
-    comment_id = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True,blank=True,related_name='hearts')
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, null=True,blank=True,related_name='hearts')
+    blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True,blank=True,related_name='hearts')
+    comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True,blank=True,related_name='hearts')

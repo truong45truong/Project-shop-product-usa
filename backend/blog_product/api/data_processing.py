@@ -28,7 +28,9 @@ def handleRawQuery(queryset):
                         'parent_id' : i.parent,
                         'user_email' : i.comment_user_email,
                         'count_comment_child' : i.count_comment_child,
-                        'status_heart_comment' : i.status_heart_comment if i.status_heart_comment != None else False
+                        'status_heart_comment' : i.status_heart_comment if i.status_heart_comment != None else False,
+                        'comment_is_edit' : i.comment_is_edit,
+                        'file_media_comment' : i.file_media_comment
                     }
                 ]
             }
@@ -44,7 +46,9 @@ def handleRawQuery(queryset):
                         'parent_id' : i.parent,
                         'user_email' : i.comment_user_email,
                         'count_comment_child' : i.count_comment_child,
-                        'status_heart_comment' : i.status_heart_comment if i.status_heart_comment != None else False
+                        'status_heart_comment' : i.status_heart_comment if i.status_heart_comment != None else False,
+                        'comment_is_edit' : i.comment_is_edit,
+                        'file_media_comment' : i.file_media_comment
             })
     for i in order_dict:
         order_list.append(order_dict[i])

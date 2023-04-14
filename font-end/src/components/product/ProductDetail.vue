@@ -76,8 +76,11 @@
             <p class="text-dark text-descript">{{data.description}}</p>
           </div>
         </div>
+        <div v-if="isLoadComment" class="mt-5 bg-dark shadow">
+          <list-comment :listComments= "list_comment" :blogId = "false" :productSlug="route.params.slug" />
+        </div>
         <div class="mt-5">
-          <list-blog :product_slug="route.params.slug"/>
+          <!-- <list-blog :product_slug="route.params.slug"/> -->
         </div>
     </div>
 </template>
@@ -86,7 +89,9 @@
 import { useRoute } from 'vue-router';
 import { mapGetters } from 'vuex'
 import { ProductApiService } from './../../common/product.service'
+import {CommentApiService} from './../../common/comment.service'
 import CountDownFLashSale from './../other/CountDowmFLashSale.vue'
+import ListComment from './../../layout/blog/ListComment.vue'
 import ListBlog from './../../layout/blog/ListBlog.vue'
 export default {
     name: "DetailProduct",
@@ -114,20 +119,32 @@ export default {
     data: () => ({
         data: '',
         isShowSelectedVoucher : false,
+        list_comment : false,
+        isLoadComment : false,
     }),
     async created() {
-        await ProductApiService.get({
-            params: {
-                product_slug: this.route.params.slug
-            }
-        }).then(res => {
-            console.log(res)
-            this.data = res.data.products[0]
-        })
+      await ProductApiService.get({
+          params: {
+              product_slug: this.route.params.slug
+          }
+      }).then(res => {
+          console.log(res)
+          this.data = res.data.products[0]
+      })
+      await CommentApiService.getCommentProduct({
+        params : {
+          product_slug : this.route.params.slug
+        }
+      }).then(response => {
+        console.log('response comment',response)
+        this.list_comment = response.data.comments
+        this.isLoadComment = true
+      })
     },
     components: {
       CountDownFLashSale,
-      ListBlog
+      ListBlog,
+      ListComment
     },
     computed: {
         ...mapGetters('notice', {

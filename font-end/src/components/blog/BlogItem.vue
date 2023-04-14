@@ -53,7 +53,7 @@
             </div>
         </div>
         <hr class="m-0 mb-1"/>
-        <list-comment :listComments = "comments" :blogId = "id" />
+        <list-comment :listComments = "comments" :blogId = "id" :productSlug="false"/>
     </div>
 </template>
 <script>

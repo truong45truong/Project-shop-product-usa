@@ -216,6 +216,14 @@
         "documentation": {}
     },
     {
+        "label": "action",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
         "label": "api_view",
         "importPath": "rest_framework.decorators",
         "description": "rest_framework.decorators",
@@ -224,7 +232,15 @@
         "documentation": {}
     },
     {
-        "label": "action",
+        "label": "permission_classes",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "authentication_classes",
         "importPath": "rest_framework.decorators",
         "description": "rest_framework.decorators",
         "isExtraImport": true,
@@ -954,11 +970,86 @@
         "documentation": {}
     },
     {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
         "label": "get_wsgi_application",
         "importPath": "django.core.wsgi",
         "description": "django.core.wsgi",
         "isExtraImport": true,
         "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "base64",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "base64",
+        "description": "base64",
+        "detail": "base64",
+        "documentation": {}
+    },
+    {
+        "label": "uuid",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uuid",
+        "description": "uuid",
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "uuid4",
+        "importPath": "uuid",
+        "description": "uuid",
+        "isExtraImport": true,
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "uuid4",
+        "importPath": "uuid",
+        "description": "uuid",
+        "isExtraImport": true,
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "uuid4",
+        "importPath": "uuid",
+        "description": "uuid",
+        "isExtraImport": true,
+        "detail": "uuid",
         "documentation": {}
     },
     {
@@ -1131,6 +1222,14 @@
     },
     {
         "label": "Heart",
+        "importPath": "blog_product.models",
+        "description": "blog_product.models",
+        "isExtraImport": true,
+        "detail": "blog_product.models",
+        "documentation": {}
+    },
+    {
+        "label": "Media_Comment",
         "importPath": "blog_product.models",
         "description": "blog_product.models",
         "isExtraImport": true,
@@ -1554,54 +1653,163 @@
         "documentation": {}
     },
     {
-        "label": "json",
-        "kind": 6,
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "base64",
-        "kind": 6,
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "importPath": "base64",
-        "description": "base64",
-        "detail": "base64",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "uuid",
-        "kind": 6,
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "importPath": "uuid",
-        "description": "uuid",
-        "detail": "uuid",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "uuid4",
-        "importPath": "uuid",
-        "description": "uuid",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "uuid",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "uuid4",
-        "importPath": "uuid",
-        "description": "uuid",
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "uuid",
+        "detail": "django.db",
         "documentation": {}
     },
     {
-        "label": "uuid4",
-        "importPath": "uuid",
-        "description": "uuid",
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
         "isExtraImport": true,
-        "detail": "uuid",
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
         "documentation": {}
     },
     {
@@ -3861,8 +4069,35 @@
         "kind": 2,
         "importPath": "backend.blog_product.api.data_processing",
         "description": "backend.blog_product.api.data_processing",
-        "peekOfCode": "def handleRawQuery(queryset):\n    order_dict = dict()\n    print(\"len queryser\",len(queryset))\n    for i in queryset:\n        print(\"id\",i.file_img_blog)\n        if i.id not in order_dict:\n            order_dict[i.id] = {\n                \"blog\" :{\n                    'id' : i.id,\n                    'title' : i.title ,",
+        "peekOfCode": "def handleRawQuery(queryset):\n    order_dict = dict()\n    order_list = []\n    for i in queryset:\n        print(\"id\",i.id)\n        if i.id not in order_dict:\n            order_dict[i.id] = {\n                \"blog\" :{\n                    'id' : i.id,\n                    'title' : i.title ,",
         "detail": "backend.blog_product.api.data_processing",
+        "documentation": {}
+    },
+    {
+        "label": "handleDecodeFile",
+        "kind": 2,
+        "importPath": "backend.blog_product.api.method_orthers",
+        "description": "backend.blog_product.api.method_orthers",
+        "peekOfCode": "def handleDecodeFile(file_data,is_image,is_video):\n    file_format, file_string = file_data.split(';base64,')\n    file_ext = file_format.split('/')[-1]\n    file_bytes = base64.b64decode(file_string)\n    if is_image is True:\n        name_file = 'blog-' + str(uuid.uuid4()) + '.' + file_ext\n        with open( os.path.join(path_upload_image, \"comments\" , name_file), 'wb+') as decoded_image_file:\n            decoded_image_file.write(file_bytes)\n            return { \n                'name' : name_file ,",
+        "detail": "backend.blog_product.api.method_orthers",
+        "documentation": {}
+    },
+    {
+        "label": "path_upload_image",
+        "kind": 5,
+        "importPath": "backend.blog_product.api.method_orthers",
+        "description": "backend.blog_product.api.method_orthers",
+        "peekOfCode": "path_upload_image = str(settings.BASE_DIR)+\"/media/photos\"\npath_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\n# ---------------------------------------------------------------------------- #\n#                              HANDLE FILE ENCODE                              #\n# ---------------------------------------------------------------------------- #\n\"\"\"_summary_\nPARMAS : \n    + file_data : data file encode\n    + is_image : file is image\n    + is_video : file is video",
+        "detail": "backend.blog_product.api.method_orthers",
+        "documentation": {}
+    },
+    {
+        "label": "path_upload_video",
+        "kind": 5,
+        "importPath": "backend.blog_product.api.method_orthers",
+        "description": "backend.blog_product.api.method_orthers",
+        "peekOfCode": "path_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\n# ---------------------------------------------------------------------------- #\n#                              HANDLE FILE ENCODE                              #\n# ---------------------------------------------------------------------------- #\n\"\"\"_summary_\nPARMAS : \n    + file_data : data file encode\n    + is_image : file is image\n    + is_video : file is video\nRETURN :",
+        "detail": "backend.blog_product.api.method_orthers",
         "documentation": {}
     },
     {
@@ -3875,20 +4110,11 @@
         "documentation": {}
     },
     {
-        "label": "QUERY_TEST",
+        "label": "QUERY_SQL_GET_BLOG_OF_PRODUCT_WITH_USER",
         "kind": 5,
         "importPath": "backend.blog_product.api.query_raw",
         "description": "backend.blog_product.api.query_raw",
-        "peekOfCode": "QUERY_TEST = \"\"\"\nSELECT \n    `blog_product_blog`.* ,`blog_product_blog`.`id`,\n    `blog_product_blog`.`content` ,`blog_product_blog`.`date_create` , \n    `blog_product_blog`.`user_id_id` , `blog_product_blog`.`title`,\n    `blog_product_comment`.`id` as 'comment_id',\n    `blog_product_comment`.`content` as 'comment_content',\n    `blog_product_comment`.`heart` as 'comment_heart',\n    `blog_product_comment`.`date_create` as 'comment_date_create',\n    `blog_product_comment`.`level` as 'comment_level',",
-        "detail": "backend.blog_product.api.query_raw",
-        "documentation": {}
-    },
-    {
-        "label": "\t`blog_product_comment`.`level`",
-        "kind": 5,
-        "importPath": "backend.blog_product.api.query_raw",
-        "description": "backend.blog_product.api.query_raw",
-        "peekOfCode": "\t`blog_product_comment`.`level` = 0\n\"\"\"\nQUERY_SQL_GET_BLOG_OF_PRODUCT = \"\"\"\n    SELECT \n        `blog_product_blog`.* ,`blog_product_blog`.`id`,\n        `blog_product_blog`.`content` ,`blog_product_blog`.`date_create` , \n        `blog_product_blog`.`user_id_id` , `blog_product_blog`.`title`,\n        `blog_product_comment`.`id` as 'comment_id',\n        `blog_product_comment`.`content` as 'comment_content',\n        `blog_product_comment`.`date_create` as 'comment_date_create',",
+        "peekOfCode": "QUERY_SQL_GET_BLOG_OF_PRODUCT_WITH_USER = \"\"\"\n    SELECT \n        `blog_product_blog`.* ,`blog_product_blog`.`id`,\n        `blog_product_blog`.`content` ,`blog_product_blog`.`date_create` , \n        `blog_product_blog`.`user_id_id` , `blog_product_blog`.`title`,\n        `blog_product_comment`.`id` as 'comment_id',\n        `blog_product_comment`.`content` as 'comment_content',\n        `blog_product_comment`.`date_create` as 'comment_date_create',\n        `blog_product_comment`.`level` as 'comment_level',\n        `blog_product_comment`.`heart` as 'comment_heart',",
         "detail": "backend.blog_product.api.query_raw",
         "documentation": {}
     },
@@ -3898,6 +4124,42 @@
         "importPath": "backend.blog_product.api.query_raw",
         "description": "backend.blog_product.api.query_raw",
         "peekOfCode": "QUERY_SQL_GET_BLOG_OF_PRODUCT = \"\"\"\n    SELECT \n        `blog_product_blog`.* ,`blog_product_blog`.`id`,\n        `blog_product_blog`.`content` ,`blog_product_blog`.`date_create` , \n        `blog_product_blog`.`user_id_id` , `blog_product_blog`.`title`,\n        `blog_product_comment`.`id` as 'comment_id',\n        `blog_product_comment`.`content` as 'comment_content',\n        `blog_product_comment`.`date_create` as 'comment_date_create',\n        `blog_product_comment`.`level` as 'comment_level',\n        `blog_product_comment`.`heart` as 'comment_heart',",
+        "detail": "backend.blog_product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_SQL_GET_COMMET_CHILD",
+        "kind": 5,
+        "importPath": "backend.blog_product.api.query_raw",
+        "description": "backend.blog_product.api.query_raw",
+        "peekOfCode": "QUERY_SQL_GET_COMMET_CHILD = \"\"\"\nSELECT \n\t`blog_product_comment`.`id`,\n    `blog_product_comment`.`content`,\n    `blog_product_comment`.`date_create`,\n    `blog_product_comment`.`level`,\n    `blog_product_comment`.`user_profile`,\n    `blog_product_comment`.`user_email`,\n    `blog_product_comment`.`parent_id`,\n    0 as 'status_heart_comment',",
+        "detail": "backend.blog_product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_SQL_GET_COMMET_CHILD_WITH_USER",
+        "kind": 5,
+        "importPath": "backend.blog_product.api.query_raw",
+        "description": "backend.blog_product.api.query_raw",
+        "peekOfCode": "QUERY_SQL_GET_COMMET_CHILD_WITH_USER = \"\"\"\nSELECT \n\t`blog_product_comment`.`id`,\n    `blog_product_comment`.`content`,\n    `blog_product_comment`.`date_create`,\n    `blog_product_comment`.`level`,\n    `blog_product_comment`.`user_profile`,\n    `blog_product_comment`.`user_email`,\n    `blog_product_comment`.`parent_id`,\n    0 as 'status_heart_comment',",
+        "detail": "backend.blog_product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_GET_COMMENT_PRODUCT_WITH_USER",
+        "kind": 5,
+        "importPath": "backend.blog_product.api.query_raw",
+        "description": "backend.blog_product.api.query_raw",
+        "peekOfCode": "QUERY_GET_COMMENT_PRODUCT_WITH_USER = \"\"\"\n    SELECT \n\t`blog_product_comment`.`id`,\n    `blog_product_comment`.`content`,\n    `blog_product_comment`.`date_create`,\n    `blog_product_comment`.`level`,\n    `blog_product_comment`.`user_profile`,\n    `blog_product_comment`.`user_email`,\n    `blog_product_comment`.`parent_id`,\n    0 as 'status_heart_comment',",
+        "detail": "backend.blog_product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_GET_COMMENT_PRODUCT_NOT_USER",
+        "kind": 5,
+        "importPath": "backend.blog_product.api.query_raw",
+        "description": "backend.blog_product.api.query_raw",
+        "peekOfCode": "QUERY_GET_COMMENT_PRODUCT_NOT_USER = \"\"\"\n    SELECT \n\t`blog_product_comment`.`id`,\n    `blog_product_comment`.`content`,\n    `blog_product_comment`.`date_create`,\n    `blog_product_comment`.`level`,\n    `blog_product_comment`.`user_profile`,\n    `blog_product_comment`.`user_email`,\n    `blog_product_comment`.`parent_id`,\n    0 as 'status_heart_comment',",
         "detail": "backend.blog_product.api.query_raw",
         "documentation": {}
     },
@@ -3915,7 +4177,7 @@
         "kind": 6,
         "importPath": "backend.blog_product.api.serializers",
         "description": "backend.blog_product.api.serializers",
-        "peekOfCode": "class CommentRawSerializer(serializers.Serializer):\n    id = serializers.IntegerField()\n    content = serializers.CharField()\n    date_create = serializers.DateTimeField()\n    level = serializers.IntegerField()\n    parent = serializers.IntegerField()\n    user_profile = serializers.CharField()\n    number_heart = serializers.IntegerField()\n    user_email =serializers.CharField()\n    count_comment_child = serializers.IntegerField()",
+        "peekOfCode": "class CommentRawSerializer(serializers.Serializer):\n    id = serializers.IntegerField()\n    content = serializers.CharField()\n    date_create = serializers.DateTimeField()\n    level = serializers.IntegerField()\n    parent_id = serializers.IntegerField()\n    user_profile = serializers.CharField()\n    number_heart = serializers.IntegerField()\n    user_email =serializers.CharField()\n    count_comment_child = serializers.IntegerField()",
         "detail": "backend.blog_product.api.serializers",
         "documentation": {}
     },
@@ -3951,7 +4213,7 @@
         "kind": 6,
         "importPath": "backend.blog_product.api.serializers",
         "description": "backend.blog_product.api.serializers",
-        "peekOfCode": "class BlogRawSerializer(serializers.Serializer):\n    id = serializers.IntegerField()\n    content = serializers.CharField()\n    date_created =  serializers.DateTimeField()\n    user_id_id =  serializers.CharField()\n    number_heart = serializers.IntegerField()\n    number_comment = serializers.IntegerField()\nclass BlogCommentSeializer(serializers.Serializer):\n    comments    = CommentRawSerializer(many   = True)\n    blog = BlogRawSerializer(many=False)",
+        "peekOfCode": "class BlogRawSerializer(serializers.Serializer):\n    id = serializers.IntegerField()\n    content = serializers.CharField()\n    date_created =  serializers.DateTimeField()\n    user_id_id =  serializers.CharField()\n    number_heart = serializers.IntegerField()\n    number_comment = serializers.IntegerField()\n    status_heart = serializers.BooleanField()\nclass BlogCommentSeializer(serializers.Serializer):\n    comments    = CommentRawSerializer(many   = True)",
         "detail": "backend.blog_product.api.serializers",
         "documentation": {}
     },
@@ -3978,7 +4240,7 @@
         "kind": 5,
         "importPath": "backend.blog_product.api.urls",
         "description": "backend.blog_product.api.urls",
-        "peekOfCode": "blog = BlogViewSet.as_view({\n    'get' : 'get_blog',\n    'post': 'post_blog'\n})\ncomment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment'\n})\nget_comment_child = CommentViewSet.as_view({\n    'get' : 'get_comment_child',",
+        "peekOfCode": "blog = BlogViewSet.as_view({\n    'get' : 'get_blog',\n    'post': 'post_blog'\n})\ncomment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment_blog'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'",
         "detail": "backend.blog_product.api.urls",
         "documentation": {}
     },
@@ -3987,16 +4249,7 @@
         "kind": 5,
         "importPath": "backend.blog_product.api.urls",
         "description": "backend.blog_product.api.urls",
-        "peekOfCode": "comment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment'\n})\nget_comment_child = CommentViewSet.as_view({\n    'get' : 'get_comment_child',\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})",
-        "detail": "backend.blog_product.api.urls",
-        "documentation": {}
-    },
-    {
-        "label": "get_comment_child",
-        "kind": 5,
-        "importPath": "backend.blog_product.api.urls",
-        "description": "backend.blog_product.api.urls",
-        "peekOfCode": "get_comment_child = CommentViewSet.as_view({\n    'get' : 'get_comment_child',\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nget_blog_product = BlogViewSet.as_view({\n    'get' : 'get_blog_product'\n})\nurlpatterns = [",
+        "peekOfCode": "comment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment_blog'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})",
         "detail": "backend.blog_product.api.urls",
         "documentation": {}
     },
@@ -4005,16 +4258,43 @@
         "kind": 5,
         "importPath": "backend.blog_product.api.urls",
         "description": "backend.blog_product.api.urls",
-        "peekOfCode": "heart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nget_blog_product = BlogViewSet.as_view({\n    'get' : 'get_blog_product'\n})\nurlpatterns = [\n    path('blog/', blog, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('comment/',comment, name = 'comment_logs'),",
+        "peekOfCode": "heart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})\npost_heart_comment = HeartViewSet.as_view({\n    'post' : 'post_heart_comment'\n})\nedit_comment = CommentViewSet.as_view({",
         "detail": "backend.blog_product.api.urls",
         "documentation": {}
     },
     {
-        "label": "get_blog_product",
+        "label": "heart_blog",
         "kind": 5,
         "importPath": "backend.blog_product.api.urls",
         "description": "backend.blog_product.api.urls",
-        "peekOfCode": "get_blog_product = BlogViewSet.as_view({\n    'get' : 'get_blog_product'\n})\nurlpatterns = [\n    path('blog/', blog, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('comment/',comment, name = 'comment_logs'),\n    path('comment/child/',get_comment_child, name = 'comment_logs'),\n    path('heart-product/post/' , heart , name = \"post_heart_product\"), # like or dislike product\n]",
+        "peekOfCode": "heart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})\npost_heart_comment = HeartViewSet.as_view({\n    'post' : 'post_heart_comment'\n})\nedit_comment = CommentViewSet.as_view({\n    'post': 'edit_comment'\n})\ndelete_comment = CommentViewSet.as_view({",
+        "detail": "backend.blog_product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "post_heart_comment",
+        "kind": 5,
+        "importPath": "backend.blog_product.api.urls",
+        "description": "backend.blog_product.api.urls",
+        "peekOfCode": "post_heart_comment = HeartViewSet.as_view({\n    'post' : 'post_heart_comment'\n})\nedit_comment = CommentViewSet.as_view({\n    'post': 'edit_comment'\n})\ndelete_comment = CommentViewSet.as_view({\n    'post': 'delete_comment'\n})\nurlpatterns = [",
+        "detail": "backend.blog_product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "edit_comment",
+        "kind": 5,
+        "importPath": "backend.blog_product.api.urls",
+        "description": "backend.blog_product.api.urls",
+        "peekOfCode": "edit_comment = CommentViewSet.as_view({\n    'post': 'edit_comment'\n})\ndelete_comment = CommentViewSet.as_view({\n    'post': 'delete_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),",
+        "detail": "backend.blog_product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "delete_comment",
+        "kind": 5,
+        "importPath": "backend.blog_product.api.urls",
+        "description": "backend.blog_product.api.urls",
+        "peekOfCode": "delete_comment = CommentViewSet.as_view({\n    'post': 'delete_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/blog/',comment, name = 'comment_logs'),\n    path('comment/product/',get_comment_product, name = 'get_comment_product'),\n    path('comment/product/create/',post_comment_product, name = 'comment_logs'),",
         "detail": "backend.blog_product.api.urls",
         "documentation": {}
     },
@@ -4023,7 +4303,7 @@
         "kind": 5,
         "importPath": "backend.blog_product.api.urls",
         "description": "backend.blog_product.api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('blog/', blog, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('comment/',comment, name = 'comment_logs'),\n    path('comment/child/',get_comment_child, name = 'comment_logs'),\n    path('heart-product/post/' , heart , name = \"post_heart_product\"), # like or dislike product\n]",
+        "peekOfCode": "urlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/blog/',comment, name = 'comment_logs'),\n    path('comment/product/',get_comment_product, name = 'get_comment_product'),\n    path('comment/product/create/',post_comment_product, name = 'comment_logs'),\n    path('comment/edit/',edit_comment, name = 'edit_comment'),\n    path('comment/delete/',delete_comment, name = 'delete_comment'),\n    path('comment/heart/',post_heart_comment, name = 'comment_heart'),",
         "detail": "backend.blog_product.api.urls",
         "documentation": {}
     },
@@ -4032,7 +4312,7 @@
         "kind": 6,
         "importPath": "backend.blog_product.api.views",
         "description": "backend.blog_product.api.views",
-        "peekOfCode": "class BlogViewSet (viewsets.ModelViewSet):\n    queryset = Blog.objects.all()\n    serializer_class = BlogSerializer\n    # ---------------------------------------------------------------------------- #\n    #                              GET BLOG OF PRODUCT                             #\n    # ---------------------------------------------------------------------------- #\n    @action(method = ['GET'], detail = False, url_path = 'blog', url_name='get_blog_product')\n    def get_blog_product(self, request, *arg, **kwargs):\n        sqlRaw = query_raw.QUERY_SQL_GET_BLOG_OF_PRODUCT\n        response = Response()",
+        "peekOfCode": "class BlogViewSet (viewsets.ModelViewSet):\n    queryset = Blog.objects.all()\n    serializer_class = BlogSerializer\n    # ---------------------------------------------------------------------------- #\n    #                                   POST BLOG                                  #\n    # ---------------------------------------------------------------------------- #\n    @action(method = ['POST'], detail = False, url_path = 'blog', url_name = 'post_blog')\n    def post_blog(self , request, *arg, **kwargs):\n        # ----------------------- handle file is video or image ---------------------- #\n        list_name_file_blog = []",
         "detail": "backend.blog_product.api.views",
         "documentation": {}
     },
@@ -4041,7 +4321,7 @@
         "kind": 6,
         "importPath": "backend.blog_product.api.views",
         "description": "backend.blog_product.api.views",
-        "peekOfCode": "class CommentViewSet(viewsets.ModelViewSet):\n    queryset = Comment.objects.all()\n    serializer_class = CommentViewSerializer\n    @action(method = ['POST'], detail = False, url_path = 'comment', url_name = 'post_comment')\n    def post_comment(self , request, *arg, **kwargs):\n        response = Response()\n        try:\n            data_request = json.loads(request.body)\n            jwtToken = request.COOKIES.get('refresh_token')\n            refresh_token = RefreshToken(jwtToken)",
+        "peekOfCode": "class CommentViewSet(viewsets.ModelViewSet):\n    queryset = Comment.objects.all()\n    serializer_class = CommentViewSerializer\n    @action(method = ['POST'], detail = False, url_path = 'delete_comment', url_name = 'delete_comment')\n    def delete_comment(self , request, *arg, **kwargs):\n        response = Response()\n        try:\n            data_request = json.loads(request.body)\n            jwtToken = request.COOKIES.get('refresh_token')\n            refresh_token = RefreshToken(jwtToken)",
         "detail": "backend.blog_product.api.views",
         "documentation": {}
     },
@@ -4055,11 +4335,47 @@
         "documentation": {}
     },
     {
+        "label": "get_blog_product",
+        "kind": 2,
+        "importPath": "backend.blog_product.api.views",
+        "description": "backend.blog_product.api.views",
+        "peekOfCode": "def get_blog_product(request):\n    try:\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)\n        decoded_token = refresh_token.payload\n        user_get = User.objects.get(id = decoded_token['user_id'])\n        sqlRaw =  query_raw.QUERY_SQL_GET_BLOG_OF_PRODUCT_WITH_USER\n    except:\n        user_get = False\n        sqlRaw =  query_raw.QUERY_SQL_GET_BLOG_OF_PRODUCT",
+        "detail": "backend.blog_product.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "get_comment_child",
+        "kind": 2,
+        "importPath": "backend.blog_product.api.views",
+        "description": "backend.blog_product.api.views",
+        "peekOfCode": "def get_comment_child(request):\n    try:\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)\n        decoded_token = refresh_token.payload\n        user_get = User.objects.get(id = decoded_token['user_id'])\n        rawSql =  query_raw.QUERY_SQL_GET_COMMET_CHILD_WITH_USER\n    except:\n        user_get = False\n        rawSql = query_raw.QUERY_SQL_GET_COMMET_CHILD",
+        "detail": "backend.blog_product.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "get_comment_product",
+        "kind": 2,
+        "importPath": "backend.blog_product.api.views",
+        "description": "backend.blog_product.api.views",
+        "peekOfCode": "def get_comment_product(request):\n    try:\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)\n        decoded_token = refresh_token.payload\n        user_get = User.objects.get(id = decoded_token['user_id'])\n        rawSql =  query_raw.QUERY_GET_COMMENT_PRODUCT_WITH_USER\n    except:\n        user_get = False\n        rawSql = query_raw.QUERY_GET_COMMENT_PRODUCT_NOT_USER",
+        "detail": "backend.blog_product.api.views",
+        "documentation": {}
+    },
+    {
+        "label": "post_comment_product",
+        "kind": 2,
+        "importPath": "backend.blog_product.api.views",
+        "description": "backend.blog_product.api.views",
+        "peekOfCode": "def post_comment_product( request):\n    response = Response()\n    try:\n        data_request = json.loads(request.body)\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)\n        decoded_token = refresh_token.payload\n        user_comment =  User.objects.get(id = decoded_token['user_id'])\n        user_comment_photo = user_comment.photo\n        user_comment_email = user_comment.email",
+        "detail": "backend.blog_product.api.views",
+        "documentation": {}
+    },
+    {
         "label": "path_upload_image",
         "kind": 5,
         "importPath": "backend.blog_product.api.views",
         "description": "backend.blog_product.api.views",
-        "peekOfCode": "path_upload_image = str(settings.BASE_DIR)+\"/media/photos\"\npath_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass BlogViewSet (viewsets.ModelViewSet):\n    queryset = Blog.objects.all()\n    serializer_class = BlogSerializer\n    # ---------------------------------------------------------------------------- #\n    #                              GET BLOG OF PRODUCT                             #\n    # ---------------------------------------------------------------------------- #\n    @action(method = ['GET'], detail = False, url_path = 'blog', url_name='get_blog_product')\n    def get_blog_product(self, request, *arg, **kwargs):",
+        "peekOfCode": "path_upload_image = str(settings.BASE_DIR)+\"/media/photos\"\npath_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass BlogViewSet (viewsets.ModelViewSet):\n    queryset = Blog.objects.all()\n    serializer_class = BlogSerializer\n    # ---------------------------------------------------------------------------- #\n    #                                   POST BLOG                                  #\n    # ---------------------------------------------------------------------------- #\n    @action(method = ['POST'], detail = False, url_path = 'blog', url_name = 'post_blog')\n    def post_blog(self , request, *arg, **kwargs):",
         "detail": "backend.blog_product.api.views",
         "documentation": {}
     },
@@ -4068,7 +4384,7 @@
         "kind": 5,
         "importPath": "backend.blog_product.api.views",
         "description": "backend.blog_product.api.views",
-        "peekOfCode": "path_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass BlogViewSet (viewsets.ModelViewSet):\n    queryset = Blog.objects.all()\n    serializer_class = BlogSerializer\n    # ---------------------------------------------------------------------------- #\n    #                              GET BLOG OF PRODUCT                             #\n    # ---------------------------------------------------------------------------- #\n    @action(method = ['GET'], detail = False, url_path = 'blog', url_name='get_blog_product')\n    def get_blog_product(self, request, *arg, **kwargs):\n        sqlRaw = query_raw.QUERY_SQL_GET_BLOG_OF_PRODUCT",
+        "peekOfCode": "path_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass BlogViewSet (viewsets.ModelViewSet):\n    queryset = Blog.objects.all()\n    serializer_class = BlogSerializer\n    # ---------------------------------------------------------------------------- #\n    #                                   POST BLOG                                  #\n    # ---------------------------------------------------------------------------- #\n    @action(method = ['POST'], detail = False, url_path = 'blog', url_name = 'post_blog')\n    def post_blog(self , request, *arg, **kwargs):\n        # ----------------------- handle file is video or image ---------------------- #",
         "detail": "backend.blog_product.api.views",
         "documentation": {}
     },
@@ -4109,11 +4425,119 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0005_remove_comment_parent",
+        "description": "backend.blog_product.migrations.0005_remove_comment_parent",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0004_comment_user_email'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='comment',\n            name='parent',\n        ),\n    ]",
+        "detail": "backend.blog_product.migrations.0005_remove_comment_parent",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0006_comment_parent",
+        "description": "backend.blog_product.migrations.0006_comment_parent",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0005_remove_comment_parent'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='comment',\n            name='parent',\n            field=mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='comment_children', to='blog_product.comment'),\n        ),",
+        "detail": "backend.blog_product.migrations.0006_comment_parent",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0007_alter_comment_parent",
+        "description": "backend.blog_product.migrations.0007_alter_comment_parent",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0006_comment_parent'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='comment',\n            name='parent',\n            field=models.IntegerField(null=True),\n        ),",
+        "detail": "backend.blog_product.migrations.0007_alter_comment_parent",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0008_alter_comment_parent",
+        "description": "backend.blog_product.migrations.0008_alter_comment_parent",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0007_alter_comment_parent'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='comment',\n            name='parent',\n            field=mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='blog_product.comment'),\n        ),",
+        "detail": "backend.blog_product.migrations.0008_alter_comment_parent",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0009_auto_20230411_0624",
+        "description": "backend.blog_product.migrations.0009_auto_20230411_0624",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0008_alter_comment_parent'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='blog',\n            name='isEdit',\n            field=models.DateTimeField(null=True),\n        ),",
+        "detail": "backend.blog_product.migrations.0009_auto_20230411_0624",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0010_rename_isedit_comment_is_edit",
+        "description": "backend.blog_product.migrations.0010_rename_isedit_comment_is_edit",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0009_auto_20230411_0624'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='comment',\n            old_name='isEdit',\n            new_name='is_edit',\n        ),",
+        "detail": "backend.blog_product.migrations.0010_rename_isedit_comment_is_edit",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0011_auto_20230412_0408",
+        "description": "backend.blog_product.migrations.0011_auto_20230412_0408",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('product', '0005_delete_heart'),\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n        ('blog_product', '0010_rename_isedit_comment_is_edit'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='heart',\n            name='blog_id',",
+        "detail": "backend.blog_product.migrations.0011_auto_20230412_0408",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0012_alter_media_comment_type",
+        "description": "backend.blog_product.migrations.0012_alter_media_comment_type",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0011_auto_20230412_0408'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='media_comment',\n            name='type',\n            field=models.BooleanField(),\n        ),",
+        "detail": "backend.blog_product.migrations.0012_alter_media_comment_type",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0013_auto_20230412_0909",
+        "description": "backend.blog_product.migrations.0013_auto_20230412_0909",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('product', '0005_delete_heart'),\n        ('blog_product', '0012_alter_media_comment_type'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='comment',\n            name='product_id',\n            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='product.product'),",
+        "detail": "backend.blog_product.migrations.0013_auto_20230412_0909",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0014_auto_20230413_0304",
+        "description": "backend.blog_product.migrations.0014_auto_20230413_0304",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0013_auto_20230412_0909'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='comment',\n            name='information_customer',\n            field=models.CharField(max_length=500, null=True),\n        ),",
+        "detail": "backend.blog_product.migrations.0014_auto_20230413_0304",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0015_alter_comment_user_id",
+        "description": "backend.blog_product.migrations.0015_alter_comment_user_id",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        migrations.swappable_dependency(settings.AUTH_USER_MODEL),\n        ('blog_product', '0014_auto_20230413_0304'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='comment',\n            name='user_id',\n            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='comments', to=settings.AUTH_USER_MODEL),",
+        "detail": "backend.blog_product.migrations.0015_alter_comment_user_id",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.blog_product.migrations.0016_alter_comment_user_profile",
+        "description": "backend.blog_product.migrations.0016_alter_comment_user_profile",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('blog_product', '0015_alter_comment_user_id'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='comment',\n            name='user_profile',\n            field=models.CharField(max_length=500, null=True),\n        ),",
+        "detail": "backend.blog_product.migrations.0016_alter_comment_user_profile",
+        "documentation": {}
+    },
+    {
         "label": "BlogAdmin",
         "kind": 6,
         "importPath": "backend.blog_product.admin",
         "description": "backend.blog_product.admin",
-        "peekOfCode": "class BlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'title')\nclass CommentAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'content' ,'blog_id' , 'user_id','level')\nclass PhotoBlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name' , 'file' ,'blog_id')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)",
+        "peekOfCode": "class BlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'title')\nclass CommentAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'content' ,'blog_id' , 'user_id','level' ,'parent')\nclass PhotoBlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name' , 'file' ,'blog_id')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nclass MediaCommentAdmin(admin.ModelAdmin):\n    list_displau = ('id' , 'file' , 'name' , 'type' , 'comment_id')",
         "detail": "backend.blog_product.admin",
         "documentation": {}
     },
@@ -4122,7 +4546,7 @@
         "kind": 6,
         "importPath": "backend.blog_product.admin",
         "description": "backend.blog_product.admin",
-        "peekOfCode": "class CommentAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'parent' , 'content' ,'blog_id' , 'user_id','level')\nclass PhotoBlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name' , 'file' ,'blog_id')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)\nadmin.site.register(Photo_blog,PhotoBlogAdmin)\nadmin.site.register(Heart,HeartAdmin)",
+        "peekOfCode": "class CommentAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'content' ,'blog_id' , 'user_id','level' ,'parent')\nclass PhotoBlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name' , 'file' ,'blog_id')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nclass MediaCommentAdmin(admin.ModelAdmin):\n    list_displau = ('id' , 'file' , 'name' , 'type' , 'comment_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)",
         "detail": "backend.blog_product.admin",
         "documentation": {}
     },
@@ -4131,7 +4555,7 @@
         "kind": 6,
         "importPath": "backend.blog_product.admin",
         "description": "backend.blog_product.admin",
-        "peekOfCode": "class PhotoBlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name' , 'file' ,'blog_id')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)\nadmin.site.register(Photo_blog,PhotoBlogAdmin)\nadmin.site.register(Heart,HeartAdmin)",
+        "peekOfCode": "class PhotoBlogAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'name' , 'file' ,'blog_id')\nclass HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nclass MediaCommentAdmin(admin.ModelAdmin):\n    list_displau = ('id' , 'file' , 'name' , 'type' , 'comment_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)\nadmin.site.register(Photo_blog,PhotoBlogAdmin)\nadmin.site.register(Heart,HeartAdmin)",
         "detail": "backend.blog_product.admin",
         "documentation": {}
     },
@@ -4140,7 +4564,16 @@
         "kind": 6,
         "importPath": "backend.blog_product.admin",
         "description": "backend.blog_product.admin",
-        "peekOfCode": "class HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)\nadmin.site.register(Photo_blog,PhotoBlogAdmin)\nadmin.site.register(Heart,HeartAdmin)",
+        "peekOfCode": "class HeartAdmin(admin.ModelAdmin):\n    list_display = ('id' , 'user_id' , 'product_id')\nclass MediaCommentAdmin(admin.ModelAdmin):\n    list_displau = ('id' , 'file' , 'name' , 'type' , 'comment_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)\nadmin.site.register(Photo_blog,PhotoBlogAdmin)\nadmin.site.register(Heart,HeartAdmin)\nadmin.site.register(Media_Comment,MediaCommentAdmin)",
+        "detail": "backend.blog_product.admin",
+        "documentation": {}
+    },
+    {
+        "label": "MediaCommentAdmin",
+        "kind": 6,
+        "importPath": "backend.blog_product.admin",
+        "description": "backend.blog_product.admin",
+        "peekOfCode": "class MediaCommentAdmin(admin.ModelAdmin):\n    list_displau = ('id' , 'file' , 'name' , 'type' , 'comment_id')\nadmin.site.register(Blog,BlogAdmin)\nadmin.site.register(Comment,CommentAdmin)\nadmin.site.register(Photo_blog,PhotoBlogAdmin)\nadmin.site.register(Heart,HeartAdmin)\nadmin.site.register(Media_Comment,MediaCommentAdmin)",
         "detail": "backend.blog_product.admin",
         "documentation": {}
     },
@@ -4158,7 +4591,7 @@
         "kind": 6,
         "importPath": "backend.blog_product.models",
         "description": "backend.blog_product.models",
-        "peekOfCode": "class Blog(models.Model):\n    id=uuid4()\n    title = models.CharField(max_length=200, blank=True, null=True)\n    content = models.TextField()\n    user_id = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    product_id = models.ForeignKey(Product, related_name='products', null= True, on_delete=models.CASCADE)\n    def __str__(self):\n        return str(self.id)\n    def __unicode__(self):",
+        "peekOfCode": "class Blog(models.Model):\n    id=uuid4()\n    title = models.CharField(max_length=200, blank=True, null=True)\n    content = models.CharField(max_length = 8000)\n    user_id = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    product_id = models.ForeignKey(Product, related_name='products', null= True, on_delete=models.CASCADE)\n    isEdit = models.DateTimeField(null = True)\n    def __str__(self):\n        return str(self.id)",
         "detail": "backend.blog_product.models",
         "documentation": {}
     },
@@ -4176,7 +4609,16 @@
         "kind": 6,
         "importPath": "backend.blog_product.models",
         "description": "backend.blog_product.models",
-        "peekOfCode": "class Comment(MPTTModel):\n    id = uuid4()\n    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')\n    content = models.TextField()\n    heart = models.IntegerField()\n    blog_id = models.ForeignKey(Blog, related_name='comments', on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    user_id = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)\n    user_profile = models.TextField()\n    user_email = models.CharField(max_length=200)",
+        "peekOfCode": "class Comment(MPTTModel):\n    id = uuid4()\n    parent = TreeForeignKey('self', on_delete = models.CASCADE, null = True, blank = True, related_name = 'children')\n    content = models.CharField(max_length = 5000)\n    heart = models.IntegerField()\n    blog_id = models.ForeignKey(Blog, related_name='comments',null=True, on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    user_id = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE , null = True)\n    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, null=True,blank=True,related_name='comments')\n    user_profile = models.CharField(max_length = 500,null = True)",
+        "detail": "backend.blog_product.models",
+        "documentation": {}
+    },
+    {
+        "label": "Media_Comment",
+        "kind": 6,
+        "importPath": "backend.blog_product.models",
+        "description": "backend.blog_product.models",
+        "peekOfCode": "class Media_Comment(models.Model):\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    name = models.CharField(max_length = 200)\n    file = models.CharField(max_length = 200)\n    type = models.BooleanField()\n    comment_id = models.ForeignKey(Comment, related_name='media_comments', on_delete=models.CASCADE)\nclass Heart( models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    type = models.IntegerField()\n    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True,blank=True,related_name='hearts')",
         "detail": "backend.blog_product.models",
         "documentation": {}
     },
@@ -4185,7 +4627,7 @@
         "kind": 6,
         "importPath": "backend.blog_product.models",
         "description": "backend.blog_product.models",
-        "peekOfCode": "class Heart( models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    type = models.IntegerField()\n    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')\n    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')\n    blog_id = models.ForeignKey(Blog, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')\n    comment_id = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True,blank=True,related_name='hearts')",
+        "peekOfCode": "class Heart( models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    type = models.IntegerField()\n    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True,blank=True,related_name='hearts')\n    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, null=True,blank=True,related_name='hearts')\n    blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True,blank=True,related_name='hearts')\n    comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True,blank=True,related_name='hearts')",
         "detail": "backend.blog_product.models",
         "documentation": {}
     },
@@ -4194,7 +4636,7 @@
         "kind": 5,
         "importPath": "backend.blog_product.models",
         "description": "backend.blog_product.models",
-        "peekOfCode": "path_upload_image = str(settings.BASE_DIR)+\"/media/photos\"\npath_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\n# Create your models here.\nclass Blog(models.Model):\n    id=uuid4()\n    title = models.CharField(max_length=200, blank=True, null=True)\n    content = models.TextField()\n    user_id = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    product_id = models.ForeignKey(Product, related_name='products', null= True, on_delete=models.CASCADE)",
+        "peekOfCode": "path_upload_image = str(settings.BASE_DIR)+\"/media/photos\"\npath_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\n# Create your models here.\nclass Blog(models.Model):\n    id=uuid4()\n    title = models.CharField(max_length=200, blank=True, null=True)\n    content = models.CharField(max_length = 8000)\n    user_id = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    product_id = models.ForeignKey(Product, related_name='products', null= True, on_delete=models.CASCADE)",
         "detail": "backend.blog_product.models",
         "documentation": {}
     },
@@ -4203,7 +4645,7 @@
         "kind": 5,
         "importPath": "backend.blog_product.models",
         "description": "backend.blog_product.models",
-        "peekOfCode": "path_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\n# Create your models here.\nclass Blog(models.Model):\n    id=uuid4()\n    title = models.CharField(max_length=200, blank=True, null=True)\n    content = models.TextField()\n    user_id = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    product_id = models.ForeignKey(Product, related_name='products', null= True, on_delete=models.CASCADE)\n    def __str__(self):",
+        "peekOfCode": "path_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\n# Create your models here.\nclass Blog(models.Model):\n    id=uuid4()\n    title = models.CharField(max_length=200, blank=True, null=True)\n    content = models.CharField(max_length = 8000)\n    user_id = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)\n    date_create = models.DateTimeField(auto_now=True, auto_now_add=False)\n    product_id = models.ForeignKey(Product, related_name='products', null= True, on_delete=models.CASCADE)\n    isEdit = models.DateTimeField(null = True)",
         "detail": "backend.blog_product.models",
         "documentation": {}
     },
@@ -5715,7 +6157,7 @@
         "kind": 6,
         "importPath": "backend.product.models",
         "description": "backend.product.models",
-        "peekOfCode": "class Category(MPTTModel):\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    slug = models.CharField(null=False,max_length=50,unique=True)\n    name=models.CharField(max_length=50)\n    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')\n    def __str__(self):\n        return self.name\nclass Product(models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    slug = models.CharField(null=False,max_length=50)",
+        "peekOfCode": "class Category(MPTTModel):\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    slug = models.CharField(null=False,max_length=50,unique=True)\n    name=models.CharField(max_length=50)\n    parent = TreeForeignKey('self', on_delete = models.CASCADE, null = True, blank = True, related_name = 'children')\n    def __str__(self):\n        return self.name\nclass Product(models.Model):\n    id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    slug = models.CharField(null=False,max_length=50)",
         "detail": "backend.product.models",
         "documentation": {}
     },

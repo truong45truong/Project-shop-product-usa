@@ -32,6 +32,8 @@ class CommentRawSerializer(serializers.Serializer):
     user_email =serializers.CharField()
     count_comment_child = serializers.IntegerField()
     status_heart_comment = serializers.BooleanField()
+    comment_is_edit = serializers.DateTimeField()
+    file_media_comment = serializers.CharField()
 # ---------------------------------------------------------------------------- #
 #                                  Photo Blog                                  #
 # ---------------------------------------------------------------------------- #
