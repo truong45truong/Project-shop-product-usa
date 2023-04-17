@@ -102,4 +102,14 @@ $font: 'Poppins', sans-serif;
 
   ;
 }
+@media only screen and (max-width: 524px)
+{
+  .title-cart {
+      font: {
+      size: 6vh;
+      family: $font;
+      weight: 600;
+    }
+  }
+}
 </style>

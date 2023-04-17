@@ -167,7 +167,7 @@ import ProductOrder from './../product/ProductOrder.vue'
 export default ({
     name: 'OrderSelectedProductExpand',
     props: {
-
+        msg : ''
     },
     data: () => ({
         isActiveInforOrder: {

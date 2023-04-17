@@ -39,8 +39,11 @@ export default ({
     methods : {
         
     },
-    mounted (){
-
+    created (){
+        this.date = this.date_prop
+        this.hour = this.hour_prop
+        this.mins = this.mins_prop
+        this.secs = this.secs_prop
         let time = new Date("2023-02-05T17:30:00");
         setInterval(() => {
             const currentTime = new Date();
@@ -114,12 +117,7 @@ export default ({
             }
         }, 1000);
     },
-    created(){
-        this.date = this.date_prop
-        this.hour = this.hour_prop
-        this.mins = this.mins_prop
-        this.secs = this.secs_prop
-    }
+
     
 })
 </script>

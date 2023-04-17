@@ -3355,7 +3355,7 @@
         "kind": 6,
         "importPath": "blog_product.api.query_raw",
         "description": "blog_product.api.query_raw",
-        "peekOfCode": "class HandleSqlRaw:\n    def __init__(self,raw_query):\n        self.raw_query = raw_query\n    def getQuery( self):\n        return self.raw_query",
+        "peekOfCode": "class HandleSqlRaw:\n    def __init__(self,raw_query):\n        self.raw_query = raw_query\n    def addLimit(self,start,end):\n        self.raw_query += \"\\n LIMIT\" + \"\\n {limit_filter_start}, {limit_filter_end}\"\n        self.raw_query = self.raw_query.format(\n               limit_filter_start =  start ,\n            limit_filter_end = end,\n        )\n    def getQuery( self):",
         "detail": "blog_product.api.query_raw",
         "documentation": {}
     },
@@ -3607,7 +3607,7 @@
         "kind": 2,
         "importPath": "blog_product.api.views",
         "description": "blog_product.api.views",
-        "peekOfCode": "def get_comment_product(request):\n    try:\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)\n        decoded_token = refresh_token.payload\n        user_get = User.objects.get(id = decoded_token['user_id'])\n        rawSql =  query_raw.QUERY_GET_COMMENT_PRODUCT_WITH_USER\n    except:\n        user_get = False\n        rawSql = query_raw.QUERY_GET_COMMENT_PRODUCT_NOT_USER",
+        "peekOfCode": "def get_comment_product(request):\n    try:\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)\n        decoded_token = refresh_token.payload\n        start_limit = request.GET['start_limit']\n        end_limit = request.GET['end_limit']\n        user_get = User.objects.get(id = decoded_token['user_id'])\n        rawSql =  query_raw.QUERY_GET_COMMENT_PRODUCT_WITH_USER\n    except:",
         "detail": "blog_product.api.views",
         "documentation": {}
     },

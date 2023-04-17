@@ -133,7 +133,9 @@ export default {
       })
       await CommentApiService.getCommentProduct({
         params : {
-          product_slug : this.route.params.slug
+          product_slug : this.route.params.slug,
+          start_limit : 0,
+          end_limit : 4,
         }
       }).then(response => {
         console.log('response comment',response)

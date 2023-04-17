@@ -25,9 +25,10 @@ export default {
     name: 'ListMediaComment',
     props: {
         msg: String,
-        data_files : [],
+        data_files : '',
         comment_id : ''
     },
+    emits: ['setPositionMedia'],
     components: {
         ImageSendComment,
         Pagination,
@@ -89,7 +90,15 @@ export default {
     height:auto;
 }
 .layout-list-media  {
-    width: 500px;
+    max-width: 500px;
     overflow-x: hidden;
+}
+@media only screen and (max-width: 624px) {
+    .img-media-comment {
+        max-width: 5rem;
+    }
+    .media-comment {
+        max-width: 5rem;
+    }
 }
 </style>

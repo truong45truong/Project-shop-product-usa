@@ -391,6 +391,11 @@ QUERY_GET_COMMENT_PRODUCT_NOT_USER = """
 class HandleSqlRaw:
     def __init__(self,raw_query):
         self.raw_query = raw_query
-        
+    def addLimit(self,start,end):
+        self.raw_query += "\n LIMIT" + "\n {limit_filter_start}, {limit_filter_end}"
+        self.raw_query = self.raw_query.format(
+               limit_filter_start =  start ,
+            limit_filter_end = end,
+        )
     def getQuery( self):
         return self.raw_query

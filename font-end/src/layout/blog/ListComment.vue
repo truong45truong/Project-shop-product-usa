@@ -1,92 +1,94 @@
 <template>
     <div class="d-flex flex-column" id="list-comment">
-        <div v-for="index in number_comment_load">
-            <div :id="`${comments[index - 1].id}`" class="m-4 position-relative">
-                <div class="d-flex">
-                    <div class="d-flex flex-column">
-                        <img v-if="comments[index - 1].user_profile != null" class="img-author-comment" 
-                            :src="'http://127.0.0.1:8000/' + `${comments[index - 1].user_profile}`"
-                            alt="Resized Image" 
-                        />
-                        <img v-if="comments[index - 1].user_profile == null" class="img-author-comment" 
-                            src="./../../assets/images/user.png"
-                            alt="Resized Image" 
-                        />
-                    </div>
-                    <div class="d-flex flex-column" :id="'container-cmt-'+comments[index - 1].id">
-                        <p class="m-2 mt-3 p-2 px-4 bg-light rounded comment-blog">
-                        <p class="text-user-email mb-1"><i><b>{{ comments[index - 1].user_email }}</b></i></p>
-                        <hr class="my-1">
-                        <p :id="'content-cmt-' + `${comments[index - 1].id}`">{{ comments[index - 1].content }}</p>
+        <div v-for="index in comments" :id="`${index.id}`" class="m-4 position-relative" :key="index.id">
+            <div class="d-flex container-comment">
+                <div class="d-flex flex-column layout-avatar">
+                    <img v-if="index.user_profile != null" class="img-author-comment" 
+                        :src="'http://127.0.0.1:8000/' + `${index.user_profile}`"
+                        alt="Resized Image" 
+                    />
+                    <img v-if="index.user_profile == null" class="img-author-comment" 
+                        src="./../../assets/images/user.png"
+                        alt="Resized Image" 
+                    />
+                </div>
+                <div class="d-flex flex-column" :id="'container-cmt-'+index.id">
+                    <p class="m-2 mt-3 p-2 px-4 bg-light rounded comment-blog">
+                    <p class="text-user-email mb-1"><i><b>{{ index.user_email }}</b></i></p>
+                    <hr class="my-1">
+                    <p :id="'content-cmt-' + `${index.id}`">{{ index.content }}</p>
+                    </p>
+                    <div class="d-flex">
+                        <p class="mx-2 text-white show-reply" @click="heartComment(index.id)">
+                            <span :id="'number-heart-' + `${index.id}`" class="ms-1 me-1">{{
+                                index.number_heart }}</span>
+                            <i class="fa-solid fa-heart me-2 text-white"></i>
+                            <i :id="'heart-' + `${index.id}`"
+                                :value="index.status_heart_comment == false ? 0 : 1">
+                                <b v-if="index.status_heart_comment == false">Yêu thích</b>
+                                <b v-if="index.status_heart_comment == true"> Đã yêu thích </b>
+                            </i>
                         </p>
-                        <div class="d-flex">
-                            <p class="mx-2 text-white show-reply" @click="heartComment(comments[index - 1].id)">
-                                <span :id="'number-heart-' + `${comments[index - 1].id}`" class="ms-1 me-1">{{
-                                    comments[index - 1].number_heart }}</span>
-                                <i class="fa-solid fa-heart me-2 text-white"></i>
-                                <i :id="'heart-' + `${comments[index - 1].id}`"
-                                    :value="comments[index - 1].status_heart_comment == false ? 0 : 1">
-                                    <b v-if="comments[index - 1].status_heart_comment == false">Yêu thích</b>
-                                    <b v-if="comments[index - 1].status_heart_comment == true"> Đã yêu thích </b>
-                                </i>
-                            </p>
-                            <p v-if="isCommentChild(comments[index - 1]['id']) == true" class="mx-2 text-white show-reply"
-                                :value="`${comments[index - 1]['id']}`"
-                                @click="checkCommentChild(comments[index - 1]['id'], comments[index - 1]['level'], null)">
-                                <i><b class="action-show">
-                                        Xem
-                                        <span class="text-white"> {{ comments[index - 1].count_comment_child }} </span>
-                                        phản hồi
-                                    </b></i>
-                            </p>
-                        </div>
-                        <p v-if="comments[index - 1].comment_is_edit != null" class="text-white"
-                            :id="'edit-datetime-' + `${comments[index - 1].id}`">
-                            Chỉnh sửa : {{ converDatime(comments[index - 1].comment_is_edit )}}
+                        <p v-if="isCommentChild(index['id']) == true" class="mx-2 text-white show-reply"
+                            :value="`${index['id']}`"
+                            @click="checkCommentChild(index['id'], index['level'], null)">
+                            <i><b class="action-show">
+                                    Xem
+                                    <span class="text-white"> {{ index.count_comment_child }} </span>
+                                    phản hồi
+                                </b></i>
                         </p>
-                        <p v-if="comments[index - 1].comment_is_edit == null" class="text-white"
-                            :id="'edit-datetime-' + `${comments[index - 1].id}`">
-                            Ngày đăng : {{ converDatime(comments[index - 1].date_create )}}
+                    </div>
+                    <p v-if="index.comment_is_edit != null" class="text-white edit-text"
+                        :id="'edit-datetime-' + `${index.id}`">
+                        Chỉnh sửa : {{ converDatime(index.comment_is_edit )}}
+                    </p>
+                    <p v-if="index.comment_is_edit == null" class="text-white edit-text"
+                        :id="'edit-datetime-' + `${index.id}`">
+                        Ngày đăng : {{ converDatime(index.date_create )}}
+                    </p>
+                    <div class="d-flex">
+                        <font-awesome-icon icon="fa-regular fa-comment" class="m-0 ms-4 text-white" />
+                        <p class="mx-2 text-white comment-reply" :value="`${index['id']}`"
+                            @click="CommentPost(index['id'], index.user_email)">
+                            <i><b>Trả lời</b></i>
                         </p>
-                        <div class="d-flex">
-                            <font-awesome-icon icon="fa-regular fa-comment" class="m-0 ms-4 text-white" />
-                            <p class="mx-2 text-white comment-reply" :value="`${comments[index - 1]['id']}`"
-                                @click="CommentPost(comments[index - 1]['id'], comments[index - 1].user_email)">
-                                <i><b>Trả lời</b></i>
-                            </p>
-                        </div>
-                        <ListMediaComment v-if="comments[index - 1].file_media_comment != null" 
-                        :data_files ="comments[index - 1].file_media_comment"  />
                     </div>
-                    <div class="">
-                        <button class="text-white btn-option-comment text-center position-relative mt-3"
-                            @click="isShowOptionExpand(comments[index - 1]['id'], comments[index - 1].user_email, comments[index - 1].content)">
-                            <p class="mb-2 text-absolute position-absolute">...</p>
-                        </button>
-                    </div>
+                    <ListMediaComment v-if="index.file_media_comment != null" 
+                    :data_files ="index.file_media_comment"  />
+                </div>
+                <div class="">
+                    <button class="text-white btn-option-comment text-center position-relative mt-3"
+                        @click="isShowOptionExpand(index['id'], index.user_email, index.content)">
+                        <p class="mb-2 text-absolute position-absolute">...</p>
+                    </button>
                 </div>
             </div>
         </div>
-        <div  v-if="isShowMoreComment && comments.length > 0" class="text-center" @click="upNumberCommentShow">
-            <p class="text-white btn-more-comment">Xem thêm bình luận</p>
+        
+        <div  v-if="comments.length > 0" class="text-center" >
+            <p class="text-white btn-more-comment" v-if="isShowMoreComment" @click="upNumberCommentShow">Xem thêm bình luận</p>
+            <p class="text-white " v-if="!isShowMoreComment" >Đã hiển thị tất cả bình luận</p>
+            
         </div>
         <div v-if="comments.length == 0" class="text-center">
             <p class="my-4 text-white">Chưa có bình luận cho sản phẩm này</p>
         </div>
         <div id="layout-comment">
-            <div class="bg-white" id="comment-user-blog">
-                <div class="d-flex align-items-center">
+            <div class="bg-white mt-2" id="comment-user-blog">
+                <div class="d-flex  w-100">
                     <div class="d-flex">
                         <img v-if="authenticated" class="img-author-comment" :src="profilePhoto" alt="Resized Image" />
                     </div>
                     <div class="content-comment w-100">
-                        <div v-if="userOfCommentSelected != false" class="d-flex align-items-center mb-1">
-                            <p class="text-dark m-0 ms-3"><b><i>Trả lời bình luận : {{ userOfCommentSelected }}</i></b></p>
-                            <font-awesome-icon icon="fa-solid fa-xmark" class="ms-3 text-dark comment-reply"
+                        <div v-if="userOfCommentSelected != false" class="d-flex align-items-center justify-content-between mb-1">
+                            <p class="text-dark m-0 ms-3"><b><i class="text-reply">Trả lời bình luận : {{ userOfCommentSelected }}</i></b></p>
+                            <font-awesome-icon icon="fa-solid fa-xmark" class="ms-3 text-dark cancel-btn me-3"
                                 @click="CancelReplyComment" />
                         </div>
-                        <input type="text" v-model="contentPostComment" placeholder="Viết bình luận ..."
-                            class="w-100 text-input-comment">
+                        <textarea v-model="contentPostComment" placeholder="Viết bình luận ..."
+                            class="w-100 text-input-comment" v-on:keyup.enter="PostComment">
+                        </textarea>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -166,11 +168,15 @@
                     </template>
                 </Carousel>
             </div>
-            <EditComment ref="editComment" id="edit-comment-object" @hide="hideEditComment" @upload="uploadEditComment"
-                :class="[isEditComment == false ? 'd-none' : 'show-edit-comment']" />
-            <OptionExpandComment ref="optionExpandComment" @hide="hideOptionExpand" @editComment="editComment"
-                @deleteComment="deleteComment" id="option-expand-cmt"
-                :class="[isOptionExpand == false ? 'hide-option-expand' : 'show-option-expand']" />
+            <div id="layout-edit-comment">
+                <EditComment ref="editComment" id="edit-comment-object" @hide="hideEditComment" @upload="uploadEditComment"
+                    :class="[isEditComment == false ? 'd-none' : 'show-edit-comment mt-2']" />
+            </div>
+            <div id="layout-option-expand">
+                <OptionExpandComment ref="optionExpandComment" @hide="hideOptionExpand" @editComment="editComment"
+                    @deleteComment="deleteComment" id="option-expand-cmt"
+                    :class="[isOptionExpand == false ? 'hide-option-expand' : 'show-option-expand']" />
+            </div>
         </div>
         <div id="list-media-comment-child" class="d-non">
             <div v-for="item in listMediaCommentChild" :id="'media-cmt-'+ item.id" class="d-inline" >
@@ -206,6 +212,10 @@ export default {
                 value: [],
                 isShow : {}
             },
+            expand_line_resize : 16,
+            commentComponent : '',
+            optionExpandCmt : '',
+            editCommentCoponent: '',
             isShowInputComment: false,
             isComment: false,
             userOfCommentSelected: false,
@@ -213,8 +223,8 @@ export default {
             commentSelected: false,
             contentPostComment: '',
             comments: [],
-            indexload: 1,
-            number_comment_load: 3,
+            indexload: 4,
+            number_comment_load: 10,
             isShowMoreComment: true,
             isOptionExpand: false,
             isEditComment: false,
@@ -302,17 +312,10 @@ export default {
 
         },
         /* ----------------------- METHOD RESET STATUS COMMENT ---------------------- */
-        resetStatus(comment_id) {
-            let comment_current = document.getElementById(this.commentSelected)
-            comment_current.setAttribute('class', "")
-        },
-        /* --------------------- METHOD CANCEL SELECTED COMMENT --------------------- */
         CancelReplyComment() {
 
             if (this.commentSelected != false) {
                 let comment_current = document.getElementById(this.commentSelected);
-                this.resetStatus(this.commentSelected)
-                comment_current.setAttribute('class', "");
             }
             let commentUserBlog = document.getElementById("comment-user-blog")
             let main = document.getElementById('layout-comment')
@@ -336,10 +339,10 @@ export default {
         },
         /* ------------------------- METHOD SELECTED COMMENT ------------------------ */
         CommentPost(comment_id, user_comment) {
+            this.checkIsComment()
             this.hideEditComment()
             let commentUserBlog = document.getElementById("comment-user-blog")
             if (this.commentSelected != comment_id && this.commentSelected != false) {
-                this.resetStatus(comment_id)
             }
             else {
                 this.isShowInputComment = !this.isShowInputComment
@@ -347,13 +350,11 @@ export default {
             console.log('this.comment_id : ', comment_id)
             let comment_activate = document.getElementById(comment_id)
             if (this.isShowInputComment == true) {
-                comment_activate.setAttribute('class', "")
                 this.commentSelected = comment_id
                 this.userOfCommentSelected = user_comment
 
                 comment_activate.appendChild(commentUserBlog)
             } else {
-                comment_activate.setAttribute('class', "")
                 this.userOfCommentSelected = false;
                 this.commentSelected = false;
                 let commentUserBlog = document.getElementById("comment-user-blog")
@@ -493,7 +494,7 @@ export default {
                     
                     cmt_end = div_current_comment
                     let div_flex_1 = document.createElement("div")
-                    div_flex_1.setAttribute('class', 'd-flex')
+                    div_flex_1.setAttribute('class', 'd-flex container-comment w-100')
                     div_current_comment.appendChild(div_flex_1)
                     let line_canvas = document.createElement('div')
                     line_canvas.setAttribute('class', "line-number-child-comment")
@@ -645,7 +646,7 @@ export default {
 
 
                     var flex_flex_2_p = document.createElement('p')
-                    flex_flex_2_p.setAttribute('class', 'text-white')
+                    flex_flex_2_p.setAttribute('class', 'text-white edit-text')
                     flex_flex_2_p.setAttribute('id', 'edit-datetime-' + index.id)
                     if (index.comment_is_edit != null) {
                         flex_flex_2_p.innerText = "Chỉnh sửa : " + this.converDatime(index.comment_is_edit)
@@ -671,7 +672,7 @@ export default {
                 var style = window.getComputedStyle(img_au);
 
                 var height = parseInt(style.getPropertyValue('height'));
-                line_canvas.style.height = height/2 +16 + "px"
+                line_canvas.style.height = height/2 + this.expand_line_resize + "px"
             }
             console.log("check comment child end")
         },
@@ -699,6 +700,7 @@ export default {
                         else {
                             console.log("comment post no parent", res)
                             this.comments.unshift(res.comment)
+                            this.appendListMediaNew(res.comment.id,res.comment.file_media_comment)
                             this.contentPostComment = ''
                             this.fileUpload = []
                         }
@@ -746,18 +748,27 @@ export default {
             console.log("PostComment end")
 
         },
-        upNumberCommentShow() {
-            this.indexload += 1
-            let number_comment = this.indexload * this.number_comment_load;
-            if (number_comment >= this.comments.length) {
-                this.number_comment_load = (this.comments.length )
-                this.isShowMoreComment = false
-            } else {
-                this.number_comment_load = number_comment
-            }
-            console.log('this.number_comment_load', this.number_comment_load)
+        async upNumberCommentShow() {
+            await CommentApiService.getCommentProduct({
+                params : {
+                product_slug : this.productSlug,
+                start_limit : this.indexload,
+                end_limit : this.number_comment_load,
+                }
+            }).then(response => {
+                if(this.number_comment_load > response.data.comments.length){
+                    this.comments  = [...this.comments,...response.data.comments]
+                    this.isShowMoreComment = false
+                }else {
+                    this.indexload += this.number_comment_load
+                    this.comments  = [...this.comments,...response.data.comments]
+                    console.log("this.comments",this.comments)
+                }
+                
+            })
         },
         isShowOptionExpand(cmt, email_user, content) {
+            this.checkIsOptionExpandCmt()
             this.isOptionExpand = true;
             this.getObjectOptionExpand(cmt)
             this.$refs.optionExpandComment.checkAuthentication(email_user)
@@ -770,6 +781,8 @@ export default {
             subObj.append(objectOptionExpand)
         },
         editComment(comment_id, content) {
+            this.checkIsEditComment()
+            this.CancelReplyComment()
             this.isEditComment = true
             this.$refs.editComment.initValue(comment_id, content)
             let objectOptionExpand = document.getElementById('edit-comment-object')
@@ -805,11 +818,15 @@ export default {
         deleteComment(cmt) {
             this.CancelReplyComment()
             this.cancelEditComment()
-            let commet_delete = document.getElementById(cmt)
-            this.comments = this.comments.filter( cmt => {
-                return cmt.id != cmt
+            
+            this.comments = this.comments.filter( comment => {
+                if(comment.id == cmt && comment.id > 0){
+                    let commet_delete = document.getElementById(cmt)
+                    commet_delete.remove()
+
+                }
+                return comment.id != cmt
             })
-            commet_delete.remove()
         },
         /* -------------------------- upload file selected -------------------------- */
         async uploadFile() {
@@ -889,31 +906,53 @@ export default {
             return result
                     
 
+        },
+        checkIsComment(){
+            if (document.getElementById('comment-user-blog') == null){
+                document.getElementById('layout-comment').appendChild(this.commentComponent)
+            }
+        },
+        checkIsOptionExpandCmt(){
+            if(document.getElementById('option-expand-cmt') == null){
+                document.getElementById('layout-option-expand').appendChild(this.optionExpandCmt)
+            }
+        },
+        checkIsEditComment(){
+            if(document.getElementById('edit-comment-object') == null){
+                document.getElementById('layout-edit-comment').appendChild(
+                    this.editCommentCoponent
+                )
+            }
         }
     },
     created() {
         this.profilePhoto = "http://127.0.0.1:8000" + this.getProfilePhoto
         this.comments = this.listComments
-        if(this.listComments.length < this.number_comment_load ){
-            this.number_comment_load = this.listComments.length
-        }
-        if(this.comments.length == 0){
-            
-        }
+    },
+    mounted(){
+        this.commentComponent = document.getElementById('comment-user-blog')
+        this.optionExpandCmt = document.getElementById('option-expand-cmt')
+        this.editCommentCoponent = document.getElementById('edit-comment-object')
+        if(window.innerWidth < 624) this.expand_line_resize = 26
+        window.addEventListener('resize',() => {
+            console.log('window.innerWidth',window.innerWidth)
+            if(window.innerWidth < 624)
+            this.expand_line_resize = 24
+            else {
+                this.expand_line_resize = 16
+            }
+        })
     }
 }
 </script>
 
 <style>
 .text-input-comment {
-    border: 0ch;
-    border-radius: 15px;
+    border: none !important;
     padding: 5px 10px;
+    margin-top: 15px;
 }
 
-.text-input-comment:focus {
-    border: none !important;
-}
 
 .send-icon-comment {
     font-size: 1.5rem;
@@ -977,6 +1016,9 @@ export default {
 
 .text-absolute {
     z-index: 999;
+}
+.cancel-btn {
+    cursor:pointer;
 }
 
 @keyframes showActivate {
@@ -1047,7 +1089,63 @@ export default {
     top:0%;
     background-color: rgb(172, 171, 171);
 }
-.content-comment {
-    max-width: 50%;
+.container-comment {
+    width:100% !important;
+    justify-content:flex-start !important;
+}
+@media only screen and (max-width: 624px)
+{   
+    .img-author-comment {
+        width:35px;
+        height:35px;
+    }
+
+  .text-user-email i b{
+    font-size: 14px;
+  }
+  .layout-list-media {
+    margin-left: 5px !important;
+  }
+  .comment-blog {
+    padding:5px 10px !important;
+  }
+  .comment-blog  p {
+    font-size: 13px;
+  }
+  .show-reply {
+    font-size: 13px;
+    width:100%;
+  }
+  .edit-text {
+    font-size: 13px;
+  }
+  .comment-reply {
+    width:100%;
+  }
+  .fa-comment {
+    margin-left: 10px !important;
+  }
+  .comment-reply i b {
+    font-size: 13px;
+  }
+  .svg-inline--fa  {
+    font-size: 13px;
+  }
+  .comment-level {
+    margin-left:4.2rem;
+  }
+  .layout-avatar {
+    justify-content:start;
+  }
+  .content-comment {
+    width:700px;
+  }
+  .text-reply {
+    font-size: 13px;
+    width: 100%;
+  }
+  .add-image-post {
+    font-size: 13px;
+  }
 }
 </style>

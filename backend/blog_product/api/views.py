@@ -457,6 +457,8 @@ def get_comment_product(request):
         jwtToken = request.COOKIES.get('refresh_token')
         refresh_token = RefreshToken(jwtToken)
         decoded_token = refresh_token.payload
+        start_limit = request.GET['start_limit']
+        end_limit = request.GET['end_limit']
         user_get = User.objects.get(id = decoded_token['user_id'])
         rawSql =  query_raw.QUERY_GET_COMMENT_PRODUCT_WITH_USER
     except:
@@ -466,7 +468,7 @@ def get_comment_product(request):
     try:
         product_slug = request.GET['product_slug']
         handleRawSql = HandleSqlRaw(rawSql)
-    
+        handleRawSql.addLimit(start_limit,end_limit)
         if product_slug not in '':
             if user_get == False:
                 queryset = Comment.objects.raw(handleRawSql.getQuery(),[product_slug])

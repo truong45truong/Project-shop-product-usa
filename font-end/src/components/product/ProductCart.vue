@@ -14,7 +14,7 @@
                 <p class="my-0 text-center btn-remove-item-in-cart text-center text-dark fw-bolder" @click="removeProductInCart">Xóa</p>
             </div>
         </div>
-        <div class="my-2 col-4 d-flex flex-column justify-content-between align-items-center ">
+        <div class="my-2 col-sm-4 d-flex flex-column justify-content-between align-items-center ">
                 <div class="d-flex justify-content-around">
                     <div class="w-25 text-center">
                         <div class="button-35 btn-down m-auto" @click="decliningQuantity">-</div>
@@ -256,5 +256,17 @@ export default ({
   z-index: 1;
   position: relative;
   top:-4px;
+}
+@media only screen and (max-width: 524px)
+{
+    .layout-img-product {
+        top:10%;
+        left:0%;
+    }
+    .card{
+        width: 100%;
+        height:fit-content !important;
+        padding-top: 15px;
+    }
 }
 </style>

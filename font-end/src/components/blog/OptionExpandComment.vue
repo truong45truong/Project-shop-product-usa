@@ -1,11 +1,11 @@
 <template>
-   <div class="shadow rounded position-relative px-3 layout-expand-cmt">
+   <div class="shadow rounded position-relative px-3 layout-expand-cmmt">
     <div class="d-flex mt-1 justify-content-end btn-hide" @click ='hide'>
-        <font-awesome-icon icon="fa-solid fa-xmark" class="text-white mb-0" />
+        <font-awesome-icon icon="fa-solid fa-xmark" class="text-dark mb-0" />
     </div>
-    <p class="text-white btn-option-expand mt-3"> Báo cáo bình luận</p>
-    <p v-if="isAuthentication" class="text-white btn-option-expand" @click='editComment'> Chỉnh sửa</p>
-    <p v-if="isAuthentication" class="text-white btn-option-expand" @click='deleteComment'> Xóa</p>
+    <p class="text-dark btn-option-expand mt-3"> Báo cáo bình luận</p>
+    <p v-if="isAuthentication" class="text-dark btn-option-expand" @click='editComment'> Chỉnh sửa</p>
+    <p v-if="isAuthentication" class="text-dark btn-option-expand" @click='deleteComment'> Xóa</p>
    </div>
 </template>
 <script>
@@ -74,10 +74,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.layout-expand-cmt {
+.layout-expand-cmmt {
     width:fit-content;
     height:fit-content;
-    background-color: rgba(100, 100, 100, 0.6);
+    background-color: white;
 }
 .btn-hide {
     cursor:pointer;

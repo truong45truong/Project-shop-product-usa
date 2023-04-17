@@ -5,7 +5,7 @@
         >
         <font-awesome-icon v-if="isShowDetailTotalSelectProduct" class="pull-down-detail fs-3 text-white"
             icon="fa-solid fa-angle-down" @click="showDetailTotalSelectedProduct" />
-        <div class="pull-up-detail-total text-center" @click="showExpandDetailTotalSelectedProduct">
+        <div class="text-center pull-up-detail-total" @click="showExpandDetailTotalSelectedProduct">
             <span v-if="!isExpandDetailTotalSelectProduct" class="text-white text-center w-100">
                 click để xem chi tiết sản phẩm đã chọn
             </span>
@@ -75,7 +75,7 @@ import OrderSelectedProductExpand from './OrderSelectedProductExpand.vue'
 export default ({
     name: 'OrderSelectedProduct',
     props: {
-
+        mgs : ''
     },
     data: () => ({
         isShowDetailTotalSelectProduct: true,
@@ -308,5 +308,23 @@ export default ({
 }
 .layout-expand-selected-product::-webkit-scrollbar {
   display: none;
+}
+@media only screen and (max-width: 524px)
+{
+    .pull-up-detail-total span {
+        font-size: 13px;
+        width: 50%;
+        text-align: start !important;
+    }
+    .voucher {
+        display:none;
+    }
+    .total-price-layout {
+        width:100%;
+        margin-bottom: 15px;
+    }
+    .d-flex{
+        justify-content: center;
+    }
 }
 </style>

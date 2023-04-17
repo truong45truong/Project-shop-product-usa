@@ -94,6 +94,12 @@ export default ({
     //   z-index: 9999;
     // }
   }
-}
 
+}
+@media only screen and (max-width: 524px)
+{
+  .col-4 p {
+    font-size: 13px;
+  }
+}
 </style>
