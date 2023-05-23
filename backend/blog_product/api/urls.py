@@ -10,7 +10,7 @@ comment = CommentViewSet.as_view({
     'get' : 'get_comment',
     'post': 'post_comment_blog'
 })
-heart = HeartViewSet.as_view({
+post_heart_product = HeartViewSet.as_view({
     'post' : 'post_heart_product'
 })
 heart_blog = HeartViewSet.as_view({
@@ -27,6 +27,7 @@ delete_comment = CommentViewSet.as_view({
 })
 urlpatterns = [
     # path('blog/', get_blog_product, name = 'blogs_logs'),
+    path('heart-product/post/',post_heart_product,name="heart_products"),
     path('blog/product/', get_blog_product, name = 'blogs_logs'),
     path('blog/heart/', heart_blog, name = 'heart_blog'),
     path('comment/blog/',comment, name = 'comment_logs'),

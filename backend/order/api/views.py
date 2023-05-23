@@ -399,3 +399,48 @@ class OrderViewSet (viewsets.ModelViewSet):
                 "sucess" : False , "status" : status.HTTP_404_NOT_FOUND ,
                 "error" : { "value" : "Information wrong" , "type" : "GOT-0001"}
             }) 
+    
+    # ---------------------------------------------------------------------------- #
+    #                    METHOD CHANGE QUANTITY PRODUCT IN CART                    #
+    # ---------------------------------------------------------------------------- #
+    @action(method=['POST'],detail=False, url_path="change_quantity_product_in_cart",url_name="change_quantity_product_in_cart")
+    def change_quantity_product_in_cart(self, request,*args, **kwargs):
+        try: 
+            # ---------------------------- check params input ---------------------------- #
+            data_request= json.loads(request.body.decode('utf-8'))
+            print(data_request)
+            name_order = data_request['params']['name_order']
+            product_slug = data_request['params']['product_slug']
+            value_change = data_request['params']['value']
+            type = data_request['params']['type']
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+        except Exception as e:
+            print(e)
+            return Response({
+                "sucess" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : { "value" : "Params wrong" , "type" : "RPIC-0001"}
+            })
+        try:
+            # -------------------------- check information post -------------------------- #
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            curent_order = Order.objects.get(name = name_order,user_id = curent_user)
+            curent_detail_order = DetailOrder.objects.get(order_id = curent_order , product_id__slug = product_slug )
+            if type == 1:
+                curent_detail_order.quantity = value_change
+            else : 
+                curent_detail_order.quantity =  int(curent_detail_order.quantity) + int(value_change)
+            curent_detail_order.save()    
+            for price_total in Order.objects.raw(raw_query.SUM_TOTAL_PRICE_IN_ORDER.format(order = str(curent_order.id).replace('-',''))):
+                curent_order.total_price = price_total.order_total_price
+                print("price_total.order_total_price", price_total)     
+            curent_order.save()
+            
+            return Response({"success": True , "status" : status.HTTP_200_OK})  
+        except Exception as e:
+            print(e)
+            return Response({
+                "sucess" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : { "value" : "Information wrong" , "type" : "CPIC-0002"}
+            })

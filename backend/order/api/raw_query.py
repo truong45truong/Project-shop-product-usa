@@ -58,3 +58,15 @@ QUERY_SQL_GET_ALL_ORDER_FOR_USER_BETWEEN_DAYS = """
     ORDER BY
         order_order.datetime DESC
 """
+# ---------------------------------------------------------------------------- #
+#                  SUM TOTAL_PRICE IN ORDER PARAMS: [ORDER_ID]                 #
+# ---------------------------------------------------------------------------- #
+SUM_TOTAL_PRICE_IN_ORDER = """
+    SELECT `order_order`.`id` , SUM(`order_detailorder`.`quantity`*`product_price`.`price_total`) as 'order_total_price'
+    FROM `product_product`,`product_price`,`order_order`,`order_detailorder`
+    WHERE
+        `product_product`.`id` = `order_detailorder`.`product_id_id` 
+        AND `order_order`.`id` = `order_detailorder`.`order_id_id`
+        AND `product_product`.`id` = `product_price`.`product_id_id`
+        AND `order_order`.`id` = "{order}"
+"""

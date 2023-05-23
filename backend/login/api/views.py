@@ -23,6 +23,7 @@ path_upload_video = str(settings.BASE_DIR)+"/media/videos"
 class RegisterUserViewSet (viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    authentication_classes =[]
     
     @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = "post_user")
     def register_user(self, request, *args, **kwargs):
@@ -209,6 +210,8 @@ def login(request):
 #                                  LOGOUT USER                                 #
 # ---------------------------------------------------------------------------- #
 @api_view(['POST'])
+@permission_classes([])
+@authentication_classes([])
 def logout(request):
     try:
         response = Response()

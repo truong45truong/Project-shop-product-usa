@@ -3490,7 +3490,7 @@
         "kind": 5,
         "importPath": "blog_product.api.urls",
         "description": "blog_product.api.urls",
-        "peekOfCode": "blog = BlogViewSet.as_view({\n    'get' : 'get_blog',\n    'post': 'post_blog'\n})\ncomment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment_blog'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'",
+        "peekOfCode": "blog = BlogViewSet.as_view({\n    'get' : 'get_blog',\n    'post': 'post_blog'\n})\ncomment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment_blog'\n})\npost_heart_product = HeartViewSet.as_view({\n    'post' : 'post_heart_product'",
         "detail": "blog_product.api.urls",
         "documentation": {}
     },
@@ -3499,16 +3499,16 @@
         "kind": 5,
         "importPath": "blog_product.api.urls",
         "description": "blog_product.api.urls",
-        "peekOfCode": "comment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment_blog'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})",
+        "peekOfCode": "comment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment_blog'\n})\npost_heart_product = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})",
         "detail": "blog_product.api.urls",
         "documentation": {}
     },
     {
-        "label": "heart",
+        "label": "post_heart_product",
         "kind": 5,
         "importPath": "blog_product.api.urls",
         "description": "blog_product.api.urls",
-        "peekOfCode": "heart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})\npost_heart_comment = HeartViewSet.as_view({\n    'post' : 'post_heart_comment'\n})\nedit_comment = CommentViewSet.as_view({",
+        "peekOfCode": "post_heart_product = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})\npost_heart_comment = HeartViewSet.as_view({\n    'post' : 'post_heart_comment'\n})\nedit_comment = CommentViewSet.as_view({",
         "detail": "blog_product.api.urls",
         "documentation": {}
     },
@@ -3535,7 +3535,7 @@
         "kind": 5,
         "importPath": "blog_product.api.urls",
         "description": "blog_product.api.urls",
-        "peekOfCode": "edit_comment = CommentViewSet.as_view({\n    'post': 'edit_comment'\n})\ndelete_comment = CommentViewSet.as_view({\n    'post': 'delete_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),",
+        "peekOfCode": "edit_comment = CommentViewSet.as_view({\n    'post': 'edit_comment'\n})\ndelete_comment = CommentViewSet.as_view({\n    'post': 'delete_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('heart-product/post/',post_heart_product,name=\"heart_products\"),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),",
         "detail": "blog_product.api.urls",
         "documentation": {}
     },
@@ -3544,7 +3544,7 @@
         "kind": 5,
         "importPath": "blog_product.api.urls",
         "description": "blog_product.api.urls",
-        "peekOfCode": "delete_comment = CommentViewSet.as_view({\n    'post': 'delete_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/blog/',comment, name = 'comment_logs'),\n    path('comment/product/',get_comment_product, name = 'get_comment_product'),\n    path('comment/product/create/',post_comment_product, name = 'comment_logs'),",
+        "peekOfCode": "delete_comment = CommentViewSet.as_view({\n    'post': 'delete_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('heart-product/post/',post_heart_product,name=\"heart_products\"),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/blog/',comment, name = 'comment_logs'),\n    path('comment/product/',get_comment_product, name = 'get_comment_product'),",
         "detail": "blog_product.api.urls",
         "documentation": {}
     },
@@ -3553,7 +3553,7 @@
         "kind": 5,
         "importPath": "blog_product.api.urls",
         "description": "blog_product.api.urls",
-        "peekOfCode": "urlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/blog/',comment, name = 'comment_logs'),\n    path('comment/product/',get_comment_product, name = 'get_comment_product'),\n    path('comment/product/create/',post_comment_product, name = 'comment_logs'),\n    path('comment/edit/',edit_comment, name = 'edit_comment'),\n    path('comment/delete/',delete_comment, name = 'delete_comment'),\n    path('comment/heart/',post_heart_comment, name = 'comment_heart'),",
+        "peekOfCode": "urlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('heart-product/post/',post_heart_product,name=\"heart_products\"),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/blog/',comment, name = 'comment_logs'),\n    path('comment/product/',get_comment_product, name = 'get_comment_product'),\n    path('comment/product/create/',post_comment_product, name = 'comment_logs'),\n    path('comment/edit/',edit_comment, name = 'edit_comment'),\n    path('comment/delete/',delete_comment, name = 'delete_comment'),",
         "detail": "blog_product.api.urls",
         "documentation": {}
     },
@@ -4746,6 +4746,15 @@
         "documentation": {}
     },
     {
+        "label": "SUM_TOTAL_PRICE_IN_ORDER",
+        "kind": 5,
+        "importPath": "order.api.raw_query",
+        "description": "order.api.raw_query",
+        "peekOfCode": "SUM_TOTAL_PRICE_IN_ORDER = \"\"\"\n    SELECT `order_order`.`id` , SUM(`order_detailorder`.`quantity`*`product_price`.`price_total`) as 'order_total_price'\n    FROM `product_product`,`product_price`,`order_order`,`order_detailorder`\n    WHERE\n        `product_product`.`id` = `order_detailorder`.`product_id_id` \n        AND `order_order`.`id` = `order_detailorder`.`order_id_id`\n        AND `product_product`.`id` = `product_price`.`product_id_id`\n        AND `order_order`.`id` = \"{order}\"\n\"\"\"",
+        "detail": "order.api.raw_query",
+        "documentation": {}
+    },
+    {
         "label": "TransportSerializer",
         "kind": 6,
         "importPath": "order.api.serializers",
@@ -4831,7 +4840,7 @@
         "kind": 5,
         "importPath": "order.api.urls",
         "description": "order.api.urls",
-        "peekOfCode": "post_remove_order = OrderViewSet.as_view({\n    'post' : 'remove_product_in_cart'\n})\nget_transport = TransportViewSet.as_view({\n    'get' : 'get_transport'\n})\nchange_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\n# ---------------------------------------------------------------------------- #",
+        "peekOfCode": "post_remove_order = OrderViewSet.as_view({\n    'post' : 'remove_product_in_cart'\n})\nget_transport = TransportViewSet.as_view({\n    'get' : 'get_transport'\n})\nchange_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\nchange_quantity_product_in_cart =  OrderViewSet.as_view({",
         "detail": "order.api.urls",
         "documentation": {}
     },
@@ -4840,7 +4849,7 @@
         "kind": 5,
         "importPath": "order.api.urls",
         "description": "order.api.urls",
-        "peekOfCode": "get_transport = TransportViewSet.as_view({\n    'get' : 'get_transport'\n})\nchange_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [",
+        "peekOfCode": "get_transport = TransportViewSet.as_view({\n    'get' : 'get_transport'\n})\nchange_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\nchange_quantity_product_in_cart =  OrderViewSet.as_view({\n    'post' : 'change_quantity_product_in_cart'\n})\n# ---------------------------------------------------------------------------- #",
         "detail": "order.api.urls",
         "documentation": {}
     },
@@ -4849,7 +4858,16 @@
         "kind": 5,
         "importPath": "order.api.urls",
         "description": "order.api.urls",
-        "peekOfCode": "change_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [\n    path('order/',get_order , name = \"order_cart\"), # get order after login for user\n    path('order/today/',get_order_today , name = \"order_cart\"), # get order today after login for user\n    path('order/remove-product/',post_remove_order , name = \"order_cart_remove\"), # remove product in order for user",
+        "peekOfCode": "change_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\nchange_quantity_product_in_cart =  OrderViewSet.as_view({\n    'post' : 'change_quantity_product_in_cart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [",
+        "detail": "order.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "change_quantity_product_in_cart",
+        "kind": 5,
+        "importPath": "order.api.urls",
+        "description": "order.api.urls",
+        "peekOfCode": "change_quantity_product_in_cart =  OrderViewSet.as_view({\n    'post' : 'change_quantity_product_in_cart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [\n    path('order/',get_order , name = \"order_cart\"), # get order after login for user\n    path('order/today/',get_order_today , name = \"order_cart\"), # get order today after login for user\n    path('order/remove-product/',post_remove_order , name = \"order_cart_remove\"), # remove product in order for user",
         "detail": "order.api.urls",
         "documentation": {}
     },
@@ -4858,7 +4876,7 @@
         "kind": 5,
         "importPath": "order.api.urls",
         "description": "order.api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('order/',get_order , name = \"order_cart\"), # get order after login for user\n    path('order/today/',get_order_today , name = \"order_cart\"), # get order today after login for user\n    path('order/remove-product/',post_remove_order , name = \"order_cart_remove\"), # remove product in order for user\n    path('order/change-order-today/',change_order_today , name = \"change_order_today\"), # change order today for user\n    path('transport/',get_transport , name=\"get_transport\") # get transport after select product in cart or payment\n]",
+        "peekOfCode": "urlpatterns = [\n    path('order/',get_order , name = \"order_cart\"), # get order after login for user\n    path('order/today/',get_order_today , name = \"order_cart\"), # get order today after login for user\n    path('order/remove-product/',post_remove_order , name = \"order_cart_remove\"), # remove product in order for user\n    path('order/change-order-today/',change_order_today , name = \"change_order_today\"), # change order today for user\n    path('order/change-quantity-product/',change_quantity_product_in_cart , name = \"change_quantity_product_in_cart\"), # change order today for user\n    path('transport/',get_transport , name=\"get_transport\") # get transport after select product in cart or payment\n]",
         "detail": "order.api.urls",
         "documentation": {}
     },
