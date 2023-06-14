@@ -127,7 +127,28 @@ export default {
     border: 3.5px solid rgb(177, 177, 177);
     color:white;
 }
+.search-category {
+    font-size: 14px;
+}
 .search-category:hover {
     text-decoration: none !important;
+}
+
+@media only screen and (max-width: 624px) {
+    .layout-list-product-search  h5 i b ,
+    .layout-list-product-search h5 b i{
+        font-size: 16px;
+    }
+    .layout-list-product-search h5 {
+        font-size: 15px;
+    }
+    .btn-click-all .search-category{
+        font-size: 15px;
+    }
+}
+@media only screen and (max-width: 424px) {
+    .layout-list-product-search {
+        top:90%;
+    }
 }
 </style>

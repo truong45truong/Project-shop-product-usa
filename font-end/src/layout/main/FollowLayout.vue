@@ -1,39 +1,41 @@
 <template>
-    <div class="row d-flex">
-        <div class="col-sm-3 text-center">
-            <h5 class="text-white mb-3 me-2">Instagram</h5>
-            <div class="d-flex flex-column align-items-start justify-content-between px-5">
-                <p class="text-white title-name m-0 me-2 w-100 text-center">
-                    <font-awesome-icon icon="fa-brands fa-instagram" />
-                    <span class="ms-2">shop.katie.usa</span>
-                </p>
+    <div class="">
+        <div class="row d-flex">
+            <div class="col-sm-3 text-center">
+                <h5 class="text-white tilte-text mb-3 me-2">Instagram</h5>
+                <div class="d-flex flex-column align-items-start justify-content-between px-5">
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">
+                        <font-awesome-icon icon="fa-brands fa-instagram" />
+                        <span class="ms-2">shop.katie.usa</span>
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-3 text-center">
-            <h5 class="text-white mb-3 me-2">Twitter</h5>
-            <div class="d-flex flex-column align-items-start justify-content-between px-5">
-                <p class="text-white title-name m-0 me-2 w-100 text-center">
-                    <font-awesome-icon icon="fa-brands fa-twitter" />
-                    katieshop.economic@gmail.com
-                </p>
+            <div class="col-sm-3 text-center">
+                <h5 class="text-white tilte-text mb-3 me-2">Twitter</h5>
+                <div class="d-flex flex-column align-items-start justify-content-between px-5">
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">
+                        <font-awesome-icon icon="fa-brands fa-twitter" />
+                        katieshop.economic@gmail.com
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-3 text-center">
-            <h5 class="text-white mb-3 me-2">Facebook</h5>
-            <div class="d-flex flex-column align-items-start justify-content-between px-5">
-                <p class="text-white title-name m-0 me-2 w-100 text-center">
-                    <font-awesome-icon icon="fa-brands fa-facebook" />
-                    https://www.facebook.com/kateshopusa
-                </p>
+            <div class="col-sm-3 text-center">
+                <h5 class="text-white  tilte-text mb-3 me-2">Facebook</h5>
+                <div class="d-flex flex-column align-items-start justify-content-between px-5">
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">
+                        <font-awesome-icon icon="fa-brands fa-facebook" />
+                        https://www.facebook.com/kateshopusa
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-3 text-center">
-            <h5 class="text-white mb-3 me-2">Group blog</h5>
-            <div class="d-flex flex-column align-items-start justify-content-between px-5">
-                <p class="text-white title-name m-0 me-2 w-100 text-center">
-                    <font-awesome-icon icon="fa-solid fa-blog" />
-                    <span class="ms-2">blogkatieshop.com</span>
-                </p>
+            <div class="col-sm-3 text-center">
+                <h5 class="text-white tilte-text mb-3 me-2">Group blog</h5>
+                <div class="d-flex flex-column align-items-start justify-content-between px-5">
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">
+                        <font-awesome-icon icon="fa-solid fa-blog" />
+                        <span class="ms-2">blogkatieshop.com</span>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -117,4 +119,5 @@ export default {
 .non-activate-expand{
     display:none;
 }
+
 </style>

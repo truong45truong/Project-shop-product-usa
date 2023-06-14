@@ -1,0 +1,724 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "get_asgi_application",
+        "importPath": "django.core.asgi",
+        "description": "django.core.asgi",
+        "isExtraImport": true,
+        "detail": "django.core.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "static",
+        "importPath": "django.conf.urls.static",
+        "description": "django.conf.urls.static",
+        "isExtraImport": true,
+        "detail": "django.conf.urls.static",
+        "documentation": {}
+    },
+    {
+        "label": "TokenObtainPairView",
+        "importPath": "rest_framework_simplejwt.views",
+        "description": "rest_framework_simplejwt.views",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.views",
+        "documentation": {}
+    },
+    {
+        "label": "TokenRefreshView",
+        "importPath": "rest_framework_simplejwt.views",
+        "description": "rest_framework_simplejwt.views",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.views",
+        "documentation": {}
+    },
+    {
+        "label": "TokenVerifyView",
+        "importPath": "rest_framework_simplejwt.views",
+        "description": "rest_framework_simplejwt.views",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.views",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "asgi",
+        "description": "asgi",
+        "peekOfCode": "application = get_asgi_application()",
+        "detail": "asgi",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nload_dotenv(dotenv_path=os.path.join(BASE_DIR, '.env'))\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure---z(_e613s_gyrf%n=zc#!6k9hr^5qm46n^0!-3cxr+7n#jk4l'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.getenv('DEBUG')\nALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "SECRET_KEY = 'django-insecure---z(_e613s_gyrf%n=zc#!6k9hr^5qm46n^0!-3cxr+7n#jk4l'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.getenv('DEBUG')\nALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "DEBUG = os.getenv('DEBUG')\nALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "ALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'product.apps.ProductConfig',",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'product.apps.ProductConfig',\n    'decryptRSA.apps.DecryptrsaConfig',\n    'JWT.apps.JwtConfig',",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n    'corsheaders.middleware.CorsMiddleware',\n    'login.middlewares.RequestRateMiddleWare'",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_CREDENTIALS",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_EXPOSE_HEADERS",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOWED_ORIGINS",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SESSION_COOKIE_SECURE",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "SESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SESSION_COOKIE_SAMESITE",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "SESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "WSGI_APPLICATION = 'backend.wsgi.application'\nAUTH_USER_MODEL = \"login.User\"\n# ------------------------------ REST FRAMEWORK ------------------------------ #\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_USER_MODEL",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "AUTH_USER_MODEL = \"login.User\"\n# ------------------------------ REST FRAMEWORK ------------------------------ #\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',\n    ),",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "REST_FRAMEWORK",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "REST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',\n    ),\n}\n# -------------------------------- CONFIG JWT -------------------------------- #",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SIMPLE_JWT",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "SIMPLE_JWT = {\n  'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),\n  'REFRESH_TOKEN_LIFETIME': timedelta(days=1),\n  'ROTATE_REFRESH_TOKENS': False,\n  'BLACKLIST_AFTER_ROTATION': True,\n  'UPDATE_LAST_LOGIN': False,\n  'ALGORITHM': 'HS256',\n  'SIGNING_KEY': SECRET_KEY,\n  'VERIFYING_KEY': None,\n  'AUDIENCE': None,",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_SECURE",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "CSRF_COOKIE_SECURE = True\nCSRF_COOKIE_HTTP_ONLY = True\nCSRF_TRUSTED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_HTTP_ONLY",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "CSRF_COOKIE_HTTP_ONLY = True\nCSRF_TRUSTED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_TRUSTED_ORIGINS",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "CSRF_TRUSTED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': os.getenv('DB_ENGINE'),",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_SAMESITE",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "CSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': os.getenv('DB_ENGINE'),\n        'NAME': os.getenv('DB_NAME'),\n        'USER': os.getenv('DB_USER'),\n        'PASSWORD': os.getenv('DB_PASSWORD'),\n        'HOST': os.getenv('DB_HOST_SERVER'),",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': os.getenv('DB_ENGINE'),\n        'NAME': os.getenv('DB_NAME'),\n        'USER': os.getenv('DB_USER'),\n        'PASSWORD': os.getenv('DB_PASSWORD'),\n        'HOST': os.getenv('DB_HOST_SERVER'),\n        'PORT': os.getenv('DB_PORT'),\n    }\n}",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "LANGUAGE_CODE = os.getenv('LANGUAGE_CODE')\nTIME_ZONE = os.getenv('TIME_ZONE')\nUSE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "TIME_ZONE = os.getenv('TIME_ZONE')\nUSE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "USE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "USE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "STATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_ROOT",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "MEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_DIRS",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "STATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_AUTO_FIELD",
+        "kind": 5,
+        "importPath": "setting_host",
+        "description": "setting_host",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nload_dotenv(dotenv_path=os.path.join(BASE_DIR, '.env'))\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure---z(_e613s_gyrf%n=zc#!6k9hr^5qm46n^0!-3cxr+7n#jk4l'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.getenv('DEBUG')\nALLOWED_HOSTS = []\n# Application definition",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "SECRET_KEY = 'django-insecure---z(_e613s_gyrf%n=zc#!6k9hr^5qm46n^0!-3cxr+7n#jk4l'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.getenv('DEBUG')\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "DEBUG = os.getenv('DEBUG')\nALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "ALLOWED_HOSTS = []\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'product.apps.ProductConfig',",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'product.apps.ProductConfig',\n    'decryptRSA.apps.DecryptrsaConfig',\n    'JWT.apps.JwtConfig',",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n    'corsheaders.middleware.CorsMiddleware',\n    'login.middlewares.RequestRateMiddleWare'",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_CREDENTIALS",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_EXPOSE_HEADERS",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOWED_ORIGINS",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "SESSION_COOKIE_SECURE",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "SESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "SESSION_COOKIE_SAMESITE",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "SESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "WSGI_APPLICATION = 'backend.wsgi.application'\nAUTH_USER_MODEL = \"login.User\"\n# ------------------------------ REST FRAMEWORK ------------------------------ #\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_USER_MODEL",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "AUTH_USER_MODEL = \"login.User\"\n# ------------------------------ REST FRAMEWORK ------------------------------ #\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',\n    ),",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "REST_FRAMEWORK",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "REST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',\n    ),\n}\n# -------------------------------- CONFIG JWT -------------------------------- #",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "SIMPLE_JWT",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "SIMPLE_JWT = {\n  'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),\n  'REFRESH_TOKEN_LIFETIME': timedelta(days=1),\n  'ROTATE_REFRESH_TOKENS': False,\n  'BLACKLIST_AFTER_ROTATION': True,\n  'UPDATE_LAST_LOGIN': False,\n  'ALGORITHM': 'HS256',\n  'SIGNING_KEY': SECRET_KEY,\n  'VERIFYING_KEY': None,\n  'AUDIENCE': None,",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_SECURE",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "CSRF_COOKIE_SECURE = True\nCSRF_COOKIE_HTTP_ONLY = True\nCSRF_TRUSTED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_HTTP_ONLY",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "CSRF_COOKIE_HTTP_ONLY = True\nCSRF_TRUSTED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_TRUSTED_ORIGINS",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "CSRF_TRUSTED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': os.getenv('DB_ENGINE'),",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_SAMESITE",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "CSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': os.getenv('DB_ENGINE'),\n        'NAME': os.getenv('DB_NAME'),\n        'USER': os.getenv('DB_USER'),\n        'PASSWORD': os.getenv('DB_PASSWORD'),\n        'HOST': os.getenv('DB_HOST'),",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': os.getenv('DB_ENGINE'),\n        'NAME': os.getenv('DB_NAME'),\n        'USER': os.getenv('DB_USER'),\n        'PASSWORD': os.getenv('DB_PASSWORD'),\n        'HOST': os.getenv('DB_HOST'),\n        'PORT': os.getenv('DB_PORT'),\n    }\n}",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "LANGUAGE_CODE = os.getenv('LANGUAGE_CODE')\nTIME_ZONE = os.getenv('TIME_ZONE')\nUSE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "TIME_ZONE = os.getenv('TIME_ZONE')\nUSE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "USE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "USE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "STATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_ROOT",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "MEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_DIRS",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "STATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_AUTO_FIELD",
+        "kind": 5,
+        "importPath": "settings",
+        "description": "settings",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "settings",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "urls",
+        "description": "urls",
+        "peekOfCode": "urlpatterns = [\n    path('',include('login.urls')),\n    path('admin/', admin.site.urls),\n    path('api/',include('product.api.urls')),\n    path('api/',include('login.api.urls')),\n    path('api/',include('user.api.urls')),\n    path('api/',include('new.api.urls')),\n    path('api/',include('order.api.urls')),\n    path('api/',include('flashSaleProduct.api.urls')),\n    path('api/', include('JWT.urls')),",
+        "detail": "urls",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "wsgi",
+        "description": "wsgi",
+        "peekOfCode": "application = get_wsgi_application()",
+        "detail": "wsgi",
+        "documentation": {}
+    }
+]

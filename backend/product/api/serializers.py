@@ -14,8 +14,8 @@ class PhotoProductSerializer(ModelSerializer):
     class Meta:
         model = Photo_product
         fields = ['id']
-class ProductSerializer(serializers.Serializer):
-    data = serializers.CharField()
+class ProductDetailSerializer(serializers.Serializer):
+    file_media_product = serializers.CharField()
     status_heart =  serializers.BooleanField()
     description = serializers.CharField()
     price = serializers.FloatField()
@@ -26,8 +26,13 @@ class ProductSerializer(serializers.Serializer):
     sale = serializers.FloatField()
     count_heart = serializers.IntegerField()
     
-        
-
+class ProductCheckoutSerializer(serializers.Serializer):  
+    slug=serializers.CharField()
+    name = serializers.CharField()
+    sex = serializers.IntegerField()
+    sale = serializers.FloatField()
+    data = serializers.CharField()
+    price = serializers.FloatField()
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
@@ -45,3 +50,14 @@ class CategoryWithNumberProductSerializer(serializers.Serializer):
     slug=serializers.CharField()
     name = serializers.CharField()
     number_product = serializers.IntegerField()
+class ProductSerializer(serializers.Serializer):
+    data = serializers.CharField()
+    status_heart =  serializers.BooleanField()
+    description = serializers.CharField()
+    price = serializers.FloatField()
+    id = UUIDField()
+    slug=serializers.CharField()
+    name = serializers.CharField()
+    sex = serializers.IntegerField()
+    sale = serializers.FloatField()
+    count_heart = serializers.IntegerField()

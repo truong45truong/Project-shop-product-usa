@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import LoginViewSet,RegisterUserViewSet,login,logout
+from .views import LoginViewSet,RegisterUserViewSet,login,logout,register_user
 # ---------------------------------------------------------------------------- #
 #                                  METHOD URL                                  #
 # ---------------------------------------------------------------------------- #
@@ -10,9 +10,9 @@ from .views import LoginViewSet,RegisterUserViewSet,login,logout
 change_password_user = LoginViewSet.as_view({
     'post' : 'change_password_user',
 })
-register_user = RegisterUserViewSet.as_view({
-    'post': 'register_user',
-})
+# register_user = RegisterUserViewSet.as_view({
+#     'post': 'register_user',
+# })
 
 urlpatterns = [
     path('login/', login, name = "login_user"),

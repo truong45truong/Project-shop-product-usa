@@ -1,15 +1,27 @@
 <template>
    <div class="d-flex flex-column align-items-center justify-content-center h-100 infor-item-box border border-2 w-100">
         <div class="d-flex align-items-center heart-content">
-            <span class="text-btn-product fs-5 me-2"> {{numberHeart}}</span>
-            <font-awesome-icon v-if="!status_heart" class="fs-4 my-2 icon-heart" icon="fa-regular fa-heart" @click="postHeart" />
-            <font-awesome-icon v-if="status_heart" class="fs-4 my-2 icon-heart" icon="fa-solid fa-heart" @click="postHeart" />
+            <span class="text-btn-product me-2"> {{numberHeart}}</span>
+            <font-awesome-icon v-if="!status_heart" class="my-2 icon-heart" icon="fa-regular fa-heart" @click="postHeart" />
+            <font-awesome-icon v-if="status_heart" class="my-2 icon-heart" icon="fa-solid fa-heart" @click="postHeart" />
         </div>
         <div class="h-100 d-flex flex-column align-items-center justify-content-center">
             <img class="img-product-item text-center" :src="'http://127.0.0.1:8000/'+`${photo}`" alt="name">
         </div>
-        <div v-if="sale > 0" :class="[isShowDetail ? 'ribbon-hide' : 'ribbon']">
-            <span>Sale {{sale}}%</span>
+        <div v-if="sale > 0" class="d-flex flex-column sale-product-category" :class="[isShowDetail ? 'ribbon-sale-hide' : 'ribbon-sale' ]">
+            <div class="content-sale">
+                <p class="m-0 text-content-sale">
+                    <span>
+                    <font-awesome-icon icon="fa-solid fa-bolt" class="text-danger" />
+                    </span> <b>Giảm sốc</b>
+                </p>
+            </div>
+            <div class="text-center">
+                <p class="text-content-sale m-0">
+                    <span class="text-danger"> lên tới </span>
+                    <b class="ms-1">{{sale}} %</b>
+                </p>
+            </div>
         </div>
         <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border ']" @click="isShowProduct" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice"
         class="icon-heart">
@@ -23,11 +35,13 @@
                 <div class="w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark py-1 name-product-item ">{{name}}</p></div>
             </div>
             <div class="d-flex w-100 my-1">
-                <div class="w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark py-1">Giá : {{Math.ceil((100 - sale) / 100 * price)}} vnđ</p></div>
+                <div class="w-100"><p class="text-product-cart-inside-market text-white my-1 text-center bg-dark py-1 price-product-item">Giá : {{price_total}} vnđ</p></div>
             </div>
             <div class="w-100 d-flex justify-content-around">
-                <button class="button-48 m-0 btn-add-tocard"><span class="m-0 text-btn-product" @click="addToCard">Thêm vào Giỏ</span></button>
-                <a class="button-48 m-0"><span class="m-0 text-btn-product" @click="nextPageDetailProduct">Chi tiết</span></a>
+                <button class="button-48 m-0 btn-add-tocard mx-1"><span class="m-0 text-btn-product" @click="addToCard">Thêm vào Giỏ</span></button>
+                <a class="button-48 m-0 mx-1" @click="nextPageDetailProduct">
+                    <span class="m-0 text-btn-product">Chi tiết</span>
+                </a>
             </div>
         </div>
     </div>
@@ -56,8 +70,14 @@ export default ({
         isHoverPrice : false,
         status_heart : false,
         numberHeart : false ,
+        price_total : 0,
         linkDetailProduct: '',
     }),
+    filters: {
+      formatNumber(price) {
+        return new Intl.NumberFormat('vi-VN').format(price);
+      }
+    },
     computed: {
 		...mapGetters('auth', {
 			get_user: 'currentUser',
@@ -93,8 +113,12 @@ export default ({
                     this.numberHeart = this.status_heart == false ? this.numberHeart - 1 : this.numberHeart + 1
                     if(this.status_heart == true ) {
                         this.$store.dispatch('heart/actionlikeItems')
+                        this.$store.dispatch('notice/actionTypeNotice',{content : 'Sản phẩm ' + this.name +' vừa dc thêm vào Yêu thích',type : 'addtocart'})
+                        this.$store.dispatch('notice/activateShowMenu')
                     }else {
                         this.$store.dispatch('heart/actionUnlikeItems')
+                        this.$store.dispatch('notice/actionTypeNotice',{content : 'Sản phẩm ' + this.name +' Đã xóa khỏi Yêu thích',type : 'addtocart'})
+                        this.$store.dispatch('notice/activateShowMenu')
                     }
                 }
             }
@@ -117,6 +141,11 @@ export default ({
         this.status_heart = this.status
         this.numberHeart = this.hearts
         this.linkDetailProduct = "/product/" + this.slug
+        this.price_total = Math.ceil((100 - this.sale) / 100 * this.price)
+        this.price_total = new Intl.NumberFormat('vi-VN').format(this.price_total)
+    },
+    mounted(){
+        
     }
     
 })
@@ -155,6 +184,24 @@ export default ({
   to {
     top:0;
     right:0%;}
+}
+@keyframes ribbonSaleHide {
+    from {
+        top:0;
+        left:0%;
+    }
+  to {
+    top:0;
+    left:-100%;}
+}
+.ribbon-sale {
+    left : 0%;
+}
+.ribbon-sale-hide {
+    left:-100% !important;
+    animation-name: ribbonSaleHide;
+    animation-duration: 0.5s;
+    
 }
 .infor-item-box{
     position:relative;
@@ -227,6 +274,22 @@ export default ({
     cursor:pointer;
     max-width: fit-content;
 }
+.sale-product-category {
+  position:absolute;
+  top:0;
+  border : 0.5px solid rgb(251, 192, 65)
+}
+.content-sale {
+  background-color: rgb(251, 192, 65);
+  padding:5px;
+}
+.text-content-sale {
+  font-size: 15px;
+}
+.text-content-sale span {
+  font-size: 12px;
+}
+
 .button-48 {
   width:50%;
   appearance: none;
@@ -256,6 +319,8 @@ export default ({
   touch-action: manipulation;
   vertical-align: baseline;
   white-space: nowrap;
+  padding:1rem 1.5rem;
+  border : 1px solid black;
 }
 
 .button-48:before {
@@ -304,19 +369,41 @@ export default ({
         font-size: 12px;;
     }
 }
-@media only screen and (max-width: 600px)
-{
-    .btn-add-tocard {
-        display:none !important;
-    }
-}
+
 @media only screen and (max-width: 524px)
 {
     .name-product-item {
-        display:none;
+        font-size: 10px;
+        overflow: hidden;
+        white-space: wrap; 
+        height:22px;
+        text-overflow:ellipsis;
+    }
+    .price-product-item {
+        font-size: 10px;
     }
     .button-48 span {
-        left: -12px;
+        left: -6px;
+    }
+    .btn-add-tocard {
+        display:block !important;
+        max-width: 110px !important;
+    }
+    .heart-content {
+        font-size: 11px !important;
+    }
+    .fa-heart {
+        font-size: 13px !important;
+    }
+    .content-sale {
+        background-color: rgb(251, 192, 65);
+        padding:1px;
+    }
+    .text-content-sale {
+        font-size: 11px;
+    }
+    .text-content-sale span {
+        font-size: 10px;
     }
 }
 </style>

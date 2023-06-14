@@ -228,3 +228,111 @@ def logout(request):
         }
         response.status_code = status.HTTP_404_NOT_FOUND
     return response
+
+
+# REGISTER USER
+
+@api_view(['POST'])
+@permission_classes([])
+@authentication_classes([])
+def register_user(request):
+        
+    list_name_file_blog = []
+    def decodeFile(image_data,is_image,is_video):
+        
+        file_format, file_string = image_data.split(';base64,')
+        file_ext = file_format.split('/')[-1]
+        file_bytes = base64.b64decode(file_string)
+        if is_image is True:
+            name_file = 'blog' + str(uuid.uuid4()) + '.' + file_ext
+            with open( os.path.join(path_upload_image, "blogs" , name_file), 'wb+') as decoded_image_file:
+                decoded_image_file.write(file_bytes)
+                list_name_file_blog.append({ 'name' : name_file ,
+                                                'file' : 'media/photos/blogs/' + name_file
+                })
+        if is_video is True:
+            name_file = 'blog' + str(uuid.uuid4()) + '.' + file_ext
+            with open( os.path.join(path_upload_video, "blogs",name_file), 'wb+') as decoded_image_file:
+                decoded_image_file.write(file_bytes)
+                list_name_file_blog.append({
+                                                'name' : name_file,
+                                                'file' : 'media/videos/blogs' + name_file
+                })
+    # ---------------------------- check params input ---------------------------- #
+    try:
+        data_request= json.loads(request.body.decode('utf-8'))
+        username = data_request['params']['username']
+        name = data_request['params']['name']
+        email    = data_request['params']['email']
+        phone    = data_request['params']['phone']
+        address    = data_request['params']['address']
+        password = data_request['params']['password'].encode('utf-8')
+        deviceId = data_request['params']['device_id']
+        device_curent = DeviceClient.objects.get(id = deviceId)   
+        decrypt_password = decrypt_tokens(password,device_curent.private_key)
+        if (
+            username == '' or name == '' or email == ''
+            or phone == '' or address == '' or password == ''
+        ):  
+            print(data_request)
+            return Response({ 
+                'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : 'Params input wrong' , 'type' : 'RU-0000' }
+            })
+    except Exception as e:
+        print(e)
+        return Response({ 
+            'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+            'error' : { 'value' : 'Params input wrong' , 'type' : 'RU-0000' }
+        })
+    # -------------------------------- create user ------------------------------- #
+    # check username
+    try:
+        user = User.objects.create(username=username,photo = None ,level=0, name = name)
+        user.password  = make_password(decrypt_password)
+        user.save()  
+    except Exception as e:
+        print(e)
+        return Response({ 
+            'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+            'error' : { 'value' : 'Username available' , 'type' : 'RU-0001' }
+        })
+    # check email
+    try:
+        user.email = email
+        user.save()
+    except:
+        user.delete()
+        return Response({ 
+            'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+            'error' : { 'value' : 'Email available' , 'type' : 'RU-0002' }
+        })
+    # check phone
+    try:
+        user.phone = phone
+        phoneUser = PhoneUser.objects.create(name =name , phone = phone , user_id = user , status = True  )
+    except:
+        return Response({ 
+            'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+            'error' : { 'value' : 'Phone available' , 'type' : 'RU-0003' }
+        })
+    #check address
+    try:
+        addressUser = Address.objects.create(address_content = address , status = True ,user_id = user)
+    except :
+        return Response({ 
+            'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+            'error' : { 'value' : 'Address Wrong' , 'type' : 'RU-0004' }
+        })
+    # ------------------------------ end create user ----------------------------- #
+    try:
+        user.save()
+        addressUser.save()
+        phoneUser.save()
+        serializer = UserSerializer(user,many=False)
+        return Response({'user'    : serializer.data , 'status' : status.HTTP_200_OK})
+    except:
+        return Response({ 
+            'user' : False , 'status' : status.HTTP_404_NOT_FOUND ,
+            'error' : { 'value' : 'Information Wrong' , 'type' : 'RU-0004' }
+        })

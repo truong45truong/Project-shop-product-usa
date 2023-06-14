@@ -1,10 +1,22 @@
 <template> 
-<div class="d-flex flex-column align-items-center justify-content-center h-100 infor-item-box border border-2 w-100 bg-white">
+<div class="d-flex flex-column align-items-center justify-content-center h-100 infor-item-box border border-2 w-100 bg-white position-relative">
         <div class="h-100 d-flex flex-column align-items-center justify-content-center">
             <img class="img-product-item text-center" :src="'http://127.0.0.1:8000/'+`${photo}`" alt="name">
         </div>
-        <div v-if="sale > 0" :class="[isShowDetail ? 'ribbon-hide' : 'ribbon']">
-            <span>Sale {{sale}}%</span>
+        <div v-if="sale > 0" class="d-flex flex-column sale-product-category" :class="[isShowDetail ? 'ribbon-sale-hide' : 'ribbon-sale' ]">
+            <div class="content-sale">
+                <p class="m-0 text-content-sale">
+                    <span>
+                    <font-awesome-icon icon="fa-solid fa-bolt" class="text-danger" />
+                    </span> <b>Giảm sốc</b>
+                </p>
+            </div>
+            <div class="text-center">
+                <p class="text-content-sale m-0">
+                    <span class="text-danger"> lên tới </span>
+                    <b class="ms-1">{{sale}} %</b>
+                </p>
+            </div>
         </div>
         <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border ']" @click="isShowDetailProduct(true)" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice">
 
@@ -16,7 +28,10 @@
                 <font-awesome-icon icon="fa-solid fa-xmark" class="fs-4 text-dark" />
             </div>
             <div class="d-flex w-100 justify-content-between bg-dark">
-                <div class="w-100"><p class="text-white fs-3 my-1 text-center">{{name}}</p></div>
+                <div class="w-100 shadow"><p class="text-white text-fs-name my-1 text-center">{{name}}</p></div>
+            </div>
+            <div class="btn btn-dark mt-1" @click="removeHeart">
+                <p>Xóa</p>
             </div>
             <div class="d-flex w-100 justify-content-between">
                 <div class="mt-1 w-100">
@@ -26,7 +41,7 @@
                     </p>
                 </div>
             </div>
-            <a class="btn btn-dark btn-detail-item-heart d-block" @click="nextPageDetailProduct">Chi tiết</a>
+            <a class="btn btn-dark btn-detail-item-heart d-block"  :href="'http://127.0.0.1:8080/product/' + slug"><p>Chi tiết</p></a>
         </div>
     </div>
 </template>
@@ -34,6 +49,7 @@
 <script>
 import { mapGetters,mapActions } from 'vuex'
 import { useRoute } from 'vue-router';
+import { ProductAction} from './../../common/product.service'
 export default ({
     name: 'ProductItemHeart',
     props: {
@@ -67,7 +83,11 @@ export default ({
         },
         isNoneHoverPrice(){
             this.isHoverPrice = false;
+        },
+        async removeHeart(){
+            this.$emit('deleteProductHeart',this.slug)
         }
+
     },
     created(){
         this.linkDetailProduct = "/product/" + this.slug
@@ -76,6 +96,17 @@ export default ({
 })
 </script>
 <style>
+.ribbon-sale {
+    left : 0%;
+    max-width: 100px;
+}
+.ribbon-sale-hide {
+    max-width: 100px;
+    left:-100% !important;
+    animation-name: ribbonSaleHide;
+    animation-duration: 0.5s;
+    
+}
 .text-price-item-heart{
     position:absolute;
     padding: 2px 15px;
@@ -124,5 +155,11 @@ export default ({
     text-decoration:line-through;
     font-weight: 300;
     color:rgb(105, 105, 105)
+}
+.text-fs-name {
+    font-size: 16px;
+}
+@media only screen and (max-width: 424px) {
+
 }
 </style>

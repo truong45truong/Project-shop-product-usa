@@ -26,7 +26,9 @@ product_catogory = Productviewset.as_view({
     'get' : 'get_product_category',
     #'post' : 'post_product'
 })
-
+get_list_product = Productviewset.as_view({
+    'get' : 'get_list_product',
+})
 product_heart = ProductHeartViewSet.as_view({
     'get' : 'get_product_heart'
 })
@@ -40,5 +42,6 @@ urlpatterns = [
     path('product/search/',search_product,name="search_product"),
     path('product/search-product-category/',search_product_category,name="search_product_category"),
     path('product-category/',product_catogory,name="get_product_category"),# get all products or product with category_slug
-    path('product-heart/',product_heart , name = "get_product_heart") # get product liked
+    path('product-heart/',product_heart , name = "get_product_heart") , # get product liked,
+    path('product-list/',get_list_product , name = "get_product_heart") # get product liked,
 ]

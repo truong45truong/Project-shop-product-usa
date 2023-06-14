@@ -1,4 +1,7 @@
-from .serializers import CategorySerializer,ProductSerializer,ProductHeartSerializer,CategoryWithNumberProductSerializer
+from .serializers import CategorySerializer,ProductSerializer
+from .serializers import ProductHeartSerializer,CategoryWithNumberProductSerializer
+from .serializers import ProductCheckoutSerializer
+from .serializers import ProductDetailSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
@@ -296,7 +299,7 @@ class Productviewset(viewsets.ViewSet):
             else:
                 queryset = Product.objects.raw(rawQuerySqlProductSlug,[slug])
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
-                serializer = ProductSerializer(queryset,many=True)
+                serializer = ProductDetailSerializer(queryset,many=True)
                 return Response({"products" : serializer.data })
                 
         if(user_get == False ) :
@@ -311,11 +314,32 @@ class Productviewset(viewsets.ViewSet):
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
         else:
             if slug:
+                if  ' ' in slug:
+                    return Response({"products" : False , "error" : "slug_product Wrong"})
                 queryset = Product.objects.raw(rawQuerySqlProductSlug,[slug])
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
+                serializer = ProductDetailSerializer(queryset,many=True)
+                return Response({"products" : serializer.data })
             else:
                 queryset = Product.objects.raw(rawQuerySql,[user_get.id])
 
-        serializer = ProductSerializer(queryset,many=True,context={'user_id': user_get})
+        serializer = ProductSerializer(queryset,many=True)
         return Response({"products" : serializer.data})
-            
+
+    @action(method=["GET"],detail=False,url_path="product_list",url_name="get_list_product")
+    def get_list_product(self, request,*args, **kwargs):
+        rawQuerySql = query_raw.QUERY_SQL_GET_LIST_PRODUCT_DETAIL_NOT_USER
+        response = Response()
+        try:
+            listSlugProduct = request.GET['list_slug_product']
+            queryset = Product.objects.raw(rawQuerySql,[listSlugProduct])         
+
+            serializer = ProductCheckoutSerializer(queryset,many=True)
+            response.data = {
+               'data' : serializer.data
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            pass     
+        return response

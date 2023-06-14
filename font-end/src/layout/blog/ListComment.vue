@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex flex-column" id="list-comment">
-        <div v-for="index in comments" :id="`${index.id}`" class="m-4 position-relative" :key="index.id">
+        <div v-for="index in comments" :id="`${index.id}`" class="position-relative comment" :key="index.id">
             <div class="d-flex container-comment">
                 <div class="d-flex flex-column layout-avatar">
                     <img v-if="index.user_profile != null" class="img-author-comment" 
@@ -13,10 +13,17 @@
                     />
                 </div>
                 <div class="d-flex flex-column" :id="'container-cmt-'+index.id">
-                    <p class="m-2 mt-3 p-2 px-4 bg-light rounded comment-blog">
-                    <p class="text-user-email mb-1"><i><b>{{ index.user_email }}</b></i></p>
-                    <hr class="my-1">
-                    <p :id="'content-cmt-' + `${index.id}`">{{ index.content }}</p>
+                    <p class="m-2 mt-3 p-2 px-4 bg-light rounded comment-blog position-relative">
+                        <p class="text-user-email mb-1"><i><b>{{ index.user_email }}</b></i></p>
+                        <hr class="my-1">
+                        <p class="m-0" :id="'content-cmt-' + `${index.id}`">{{ index.content }}
+                        </p>
+                        <span class="expand-option">
+                            <button class="text-white btn-option-comment text-center position-relative mt-3"
+                                @click="isShowOptionExpand(index['id'], index.user_email, index.content)">
+                                <p class="mb-2 text-absolute position-absolute">...</p>
+                            </button>
+                        </span>
                     </p>
                     <div class="d-flex">
                         <p class="mx-2 text-white show-reply" @click="heartComment(index.id)">
@@ -57,12 +64,6 @@
                     <ListMediaComment v-if="index.file_media_comment != null" 
                     :data_files ="index.file_media_comment"  />
                 </div>
-                <div class="">
-                    <button class="text-white btn-option-comment text-center position-relative mt-3"
-                        @click="isShowOptionExpand(index['id'], index.user_email, index.content)">
-                        <p class="mb-2 text-absolute position-absolute">...</p>
-                    </button>
-                </div>
             </div>
         </div>
         
@@ -78,7 +79,7 @@
             <div class="bg-white mt-2" id="comment-user-blog">
                 <div class="d-flex  w-100">
                     <div class="d-flex">
-                        <img v-if="authenticated" class="img-author-comment" :src="profilePhoto" alt="Resized Image" />
+                        <img v-if="authenticated" class="img-author-comment" :src="'http://127.0.0.1:8000/' + `${getProfilePhoto}`" alt="Resized Image" />
                     </div>
                     <div class="content-comment w-100">
                         <div v-if="userOfCommentSelected != false" class="d-flex align-items-center justify-content-between mb-1">
@@ -276,6 +277,24 @@ export default {
             authenticated: 'isAuthenticated',
             getProfilePhoto: 'getProfilePhoto'
         })
+    },
+    watch : {
+        user: {
+        deep: true,
+        async handler() {
+            await CommentApiService.getCommentProduct({
+                params : {
+                product_slug : this.productSlug,
+                start_limit : 0,
+                end_limit : 4,
+                }
+            }).then(response => {
+                console.log('reload comment',response)
+                this.comments = []
+                this.comments = response.data.comments
+            })
+        }
+    }
     },
     methods: {
         hideOptionExpand() {
@@ -482,7 +501,7 @@ export default {
                 let level_comment = level + 1
                 let class_level = "comment-level"
                 let id_comment = 'id_comment-' + comment
-                div_all_comments.setAttribute('class', "m4 " + class_level)
+                div_all_comments.setAttribute('class', "comment " + class_level)
                 div_all_comments.setAttribute('id', id_comment)
                 
                 this.addLineComment(comment)
@@ -501,7 +520,7 @@ export default {
                     div_current_comment.appendChild(line_canvas)
 
                     let div_flex_1_1 = document.createElement("div")
-                    div_flex_1_1.setAttribute('class', 'd-flex flex-column')
+                    div_flex_1_1.setAttribute('class', 'd-flex flex-column justify-content-start')
 
                     let div_line = document.createElement('div')
                     div_line.setAttribute('class', 'line-comment-child')
@@ -523,7 +542,18 @@ export default {
                     div_flex_1_2.setAttribute('id', 'container-cmt-' + index.id)
 
                     let p_div_flex_1_2 = document.createElement("p")
-                    p_div_flex_1_2.setAttribute('class', 'm-2 mt-3 p-2 px-4 bg-light rounded comment-blog')
+                    p_div_flex_1_2.setAttribute('class', 'm-2 mt-3 p-2 px-4 position-relative bg-light rounded comment-blog')
+
+                    let flex_div_button = document.createElement('button')
+                    flex_div_button.addEventListener('click', (event) => {
+                        this.isShowOptionExpand(index.id, index.user_email, index.content)
+                    })
+                    flex_div_button.setAttribute('class', 'text-white btn-option-comment text-center position-absolute')
+                    let flex_div_button_p = document.createElement('p')
+                    flex_div_button_p.innerText = "..."
+                    flex_div_button_p.setAttribute('class', 'mb-2 text-absolute mt-3')
+                    flex_div_button.appendChild(flex_div_button_p)
+                    p_div_flex_1_2.appendChild(flex_div_button)
 
                     let flex_div_flex_1_2 = document.createElement("div")
                     flex_div_flex_1_2.setAttribute('class', 'd-flex')
@@ -581,9 +611,8 @@ export default {
                     p_flex_div_flex_1_3.setAttribute('class', 'mx-2 text-white')
                     let icon_p_div_flex_1_3 = document.createElement("i")
                     icon_p_div_flex_1_3.setAttribute('class', 'fa-regular fa-comment me-2')
-                    p_flex_div_flex_1_3.appendChild(icon_p_div_flex_1_3)
 
-                    if (index.level < 6) {
+                    if (index.level < 2) {
                         let b_aft_b_p_div_flex_1_3 = document.createElement("b")
                         b_aft_b_p_div_flex_1_3.setAttribute('class', 'mx-2 text-white comment-reply')
                         b_aft_b_p_div_flex_1_3.innerText = "Trả lời"
@@ -591,6 +620,7 @@ export default {
                             this.CommentPost(index.id, index.user_email)
                         })
                         p_flex_div_flex_1_3.appendChild(b_aft_b_p_div_flex_1_3)
+                        p_flex_div_flex_1_3.appendChild(icon_p_div_flex_1_3)
                     }
                     /* --------------------------------- end add -------------------------------- */
                     let p_p_div_flex_1_2 = document.createElement("p")
@@ -605,10 +635,12 @@ export default {
                     hr_p_div_flex_1_2.setAttribute('class', 'my-1')
 
                     let p_p_p_div_flex_1_2 = document.createElement("p")
-                    p_p_p_div_flex_1_2.setAttribute('class', 'm-0')
-                    p_p_p_div_flex_1_2.setAttribute('id', 'content-cmt-' + index.id)
+                    p_p_p_div_flex_1_2.setAttribute('class', 'm-0 position-relative')
+                    p_p_p_div_flex_1_2.setAttribute('id', 'content-cmt-'+index.id)
                     p_p_p_div_flex_1_2.innerText = index.content
-
+                    
+                    let flex_div = document.createElement('div')
+                    
                     let media_cmt = false
                     if(index.file_media_comment != null){
                         if(this.listMediaCommentChild.length == 0){
@@ -632,17 +664,6 @@ export default {
                         }
                     }
 
-                    let flex_div = document.createElement('div')
-                    let flex_div_button = document.createElement('button')
-                    flex_div_button.addEventListener('click', (event) => {
-                        this.isShowOptionExpand(index.id, index.user_email, index.content)
-                    })
-                    flex_div_button.setAttribute('class', 'text-white btn-option-comment text-center position-relative mt-3')
-                    let flex_div_button_p = document.createElement('p')
-                    flex_div_button_p.innerText = "..."
-                    flex_div_button_p.setAttribute('class', 'mb-2 text-absolute position-absolute')
-                    flex_div_button.appendChild(flex_div_button_p)
-                    flex_div.appendChild(flex_div_button)
 
 
                     var flex_flex_2_p = document.createElement('p')
@@ -728,6 +749,7 @@ export default {
                 }).then(res => {
                     console.log("comment post", res)
                     if (res.status == 200) {
+                        this.CancelReplyComment()
                         delete this.showComment.value[parent]
                         if (parent != false) {
                             this.appendCommentNew(parent, res.comment.level-1, [res.comment])
@@ -933,12 +955,20 @@ export default {
         this.commentComponent = document.getElementById('comment-user-blog')
         this.optionExpandCmt = document.getElementById('option-expand-cmt')
         this.editCommentCoponent = document.getElementById('edit-comment-object')
-        if(window.innerWidth < 624) this.expand_line_resize = 26
+        if(window.innerWidth < 624)
+        this.expand_line_resize = 24
+        if(window.innerWidth < 424)
+        this.expand_line_resize = 16
+        if(window.innerWidth > 624) {
+            this.expand_line_resize = 16
+        }
         window.addEventListener('resize',() => {
             console.log('window.innerWidth',window.innerWidth)
             if(window.innerWidth < 624)
             this.expand_line_resize = 24
-            else {
+            if(window.innerWidth < 424)
+            this.expand_line_resize = 16
+            if(window.innerWidth > 624) {
                 this.expand_line_resize = 16
             }
         })
@@ -952,8 +982,15 @@ export default {
     padding: 5px 10px;
     margin-top: 15px;
 }
-
-
+.expand-option {
+    position:absolute;
+    top:0%;
+    left:100%;
+}
+.btn-option-comment {
+        top:0%;
+        left:100%;
+    }
 .send-icon-comment {
     font-size: 1.5rem;
     color: white;
@@ -986,10 +1023,6 @@ export default {
 
 .comment-level {
     margin-left: 5rem;
-}
-
-.comment-level-2 {
-    margin-left: 10rem;
 }
 
 .text-user-email {
@@ -1147,5 +1180,53 @@ export default {
   .add-image-post {
     font-size: 13px;
   }
+  .comment {
+    margin: 0px;
+  }
+  .comment-level {
+    margin-left: 3rem;
+  }
+  .line-50 {
+    width:50%;
+  }
+  p {
+    margin-bottom: 5px;
+  }
+}
+@media only screen and (max-width: 424px){
+    .text-user-email i b{
+    font-size: 10px;
+  }
+  p {
+    font-size: 10px !important;
+  }
+  .edit-text {
+    font-size: 10px;
+  }
+  .show-reply {
+    font-size: 10px;
+  }
+  .comment-reply {
+    font-size: 10px;
+  }
+  .comment-reply i b {
+    font-size: 10px;
+  }
+  .img-author-comment {
+        width:30px;
+        height:30px;
+        margin : 10px;
+        margin-bottom: 0;
+    }
+    .line-comment-child {
+        top:1.75rem;
+        width:10px;
+    }
+    .text-input-comment {
+        font-size: 11px;
+    }
+    .add-image-post {
+        font-size: 11px;
+    }
 }
 </style>

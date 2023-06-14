@@ -1,15 +1,17 @@
 <template>
     <div class="h-100 w-100 bg-list-item-heart "
     :class="[ isShowComponent == true ? 'list-item-heart' : isShowComponent == false ? 'hide-list-item-heart' : 'already-list-item-heart']"
-    >
-        <div class="d-flex icon-cancel-list-heart justify-content-end bg-white" @click="$emit('hideListItemHeart',false)">
-            <font-awesome-icon icon="fa-solid fa-xmark" class="m-3" />
+    >   
+        <div class="position-fixed d-flex icon-cancel-cart align-items-center" @click="$emit('hideListItemHeart', false)">
+            <font-awesome-icon  icon="fa-solid fa-arrow-left-long" class="m-3 icon-cancel-cart" />
+            <p class="m-0 me-1 text-dark text-icon-cancel">Trở về</p>
         </div>
-        <div class="header-shopping-cart">
-            <h2 class="title-cart ">Yêu thích</h2>
+
+        <div class="header-shopping-cart text-center">
+            <h2 class="title-cart mt-2">Yêu thích</h2>
         </div>
         <div class="bg-dark mb-3">
-            <div class="container action-show">
+            <div v-if="checkReponsive == false" class="container action-show">
                 <div class="d-flex align-items-center">
                     <div class="d-flex ms-2 align-items-center change-model-show" @click="changeModeShow">
                         <p class="text-white text-action-show m-0 me-2"> Đổi</p>
@@ -19,6 +21,9 @@
                     <p v-if="isShowList" class="text-white text-action-show m-0 ms-4" > chế độ danh sách</p>
                     <p v-if="!isShowList" class="text-white text-action-show m-0 ms-4" > chế độ bảng</p>
                 </div>
+            </div>
+            <div v-if="checkReponsive" class="py-2">
+                
             </div>
         </div>
         <div v-if="isShowList">
@@ -36,7 +41,7 @@
                                         {{ item.prices__sale }}%</b> </div>
                             </div>
                             <div class="col-item-list-heart d-flex justify-content-around">
-                                <div class="btn btn-warning">Chi tiết</div>
+                                <a class="btn btn-warning"  :href="'http://127.0.0.1:8080/product/' + item.slug">Chi tiết</a>
                             </div>
                             <div class="col-item-list-heart d-flex justify-content-center">
                                 <div class="ms-2 d-flex align-items-center btn-unheart-item"
@@ -52,11 +57,11 @@
         </div>
         <div v-if="!isShowList">
             <div class="container layout-list-item-heart scroll-list-product">
-                <div  class="row  h-100 mb-5">
+                <div  class="row  mb-5">
                     <div v-for="item in dataItem"
-                        class="col-lg-3 col-sm-4 col-6 mt-0 my-3 h-sm-25 item-cart-market-grid px-2">
+                        class="col-lg-3 col-md-4 col-sm-6 mt-0 my-3 h-sm-25 item-cart-market-grid px-2">
                         <product-item-heart :name="item.name" :slug="item.slug" :photo="item.photo_products__data" 
-                        :sale="item.prices__sale" :price="item.prices__price" />
+                        :sale="item.prices__sale" :price="item.prices__price" @deleteProductHeart="deleteProductHeart" />
                     </div>
                 </div>
             </div>
@@ -86,6 +91,7 @@ export default {
         dataItem: false,
         isShowGrid: true,
         isShowList: false,
+        checkReponsive : false
     }),
     components: {
         ProductItemHeart,
@@ -94,6 +100,10 @@ export default {
         ...mapGetters('auth', {
 			get_authenticated: 'isAuthenticated'
 		}),
+        ...mapGetters('notice', {
+            get_accept: 'isAccept'
+        }),
+
     },
     async created() {
         console.log("isShowComponent",this.isShowComponent)
@@ -102,22 +112,26 @@ export default {
             this.dataItem = Array.from(res)
         })
     },
+    mounted(){
+        if(window.innerWidth < 624){
+            this.checkReponsive = true
+        }
+    },
     methods: {
         deleteProductHeart(product_slug) {
-            console.log('this.get_accept', this.get_accept)
             this.isShowNoticeCarefully()
             return new Promise((resolve) => {
                 const checkValue = () => {
+                    console.log('this.get_accept', this.get_accept)
                     if (this.get_accept === true) {
                         ProductAction.actionPostHeart({
                             params: {
-                                token_permission_infor_user: localStorage.getItem('token_permission_infor_user') ? localStorage.getItem('token_permission_infor_user') : "nono",
                                 product_slug: product_slug
                             }
                         }).then(res => {
                             console.log(res)
                             this.$store.dispatch('notice/actionComplete')
-                            this.$emit('removeProductHeart', [product_slug, false])
+                            this.$store.dispatch('heart/actionUnlikeItems')
                             this.dataItem = this.dataItem.filter((product) => {
                                 return product.slug != product_slug
                             })
@@ -141,7 +155,10 @@ export default {
         },
         changeModeShow(){
             this.isShowList = ! this.isShowList
-        }
+        },
+        nextPageDetailProduct(slug){
+            this.$router.push('/product/'+ slug)
+        },
 
     }
 };

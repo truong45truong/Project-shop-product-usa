@@ -8,19 +8,19 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="w-100 d-flex rounded fill-content">
-						<div class="p-5 w-100">
+						<div class="p-sm-5 p-3 w-100">
 							<div class="d-flex flex-column w-100 align-items-center">
 								<div>
 									<h3 class="mb-4">Đăng nhập</h3>
 								</div>
 							</div>
 							<form action="#" class="signin-form">
-								<div class="mb-3 w-100">
+								<div class="mb-sm-3 w-100">
 									<label class="label" for="name">Tài khoản </label>
 									<input type="text" class="form-control w-100" placeholder="tài khoản" required
 										v-model="username" :class="{ 'border border-danger' : message != ''}">
 								</div>
-								<div class="mb-3 w-100">
+								<div class="mb-sm-3 w-100">
 									<label class="label" for="password">Mật khẩu</label>
 									<input type="password" class="form-control w-100" placeholder="mật khẩu" required
 										v-model="password" :class="{ 'border border-danger' : message != ''}">
@@ -59,12 +59,12 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="d-md-flex sigup-center fit-content">
-						<div class="login-wrap p-4 p-md-5 w-100 mb-2">
+						<div class="login-wrap p-lg-4 p-md-5 p-2 w-100 mb-2">
 							<div class="d-flex justify-content-center w-100">
-								<h3 class="mb-4">Đăng kí</h3>
+								<h3 class="mb-sm-4 mb-2">Đăng kí</h3>
 							</div>
 							<form action="#" class="signin-form">
-								<div class="mb-3">
+								<div class="mb-sm-3">
 									<label class="label" for="name">Tài khoản </label>
 									<input type="text" class="form-control w-100" placeholder="tài khoản" required
 										v-model="username_register"
@@ -72,14 +72,14 @@
 									<p class="text-danger" v-if="showErrorUsernameRegister()">{{ get_error.value }}</p>
 									<span v-if="error_empty.username" class="text-danger">Nhâp tên tài khoản</span>
 								</div>
-								<div class="mb-3">
+								<div class="mb-sm-3">
 									<label class="label" for="password">Mật khẩu</label>
 									<input type="password" class="form-control w-100" placeholder="mật khẩu" required
 										v-model="password_register"
 										:class="{ 'border border-danger': error_empty.password }">
 									<span v-if="error_empty.password" class="text-danger">Nhập mật khẩu lần 1</span>
 								</div>
-								<div class="mb-3">
+								<div class="mb-sm-3">
 									<label class="label" for="password">Nhập lại mật khẩu</label>
 									<input type="password" class="form-control w-100" @blur="handleBlur"
 										placeholder="mật khẩu" required v-model="password_register_confirm" ref="checkpw"
@@ -87,20 +87,20 @@
 									<p class="text-danger" v-if="password_register_confirm_error"> Password no same</p>
 									<span v-if="error_empty.password_confirm" class="text-danger">Nhập mật khẩu lần 2</span>
 								</div>
-								<div class="mb-3">
+								<div class="mb-sm-3">
 									<label class="label" for="name">Email </label>
 									<input type="email" class="form-control w-100" placeholder="email" required v-on:blur="checkEmail"
 										v-model="email_register" :class="{ 'border border-danger': error_empty.email }">
 									<span v-if="error_empty.email" class="text-danger">Nhập email</span>
 									<span v-if="check_mail_error.value" class="text-danger">{{check_mail_error.content}}</span>
 								</div>
-								<div class="mb-3">
+								<div class="mb-sm-3">
 									<label class="label" for="name">Họ và tên </label>
 									<input type="email" class="form-control w-100" placeholder="Họ và tên" required
 										v-model="name_register" :class="{ 'border border-danger': error_empty.email }">
 									<span v-if="error_empty.name" class="text-danger">Nhập họ và tên</span>
 								</div>
-								<div class="mb-3">
+								<div class="mb-sm-3">
 									<label class="label" for="name">Số điện thoại </label>
 									<input type="email" class="form-control w-100" placeholder="số điện thoại" required v-on:blur="checkPhone"
 										v-model="phone_register" :class="{ 'border border-danger': error_empty.phone }" >
@@ -108,7 +108,7 @@
 									<span v-if="error_empty.phone" class="text-danger">Nhập số điện thoại</span>
 									<span v-if="check_phone_error.value" class="text-danger">{{check_phone_error.content}}</span>
 								</div>
-								<div class="mb-3">
+								<div class="mb-sm-3">
 									<label class="label" for="name">Địa chỉ </label>
 									<input type="email" class="form-control w-100" placeholder="Địa chỉ" required
 										v-model="address_register" :class="{ 'border border-danger': error_empty.email }">
@@ -387,5 +387,33 @@ export default {
 }
 .icon-cancel-login:hover {
 	color:rgb(104, 104, 104)
+}
+@media only screen and (max-width: 1024px) {
+	.img {
+		display :none;
+	}
+	.ftco-section {
+		top:10%;
+	}
+	.icon-cancel-login {
+		right:10%;
+	}
+}
+@media only screen and (max-width: 424px){
+	.label {
+		font-size: 11px;;
+	}
+	input.form-control {
+		font-size: 11px;
+	}
+	button.form-control {
+		font-size: 11px;
+	}
+	p {
+		font-size: 11px;
+	}
+	a {
+		font-size: 11px;
+	}
 }
 </style>

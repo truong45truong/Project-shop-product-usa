@@ -1,10 +1,13 @@
 <template>
   <div id="shopping-cart">
-    <div class="d-flex icon-cancel-list-heart justify-content-end">
-      <font-awesome-icon @click="$emit('hideCart', false)" icon="fa-solid fa-xmark" class="m-3" />
+    <div class="position-fixed d-flex icon-cancel-cart align-items-center" @click="$emit('hideCart', false)">
+      <font-awesome-icon  icon="fa-solid fa-arrow-left-long" class="m-3 icon-cancel-cart" />
+      <p class="m-0 me-1 text-dark text-icon-cancel">Trở về</p>
     </div>
     <div class="header-shopping-cart">
-      <h2 class="title-cart ms-5">Giỏ hàng</h2>
+      <div class="container text-center">
+        <h2 class="title-cart ms-5 mt-4">Giỏ hàng</h2>
+      </div>
     </div>
     <div class="layout-order-cart">
       <cart-order v-for="order,index in listOrder" :name="order.order.name" :datetime="order.order.datetime"
@@ -12,7 +15,7 @@
         :phone_receiver="order.order.phone_receiver" :status="order.order.status" :note="order.order.note"
         :logs="order.order.logs" :cancel="order.order.cancel" :total_price="order.order.total_price"
         :request_cancel="order.order.request_cancel" :transport="order.transport" :products="order.products" 
-        :indexOrder="index" @hideCart="hide"
+        :indexOrder="index" @hideCart="hide" :dataProductSelect="dataProductSelect"
          />
     </div>
     <div class="h-100">
@@ -25,16 +28,22 @@
 import { mapGetters, mapActions } from 'vuex'
 import CartOrder from '../../components/cart/CartOrder.vue'
 import OrderSelectedProduct from '../../components/cart/OrderSelectedProduct.vue'
+import qs from 'qs';
+
 export default {
   name: "ShoppingCartLayout",
   async created() {
       this.listOrder = this.get_data;
       console.log(this.listOrder)
-    
+      let products = qs.parse(this.$router.currentRoute._value.query.products)
+      console.log("products list seledct",products)
+      this.dataProductSelect = Object.values(products)
+      
   },
   data: () => ({
     listOrder: [],
-    isShowDetailTotalSelectProduct : false
+    isShowDetailTotalSelectProduct : false,
+    dataProductSelect : []
   }),
   components: {
     CartOrder,
@@ -101,6 +110,17 @@ $font: 'Poppins', sans-serif;
   }
 
   ;
+}
+.icon-cancel-cart {
+  font-size: 46px;
+  cursor : pointer;
+  z-index: 1;
+}
+.icon-cancel-cart:hover {
+  color:#777777
+}
+.text-icon-cancel {
+  font-size: 14px;
 }
 @media only screen and (max-width: 524px)
 {

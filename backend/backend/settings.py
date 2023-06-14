@@ -73,7 +73,8 @@ CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     'http://127.0.0.1:8080',
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
+    'https://katieshopus.info'
 ]
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = "None"

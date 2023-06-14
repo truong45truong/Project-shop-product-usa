@@ -12,8 +12,11 @@
                     @click="loadData(4)">Nhà vận chuyển </p>
             </div>
             <div v-if="isActiveInforOrder.product" class="col layout-product-order border border-1">
-                <hr classs="mt-2">
-                <div class="col mt-2" v-for="product in get_is_order_selected_product.data" :key="product">
+                <hr classs="mt-2" v-if="get_is_order_selected_product.data.length != 0" >
+                <div class="text-center mt-5" v-if="get_is_order_selected_product.data.length == 0" >
+                    <h3>Không có sản phẩm được chọn</h3>
+                </div>
+                <div class="col mt-2" v-for="product,index in get_is_order_selected_product.data" :key="product">
                     <product-order :slug="product.product_slug" :name="product.product_name"
                         :category="product.category_name" :photo="product.photo_product" :price="product.product_price" :numberProduct="product.product_quantity"
                         :sale='product.product_sale' :total_price="product.product_price_total" :voucher_activate = "product.voucher_activate"
@@ -167,7 +170,8 @@ import ProductOrder from './../product/ProductOrder.vue'
 export default ({
     name: 'OrderSelectedProductExpand',
     props: {
-        msg : ''
+        msg : '',
+        indexOrder : ''
     },
     data: () => ({
         isActiveInforOrder: {

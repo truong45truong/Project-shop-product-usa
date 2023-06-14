@@ -6,9 +6,9 @@
             </div>
             <div class="title d-flex justify-content-between align-items-center w-100">
                 <p class="fs-5 text-dark my-2 ms-2 py-1">
-                    <b><i>Bộ lọc & Xắp xếp</i></b>
+                    <b><i>Bộ lọc & Sắp xếp</i></b>
                 </p>
-                <button class="text-dark my-2 me-2 btn-clear-all">
+                <button class="text-dark my-2 me-2 btn-clear-all" @click="resetStatus">
                     <i>Xóa tất cả thiết lập</i>
                 </button>
             </div>
@@ -19,7 +19,7 @@
                         <span v-if="category_applied == false"> ( {{ category_applied }} )</span>
                     </b>
                 </p>
-                <div class="d-flex align-items-center">
+                <!-- <div class="d-flex align-items-center">
                     <p class="my-2 ms-2"> <i> sản phẩm : </i> </p>
                     <p v-if="products == false" class="my-2 ms-2 applied-content p-1">
                         Tất cả
@@ -28,9 +28,9 @@
                         <ButtonRemoveApplied v-for="item in products" :type=1 :value="item"
                             @updateProduct="updateProducts" />
                     </div>
-                </div>
+                </div> -->
                 <div class="d-flex align-items-center">
-                    <p class="my-2 ms-2"> <i> xắp xếp : </i> </p>
+                    <p class="my-2 ms-2"> <i> Sắp xếp : </i> </p>
                     <p v-if="sorts == false" class="my-2 ms-2 applied-content p-1">
                         A -> Z
                     </p>
@@ -48,8 +48,8 @@
                     </div>
                 </div>
             </div>
-            <hr v-if="hideProducts == false">
-            <div v-if="hideProducts == false" class="filter-select">
+            <!-- <hr v-if="hideProducts == false"> -->
+            <!-- <div v-if="hideProducts == false" class="filter-select">
                 <p class="fs-5 text-dark my-2 ms-2">
                     <b>
                         <i>Sản phẩm</i>
@@ -60,12 +60,12 @@
                         <b class="applied-content p-2 text-dark" href="" @click="addFilterProduct(item.slug)">{{item.name}}</b>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <hr>
             <div class="sort-select">
                 <p class="fs-5 text-dark my-2 ms-2">
                     <b class="title-filter">
-                        <i>Xắp xếp</i>
+                        <i>Sắp xếp</i>
                     </b>
                 <div class="row">
                     <div class="col-3">
@@ -160,13 +160,6 @@
                 </div>
             </div>
             <hr>
-            <div class="d-flex flex-column align-items-center">
-                <button class="button-filter-sort" @click="filterAndSort">
-                    <span class="fs-5 text-dark my-2 py-1 mx-2">
-                        <b><i>Lọc & Xắp xếp</i></b>
-                    </span>
-                </button>
-            </div>
         </div>
     </div>
 </template> 
@@ -196,6 +189,27 @@ export default {
         }
     }),
     methods: {
+        resetStatus(){
+            this.products = []
+            this.sorts = [] 
+            this.limits = []
+            this.limitPrice = {
+                up: null,
+                down: null,
+                message: false
+            }
+            let ValueFilterAndSort = {
+                applied : {
+                    products : false,
+                    sorts : false,
+                    limits : false,
+                    category : this.category_applied,
+                    up: false,
+                    down : false
+                }
+            }
+            sessionStorage.setItem('filter_sort', JSON.stringify(ValueFilterAndSort))
+        },
         hide() {
             this.$emit('hideFilterAndSort')
         },
@@ -215,13 +229,16 @@ export default {
         },
         updateProducts(data) {
             this.products = data
+            this.filterAndSort()
         },
         addSort(value) {
             const jsonString = sessionStorage.getItem('filter_sort');
             let applied = JSON.parse(jsonString);
-            if (applied.applied.sorts == false) {
+            if (applied.applied.sorts == false || applied.applied.sorts == 'false') {
                 applied.applied.sorts = [value]
-            } else {
+            }
+
+            else {
                 if (this.sorts.some(element => element == value) == false) {
                     for (let i of this.sorts) {
                         let typeAdd = value.split(":")[0]
@@ -238,15 +255,22 @@ export default {
             }
             this.sorts = applied.applied.sorts
             sessionStorage.setItem('filter_sort', JSON.stringify(applied));
+            this.filterAndSort()
         },
         updateSorts(data) {
+            console.log("update sort",data )
             this.sorts = data
+            this.filterAndSort()
+            console.log("end update sort")
         },
         addLimit(value) {
             const jsonString = sessionStorage.getItem('filter_sort');
             let applied = JSON.parse(jsonString);
-            console.log(value)
-            if (applied.applied.limits == false) {
+            console.log(value,this.limits , "day la limit")
+            if(this.limits == false){
+                this.limits = []
+            }
+            if (applied.applied.limits == false || applied.applied.limits == 'false') {
                 applied.applied.limits = [value]
                 console.log(applied.applied.limits)
             } else {
@@ -262,16 +286,20 @@ export default {
 
             }
             this.limits = applied.applied.limits
-            if (this.limitPrice.up != false) {
+            if (this.limitPrice.up != false && this.limitPrice.up != 'false') {
                 applied.applied.up = this.limitPrice.up
             }
-            if (this.limitPrice.down != false) {
+            if (this.limitPrice.down != false && this.limitPrice.down != 'false') {
                 applied.applied.down = this.limitPrice.down
             }
             sessionStorage.setItem('filter_sort', JSON.stringify(applied));
+            this.filterAndSort()
         },
         updateLimits(data) {
+            console.log("update limit")
             this.limits = data
+            this.filterAndSort()
+            console.log("end update limit")
         },
         removePriceUpDown(){
             this.limitPrice.up = null
@@ -295,6 +323,7 @@ export default {
                 } else {
                     this.limitPrice.up = null
                 }
+                this.filterAndSort()
             }
             if (type == 2) {
                 if (isNumeric(this.limitPrice.down) == true) {
@@ -307,10 +336,12 @@ export default {
                 } else {
                     this.limitPrice.down = null
                 }
+                this.filterAndSort()
             }
             // sessionStorage.setItem('filter_sort', JSON.stringify(applied));
         },
         filterAndSort() {
+            console.log("start filter and sort")
             const jsonString = sessionStorage.getItem('filter_sort');
             let applied = JSON.parse(jsonString);
             if (this.type == 1){
@@ -340,9 +371,25 @@ export default {
     created() {
         const jsonString = sessionStorage.getItem('filter_sort');
         const applied = JSON.parse(jsonString);
-        this.products = applied.applied.products
-        this.limits = applied.applied.limits
-        this.sorts = applied.applied.sorts
+        if(applied.applied.products  == false || applied.applied.products  == "false"){
+            this.products = false
+        } else {
+            this.products = applied.applied.products
+        }
+        if(applied.applied.limits  == false || applied.applied.limits  == "false"){
+            this.limits = false
+        } else {
+            this.limits = applied.applied.limits
+        }
+        if(applied.applied.sorts  == false || applied.applied.sorts  == "false"){
+            this.sorts = false
+        } else {
+            console.log("applied.applied.sorts",applied.applied.sorts,typeof applied.applied.sorts)
+            if(typeof applied.applied.sorts == 'string' ){
+                this.sorts.push(applied.applied.sorts)
+            }else
+            this.sorts = applied.applied.sorts
+        }
         if( applied.applied.up != false &&  applied.applied.up == false){
             this.limitPrice.up = applied.applied.up
             this.limitPrice.down = null

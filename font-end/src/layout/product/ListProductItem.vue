@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column mt-5 list-product-layout " :class="[ toMarket == true & isShowLoginStore == false ? 'market bg-list-item-heart' : 'container flash-sale-top' ]">
+    <div class="d-flex flex-column list-product-layout " :class="[ toMarket == true & isShowLoginStore == false ? 'market bg-list-item-heart' : 'container flash-sale-top' ]">
         <div class="info-user-layout w-100 d-flex flex-column align-items-center">
             <InforUserLayout v-if="inforUser != false " :name="inforUser.name"  :address ="inforUser.address" :phone="inforUser.phones" :photo="inforUser.photo"
             :class="[ isInforUser == true ? 'info-user' : 'info-user-hide' ]" @hide="isShowInforUser"/>
@@ -7,32 +7,49 @@
         <div class="info-user-layout w-100 d-flex flex-column align-items-center">
             <cart-inside-market-layout v-if="isCart != false " :class="[ isCart == true ? 'info-user' : 'info-user-hide' ]" @hideCart="isShowCart"/>
         </div>
-        <div class="row  d-flex mx-3 justify-content-between">
-            <div class="col-lg-3 d-flex align-items-center bulletin-board ">
+        <div v-if="toMarket == false & isShowLoginStore == false" class="row d-flex justify-content-between  mx-3 " :class="[toMarket & isShowLoginStore == false ? 'layout-menu-market' : '']">
+            <div class="col-3 d-flex align-items-center bulletin-board ">
                 <font-awesome-icon icon="fa-solid fa-bookmark" class="text-dark bulletin-content" />
                 <div class="bulletin-text">
                     <h5 class="text-white m-0 me-1 ms-4 fs-3">Chợ</h5>
                 </div>
             </div>
-            <div v-if="toMarket & isShowLoginStore == false" class="col-3 d-flex align-items-center btn-market-layout">
-            </div>
-            <div class="col-lg-3 d-flex align-items-center btn-market-layout justify-content-end">
-                <font-awesome-icon v-if="toMarket & get_authenticated == true" icon="fa-solid fa-user" class="text-dark fs-2 icon-market me-5" @click="isShowInforUser"/>
-                <font-awesome-icon v-if="toMarket & isShowLoginStore == false &  get_authenticated == true" icon="fa-solid fa-basket-shopping" class="text-dark fs-2 icon-market me-5" @click="isShowCart" />
+            <div class="col-3 d-flex align-items-center btn-market-layout justify-content-end">
                 <div class="btn-market d-flex align-items-center" @click="toTheMaket">
                     <p v-if="!toMarket " class="text-white m-0 btn-market-inside">Vào chợ </p>
-                    <p v-if="toMarket & isShowLoginStore == false"  class="text-white m-0 btn-market-inside">Ra chợ </p>
                     <font-awesome-icon icon="fa-solid fa-arrow-right" class="text-white mx-4 fs-2 btn-icon-market" />
                 </div>
             </div>
         </div>
+        <div v-if="toMarket & isShowLoginStore == false" class="container" id="menu-list-item">
+            <div class="row text-center">
+                <h3 class="text-dark my-2">Chợ mua sắm</h3>
+            </div>
+            <div class="row my-1 d-flex align-items-center btn-market-layout justify-content-end">
+                <div class="col-6">
+                    <button v-if="toMarket & isShowLoginStore == false &  get_authenticated == false" class="btn btn-dark" @click="loginMarket">
+                        Đăng nhập ngay
+                    </button>
+                    <font-awesome-icon v-if="toMarket & isShowLoginStore == false &  get_authenticated == true" icon="fa-solid fa-user" class="text-dark fs-2 icon-market me-5" @click="isShowInforUser"/>
+                    <font-awesome-icon v-if="toMarket & isShowLoginStore == false &  get_authenticated == true" icon="fa-solid fa-basket-shopping" class="text-dark fs-2 icon-market me-5" @click="isShowCart" />
+                </div>
+                <div class="col-6 d-flex align-items-end justify-content-end">
+                    <div class="btn-market d-flex" @click="toTheMaket">
+                        <p v-if="toMarket & isShowLoginStore == false"  class="text-white m-0 btn-market-inside">Ra chợ </p>
+                        <font-awesome-icon icon="fa-solid fa-arrow-right" class="text-white mx-4 fs-2 btn-icon-market" />
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container">
-            <div class="row h-75 layout-list-product-market">
-                <div v-if="toMarket & isShowLoginStore == false" v-for="item in listProductItem"  class="col-lg-3 col-sm-4 col-6 mt-0 my-3 h-sm-25 item-cart-market-grid px-2">
-                    <product-item :slug="item.slug" :photo="item.data" :name="item.name" class="layout-product-item bg-white"
+            <div v-if="toMarket  & isShowLoginStore == false" class="row list-product-layout" :style="{ height: elementHeight + 'px' }">
+                <div v-for="item in listProductItem"  class="col-lg-3 col-sm-4 col-6 mt-0 my-3 h-sm-25 px-2">
+                    <product-item :slug="item.slug" :photo="item.data" :name="item.name" class=" bg-white" :sale="item.sale"
                             :price="item.price" :numberProduct=3 :status="item.status_heart" :hearts="item.count_heart"
                         />
                 </div>
+            </div>
+            <div class="row" >
                 <Carousel v-if="!toMarket || isShowLoginStore == true" :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
                     <Slide v-if="listProductItem.length > 0" v-for="index in arrayMarket" :key="index" :class="'mx-1 shawdo'">
                         <product-item :slug="listProductItem[index].slug" :photo="listProductItem[index].data" :name="listProductItem[index].name" 
@@ -46,9 +63,6 @@
                     </template>
                 </Carousel>
             </div>
-        </div>
-        <div v-if=" toMarket == true & isShowLoginStore == false" class="d-flex flex-column align-items-center mt-5">
-            <button class="btn btn-dark">1</button>
         </div>
     </div>
 </template>
@@ -93,6 +107,7 @@ export default ({
         inforUser : false,
         isCart : false,
         arrayMarket : [],
+        elementHeight : '',
         settings: {
             itemsToShow: 2,
             snapAlign: 'center',
@@ -117,8 +132,39 @@ export default ({
       },
     }),
     methods: {
+        loginMarket(){
+            this.$router.push({ name : 'sign-in' , query : {
+            nextPage : String(window.location.href).replace("http://127.0.0.1:8080/",'')
+            }})
+        },
         toTheMaket(){
             this.toMarket = ! this.toMarket;
+            if(this.toMarket == true){
+
+                new Promise((resolve) => {
+                    const checkValue = () => {
+                        if (document.getElementById('menu-list-item') != null) {
+                            this.elementHeight = window.innerHeight - document.getElementById('menu-list-item').offsetHeight
+                            resolve();
+                        }
+                        else {
+                            setTimeout(checkValue, 500);
+                        }
+
+                    };
+
+                    checkValue();
+                });
+            }
+            let listQuery = {...this.$router.currentRoute._value.query}
+            if(listQuery.nextMarket != null){
+                delete listQuery.nextMarket
+                this.$router.push({ query: listQuery });
+            }else {
+                this.$router.push({ query: { "nextMarket": true , ...listQuery} });
+            }
+            
+            
         },
         async isShowInforUser() {
             this.isInforUser = ! this.isInforUser
@@ -151,7 +197,31 @@ export default ({
                 this.arrayMarket.push(Math.floor(Math.random() * 11));
             }
         })
-    }
+    },
+    mounted() {
+        window.addEventListener('resize', ()=> {
+            console.log("this.elementHeight = window.innerHeight - document.getElementById('menu-list-item').offsetHeight;",document.getElementById('menu-list-item').offsetHeight)
+            this.elementHeight = window.innerHeight - document.getElementById('menu-list-item').offsetHeight
+        });
+        let listQuery = {...this.$router.currentRoute._value.query}
+        if(listQuery.nextMarket != null){
+            this.toMarket = true
+            new Promise((resolve) => {
+                    const checkValue = () => {
+                        if (document.getElementById('menu-list-item') != null) {
+                            this.elementHeight = window.innerHeight - document.getElementById('menu-list-item').offsetHeight
+                            resolve();
+                        }
+                        else {
+                            setTimeout(checkValue, 500);
+                        }
+
+                    };
+
+                    checkValue();
+            });
+        }
+    },
 })
 </script>
 <style>
@@ -161,11 +231,9 @@ export default ({
     display:block;
     position:fixed !important;
     width:100% !important;
-    height: 100% !important;
     z-index: 9999;
     background-color: white;
     border:5px solid rgb(36,41,47);
-    transition:all 0.5s;
     align-content: center;
 }
 .info-user-layout {
@@ -191,6 +259,7 @@ export default ({
     top:-20%;
     padding: 15px 20px;
     border-radius: 15px;
+    max-width: 200px;
 }
 .icon-market{
     position:relative;
@@ -243,6 +312,9 @@ export default ({
     right:10%;
     transition:1.5s;
 }
+#menu-list-item {
+    box-shadow: 0 4px 2px -2px rgb(175, 175, 175);
+}
 @keyframes hoverBtnMarket {
     from {
         right:10%;
@@ -292,13 +364,35 @@ export default ({
     cursor: pointer;
     color :brown !important;   
 }
-/* .layout-list-product-market {
-    overflow-y: scroll;
-} */
+
 .list-product-layout::-webkit-scrollbar {
   display: none;
 }
 .list-product-layout{
+    height:fit-content;
     overflow-y: scroll;
+}
+
+@media only screen and (max-width: 524px) {
+    .bulletin-board {
+        justify-content: start !important;
+        font-size: larger;
+    }
+    .bulletin-content {
+        font-size: 120px;
+    }
+    .btn-market {
+        padding:10px 20px;
+    }
+    .layout-menu-market  {
+        position:fixed;
+        top:2%;
+        background-color: white;
+        margin-left:0 !important;
+        padding:0 !important;
+    }
+    .layout-list-product-market {
+        height:fit-content !important;
+    }
 }
 </style>

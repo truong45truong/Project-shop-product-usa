@@ -1,13 +1,12 @@
 <template >
-    <div v-if="get_activate && get_type == 'addtocart'" class="position-absolute pb-2 bg-white text-bg-white text-dark rounded-fill w-50 start-50 shadow"
-        :class="[ isShowNotify == true ? 'notify-menu-hover' : 'notify-menu' ]" v-on:mouseout="showNotify" v-on:mouseover="showNotify"
+    <div v-if="get_activate && get_type == 'addtocart'" class="pb-2 d-flex  text-bg-white text-dark rounded-fill end-0 shadow"
+        :class="[ isShowNotify == false ? 'd-none' : 'notify-menu' ]"
     >    
-        <div class="bg-light w-100 text-center position-relative d-flex flex-row-reverse">
-            <font-awesome-icon icon="fa-solid fa-xmark"
-            class="text-danger fs-4 me-1 cancel-notify " @click="cancel" />
-        </div>
-        <div class="p-2 text-center">
-            {{get_content}}
+        <div class="d-flex flex-column container-notice justify-content-center align-items-center">
+            <img src="../../assets/icon/icon-correctcorrect.png" class="icon-corret-notice" alt="">
+            <div class="p-2 text-center text-white">
+                {{get_content}}
+            </div>
         </div>
     </div>
 </template>
@@ -38,12 +37,18 @@ export default ({
     mounted(){
         return new Promise((resolve) => {
             const checkValue = () => {
-                if (this.showComponent === false) {
-                    resolve();
+                if (this.get_activate === false) {
+                    this.isShowNotify = false
                 }
-                else {
-                    setTimeout(checkValue, 500);
+                if (this.get_activate === true) {
+                    this.isShowNotify = true
+                    setTimeout(()=>{
+                        this.$store.dispatch('notice/actionShowMenuCancel')
+                    },2000)
+                    
                 }
+                setTimeout(checkValue, 500);
+
             };
 
             checkValue();
@@ -59,20 +64,32 @@ export default ({
         display:block;
     }
     100% {
-        opacity : 0;
+        opacity : 0.5;
         display:none;
     }
 }
 .notify-menu{
-    top:120%;   
-    opacity : 0;
-    animation: notifyActivate 5s;
+    position :fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    top:0%;
+    z-index: 9999;
+    animation: notifyActivate 2s;
+}
+.container-notice{
+    background-color: rgba(33, 33, 33, 0.9);
+    width: 400px;
+    height: 200px;
 }
 .notify-menu-hover {
     top:120%; 
     opacity: 1;
 }
-.cancel-notify {
-    cursor:pointer;
+.icon-corret-notice{
+    width:80px;
+    height:80px;
 }
 </style>

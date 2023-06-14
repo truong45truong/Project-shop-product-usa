@@ -101,4 +101,12 @@ export default {
         max-width: 5rem;
     }
 }
+@media only screen and (max-width: 424px) {
+    .img-media-comment {
+        max-width: 3.5rem;
+    }
+    .media-comment {
+        max-width: 3.5rem;
+    }
+}
 </style>

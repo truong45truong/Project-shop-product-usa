@@ -1,15 +1,15 @@
 <template>
-    <div class="p-3 notify-layout w-25">
+    <div class="p-3 notify-layout">
         <div class="w-100 d-flex flex-column align-items-center">
-            <h5 class="m-0">{{get_content}}</h5>
+            <h5 class="m-0 content-notice">{{get_content}}</h5>
         </div>
         <div class="d-flex justify-content-bettween mt-4 w-100">
-            <div class="btn btn-warning w-100" @click="backNoticeCarefully">
-                Trở Lại
-            </div>
-            <div class="btn btn-warning w-100" @click="acceptNoticeCarefully">
-                {{get_type}}
-            </div>
+            <button class="btn btn-warning text-center layout-btn-notice" @click="backNoticeCarefully">
+                <p class="m-0">Trở Lại</p>
+            </button>
+            <button class="btn btn-warning text-center layout-btn-notice" @click="acceptNoticeCarefully">
+                <p class="m-0 text-center">{{get_type}}</p>
+            </button>
         </div>
     </div>
 </template>
@@ -48,6 +48,17 @@ export default ({
 .notify-layout {
     background-color:  white;
     width:inherit;
-    max-width:inherit;
+    max-width:300px;
+}
+.layout-btn-notice {
+    width:75px !important;
+}
+@media only screen and (max-width: 424px) {
+    .content-notice {
+        font-size: 14px;
+    }
+    .layout-btn-notice p {
+        font-size:  13px;
+    }
 }
 </style>

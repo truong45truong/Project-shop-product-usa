@@ -1,19 +1,21 @@
 <template>
-    <div class="row d-flex">
-        <div class="col-sm-6 text-center">
-            <h5 class="text-white title-name mb-3 me-2">Về chúng tôi</h5>
-            <div class="d-flex flex-column align-items-start justify-content-between px-5">
-                <p class="text-white title-name m-0 me-2 w-100 text-center">Giấy tờ pháp lí kinh doanh</p>
-                <p class="text-white title-name m-0 me-2 w-100 text-center">Lịch sử thành lập</p>
-                <p class="text-white title-name m-0 me-2 w-100 text-center">Nguồn cung cấp hàng hóa</p>
+    <div class="">
+        <div class="row d-flex">
+            <div class="col-sm-6 text-center">
+                <h5 class="text-white tilte-text mb-3 me-2">Về chúng tôi</h5>
+                <div class="d-flex flex-column align-items-start justify-content-between px-5">
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">Giấy tờ pháp lí kinh doanh</p>
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">Lịch sử thành lập</p>
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">Nguồn cung cấp hàng hóa</p>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-6 text-center">
-            <h5 class="text-white title-name mb-3 me-2">Đảm Bảo</h5>
-            <div class="d-flex flex-column align-items-start justify-content-between px-5">
-                <p class="text-white title-name m-0 me-2 w-100 text-center">Sản phẩm</p>
-                <p class="text-white title-name m-0 me-2 w-100 text-center">Chất lượng sản phẩm</p>
-                <p class="text-white title-name m-0 me-2 w-100 text-center">Nhà cung cấp uy tín</p>
+            <div class="col-sm-6 text-center">
+                <h5 class="text-white tilte-text mb-3 me-2">Đảm Bảo</h5>
+                <div class="d-flex flex-column align-items-start justify-content-between px-5">
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">Sản phẩm</p>
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">Chất lượng sản phẩm</p>
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">Nhà cung cấp uy tín</p>
+                </div>
             </div>
         </div>
     </div>

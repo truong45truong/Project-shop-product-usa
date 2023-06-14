@@ -1,43 +1,45 @@
 <template>
-    <div class="row d-flex">
-        <div class="col-3">
-            <div v-for=" item in listCateogry " class="d-flex align-items-center justify-content-between px-5">
-                <a :id="`${item.id}`" v-if='item.level==0' class="link-category text-white title-name m-0 me-2" :href="'/'+ `${item.slug}`">
-                    {{ item.name }}
-                </a>
-                <div v-if='item.level==0'>
-                    <font-awesome-icon v-if="isShowChild[item.id].expand == false " class="text-white icon-expand " :id='"icon-"+`${item.id}`' icon="fa-solid fa-plus" @click="checkChildCategogy(item.id,item.level)" />
+    <div class="">
+        <div class="row d-flex">
+            <div class="col-md-3">
+                <div v-for=" item in listCateogry " class="d-flex align-items-center justify-content-between px-5">
+                    <a :id="`${item.id}`" v-if='item.level==0' class="link-category text-white title-name m-0 me-2" :href="'/'+ `${item.slug}`">
+                        {{ item.name }}
+                    </a>
+                    <div v-if='item.level==0'>
+                        <font-awesome-icon v-if="isShowChild[item.id].expand == false " class="text-white icon-expand " :id='"icon-"+`${item.id}`' icon="fa-solid fa-plus" @click="checkChildCategogy(item.id,item.level)" />
+                    </div>
+                    <div v-if='item.level==0' class="hr-category ms-2" :class="[ isShowChild[item.id].expand == true ? 'activate-expand' : 'non-activate-expand']" ></div>
                 </div>
-                <div v-if='item.level==0' class="hr-category ms-2" :class="[ isShowChild[item.id].expand == true ? 'activate-expand' : 'non-activate-expand']" ></div>
             </div>
-        </div>
-        <div class="col-3">
-            <div v-for=" item in listCateogry " class="d-flex align-items-center justify-content-between px-5">
-                <a :id="`${item.id}`" v-if='item.level==1 & isShowChild[item.id].value == true' class="link-category text-white title-name m-0 me-2 p-0" :href="'/'+ `${item.slug}`" >
-                    {{ item.name }}
-                </a>
-                <div v-if='item.level==1 & isShowChild[item.id].value == true'>
-                    <font-awesome-icon v-if="isShowChild[item.id].expand == false " class="text-white icon-expand" :id='"icon-"+`${item.id}`' icon="fa-solid fa-plus" @click="checkChildCategogy(item.id,item.level)" />
+            <div class="col-md-3">
+                <div v-for=" item in listCateogry " class="d-flex align-items-center justify-content-between px-5">
+                    <a :id="`${item.id}`" v-if='item.level==1 & isShowChild[item.id].value == true' class="link-category text-white title-name m-0 me-2 p-0" :href="'/'+ `${item.slug}`" >
+                        {{ item.name }}
+                    </a>
+                    <div v-if='item.level==1 & isShowChild[item.id].value == true'>
+                        <font-awesome-icon v-if="isShowChild[item.id].expand == false " class="text-white icon-expand" :id='"icon-"+`${item.id}`' icon="fa-solid fa-plus" @click="checkChildCategogy(item.id,item.level)" />
+                    </div>
+                    <div v-if='item.level==1 & isShowChild[item.id].value == true' class="hr-category ms-2" :class="[ isShowChild[item.id].expand == true ? 'activate-expand' : 'non-activate-expand']" ></div>
                 </div>
-                <div v-if='item.level==1 & isShowChild[item.id].value == true' class="hr-category ms-2" :class="[ isShowChild[item.id].expand == true ? 'activate-expand' : 'non-activate-expand']" ></div>
             </div>
-        </div>
-        <div class="col-3">
-            <div v-for=" item in listCateogry " class="d-flex align-items-center justify-content-between px-5">
-                <a :id="`${item.id}`" v-if='item.level==2 & isShowChild[item.id].value == true' class="link-category text-white title-name m-0 me-2" :href="'/'+ `${item.slug}`" >
-                    {{ item.name }}
-                </a>
-                <div v-if='item.level==2 & isShowChild[item.id].value == true'>
-                    <font-awesome-icon v-if="isShowChild[item.id].expand == false " class="text-white icon-expand" :id='"icon-"+`${item.id}`' icon="fa-solid fa-plus" @click="checkChildCategogy(item.id,item.level)" />
+            <div class="col-md-3">
+                <div v-for=" item in listCateogry " class="d-flex align-items-center justify-content-between px-5">
+                    <a :id="`${item.id}`" v-if='item.level==2 & isShowChild[item.id].value == true' class="link-category text-white title-name m-0 me-2" :href="'/'+ `${item.slug}`" >
+                        {{ item.name }}
+                    </a>
+                    <div v-if='item.level==2 & isShowChild[item.id].value == true'>
+                        <font-awesome-icon v-if="isShowChild[item.id].expand == false " class="text-white icon-expand" :id='"icon-"+`${item.id}`' icon="fa-solid fa-plus" @click="checkChildCategogy(item.id,item.level)" />
+                    </div>
+                    <div v-if='item.level==2 & isShowChild[item.id].value == true' class="hr-category ms-2" :class="[ isShowChild[item.id].expand == true ? 'activate-expand' : 'non-activate-expand']" ></div>
                 </div>
-                <div v-if='item.level==2 & isShowChild[item.id].value == true' class="hr-category ms-2" :class="[ isShowChild[item.id].expand == true ? 'activate-expand' : 'non-activate-expand']" ></div>
             </div>
-        </div>
-        <div class="col-3">
-            <div v-for=" item in listCateogry " class="d-flex align-items-center justify-content-between px-5">
-                <a :id="`${item.id}`" v-if='item.level==3 & isShowChild[item.id].value == true' class="link-category text-white title-name   m-0 me-2" :href="'/'+ `${item.slug}`" >
-                    {{ item.name }}
-                </a>
+            <div class="col-md-3">
+                <div v-for=" item in listCateogry " class="d-flex align-items-center justify-content-between px-5">
+                    <a :id="`${item.id}`" v-if='item.level==3 & isShowChild[item.id].value == true' class="link-category text-white title-name   m-0 me-2" :href="'/'+ `${item.slug}`" >
+                        {{ item.name }}
+                    </a>
+                </div>
             </div>
         </div>
     </div>

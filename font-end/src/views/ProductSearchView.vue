@@ -1,16 +1,20 @@
 
 <template>
     <main>
+      <div v-if="isLogin" class="position-fixed over-bg-login h-100 w-100"></div>
       <div class="d-flex flex-column" :class="[get_is_activate == true ? 'top-action-on-web' : '']">
         <notice-carefully v-if="get_is_activate" class="m-auto">
         </notice-carefully>
       </div>
-      <menu-header ref="menuHeader" @hideListItemHeart="activeShowListHeart" @hideCart="activeShowCart" />
+      <menu-header ref="menuHeader" @hideListItemHeart="activeShowListHeart" @hideCart="activeShowCart" 
+        @hideChangePassword = "activeChangePassword"/>
       <list-product-search />
       <list-item-heart v-if="isShowListHeart" class="h-100" @hideListItemHeart="activeShowListHeart"
         @removeProductHeart="fromHomeViewChangeStatutsHeart" :isShowComponent="isShowListHeart" />
       <shopping-cart-layout v-if="isShowCart" class="h-100" @hideCart="activeShowCart" :isShowComponent="isShowCart" />
+      <notice-menu />
       <footer-layout />
+      <change-password @hide = "activeChangePassword" v-if="isShowChangePassword" />
     </main>
   </template>
     
@@ -22,15 +26,29 @@
   import ListItemHeart from '../layout/product/ListItemHeart.vue';
   import ShoppingCartLayout from '../layout/cart/ShoppingCartLayout.vue';
   import ListProductSearch from './../layout/product/ListProductSearch.vue';
+  import ChangePassword from './../components/login/ChangePassword.vue'
+  import NoticeMenu from './../components/other/NoticeMenu.vue'
   import { mapGetters } from 'vuex';
   export default {
     name: "ProductSearchView",
     async created() {
       if (this.get_authenticated) {
-        await this.$store.dispatch('heart/actionGetData')
-        if (this.get_is_data_cart == false) {
-          await this.$store.dispatch('cart/actionGetData')
-        }
+          await this.$store.dispatch('heart/actionGetData')
+          if (this.get_is_data_cart == false) {
+            await this.$store.dispatch('cart/actionGetData')
+            if(this.$router.currentRoute._value.query.nextCart == 'true'){
+                this.activeShowCart(true)
+            } else 
+            if(this.$router.currentRoute._value.query.nextHeart == 'true'){
+              this.activeShowListHeart(true)
+            }
+          }
+        }else {
+          if(this.$router.currentRoute._value.query.nextCart == 'true'){
+            this.$router.push({ name : 'sign-in' , query : {
+              nextPage : String(window.location.href).replace("http://127.0.0.1:8080/",'')
+            }})
+          }
       }
     },
     watch:{
@@ -48,6 +66,7 @@
       isShowListHeart: null,
       isShowCart: null,
       isShowLogin : false,
+      isShowChangePassword : null ,
     }),
     components: {
       MenuHeader,
@@ -55,7 +74,9 @@
       NoticeCarefully,
       ListItemHeart,
       ShoppingCartLayout,
-      ListProductSearch
+      ListProductSearch,
+      ChangePassword,
+      NoticeMenu
     },
     computed: {
       ...mapGetters('notice', {
@@ -67,11 +88,23 @@
       }),
       ...mapGetters('auth', {
               get_authenticated: 'isAuthenticated',
+              isLogin : 'isShowLogin',
           }),
     },
     methods: {
       activeShowListHeart(status) {
-        this.isShowListHeart = status;
+        if (this.get_authenticated != true) {
+        this.$store.dispatch('notice/actionTypeNotice', { content: 'Đăng nhập để vào yêu thích', type: 'addtocart' })
+        this.$store.dispatch('notice/activateShowMenu')
+      } else {
+        if(status == false){
+            let listQuery = {...this.$router.currentRoute._value.query}
+            console.log('listQuery',listQuery)
+            delete listQuery.nextHeart
+            this.$router.push({ query: {...listQuery} });
+          }
+          this.isShowListHeart = status;
+      }
       },
       fromHomeViewChangeStatutsHeart(product_slug) {
         const listProductItem = this.$refs.list_product_item;
@@ -82,14 +115,27 @@
           this.$store.dispatch('notice/actionTypeNotice', { content: 'Đăng nhập để vào giỏ hàng', type: 'addtocart' })
           this.$store.dispatch('notice/activateShowMenu')
         } else {
+          if(status == false){
+            let listQuery = {...this.$router.currentRoute._value.query}
+            console.log('listQuery',listQuery)
+            delete listQuery.nextCart
+            this.$router.push({ query: {...listQuery} });
+          }
           this.isShowCart = status;
         }
       },
       showLogin(){
         this.$refs.menuHeader.isShowLogin = true
-      }
+      },
+      activeChangePassword( status ){
+        this.isShowChangePassword = status;
+      },
     }
   }
   </script>
   <style>
+  .over-bg-login  {
+  background-color: rgba(0, 0, 0,0.4);
+  z-index: 999;
+}
   </style>

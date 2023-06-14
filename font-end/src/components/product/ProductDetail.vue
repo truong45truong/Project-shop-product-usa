@@ -9,8 +9,8 @@
             </div>
         </div>
         <div class="row shadow position-relative">
-            <div class="col-sm-6 position-relative">
-                <img class="img-detail-product" :src="'http://127.0.0.1:8000/' + `${data.data}`" alt="">
+            <div class="col-sm-4 position-relative">
+                <img class="img-detail-product" :src="'http://127.0.0.1:8000/' + `${imgs[0]}`" alt="">
                 <div v-if="data.sale > 0" class="promoribon"><br>
                   <img class="img-sale" src="./../../assets/images/sale-product-detail.png" alt="">
                   <p class="text-white m-0">Sale</p>
@@ -18,21 +18,30 @@
                       {{data.sale}}%
                   </p>
                 </div>
+                <ListImageProduct :dataImage="imgs" />
             </div>
-            <div class="col-sm-6">
+            <div class="col">
                 <div class="d-flex flex-column position-relative">
-
-                    <p class="m-0 fs-5 text-dark mb-2">
+                  <div class="border p-3 flask-sale-content" v-if="data.sale > 0">
+                      <div class="d-flex">
+                        <font-awesome-icon icon="fa-solid fa-bolt" class="text-danger" />
+                        <p class="ms-2">
+                          Flask Sale Còn :
+                        </p>
+                      </div>
+                      <CountDownFLashSale />
+                    </div>
+                    <p class="m-0 text-content-detail fs-5 text-dark mb-2">
                         Giá : 
                           <span :class="[ data.sale>0 ? 'price-sale' : '']" > {{ data.price }} </span>
-                          <span class="ms-2 text-danger" v-if="data.sale > 0"> {{Math.ceil(data.price*(( 100 - data.sale)/100))}} </span>
+                          <span class="ms-2 text-danger" v-if="data.sale > 0"> {{price_total}} </span>
                         vnđ
                     </p>
-                    <p class="m-0 fs-5 text-dark mb-2"> Yêu thích : {{ data.count_heart }}
+                    <p class="m-0 fs-5 text-content-detail text-dark mb-2"> Yêu thích : {{ data.count_heart }}
                         <span> <font-awesome-icon icon="fa-solid fa-heart" class="fs-4" /> </span>
                     </p>
                     <div class="d-flex flex-column mb-4">
-                        <p class="m-0 fs-5 text-dark mb-2">Mã giảm giá áp dụng cho sản phẩm</p>
+                        <p class="m-0 text-content-detail fs-5 text-dark mb-2">Mã giảm giá áp dụng cho sản phẩm</p>
                         <div class="btn-select-voucher d-flex justify-content-between py-2 px-4" @click="showSelectedVoucher">
                             <p class="m-0 text-white">Chọn Mã</p>
                             <font-awesome-icon icon="fa-solid fa-angle-down" class="m-0 text-white" />
@@ -43,15 +52,6 @@
                             <p class="m-0 me-1 text-white">Giảm 15 k</p>
                           </div>
                         </div>
-                    </div>
-                    <div class="border p-3 flask-sale-content">
-                      <div class="d-flex">
-                        <font-awesome-icon icon="fa-solid fa-bolt" class="text-danger" />
-                        <p class="ms-2">
-                          Flask Sale Còn :
-                        </p>
-                      </div>
-                      <CountDownFLashSale v-if="data.sale > 0" />
                     </div>
                 </div>
             </div>
@@ -64,16 +64,26 @@
               </button>
             </div>
             <div class="col-sm-6 mt-3 d-flex flex-column">
-              <button class="button-48 m-auto">
+              <button class="button-48 m-auto" @click="nextCheckout">
                 <span class="text"> Mua Ngay</span>
               </button>
             </div>
           </div>
         </div>
-        <div class="border mt-5 pb-3">
-          <div class="row">
+        <div  class="border mt-5" 
+        >
+          <div class="row content-descript"
+          :class="[ checkShowMoreDescribe == false ? ''  :  showMoreDescribe ? 'more-expand' : 'more-hide' ]" 
+          >
             <h4 class="mb-3 mt-1">Mô tả sản phẩm </h4>
             <p class="text-dark text-descript">{{data.description}}</p>
+          </div>
+          <div v-if="checkShowMoreDescribe" class="bg-dark mt-2 text-center" 
+            @click="isShowMoreDecribe"
+          >
+              <p class="text-white m-0 py-2">Xem thêm
+                <font-awesome-icon class="text-" icon="fa-solid fa-angle-down" />
+              </p>
           </div>
         </div>
         <div v-if="isLoadComment" class="mt-5 bg-dark shadow">
@@ -93,6 +103,8 @@ import {CommentApiService} from './../../common/comment.service'
 import CountDownFLashSale from './../other/CountDowmFLashSale.vue'
 import ListComment from './../../layout/blog/ListComment.vue'
 import ListBlog from './../../layout/blog/ListBlog.vue'
+import lzwCompress from 'lzwcompress';
+import ListImageProduct from './ListImageProduct.vue'
 export default {
     name: "DetailProduct",
     setup() {
@@ -121,6 +133,10 @@ export default {
         isShowSelectedVoucher : false,
         list_comment : false,
         isLoadComment : false,
+        checkShowMoreDescribe : false,
+        showMoreDescribe : false,
+        price_total : 0,
+        imgs : ''
     }),
     async created() {
       await ProductApiService.get({
@@ -130,6 +146,7 @@ export default {
       }).then(res => {
           console.log(res)
           this.data = res.data.products[0]
+          this.imgs = res.data.products[0].file_media_product.split(',')
       })
       await CommentApiService.getCommentProduct({
         params : {
@@ -142,11 +159,21 @@ export default {
         this.list_comment = response.data.comments
         this.isLoadComment = true
       })
+      this.price_total = Math.ceil((100 - this.data.sale) / 100 * this.data.price)
+      this.price_total = new Intl.NumberFormat('vi-VN').format(this.price_total)
+    },
+    mounted()
+    {
+      if(window.innerWidth < 624){
+        this.checkShowMoreDescribe = true
+      }
+      window.scrollTo(0, 0);
     },
     components: {
       CountDownFLashSale,
       ListBlog,
-      ListComment
+      ListComment,
+      ListImageProduct
     },
     computed: {
         ...mapGetters('notice', {
@@ -167,9 +194,21 @@ export default {
           this.$store.dispatch('cart/actionAddToCart', {
                 product_slug : this.route.params.slug
            })
-           this.$store.dispatch('notice/actionTypeNotice',{content : 'Sản phẩm vừa dc thêm vào giỏ hàng',type : 'addtocart'})
+           this.$store.dispatch('notice/actionTypeNotice',{content : 'Sản phẩm ' + this.data.name +' vừa dc thêm vào giỏ hàng',type : 'addtocart'})
           this.$store.dispatch('notice/activateShowMenu')
         }
+      },
+      isShowMoreDecribe(){
+        this.showMoreDescribe = ! this.showMoreDescribe
+      },
+      nextCheckout(){
+        let inf = JSON.stringify({
+          product : {
+            slug : this.route.params.slug,
+            quantity : 1
+          },
+        })
+        console.log(String(lzwCompress.pack(inf)), this.route.params.slug)
       }
     }
 }
@@ -403,5 +442,74 @@ export default {
 }
 .text-descript {
   white-space: pre-wrap !important;
+}
+.content-descript {
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+.more-hide {
+  height:250px;
+}
+.more-expand {
+  height:auto;
+}
+@media only screen and (max-width: 424px) {
+  .button-48 span.text {
+    font-size: 11px !important;
+  }
+  .button-48 {
+    width:140px;
+    height:20px;  
+  }
+  .esarfa {
+    padding : 0 1rem;
+  }
+  .esarfa:after,
+  .esarfa:before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 100%;
+      border-top: 0.75em solid #999;
+      border-right: 0.75em solid transparent;
+      border-left: 0.75em solid transparent;
+      border-bottom: 0.75em solid transparent;
+  }
+
+  .esarfa:before {
+      left: 0;
+      border-right: 0.2em solid #999;
+  }
+
+  .esarfa:after {
+      right: 0;
+      border-left: 0.2em solid #999;
+  }
+  .esarfa h1{
+    font-size: 13px;
+  }
+  .img-sale {
+    width:50px;
+  }
+  .promoribon{
+    top:15%;
+  }
+  .promoribon::after {
+    left:35%;
+  }
+  .text-content-detail,
+  .text-content-detail span svg {
+      font-size: 12px !important;
+  }
+  .flask-sale-content {
+    padding:10px !important;
+    margin-bottom: 10px;
+  }
+  .detail-product .row {
+    margin: 0  1rem;
+  }
 }
 </style>

@@ -2,28 +2,51 @@
 #                            PARAMS : [PRODUCT_SLUG]                           #
 # ---------------------------------------------------------------------------- #
 QUERY_SQL_GET_PRODUCT_DETAIL_NOT_USER = """
-    SELECT  `product_product`.`id`, `product_product`.`slug`, 
+ SELECT  `product_product`.`id`, `product_product`.`slug`, 
             `product_product`.`name`, `product_product`.`sex`, 
-            `product_product`.`description`, `product_photo_product`.`data`, 
+            `product_product`.`description`,
             `product_price`.`price`, `product_price`.`sale`, 
             `product_product`.`description`,
             (
                 SELECT COUNT(U0.`id`) AS `heart_count` 
                 FROM `blog_product_heart` U0 
                 WHERE U0.`product_id_id` = `product_product`.`id`
-            ) AS `count_heart` FROM `product_product` 
-    INNER JOIN `product_photo_product` 
-        ON (`product_product`.`id` = `product_photo_product`.`product_id_id`) 
+            ) AS `count_heart` ,
+            (
+                SELECT 
+                    GROUP_CONCAT(`product_photo_product`.`data` SEPARATOR ',' )
+                FROM 
+                    `product_photo_product`
+                WHERE 
+                    `product_photo_product`.`product_id_id` = `product_product`.`id`
+            )  AS `file_media_product` 
+            
+    
+    FROM `product_product` 
     INNER JOIN `product_price` 
         ON (`product_product`.`id` = `product_price`.`product_id_id`) 
     WHERE 
         (
-            `product_photo_product`.`id` IS NOT NULL 
-            AND `product_price`.`id` IS NOT NULL 
-            AND `product_product`.`slug` = %s 
+            `product_price`.`id` IS NOT NULL 
+            AND `product_product`.`slug` = %s
         )
 """
-
+# ---------------------------------------------------------------------------- #
+#                            PARAMS : [PRODUCT_SLUG]                           #
+# ---------------------------------------------------------------------------- #
+QUERY_SQL_GET_LIST_PRODUCT_DETAIL_NOT_USER = """
+    SELECT  `product_product`.`id`, `product_product`.`slug`, 
+            `product_product`.`name`, `product_product`.`sex`, 
+            `product_photo_product`.`data`, 
+            `product_price`.`price`, `product_price`.`sale`
+    FROM `product_product` , `product_photo_product` , `product_price` 
+    WHERE 
+        (
+            `product_product`.`id` = `product_photo_product`.`product_id_id`
+            AND `product_product`.`id` = `product_price`.`product_id_id`
+            AND `product_product`.`slug` in (%s) 
+        )
+"""
 # ---------------------------------------------------------------------------- #
 #                              PARAMS : [USER_ID]                              #
 # ---------------------------------------------------------------------------- #
@@ -235,7 +258,6 @@ class HandleProductCategory:
         if key in CONSTANTS_FILTER_LIMIT.keys() == False or key == False:
             return
         else:
-            print("key in CONSTANTS_FILTER_LIMIT.keys()",key in CONSTANTS_FILTER_LIMIT.keys())
             if self.filter_category == False:
                 self.stringFilterCategory = self.stringFilterCategory + CONSTANTS_FILTER_LIMIT['category'] + "'" +str(value) + "'"
                 self.filter_category = True
@@ -279,7 +301,6 @@ class HandleProductCategory:
             return self.raw_query.format(filter = self.stringQueryFilter  ,order_by = '' )  
         
         if  self.filter_by_number == 0 and self.order_by_number != 0:
-            print('elf.stringQueryOrderBy',self.stringQueryOrderBy)
             return self.raw_query.format(filter = ''  ,order_by = self.stringQueryOrderBy )
         
         if  self.filter_by_number != 0 and self.order_by_number != 0:

@@ -153,14 +153,52 @@ export const cart = {
         /* -------------------------------------------------------------------------- */
         actionChangeQuangtityProductInOrder({commit,state},payload){
             if( state.isLoading )  return ;
-            commit('changeQuantityProductInOrderSuccess' , {product_slug :payload.product_slug, value : payload.value})
+            commit('changeQuantityProductInOrderSuccess' , {
+                product_slug :payload.product_slug, 
+                value : parseInt(payload.value)
+            })
+        },
+        actionChangeNumberQuangtityProductInOrder({commit,state},payload){
+            if( state.isLoading )  return ;
+            commit('changeNumberQuantityProductInOrderSuccess' , {
+                product_slug :payload.product_slug, 
+                value : parseInt(payload.quantity)
+            })
         },
         /* -------------------------------------------------------------------------- */
-        /*                    ACTION CHANG QUANTITY PRODUCT IN CART                   */
+        /*                   ACTION CHANGE QUANTITY PRODUCT IN CART                   */
         /* -------------------------------------------------------------------------- */
-        actionChangeQuangtityProductInCart({commit,state},payload){
+        async actionChangeQuantityProductInCart({commit,state},payload){
+            if( state.isLoading )  return ;
             commit('startChangeQuantityProductInCart')
-            commit('changeQuantityProductInCartSuccess' , {indexOrder : payload.indexOrder, index : payload.index , value : payload.value})
+            return await OrderAction.actionChangeQuantityProductInCart({
+                params : {
+                    product_slug : state.data[payload.indexOrder].products[payload.index].product_slug,
+                    name_order : state.data[payload.indexOrder].order.name,
+                    value : payload.value,
+                    type : 0
+                }
+            }).then((response) => {
+                commit('changeQuantityProductInCartSuccess' , {indexOrder : payload.indexOrder, index : payload.index , value : payload.value})
+            })
+        },
+        async actionChangeNumberQuantityProductInCart({commit,state},payload){
+            if( state.isLoading )  return ;
+            commit('startChangeNumberQuantityProductInCart')
+            console.log("payload.value num bẻ",payload.quantity)
+            return await OrderAction.actionChangeQuantityProductInCart({
+                params : {
+                    product_slug : state.data[payload.indexOrder].products[payload.index].product_slug,
+                    name_order : state.data[payload.indexOrder].order.name,
+                    value : payload.quantity,
+                    type : 1
+                }
+            }).then((response) => {
+                console.log('actionChangeQuangtityProductInOrder',response)
+                commit('changeNumberQuantityProductInCartSuccess' , {indexOrder : payload.indexOrder, index : payload.index , value : payload.quantity})
+            }).catch(()=> {
+                commit('changeNumberQuantityProductInCartFailure')
+            })
         },
         /* -------------------------------------------------------------------------- */
         /*                              ACTION EXIT CART                              */
@@ -204,9 +242,13 @@ export const cart = {
         },
         changeQuantityProductInCartSuccess(state,payload){
             state.data[payload.indexOrder].products[payload.index].product_quantity += payload.value
+            
+            let total_price = 0
+            state.data[payload.indexOrder].products.filter(product => {
+                total_price += product.product_quantity*product.product_price_total
+            })
+            state.data[payload.indexOrder].order.total_price = total_price
             state.isLoading = false;
-            console.log("state.orderSelectedProduct.data",state.data[payload.indexOrder].products[payload.index].product_quantity)
-
         },
         changeQuantityProductInCartFailure(state){
             state.isLoading = false;
@@ -322,13 +364,58 @@ export const cart = {
                 }else {
                     total_price += product.product_price_total*product.product_quantity
                 }
+                console.log("total_price" , total_price, product.product_price_total ,  product.product_quantity)
                 return product
             });
             state.orderSelectedProduct.totalPrice = total_price
             state.orderSelectedProduct.numberProduct += payload.value
             state.isLoading = false;
         },
+        changeNumberQuantityProductInOrderSuccess(state,payload){
+            console.log("start chang bumber quan ti ty order,",state.orderSelectedProduct.data,payload)
+            let total_price = 0
+            let before_quantity = 0
+            state.orderSelectedProduct.data = state.orderSelectedProduct.data.filter((product) => {
+                if (product.product_slug == payload.product_slug){
+                    before_quantity = product.product_quantity
+                    product.product_quantity = payload.value
+                }
+                if(product.voucher_activate == true){
+                    total_price += product.price_after_voucher*product.product_quantity
+                }else {
+                    total_price += product.product_price_total*product.product_quantity
+                }
+                console.log("total_price" , total_price, product.product_price_total ,  product.product_quantity)
+                return product
+            });
+            console.log("before_quantity ",before_quantity)
+            state.orderSelectedProduct.totalPrice = total_price
+
+            state.orderSelectedProduct.numberProduct = state.orderSelectedProduct.numberProduct + payload.value - before_quantity
+            state.isLoading = false;
+            console.log("End chang bumber quan ti ty order")
+        },
         changeQuantityProductInOrderFailure(state){
+            state.isLoading = false;
+        },
+        /* -------------------------------------------------------------------------- */
+        /*               MUTATIONS CHANGE NUMBER QUANTITY PRODUCT ORDER               */
+        /* -------------------------------------------------------------------------- */
+        startChangeNumberQuantityProductInCart(state){
+            state.isLoading = true;
+        },
+        changeNumberQuantityProductInCartSuccess(state,payload){
+            let total_price = 0
+
+            state.data[payload.indexOrder].products[payload.index].product_quantity = payload.value
+            
+            state.data[payload.indexOrder].products.filter(product => {
+                total_price += product.product_quantity*product.product_price_total
+            })
+            state.data[payload.indexOrder].order.total_price = total_price
+            state.isLoading = false;
+        },
+        changeNumberQuantityProductInCartFailure(state){
             state.isLoading = false;
         },
         /* -------------------------------------------------------------------------- */

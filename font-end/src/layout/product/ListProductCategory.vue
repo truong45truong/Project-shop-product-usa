@@ -30,8 +30,17 @@
             <hr>
         </div>
     </div>
-    <FilterAndSortLayout v-if="filterAndSort != false" :type=1 @hideFilterAndSort="showFilterAndSort" :listCategory="listCategory" :hideProducts=false />
+    <FilterAndSortLayout v-if="filterAndSort != false" :type=1 @hideFilterAndSort="showFilterAndSort"
+     :listCategory="listCategory" :category_applied="route.params.category" :hideProducts=false  />
     <div class="bottom-list">
+        <div class="container"  v-if="data.length == 0">
+            <div class="d-flex flex-column align-items-center">
+                <img src="./../../assets/images/noproductfound.png" class="img-no-product my-2" alt="">
+            </div>
+            <h3 class="text-dark text-center">
+                Hiện tại không có sản phẩm nào 
+            </h3>
+        </div>
         <div v-if="data != false" class="container">
             <div v-if="paginate != false && data" class="row">
                 <div v-for="item,index in data" class="col-lg-3 col-sm-4 col-6  mt-4">
@@ -108,7 +117,12 @@ export default {
     },
     watch:{
         $route (to, from){
-            this.getData()
+            let listQuery = {...this.$router.currentRoute._value.query}
+            if(listQuery.Page != null){
+                this.indexPage = listQuery.Page
+            }else {
+                this.getData()
+            }
         }
     } ,
     setup() {
@@ -167,11 +181,14 @@ export default {
             }
         },
         changePage(index){
+            let listQuery = {...this.$router.currentRoute._value.query}
+            this.$router.push({ query: {...listQuery,...{Page : index}} });
             this.indexPage = index
         },
         async getData(){
             const filter_sort = sessionStorage.getItem('filter_sort');
             let applied = JSON.parse(filter_sort);
+            console.log("get data",applied)
             let arrayLimits= new Array()
             let arraySort = new Array()
             let arraySlugCategory = new Array()
@@ -181,13 +198,21 @@ export default {
                 categories: false
             }
             if(applied.applied.sorts != false){
-                
-                for (let item of applied.applied.sorts){
-                    let e = Sort.get(item)
+                console.log(applied.applied.sorts,typeof applied.applied.sorts)
+                if(typeof applied.applied.sorts !== 'string' ){
+                    for (let item of applied.applied.sorts){
+                        let e = Sort.get(item)
+                        if(e)
+                        arraySort.push(e)
+                    }
+                    filter.sorts = arraySort
+                }else {
+                    let e = Sort.get(applied.applied.sorts)
                     if(e)
                     arraySort.push(e)
+                    filter.sorts = arraySort
                 }
-                filter.sorts = arraySort
+                
             }
             if(applied.applied.limits != false){
                 for (let item of applied.applied.limits){
@@ -197,7 +222,7 @@ export default {
                 }
                 filter.limits = arrayLimits
             }
-            if(applied.applied.products != false){
+            if(applied.applied.products != false && applied.applied.products != 'false'){
                 for (let item of applied.applied.products){
                     arraySlugCategory.push(item)
                 }
@@ -210,14 +235,19 @@ export default {
                     'filter_limit' :  JSON.stringify(filter.limits),
                     'slug_categories' : JSON.stringify(filter.categories),
                     'up' :applied.applied.up == null ? false : applied.applied.up,
-                    'down' :applied.applied.down == null ? false : applied.applied.down
+                    'down' :applied.applied.down == null ? false : applied.applied.down,
                 }
             }).then(res => {
                 if (res.status == 200) {
+                    let listQuery = {...this.$router.currentRoute._value.query}
+
+                    if(listQuery.Page != null){
+                        console.log('listQuery.Page',listQuery.Page)
+                        this.indexPage = listQuery.Page
+                    }
                     this.data = res.products
                     if( this.data.length > this.numberProductInPage){
                         this.paginate = false
-                        this.indexPage = 1;
 
                         let naturalPart = Math.floor(this.data.length / this.numberProductInPage)
                         let remainder = this.data.length - naturalPart*this.numberProductInPage
@@ -255,6 +285,60 @@ export default {
             this.category = response.data.category_main
             this.listCategory = response.data.categories
         })
+        console.log("params route" , this.$router.currentRoute._value.query)
+        if(this.$router.currentRoute._value.query != null){
+            let limits = []
+            let products = []
+            let sorts = []
+
+            if(typeof this.$router.currentRoute._value.query.limits == 'string'){
+                limits.push(this.$router.currentRoute._value.query.limits)
+            }
+            else {
+                if(this.$router.currentRoute._value.query.limits != 'false'
+                    || this.$router.currentRoute._value.query.limits != false
+                )
+                limits = this.$router.currentRoute._value.query.limits
+                else 
+                limits = false
+            }
+
+            if(typeof this.$router.currentRoute._value.query.sorts == 'string'){
+                sorts.push(this.$router.currentRoute._value.query.sorts)
+            }
+            else {
+                if(this.$router.currentRoute._value.query.sorts != 'false'
+                    || this.$router.currentRoute._value.query.sorts != false
+                )
+                sorts = this.$router.currentRoute._value.query.sorts
+                else 
+                sorts = false
+            }
+
+            if(typeof this.$router.currentRoute._value.query.products == 'string'){
+                products.push(this.$router.currentRoute._value.query.products)
+            }
+            else {
+                if(this.$router.currentRoute._value.query.products != 'false'
+                    || this.$router.currentRoute._value.query.products != false
+                )
+                products = this.$router.currentRoute._value.query.products
+                else 
+                products = false
+            }
+
+            let ValueFilterAndSort = {
+                applied : {
+                    products : products,
+                    sorts : sorts,
+                    limits : limits,
+                    category : this.$router.currentRoute._value.query.category,
+                    up : this.$router.currentRoute._value.query.up,
+                    down : this.$router.currentRoute._value.query.down
+                }
+            }
+            sessionStorage.setItem('filter_sort', JSON.stringify(ValueFilterAndSort));
+        }
         window.addEventListener('scroll', this.handleScroll);
         const filter_sort = sessionStorage.getItem('filter_sort');
         let applied = JSON.parse(filter_sort);
@@ -285,7 +369,6 @@ export default {
                 sessionStorage.setItem('filter_sort', JSON.stringify(ValueFilterAndSort));
             }
         }
-        console.log(this.route.query,Sort)
         await this.getData()
     },
     mounted() {
@@ -301,7 +384,9 @@ export default {
 .title-category {
     text-decoration: none;
 }
-
+.img-no-product {
+    max-width:500px !important;
+}
 .btn-filter {
     background-color: white;
 }

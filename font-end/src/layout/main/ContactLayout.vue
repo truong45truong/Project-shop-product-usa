@@ -1,32 +1,34 @@
 <template>
-    <div class="row d-flex">
-        <div class="col-sm-4 text-center">
-            <h5 class="text-white mb-3 me-2">Hotline 24/7</h5>
-            <div class="d-flex flex-column align-items-start justify-content-between px-5">
-                <p class="text-white title-name m-0 me-2 w-100 text-center">
-                    <font-awesome-icon icon="fa-solid fa-phone" />
-                    <span class="ms-2">1808.0808 (gặp tư vấn viên của chúng tôi)</span>
-                </p>
+    <div class="">
+        <div class="row d-flex">
+            <div class="col-lg-4 text-center">
+                <h5 class="text-white mb-3 me-2 tilte-text">Hotline 24/7</h5>
+                <div class="d-flex flex-column align-items-start justify-content-between px-5">
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">
+                        <font-awesome-icon icon="fa-solid fa-phone" />
+                        <span class="ms-2">1808.0808 (gặp tư vấn viên của chúng tôi)</span>
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-4 text-center">
-            <h5 class="text-white mb-3 me-2">Email</h5>
-            <div class="d-flex flex-column align-items-start justify-content-between px-5">
-                <p class="text-white m-0 me-2 w-100 text-center">Mọi thắc mắc hoặc giải đáp bạn có thể gửi qua email của chúng tôi</p>
-                <p class="text-white title-name m-0 me-2 w-100 text-center">
-                    <font-awesome-icon icon="fa-solid fa-envelope" />
-                    katieshop.economic@gmail.com
-                </p>
+            <div class="col-lg-4 text-center">
+                <h5 class="text-white mb-3 me-2 tilte-text">Email</h5>
+                <div class="d-flex flex-column align-items-start justify-content-between px-5">
+                    <p class="text-white m-0 title-name  me-2 w-100 text-center">Mọi thắc mắc hoặc giải đáp bạn có thể gửi qua email của chúng tôi</p>
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">
+                        <font-awesome-icon icon="fa-solid fa-envelope" />
+                        katieshop.economic@gmail.com
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-4 text-center">
-            <h5 class="text-white mb-3 me-2">Facebook</h5>
-            <div class="d-flex flex-column align-items-start justify-content-between px-5">
-                <p class="text-white m-0 me-2 w-100 text-center">Mọi thắc mắc hoặc giải đáp bạn có thể  nhắn tin vào facebook của chúng tôi</p>
-                <p class="text-white title-name m-0 me-2 w-100 text-center">
-                    <font-awesome-icon icon="fa-brands fa-facebook-messenger" />
-                    https://www.facebook.com/kateshopusa
-                </p>
+            <div class="col-lg-4 text-center">
+                <h5 class="text-white mb-3 me-2 tilte-text">Facebook</h5>
+                <div class="d-flex flex-column align-items-start justify-content-between px-5">
+                    <p class="text-white m-0 me-2 title-name  w-100 text-center">Mọi thắc mắc hoặc giải đáp bạn có thể  nhắn tin vào facebook của chúng tôi</p>
+                    <p class="text-white title-name m-0 me-2 w-100 text-center">
+                        <font-awesome-icon icon="fa-brands fa-facebook-messenger" />
+                        https://www.facebook.com/kateshopusa
+                    </p>
+                </div>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
                         <p class ="m-0 ms-2" id="current-time">{{ currentTime }}</p>
                     </div>
                     <div class="col-6 my-1 d-flex align-items-center justify-content-end">
-                        <img class="img-flag mx-2" src="./../assets/images/flagflag.webp" alt="">
+                        <img class="img-flag mx-2" src="./../../assets/images/flagflag.webp" alt="">
                         <p v-if="!isAuthenticated" class="m-0 btn-login" @click="showLogin" >Đăng nhập</p>
                         <p v-if="isAuthenticated" class="m-0"> {{get_user.user}}  </p>
                         <p v-if="isAuthenticated" class="m-0 ms-2 btn-login" @click="logoutUser()" > Đăng xuất  </p>
@@ -46,28 +46,28 @@
                             THEO DÕI
                         </a>
                     </div>
-                    <div class="col-lg-4 my-3 d-flex justify-content-end align-items-center">
+                    <div class="col-lg-4 my-3 d-flex justify-content-end aligif (state.isLoangding == true) return;n-items-center">
                         <div class="search-control">
                             <input v-model="keySearch" type="text" class="input-search border" placeholder="Tìm kiếm sản phẩm" @input="handleSearch">
                             <search-product-layout v-if="keySearch != ''"  :key_search="keySearch"  />
                         </div> 
                         <div class="position-relative" @click="showHeart" >
                             <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-regular fa-heart"/>
-                            <div class="number-product-cart text-white text-center m-0">{{get_is_number_product_heart}}</div> 
+                            <div v-if="get_is_number_product_heart > 0" class="number-product-cart text-white text-center m-0">{{get_is_number_product_heart}}</div> 
                         </div>
                         <div v-if="get_authenticated" class="position-relative" @click="showUser">
                             <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-regular fa-user" />
                         </div>
                         <div class="position-relative" @click="showCart" >
                             <font-awesome-icon class="text-white fs-4 ms-3 icon-cursor" icon="fa-solid fa-basket-shopping" /> 
-                            <div class="number-product-cart text-white text-center m-0">{{get_is_number_product}}</div> 
+                            <div v-if="get_is_number_product > 0" class="number-product-cart text-white text-center m-0">{{get_is_number_product}}</div> 
                         </div> 
-                        <notice-menu />
-                        <div v-if="isShowUser" class="position-absolute bg-white rounded shadow top-100 p-2 w-50 start-50 py-4 text-center">
-                            <p class="text-dark action-menu-user" >Thông tin các nhân</p>
+                        <div v-if="isShowUser" class="position-absolute bg-white rounded w-menu-user shadow top-100 p-2 py-4 text-center">
+                            <!-- <p class="text-dark action-menu-user" >Thông tin cá nhân</p> -->
                             <p class="text-dark action-menu-user" @click="showChangePassword">Đổi mật khẩu</p>
                             <p class="text-dark action-menu-user mb-0" @click="logoutUser()">Đăng xuất</p>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -84,7 +84,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import CategoryLayout from '../others/CategoryLayout.vue'
 import SignIn from '../../components/login/SignIn.vue'
-import NoticeMenu from '../../components/other/NoticeMenu.vue'
 import IntroduceLayout from './IntroduceLayout.vue'
 import ContactLayout from './ContactLayout.vue'
 import FollowLayout from './FollowLayout.vue'
@@ -110,7 +109,6 @@ export default {
     components : {
         CategoryLayout,
         SignIn,
-        NoticeMenu,
         IntroduceLayout,
         ContactLayout,
         FollowLayout,
@@ -149,21 +147,32 @@ export default {
         },
         showLogin(){
             this.isShowLogin = ! this.isShowLogin
+            this.$store.dispatch('auth/actionShowLogin')
         },
         hideLogin(){
             this.isShowLogin = false
         },
         showCart(){
             if(this.get_authenticated != true){
-                this.isShowLogin = ! this.isShowLogin
+                this.showLogin()
             }else{
+                let listQuery = {...this.$router.currentRoute._value.query}
+                if(listQuery.nextHeart != null){
+                    delete listQuery.nextHeart
+                }
+                this.$router.push({ query: { "nextCart": true , ...listQuery} });
                 this.$emit('hideCart',true)
             }
         },
         showHeart(){
             if(this.get_authenticated != true){
-                this.isShowLogin = ! this.isShowLogin
+                this.showLogin()
             }else{
+                let listQuery = {...this.$router.currentRoute._value.query}
+                if(listQuery.nextCart != null){
+                    delete listQuery.nextCart
+                }
+                this.$router.push({ query: { "nextHeart": true , ...listQuery} });
                 this.$emit('hideListItemHeart',true)
             }
         },
@@ -331,6 +340,7 @@ header {
     animation-name: showdown;
     animation-duration: 0.5s;
     padding:5em 4em;
+    overflow: hidden;
 }
 .btn-login {
     cursor :pointer;
@@ -346,6 +356,10 @@ header {
 .font-logo {
     font-family: 'Sassy Frass', cursive;
     color: #F56A79
+}
+.w-menu-user {
+    max-width: 500px;
+    right:0% !important;
 }
 .input-search {
     border-radius: 15px;
@@ -391,6 +405,11 @@ header {
 .action-menu-user:hover {
     color:rgb(3, 101, 182) !important;
 }
+.w-menu-notice {
+    position:absolute;
+    max-width: 500px;
+    right:100%;
+}
 @media only screen and (max-width: 1024px)
 {
 
@@ -402,6 +421,15 @@ header {
 {
     .title-menu {
         font-size:small;
+    }
+    .title-name {
+        font-size: 13px;
+    }
+    .title-name p {
+        font-size: 13px;
+    }
+    .tilte-text {
+        font-size: 16px;
     }
 }
 @media only screen and (max-width: 424px)
@@ -423,6 +451,9 @@ header {
     }
     .btn-login-moblie{
         display:block !important;
+    }
+    .show-list-category {
+        width:100% !important;
     }
 }
 </style>

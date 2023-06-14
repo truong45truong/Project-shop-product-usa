@@ -18,12 +18,7 @@
                 <div class="col-sm-6">
                     <div class="d-flex mt-1">
                         <voucher-information />
-                        <div class="d-flex flex-column">
-                            <div class="d-flex align-items-center">
-                                <p class="my-2 ms-2 fs-4">Chọn sản phẩm</p>
-                                <input type="checkbox" class="my-2 ms-2 fs-4">
-                                <span> (Tất cá : {{ get_is_number_product }}) </span>
-                            </div>
+                        <div class="d-flex flex-column ">
                             <div class="d-flex align-items-center">
                                 <p class="my-2 ms-2 fs-5">
                                     Thanh toán : {{ get_is_order_selected_product.numberProduct }}
@@ -33,6 +28,9 @@
                             <div class="total-price-layout text-center py-1 ms-2">
                                 {{ get_is_order_selected_product.totalPrice }} <span>vnđ</span>
                             </div>
+                            <button class="button-5 my-2 mx-2">
+                                Mua Ngay
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -75,7 +73,8 @@ import OrderSelectedProductExpand from './OrderSelectedProductExpand.vue'
 export default ({
     name: 'OrderSelectedProduct',
     props: {
-        mgs : ''
+        mgs : '',
+        indexOrder : ''
     },
     data: () => ({
         isShowDetailTotalSelectProduct: true,
@@ -130,6 +129,22 @@ export default ({
         },
         showExpandDetailTotalSelectedProduct() {
             this.isExpandDetailTotalSelectProduct = !this.isExpandDetailTotalSelectProduct;
+            let listQuery = {...this.$router.currentRoute._value.query}
+            if(this.isExpandDetailTotalSelectProduct == false){
+                if(listQuery.nextDetailOrder != null){
+                    delete listQuery.nextDetailOrder 
+                }
+                this.$router.push({query : {...listQuery}})
+            }else {
+                this.$router.push({ query: { "nextDetailOrder": true , ...listQuery} });
+            }
+            
+        }
+    },
+    created(){
+        let listQuery = {...this.$router.currentRoute._value.query}
+        if(listQuery.nextDetailOrder == 'true'){
+            this.isExpandDetailTotalSelectProduct  = true
         }
     }
 
@@ -308,6 +323,52 @@ export default ({
 }
 .layout-expand-selected-product::-webkit-scrollbar {
   display: none;
+}
+
+/* CSS */
+.button-5 {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #fa6400;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-5:hover,
+.button-5:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5:hover {
+  transform: translateY(-1px);
+}
+
+.button-5:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
 }
 @media only screen and (max-width: 524px)
 {

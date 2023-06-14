@@ -76,7 +76,7 @@
                         <span>{{ phone_selected.phone }}</span>
                         <span class="ms-1 text-primary" v-if="phone_selected.status == true">(Mặc định)</span>
                     </p>
-                    <img class="img-flag-phone-user mx-2" src="./../assets/images/flagflag.webp" alt="">
+                    <img class="img-flag-phone-user mx-2" src="./../../assets/images/flagflag.webp" alt="">
                     <font-awesome-icon v-if="!isSelectPhone & isSelectAddress != true" icon="fa-solid fa-pencil"
                         class="ms-2 fs-4 icon-select-address" @click="isShowSelectPhone" />
                     <div v-if="isSelectPhone == true" class="select-phone w-100"
@@ -116,7 +116,7 @@
                             <div class="d-flex flex-column mt-2">
                                 <div class="d-flex align-items-center">
                                     <p class="m-0 me-1">(+84)</p>
-                                    <img src="./../assets/images/flagflag.webp" class="img-flag-phone-user me-2" alt="">
+                                    <img src="./../../assets/images/flagflag.webp" class="img-flag-phone-user me-2" alt="">
                                     <input v-model="contentPhone.phone" type="text" class="m-0 my-1 mt-2 py-1 ps-2 w-100"
                                         placeholder="Nhập số đi động" @change="checkPhone()">
                                 </div>

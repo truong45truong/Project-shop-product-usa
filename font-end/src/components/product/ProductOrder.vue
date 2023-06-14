@@ -25,7 +25,7 @@
                 <div class="w-25 text-center">
                     <div class="button-35 btn-down m-auto" @click="decliningQuantity">-</div>
                 </div>
-                <input v-model="numberQuantity" type="number" class="input-quantity-product w-50 text-center">
+                <input v-model="numberQuantity" type="number" class="input-quantity-product w-50 text-center" @change="changeNumberQuantity">
                 <div class="w-25 text-center">
                     <div class="button-35" @click="icreasingQuantity">+</div>
                 </div>
@@ -51,6 +51,8 @@
 <script>
 import SlideImageProduct from './../other/SlideImageProduct.vue'
 import {mapGetters } from 'vuex'
+import qs from 'qs';
+
 export default ({
     name: 'ProductOrder',
     props: {
@@ -99,12 +101,31 @@ export default ({
             }
             this.checkedSelected = ! this.checkedSelected 
         },
+        changeRouteNumberProductInOrder( value ){
+            let listQuery = {...this.$router.currentRoute._value.query}
+            if(listQuery.products != null && value > 0){
+                let products = qs.parse(this.$router.currentRoute._value.query.products)
+                console.log("products list seledct",products)
+                products = Object.values(products)
+                products = products.filter(product => {
+                    if(product.product_slug == this.slug){
+                        product.quantity = value
+                    }
+                    return product
+                })
+                delete listQuery.products
+                this.$router.push({ query: { "products":qs.stringify(products) , ...listQuery} });
+            }
+
+        },
         icreasingQuantity(){
             this.numberQuantity += 1
             this.$store.dispatch('cart/actionChangeQuangtityProductInOrder', { 
                 product_slug: this.slug ,indexOrder : this.indexOrder ,
                 index : this.index  , value : 1
             })
+            this.changeRouteNumberProductInOrder(this.numberQuantity)
+
         },
         decliningQuantity(){
             if(this.numberQuantity > 1){
@@ -114,6 +135,23 @@ export default ({
                     index : this.index ,value : -1
                 })
             }
+            this.changeRouteNumberProductInOrder(this.numberQuantity)
+        },
+        changeNumberQuantity(){
+            if(/^\d+$/.test(this.numberQuantity)){
+                if(this.numberQuantity <= 0){
+                    this.numberQuantity = 1
+                    this.$store.dispatch('cart/actionChangeNumberQuangtityProductInOrder', { product_slug: this.slug ,name_order : this.name_order , indexOrder : this.indexOrder ,index : this.index,quantity : 1})
+
+                } else {
+                    this.$store.dispatch('cart/actionChangeNumberQuangtityProductInOrder', { product_slug: this.slug ,name_order : this.name_order , indexOrder : this.indexOrder ,index : this.index,quantity : this.numberQuantity})
+                }
+                
+            }else {
+                this.numberQuantity = 1
+                this.$store.dispatch('cart/actionChangeNumberQuangtityProductInOrder', { product_slug: this.slug ,name_order : this.name_order , indexOrder : this.indexOrder ,index : this.index,quantity : 1})
+            }
+            this.changeRouteNumberProductInOrder(this.numberQuantity)
         },
         removeProduct(){
             this.$store.dispatch('notice/actionTypeNotice',{content : 'Bạn có muốn xóa sản phẩm : ' +this.name,type : 'Xóa'})
@@ -140,6 +178,28 @@ export default ({
     },
     created(){
         this.numberQuantity = this.numberProduct
+    },
+    mounted(){
+        let listQuery = {...this.$router.currentRoute._value.query}
+        if(listQuery.products != null ){
+            let products = qs.parse(this.$router.currentRoute._value.query.products)
+            console.log("products list seledct",products)
+            products = Object.values(products)
+            products = products.filter(product => {
+                if( product.product_slug == this.slug &&
+                    product.quantity !=  this.numberQuantity ){
+                        this.$store.dispatch('cart/actionChangeNumberQuangtityProductInOrder', { 
+                            product_slug: this.slug ,
+                            name_order : this.name_order , 
+                            indexOrder : this.indexOrder ,
+                            index : this.index,
+                            quantity :  product.quantity
+                        })
+                        this.numberQuantity = product.quantity
+                }
+                return product
+            })
+        }
     }
 
 })

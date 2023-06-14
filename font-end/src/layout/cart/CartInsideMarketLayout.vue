@@ -31,7 +31,7 @@
                 />
             </div>
         </div> -->
-        <div v-if="dataItem.length > 0" class="result-product-cart w-75">
+        <!-- <div v-if="dataItem.length > 0" class="result-product-cart w-75">
             <div class="mt-0 border border-2 border-warning my-2">
                 <div class="d-flex align-items-center">
                     <div class="col-infor-item text-center mt-2">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div v-if="dataItem.length > 0" class="result-product-cart w-75">
             <div class="mt-0 border border-2 border-warning my-2">
                 <div class="row d-flex align-items-center position-relative">
@@ -78,7 +78,7 @@
                         <div class="d-flex justify-content-center">
                             <font-awesome-icon icon="fa-solid fa-phone" class="fs-4" />
                             <p class="m-0 ms-2">(+84)</p>
-                            <img class="img-flag-phone-user mx-2" src="./../assets/images/flagflag.webp" alt="">
+                            <img class="img-flag-phone-user mx-2" src="./../../assets/images/flagflag.webp" alt="">
                             <p v-if="phoneSelected == false" class="m-0">{{orderInformation.phone_receiver}}</p>
                             <p v-if="phoneSelected == false " class="m-0 text-primary">({{orderInformation.receiver}})</p>
                             <p class="m-0 ms-2" v-if="phoneSelected != false">

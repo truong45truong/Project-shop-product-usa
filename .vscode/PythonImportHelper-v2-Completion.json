@@ -3732,6 +3732,24 @@
         "documentation": {}
     },
     {
+        "label": "cv2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "cv2",
+        "description": "cv2",
+        "detail": "cv2",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
         "label": "JwtConfig",
         "kind": 6,
         "importPath": "backend.JWT.apps",
@@ -3826,7 +3844,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"",
+        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -3835,7 +3853,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [",
+        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -3844,7 +3862,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
+        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -3853,7 +3871,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',",
+        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -4105,7 +4123,7 @@
         "kind": 6,
         "importPath": "backend.blog_product.api.query_raw",
         "description": "backend.blog_product.api.query_raw",
-        "peekOfCode": "class HandleSqlRaw:\n    def __init__(self,raw_query):\n        self.raw_query = raw_query\n    def getQuery( self):\n        return self.raw_query",
+        "peekOfCode": "class HandleSqlRaw:\n    def __init__(self,raw_query):\n        self.raw_query = raw_query\n    def addLimit(self,start,end):\n        self.raw_query += \"\\n LIMIT\" + \"\\n {limit_filter_start}, {limit_filter_end}\"\n        self.raw_query = self.raw_query.format(\n               limit_filter_start =  start ,\n            limit_filter_end = end,\n        )\n    def getQuery( self):",
         "detail": "backend.blog_product.api.query_raw",
         "documentation": {}
     },
@@ -4240,7 +4258,7 @@
         "kind": 5,
         "importPath": "backend.blog_product.api.urls",
         "description": "backend.blog_product.api.urls",
-        "peekOfCode": "blog = BlogViewSet.as_view({\n    'get' : 'get_blog',\n    'post': 'post_blog'\n})\ncomment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment_blog'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'",
+        "peekOfCode": "blog = BlogViewSet.as_view({\n    'get' : 'get_blog',\n    'post': 'post_blog'\n})\ncomment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment_blog'\n})\npost_heart_product = HeartViewSet.as_view({\n    'post' : 'post_heart_product'",
         "detail": "backend.blog_product.api.urls",
         "documentation": {}
     },
@@ -4249,16 +4267,16 @@
         "kind": 5,
         "importPath": "backend.blog_product.api.urls",
         "description": "backend.blog_product.api.urls",
-        "peekOfCode": "comment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment_blog'\n})\nheart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})",
+        "peekOfCode": "comment = CommentViewSet.as_view({\n    'get' : 'get_comment',\n    'post': 'post_comment_blog'\n})\npost_heart_product = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})",
         "detail": "backend.blog_product.api.urls",
         "documentation": {}
     },
     {
-        "label": "heart",
+        "label": "post_heart_product",
         "kind": 5,
         "importPath": "backend.blog_product.api.urls",
         "description": "backend.blog_product.api.urls",
-        "peekOfCode": "heart = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})\npost_heart_comment = HeartViewSet.as_view({\n    'post' : 'post_heart_comment'\n})\nedit_comment = CommentViewSet.as_view({",
+        "peekOfCode": "post_heart_product = HeartViewSet.as_view({\n    'post' : 'post_heart_product'\n})\nheart_blog = HeartViewSet.as_view({\n    'post' : 'post_heart_blog'\n})\npost_heart_comment = HeartViewSet.as_view({\n    'post' : 'post_heart_comment'\n})\nedit_comment = CommentViewSet.as_view({",
         "detail": "backend.blog_product.api.urls",
         "documentation": {}
     },
@@ -4285,7 +4303,7 @@
         "kind": 5,
         "importPath": "backend.blog_product.api.urls",
         "description": "backend.blog_product.api.urls",
-        "peekOfCode": "edit_comment = CommentViewSet.as_view({\n    'post': 'edit_comment'\n})\ndelete_comment = CommentViewSet.as_view({\n    'post': 'delete_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),",
+        "peekOfCode": "edit_comment = CommentViewSet.as_view({\n    'post': 'edit_comment'\n})\ndelete_comment = CommentViewSet.as_view({\n    'post': 'delete_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('heart-product/post/',post_heart_product,name=\"heart_products\"),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),",
         "detail": "backend.blog_product.api.urls",
         "documentation": {}
     },
@@ -4294,7 +4312,7 @@
         "kind": 5,
         "importPath": "backend.blog_product.api.urls",
         "description": "backend.blog_product.api.urls",
-        "peekOfCode": "delete_comment = CommentViewSet.as_view({\n    'post': 'delete_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/blog/',comment, name = 'comment_logs'),\n    path('comment/product/',get_comment_product, name = 'get_comment_product'),\n    path('comment/product/create/',post_comment_product, name = 'comment_logs'),",
+        "peekOfCode": "delete_comment = CommentViewSet.as_view({\n    'post': 'delete_comment'\n})\nurlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('heart-product/post/',post_heart_product,name=\"heart_products\"),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/blog/',comment, name = 'comment_logs'),\n    path('comment/product/',get_comment_product, name = 'get_comment_product'),",
         "detail": "backend.blog_product.api.urls",
         "documentation": {}
     },
@@ -4303,7 +4321,7 @@
         "kind": 5,
         "importPath": "backend.blog_product.api.urls",
         "description": "backend.blog_product.api.urls",
-        "peekOfCode": "urlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/blog/',comment, name = 'comment_logs'),\n    path('comment/product/',get_comment_product, name = 'get_comment_product'),\n    path('comment/product/create/',post_comment_product, name = 'comment_logs'),\n    path('comment/edit/',edit_comment, name = 'edit_comment'),\n    path('comment/delete/',delete_comment, name = 'delete_comment'),\n    path('comment/heart/',post_heart_comment, name = 'comment_heart'),",
+        "peekOfCode": "urlpatterns = [\n    # path('blog/', get_blog_product, name = 'blogs_logs'),\n    path('heart-product/post/',post_heart_product,name=\"heart_products\"),\n    path('blog/product/', get_blog_product, name = 'blogs_logs'),\n    path('blog/heart/', heart_blog, name = 'heart_blog'),\n    path('comment/blog/',comment, name = 'comment_logs'),\n    path('comment/product/',get_comment_product, name = 'get_comment_product'),\n    path('comment/product/create/',post_comment_product, name = 'comment_logs'),\n    path('comment/edit/',edit_comment, name = 'edit_comment'),\n    path('comment/delete/',delete_comment, name = 'delete_comment'),",
         "detail": "backend.blog_product.api.urls",
         "documentation": {}
     },
@@ -4357,7 +4375,7 @@
         "kind": 2,
         "importPath": "backend.blog_product.api.views",
         "description": "backend.blog_product.api.views",
-        "peekOfCode": "def get_comment_product(request):\n    try:\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)\n        decoded_token = refresh_token.payload\n        user_get = User.objects.get(id = decoded_token['user_id'])\n        rawSql =  query_raw.QUERY_GET_COMMENT_PRODUCT_WITH_USER\n    except:\n        user_get = False\n        rawSql = query_raw.QUERY_GET_COMMENT_PRODUCT_NOT_USER",
+        "peekOfCode": "def get_comment_product(request):\n    try:\n        jwtToken = request.COOKIES.get('refresh_token')\n        refresh_token = RefreshToken(jwtToken)\n        decoded_token = refresh_token.payload\n        start_limit = request.GET['start_limit']\n        end_limit = request.GET['end_limit']\n        user_get = User.objects.get(id = decoded_token['user_id'])\n        rawSql =  query_raw.QUERY_GET_COMMENT_PRODUCT_WITH_USER\n    except:",
         "detail": "backend.blog_product.api.views",
         "documentation": {}
     },
@@ -5104,16 +5122,7 @@
         "kind": 5,
         "importPath": "backend.login.api.urls",
         "description": "backend.login.api.urls",
-        "peekOfCode": "change_password_user = LoginViewSet.as_view({\n    'post' : 'change_password_user',\n})\nregister_user = RegisterUserViewSet.as_view({\n    'post': 'register_user',\n})\nurlpatterns = [\n    path('login/', login, name = \"login_user\"),\n    path('logout/', logout, name = \"logout_user\"),\n    path('user/change-password/', change_password_user, name = \"change_password_user\"),",
-        "detail": "backend.login.api.urls",
-        "documentation": {}
-    },
-    {
-        "label": "register_user",
-        "kind": 5,
-        "importPath": "backend.login.api.urls",
-        "description": "backend.login.api.urls",
-        "peekOfCode": "register_user = RegisterUserViewSet.as_view({\n    'post': 'register_user',\n})\nurlpatterns = [\n    path('login/', login, name = \"login_user\"),\n    path('logout/', logout, name = \"logout_user\"),\n    path('user/change-password/', change_password_user, name = \"change_password_user\"),\n    path('register-user/', register_user, name = \"register_user\")\n]",
+        "peekOfCode": "change_password_user = LoginViewSet.as_view({\n    'post' : 'change_password_user',\n})\n# register_user = RegisterUserViewSet.as_view({\n#     'post': 'register_user',\n# })\nurlpatterns = [\n    path('login/', login, name = \"login_user\"),\n    path('logout/', logout, name = \"logout_user\"),\n    path('user/change-password/', change_password_user, name = \"change_password_user\"),",
         "detail": "backend.login.api.urls",
         "documentation": {}
     },
@@ -5131,7 +5140,7 @@
         "kind": 6,
         "importPath": "backend.login.api.views",
         "description": "backend.login.api.views",
-        "peekOfCode": "class RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):\n            file_format, file_string = image_data.split(';base64,')\n            file_ext = file_format.split('/')[-1]\n            file_bytes = base64.b64decode(file_string)",
+        "peekOfCode": "class RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    authentication_classes =[]\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):\n            file_format, file_string = image_data.split(';base64,')\n            file_ext = file_format.split('/')[-1]",
         "detail": "backend.login.api.views",
         "documentation": {}
     },
@@ -5163,11 +5172,20 @@
         "documentation": {}
     },
     {
+        "label": "register_user",
+        "kind": 2,
+        "importPath": "backend.login.api.views",
+        "description": "backend.login.api.views",
+        "peekOfCode": "def register_user(request):\n    list_name_file_blog = []\n    def decodeFile(image_data,is_image,is_video):\n        file_format, file_string = image_data.split(';base64,')\n        file_ext = file_format.split('/')[-1]\n        file_bytes = base64.b64decode(file_string)\n        if is_image is True:\n            name_file = 'blog' + str(uuid.uuid4()) + '.' + file_ext\n            with open( os.path.join(path_upload_image, \"blogs\" , name_file), 'wb+') as decoded_image_file:\n                decoded_image_file.write(file_bytes)",
+        "detail": "backend.login.api.views",
+        "documentation": {}
+    },
+    {
         "label": "path_upload_image",
         "kind": 5,
         "importPath": "backend.login.api.views",
         "description": "backend.login.api.views",
-        "peekOfCode": "path_upload_image = str(settings.BASE_DIR)+\"/media/photos\"\npath_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):\n            file_format, file_string = image_data.split(';base64,')",
+        "peekOfCode": "path_upload_image = str(settings.BASE_DIR)+\"/media/photos\"\npath_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    authentication_classes =[]\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):",
         "detail": "backend.login.api.views",
         "documentation": {}
     },
@@ -5176,7 +5194,7 @@
         "kind": 5,
         "importPath": "backend.login.api.views",
         "description": "backend.login.api.views",
-        "peekOfCode": "path_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):\n            file_format, file_string = image_data.split(';base64,')\n            file_ext = file_format.split('/')[-1]",
+        "peekOfCode": "path_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    authentication_classes =[]\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):\n            file_format, file_string = image_data.split(';base64,')",
         "detail": "backend.login.api.views",
         "documentation": {}
     },
@@ -5496,6 +5514,15 @@
         "documentation": {}
     },
     {
+        "label": "SUM_TOTAL_PRICE_IN_ORDER",
+        "kind": 5,
+        "importPath": "backend.order.api.raw_query",
+        "description": "backend.order.api.raw_query",
+        "peekOfCode": "SUM_TOTAL_PRICE_IN_ORDER = \"\"\"\n    SELECT `order_order`.`id` , SUM(`order_detailorder`.`quantity`*`product_price`.`price_total`) as 'order_total_price'\n    FROM `product_product`,`product_price`,`order_order`,`order_detailorder`\n    WHERE\n        `product_product`.`id` = `order_detailorder`.`product_id_id` \n        AND `order_order`.`id` = `order_detailorder`.`order_id_id`\n        AND `product_product`.`id` = `product_price`.`product_id_id`\n        AND `order_order`.`id` = \"{order}\"\n\"\"\"",
+        "detail": "backend.order.api.raw_query",
+        "documentation": {}
+    },
+    {
         "label": "TransportSerializer",
         "kind": 6,
         "importPath": "backend.order.api.serializers",
@@ -5581,7 +5608,7 @@
         "kind": 5,
         "importPath": "backend.order.api.urls",
         "description": "backend.order.api.urls",
-        "peekOfCode": "post_remove_order = OrderViewSet.as_view({\n    'post' : 'remove_product_in_cart'\n})\nget_transport = TransportViewSet.as_view({\n    'get' : 'get_transport'\n})\nchange_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\n# ---------------------------------------------------------------------------- #",
+        "peekOfCode": "post_remove_order = OrderViewSet.as_view({\n    'post' : 'remove_product_in_cart'\n})\nget_transport = TransportViewSet.as_view({\n    'get' : 'get_transport'\n})\nchange_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\nchange_quantity_product_in_cart =  OrderViewSet.as_view({",
         "detail": "backend.order.api.urls",
         "documentation": {}
     },
@@ -5590,7 +5617,7 @@
         "kind": 5,
         "importPath": "backend.order.api.urls",
         "description": "backend.order.api.urls",
-        "peekOfCode": "get_transport = TransportViewSet.as_view({\n    'get' : 'get_transport'\n})\nchange_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [",
+        "peekOfCode": "get_transport = TransportViewSet.as_view({\n    'get' : 'get_transport'\n})\nchange_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\nchange_quantity_product_in_cart =  OrderViewSet.as_view({\n    'post' : 'change_quantity_product_in_cart'\n})\n# ---------------------------------------------------------------------------- #",
         "detail": "backend.order.api.urls",
         "documentation": {}
     },
@@ -5599,7 +5626,16 @@
         "kind": 5,
         "importPath": "backend.order.api.urls",
         "description": "backend.order.api.urls",
-        "peekOfCode": "change_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [\n    path('order/',get_order , name = \"order_cart\"), # get order after login for user\n    path('order/today/',get_order_today , name = \"order_cart\"), # get order today after login for user\n    path('order/remove-product/',post_remove_order , name = \"order_cart_remove\"), # remove product in order for user",
+        "peekOfCode": "change_order_today = OrderViewSet.as_view({\n    'post' : 'change_order_today'\n})\nchange_quantity_product_in_cart =  OrderViewSet.as_view({\n    'post' : 'change_quantity_product_in_cart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [",
+        "detail": "backend.order.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "change_quantity_product_in_cart",
+        "kind": 5,
+        "importPath": "backend.order.api.urls",
+        "description": "backend.order.api.urls",
+        "peekOfCode": "change_quantity_product_in_cart =  OrderViewSet.as_view({\n    'post' : 'change_quantity_product_in_cart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [\n    path('order/',get_order , name = \"order_cart\"), # get order after login for user\n    path('order/today/',get_order_today , name = \"order_cart\"), # get order today after login for user\n    path('order/remove-product/',post_remove_order , name = \"order_cart_remove\"), # remove product in order for user",
         "detail": "backend.order.api.urls",
         "documentation": {}
     },
@@ -5608,7 +5644,7 @@
         "kind": 5,
         "importPath": "backend.order.api.urls",
         "description": "backend.order.api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('order/',get_order , name = \"order_cart\"), # get order after login for user\n    path('order/today/',get_order_today , name = \"order_cart\"), # get order today after login for user\n    path('order/remove-product/',post_remove_order , name = \"order_cart_remove\"), # remove product in order for user\n    path('order/change-order-today/',change_order_today , name = \"change_order_today\"), # change order today for user\n    path('transport/',get_transport , name=\"get_transport\") # get transport after select product in cart or payment\n]",
+        "peekOfCode": "urlpatterns = [\n    path('order/',get_order , name = \"order_cart\"), # get order after login for user\n    path('order/today/',get_order_today , name = \"order_cart\"), # get order today after login for user\n    path('order/remove-product/',post_remove_order , name = \"order_cart_remove\"), # remove product in order for user\n    path('order/change-order-today/',change_order_today , name = \"change_order_today\"), # change order today for user\n    path('order/change-quantity-product/',change_quantity_product_in_cart , name = \"change_quantity_product_in_cart\"), # change order today for user\n    path('transport/',get_transport , name=\"get_transport\") # get transport after select product in cart or payment\n]",
         "detail": "backend.order.api.urls",
         "documentation": {}
     },
@@ -5734,7 +5770,16 @@
         "kind": 5,
         "importPath": "backend.product.api.query_raw",
         "description": "backend.product.api.query_raw",
-        "peekOfCode": "QUERY_SQL_GET_PRODUCT_DETAIL_NOT_USER = \"\"\"\n    SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_product`.`description`, `product_photo_product`.`data`, \n            `product_price`.`price`, `product_price`.`sale`, \n            `product_product`.`description`,\n            (\n                SELECT COUNT(U0.`id`) AS `heart_count` \n                FROM `blog_product_heart` U0 \n                WHERE U0.`product_id_id` = `product_product`.`id`",
+        "peekOfCode": "QUERY_SQL_GET_PRODUCT_DETAIL_NOT_USER = \"\"\"\n SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_product`.`description`,\n            `product_price`.`price`, `product_price`.`sale`, \n            `product_product`.`description`,\n            (\n                SELECT COUNT(U0.`id`) AS `heart_count` \n                FROM `blog_product_heart` U0 \n                WHERE U0.`product_id_id` = `product_product`.`id`",
+        "detail": "backend.product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_SQL_GET_LIST_PRODUCT_DETAIL_NOT_USER",
+        "kind": 5,
+        "importPath": "backend.product.api.query_raw",
+        "description": "backend.product.api.query_raw",
+        "peekOfCode": "QUERY_SQL_GET_LIST_PRODUCT_DETAIL_NOT_USER = \"\"\"\n    SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_photo_product`.`data`, \n            `product_price`.`price`, `product_price`.`sale`\n    FROM `product_product` , `product_photo_product` , `product_price` \n    WHERE \n        (\n            `product_product`.`id` = `product_photo_product`.`product_id_id`\n            AND `product_product`.`id` = `product_price`.`product_id_id`",
         "detail": "backend.product.api.query_raw",
         "documentation": {}
     },
@@ -5923,16 +5968,25 @@
         "kind": 6,
         "importPath": "backend.product.api.serializers",
         "description": "backend.product.api.serializers",
-        "peekOfCode": "class PhotoProductSerializer(ModelSerializer):\n    class Meta:\n        model = Photo_product\n        fields = ['id']\nclass ProductSerializer(serializers.Serializer):\n    data = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()",
+        "peekOfCode": "class PhotoProductSerializer(ModelSerializer):\n    class Meta:\n        model = Photo_product\n        fields = ['id']\nclass ProductDetailSerializer(serializers.Serializer):\n    file_media_product = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()",
         "detail": "backend.product.api.serializers",
         "documentation": {}
     },
     {
-        "label": "ProductSerializer",
+        "label": "ProductDetailSerializer",
         "kind": 6,
         "importPath": "backend.product.api.serializers",
         "description": "backend.product.api.serializers",
-        "peekOfCode": "class ProductSerializer(serializers.Serializer):\n    data = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()\n    sex = serializers.IntegerField()\n    sale = serializers.FloatField()",
+        "peekOfCode": "class ProductDetailSerializer(serializers.Serializer):\n    file_media_product = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()\n    sex = serializers.IntegerField()\n    sale = serializers.FloatField()",
+        "detail": "backend.product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "ProductCheckoutSerializer",
+        "kind": 6,
+        "importPath": "backend.product.api.serializers",
+        "description": "backend.product.api.serializers",
+        "peekOfCode": "class ProductCheckoutSerializer(serializers.Serializer):  \n    slug=serializers.CharField()\n    name = serializers.CharField()\n    sex = serializers.IntegerField()\n    sale = serializers.FloatField()\n    data = serializers.CharField()\n    price = serializers.FloatField()\nclass CategorySerializer(ModelSerializer):\n    class Meta:\n        model = Category",
         "detail": "backend.product.api.serializers",
         "documentation": {}
     },
@@ -5959,7 +6013,16 @@
         "kind": 6,
         "importPath": "backend.product.api.serializers",
         "description": "backend.product.api.serializers",
-        "peekOfCode": "class CategoryWithNumberProductSerializer(serializers.Serializer):\n    id =  UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()\n    number_product = serializers.IntegerField()",
+        "peekOfCode": "class CategoryWithNumberProductSerializer(serializers.Serializer):\n    id =  UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()\n    number_product = serializers.IntegerField()\nclass ProductSerializer(serializers.Serializer):\n    data = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()",
+        "detail": "backend.product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "ProductSerializer",
+        "kind": 6,
+        "importPath": "backend.product.api.serializers",
+        "description": "backend.product.api.serializers",
+        "peekOfCode": "class ProductSerializer(serializers.Serializer):\n    data = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()\n    sex = serializers.IntegerField()\n    sale = serializers.FloatField()",
         "detail": "backend.product.api.serializers",
         "documentation": {}
     },
@@ -6004,7 +6067,7 @@
         "kind": 5,
         "importPath": "backend.product.api.urls",
         "description": "backend.product.api.urls",
-        "peekOfCode": "search_product_category = Productviewset.as_view({\n    'get' : 'search_product_category',\n    #'post' : 'post_product'\n})\nproduct_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'",
+        "peekOfCode": "search_product_category = Productviewset.as_view({\n    'get' : 'search_product_category',\n    #'post' : 'post_product'\n})\nproduct_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nget_list_product = Productviewset.as_view({\n    'get' : 'get_list_product',",
         "detail": "backend.product.api.urls",
         "documentation": {}
     },
@@ -6013,7 +6076,16 @@
         "kind": 5,
         "importPath": "backend.product.api.urls",
         "description": "backend.product.api.urls",
-        "peekOfCode": "product_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #",
+        "peekOfCode": "product_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nget_list_product = Productviewset.as_view({\n    'get' : 'get_list_product',\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})",
+        "detail": "backend.product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "get_list_product",
+        "kind": 5,
+        "importPath": "backend.product.api.urls",
+        "description": "backend.product.api.urls",
+        "peekOfCode": "get_list_product = Productviewset.as_view({\n    'get' : 'get_list_product',\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [",
         "detail": "backend.product.api.urls",
         "documentation": {}
     },
@@ -6031,7 +6103,7 @@
         "kind": 5,
         "importPath": "backend.product.api.urls",
         "description": "backend.product.api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('category/',category, name = \"get_category\"), # get categories\n    path('category-tree/',category_tree, name = \"category_tree\"), # get categories  \n    path('product/',product,name=\"get_product\"), # get all products or product with product_slug\n    path('product/search/',search_product,name=\"search_product\"),\n    path('product/search-product-category/',search_product_category,name=\"search_product_category\"),\n    path('product-category/',product_catogory,name=\"get_product_category\"),# get all products or product with category_slug\n    path('product-heart/',product_heart , name = \"get_product_heart\") # get product liked\n]",
+        "peekOfCode": "urlpatterns = [\n    path('category/',category, name = \"get_category\"), # get categories\n    path('category-tree/',category_tree, name = \"category_tree\"), # get categories  \n    path('product/',product,name=\"get_product\"), # get all products or product with product_slug\n    path('product/search/',search_product,name=\"search_product\"),\n    path('product/search-product-category/',search_product_category,name=\"search_product_category\"),\n    path('product-category/',product_catogory,name=\"get_product_category\"),# get all products or product with category_slug\n    path('product-heart/',product_heart , name = \"get_product_heart\") , # get product liked,\n    path('product-list/',get_list_product , name = \"get_product_heart\") # get product liked,\n]",
         "detail": "backend.product.api.urls",
         "documentation": {}
     },
@@ -12108,6 +12180,429 @@
         "description": "font-end.node_modules.idna-uts46-hx.build-unicode-tables",
         "peekOfCode": "NUM_UCHAR = 0x10ffff + 1\ndef download_unicode(version):\n    idna_tables = \"http://www.unicode.org/Public/idna/\" + version\n    infd = urllib2.urlopen(idna_tables + \"/IdnaTest.txt\")\n    #with open(\"test/test-idna2.js\", \"w\") as outfd:\n    #    build_test_code(infd, outfd)\n    with open(\"test/IdnaTest.txt\", \"w\") as outfd:\n        for line in infd:\n            outfd.write(line)\n    infd.close()",
         "detail": "font-end.node_modules.idna-uts46-hx.build-unicode-tables",
+        "documentation": {}
+    },
+    {
+        "label": "group_intersecting_lines",
+        "kind": 2,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "def group_intersecting_lines(lines):\n    groups = [] # Danh sách các nhóm đường thẳng\n    point = []\n    threshold_rho = 10 # Giảm ngưỡng khoảng cách rho\n    threshold_theta = np.pi/180 * 10\n    height, width, _ = image.shape\n    print(\"height: \", height)\n    print(\"width :\",width)\n    # for line in lines:\n    rho, theta = lines[0] # Lấy rho và theta của đường thẳng",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "image",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "image = cv2.imread('./sg-11134201-22120-w4it0uurvklvbd.jpeg')\nimage_test = cv2.imread('./sg-11134201-22120-w4it0uurvklvbd.jpeg')\nmin_x = 0\nmax_x = 500\nmin_y = 0\nmax_y = 500\nlab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)\nl, a, b = cv2.split(lab)  # Tách các kênh L, a, b\n# Áp dụng phép biến đổi vào kênh L\nl_equ = cv2.equalizeHist(l)",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "image_test",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "image_test = cv2.imread('./sg-11134201-22120-w4it0uurvklvbd.jpeg')\nmin_x = 0\nmax_x = 500\nmin_y = 0\nmax_y = 500\nlab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)\nl, a, b = cv2.split(lab)  # Tách các kênh L, a, b\n# Áp dụng phép biến đổi vào kênh L\nl_equ = cv2.equalizeHist(l)\n# Kết hợp lại các kênh L, a, b",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "min_x",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "min_x = 0\nmax_x = 500\nmin_y = 0\nmax_y = 500\nlab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)\nl, a, b = cv2.split(lab)  # Tách các kênh L, a, b\n# Áp dụng phép biến đổi vào kênh L\nl_equ = cv2.equalizeHist(l)\n# Kết hợp lại các kênh L, a, b\nlab_equ = cv2.merge((l_equ, a, b))",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "max_x",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "max_x = 500\nmin_y = 0\nmax_y = 500\nlab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)\nl, a, b = cv2.split(lab)  # Tách các kênh L, a, b\n# Áp dụng phép biến đổi vào kênh L\nl_equ = cv2.equalizeHist(l)\n# Kết hợp lại các kênh L, a, b\nlab_equ = cv2.merge((l_equ, a, b))\n# Chuyển lại ảnh gốc từ không gian màu LAB sang BGR",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "min_y",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "min_y = 0\nmax_y = 500\nlab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)\nl, a, b = cv2.split(lab)  # Tách các kênh L, a, b\n# Áp dụng phép biến đổi vào kênh L\nl_equ = cv2.equalizeHist(l)\n# Kết hợp lại các kênh L, a, b\nlab_equ = cv2.merge((l_equ, a, b))\n# Chuyển lại ảnh gốc từ không gian màu LAB sang BGR\nresult = cv2.cvtColor(lab_equ, cv2.COLOR_LAB2BGR)",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "max_y",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "max_y = 500\nlab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)\nl, a, b = cv2.split(lab)  # Tách các kênh L, a, b\n# Áp dụng phép biến đổi vào kênh L\nl_equ = cv2.equalizeHist(l)\n# Kết hợp lại các kênh L, a, b\nlab_equ = cv2.merge((l_equ, a, b))\n# Chuyển lại ảnh gốc từ không gian màu LAB sang BGR\nresult = cv2.cvtColor(lab_equ, cv2.COLOR_LAB2BGR)\ngray = cv2.cvtColor(result, cv2.COLOR_BGR2GRAY)",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "lab",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)\nl, a, b = cv2.split(lab)  # Tách các kênh L, a, b\n# Áp dụng phép biến đổi vào kênh L\nl_equ = cv2.equalizeHist(l)\n# Kết hợp lại các kênh L, a, b\nlab_equ = cv2.merge((l_equ, a, b))\n# Chuyển lại ảnh gốc từ không gian màu LAB sang BGR\nresult = cv2.cvtColor(lab_equ, cv2.COLOR_LAB2BGR)\ngray = cv2.cvtColor(result, cv2.COLOR_BGR2GRAY)\n# Phát hiện cạnh của ./nh",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "l_equ",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "l_equ = cv2.equalizeHist(l)\n# Kết hợp lại các kênh L, a, b\nlab_equ = cv2.merge((l_equ, a, b))\n# Chuyển lại ảnh gốc từ không gian màu LAB sang BGR\nresult = cv2.cvtColor(lab_equ, cv2.COLOR_LAB2BGR)\ngray = cv2.cvtColor(result, cv2.COLOR_BGR2GRAY)\n# Phát hiện cạnh của ./nh\n# image = cv2.threshold(image,127,255,cv2.THRESH_BINARY)\n# blurred = cv2.GaussianBlur(image, (5, 5), 0)\nedges = cv2.Canny(image, 30, 150)",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "lab_equ",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "lab_equ = cv2.merge((l_equ, a, b))\n# Chuyển lại ảnh gốc từ không gian màu LAB sang BGR\nresult = cv2.cvtColor(lab_equ, cv2.COLOR_LAB2BGR)\ngray = cv2.cvtColor(result, cv2.COLOR_BGR2GRAY)\n# Phát hiện cạnh của ./nh\n# image = cv2.threshold(image,127,255,cv2.THRESH_BINARY)\n# blurred = cv2.GaussianBlur(image, (5, 5), 0)\nedges = cv2.Canny(image, 30, 150)\n# Tìm các đường thẳng trong ảnh\nlines = cv2.HoughLines(edges, 1, np.pi/180, 100)",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "result",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "result = cv2.cvtColor(lab_equ, cv2.COLOR_LAB2BGR)\ngray = cv2.cvtColor(result, cv2.COLOR_BGR2GRAY)\n# Phát hiện cạnh của ./nh\n# image = cv2.threshold(image,127,255,cv2.THRESH_BINARY)\n# blurred = cv2.GaussianBlur(image, (5, 5), 0)\nedges = cv2.Canny(image, 30, 150)\n# Tìm các đường thẳng trong ảnh\nlines = cv2.HoughLines(edges, 1, np.pi/180, 100)\npoint_line = []\ndistinct_lines = []",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "gray",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "gray = cv2.cvtColor(result, cv2.COLOR_BGR2GRAY)\n# Phát hiện cạnh của ./nh\n# image = cv2.threshold(image,127,255,cv2.THRESH_BINARY)\n# blurred = cv2.GaussianBlur(image, (5, 5), 0)\nedges = cv2.Canny(image, 30, 150)\n# Tìm các đường thẳng trong ảnh\nlines = cv2.HoughLines(edges, 1, np.pi/180, 100)\npoint_line = []\ndistinct_lines = []\nif lines is not None:",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "edges",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "edges = cv2.Canny(image, 30, 150)\n# Tìm các đường thẳng trong ảnh\nlines = cv2.HoughLines(edges, 1, np.pi/180, 100)\npoint_line = []\ndistinct_lines = []\nif lines is not None:\n    for rho, theta in lines[:, 0]:\n        a = np.cos(theta)\n        b = np.sin(theta)\n        x0 = a * rho",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "lines",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "lines = cv2.HoughLines(edges, 1, np.pi/180, 100)\npoint_line = []\ndistinct_lines = []\nif lines is not None:\n    for rho, theta in lines[:, 0]:\n        a = np.cos(theta)\n        b = np.sin(theta)\n        x0 = a * rho\n        y0 = b * rho\n        x1 = int(x0 + 1000 * (-b))",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "point_line",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "point_line = []\ndistinct_lines = []\nif lines is not None:\n    for rho, theta in lines[:, 0]:\n        a = np.cos(theta)\n        b = np.sin(theta)\n        x0 = a * rho\n        y0 = b * rho\n        x1 = int(x0 + 1000 * (-b))\n        y1 = int(y0 + 1000 * (a))",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "distinct_lines",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "distinct_lines = []\nif lines is not None:\n    for rho, theta in lines[:, 0]:\n        a = np.cos(theta)\n        b = np.sin(theta)\n        x0 = a * rho\n        y0 = b * rho\n        x1 = int(x0 + 1000 * (-b))\n        y1 = int(y0 + 1000 * (a))\n        x2 = int(x0 - 1000 * (-b))",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "group_lines,point_intersection",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "group_lines,point_intersection = group_intersecting_lines(distinct_lines)\nprint(group_lines)\n# Hiển thị ảnh với các đường thẳng và điểm giao nhau đã được vẽ lên\nline_check = distinct_lines[0]\nrho_line_check,theta_line_check = line_check\na_line_check = -np.cos(theta_line_check)/np.sin(theta_line_check)\nb_line_check = rho_line_check / np.sin(theta_line_check)\na = np.cos(theta_line_check)\nb = np.sin(theta_line_check)\nx0 = a * rho_line_check",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "line_check",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "line_check = distinct_lines[0]\nrho_line_check,theta_line_check = line_check\na_line_check = -np.cos(theta_line_check)/np.sin(theta_line_check)\nb_line_check = rho_line_check / np.sin(theta_line_check)\na = np.cos(theta_line_check)\nb = np.sin(theta_line_check)\nx0 = a * rho_line_check\ny0 = b * rho_line_check\nx1 = int(x0 + 1024 * (-b))\ny1 = int(y0 + 1024 * (a))",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "rho_line_check,theta_line_check",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "rho_line_check,theta_line_check = line_check\na_line_check = -np.cos(theta_line_check)/np.sin(theta_line_check)\nb_line_check = rho_line_check / np.sin(theta_line_check)\na = np.cos(theta_line_check)\nb = np.sin(theta_line_check)\nx0 = a * rho_line_check\ny0 = b * rho_line_check\nx1 = int(x0 + 1024 * (-b))\ny1 = int(y0 + 1024 * (a))\nx2 = int(x0 - 1024 * (-b))",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "a_line_check",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "a_line_check = -np.cos(theta_line_check)/np.sin(theta_line_check)\nb_line_check = rho_line_check / np.sin(theta_line_check)\na = np.cos(theta_line_check)\nb = np.sin(theta_line_check)\nx0 = a * rho_line_check\ny0 = b * rho_line_check\nx1 = int(x0 + 1024 * (-b))\ny1 = int(y0 + 1024 * (a))\nx2 = int(x0 - 1024 * (-b))\ny2 = int(y0 - 1024 * (a))",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "b_line_check",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "b_line_check = rho_line_check / np.sin(theta_line_check)\na = np.cos(theta_line_check)\nb = np.sin(theta_line_check)\nx0 = a * rho_line_check\ny0 = b * rho_line_check\nx1 = int(x0 + 1024 * (-b))\ny1 = int(y0 + 1024 * (a))\nx2 = int(x0 - 1024 * (-b))\ny2 = int(y0 - 1024 * (a))\nimg_test = image_test",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "a",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "a = np.cos(theta_line_check)\nb = np.sin(theta_line_check)\nx0 = a * rho_line_check\ny0 = b * rho_line_check\nx1 = int(x0 + 1024 * (-b))\ny1 = int(y0 + 1024 * (a))\nx2 = int(x0 - 1024 * (-b))\ny2 = int(y0 - 1024 * (a))\nimg_test = image_test\ncv2.line(image_test, (x1, y1), (x2, y2), (160, 100, 100), 2)",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "b",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "b = np.sin(theta_line_check)\nx0 = a * rho_line_check\ny0 = b * rho_line_check\nx1 = int(x0 + 1024 * (-b))\ny1 = int(y0 + 1024 * (a))\nx2 = int(x0 - 1024 * (-b))\ny2 = int(y0 - 1024 * (a))\nimg_test = image_test\ncv2.line(image_test, (x1, y1), (x2, y2), (160, 100, 100), 2)\nfor lines in group_lines:",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "x0",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "x0 = a * rho_line_check\ny0 = b * rho_line_check\nx1 = int(x0 + 1024 * (-b))\ny1 = int(y0 + 1024 * (a))\nx2 = int(x0 - 1024 * (-b))\ny2 = int(y0 - 1024 * (a))\nimg_test = image_test\ncv2.line(image_test, (x1, y1), (x2, y2), (160, 100, 100), 2)\nfor lines in group_lines:\n    print(lines)",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "y0",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "y0 = b * rho_line_check\nx1 = int(x0 + 1024 * (-b))\ny1 = int(y0 + 1024 * (a))\nx2 = int(x0 - 1024 * (-b))\ny2 = int(y0 - 1024 * (a))\nimg_test = image_test\ncv2.line(image_test, (x1, y1), (x2, y2), (160, 100, 100), 2)\nfor lines in group_lines:\n    print(lines)\n    # for line in lines:",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "x1",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "x1 = int(x0 + 1024 * (-b))\ny1 = int(y0 + 1024 * (a))\nx2 = int(x0 - 1024 * (-b))\ny2 = int(y0 - 1024 * (a))\nimg_test = image_test\ncv2.line(image_test, (x1, y1), (x2, y2), (160, 100, 100), 2)\nfor lines in group_lines:\n    print(lines)\n    # for line in lines:\n    rho, theta = lines",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "y1",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "y1 = int(y0 + 1024 * (a))\nx2 = int(x0 - 1024 * (-b))\ny2 = int(y0 - 1024 * (a))\nimg_test = image_test\ncv2.line(image_test, (x1, y1), (x2, y2), (160, 100, 100), 2)\nfor lines in group_lines:\n    print(lines)\n    # for line in lines:\n    rho, theta = lines\n    a = np.cos(theta)",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "x2",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "x2 = int(x0 - 1024 * (-b))\ny2 = int(y0 - 1024 * (a))\nimg_test = image_test\ncv2.line(image_test, (x1, y1), (x2, y2), (160, 100, 100), 2)\nfor lines in group_lines:\n    print(lines)\n    # for line in lines:\n    rho, theta = lines\n    a = np.cos(theta)\n    b = np.sin(theta)",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "y2",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "y2 = int(y0 - 1024 * (a))\nimg_test = image_test\ncv2.line(image_test, (x1, y1), (x2, y2), (160, 100, 100), 2)\nfor lines in group_lines:\n    print(lines)\n    # for line in lines:\n    rho, theta = lines\n    a = np.cos(theta)\n    b = np.sin(theta)\n    x0 = a * rho",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "img_test",
+        "kind": 5,
+        "importPath": "detectProduct",
+        "description": "detectProduct",
+        "peekOfCode": "img_test = image_test\ncv2.line(image_test, (x1, y1), (x2, y2), (160, 100, 100), 2)\nfor lines in group_lines:\n    print(lines)\n    # for line in lines:\n    rho, theta = lines\n    a = np.cos(theta)\n    b = np.sin(theta)\n    x0 = a * rho\n    y0 = b * rho",
+        "detail": "detectProduct",
+        "documentation": {}
+    },
+    {
+        "label": "drawLines",
+        "kind": 2,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "def drawLines(img, lines):\n    \"\"\"\n    Draw lines on an image\n    \"\"\"\n    for line in lines:\n        for rho,theta in line:\n            a = np.cos(theta)\n            b = np.sin(theta)\n            x0 = a*rho\n            y0 = b*rho",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "lines_data",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "lines_data = [{'x1': -1000, 'x2': 999, 'y1': 599, 'y2': 999}, {'x1': -20, 'x2': 663, 'y1': 1056, 'y2': 663}, {'x1': 242, 'x2': 926, 'y1': -1152, 'y2': 926}, {'x1': 233, 'x2': 373, 'y1': 1018, 'y2': 373}, {'x1': 603, 'x2': 812, 'y1': -1068, 'y2': 812}, {'x1': -1110, 'x2': 865, 'y1': 617, 'y2': 865}, {'x1': -819, 'x2': 1150, 'y1': 1113, 'y2': 1150}]\ninput_image = cv2.imread('./sg-11134201-22120-w4it0uurvklvbd.jpeg')\ndef drawLines(img, lines):\n    \"\"\"\n    Draw lines on an image\n    \"\"\"\n    for line in lines:\n        for rho,theta in line:\n            a = np.cos(theta)\n            b = np.sin(theta)",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "input_image",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "input_image = cv2.imread('./sg-11134201-22120-w4it0uurvklvbd.jpeg')\ndef drawLines(img, lines):\n    \"\"\"\n    Draw lines on an image\n    \"\"\"\n    for line in lines:\n        for rho,theta in line:\n            a = np.cos(theta)\n            b = np.sin(theta)\n            x0 = a*rho",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "input_image_grey",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "input_image_grey = cv2.cvtColor(input_image, cv2.COLOR_BGR2GRAY)\nedged = input_image_grey\nrho = 1 # 1 pixel\ntheta = 1.0*0.017 # 1 degree\nthreshold = 100\nlines = cv2.HoughLines(edged, rho, theta, threshold)\n# Fix negative angles\nnum_lines = lines.shape[1]\nfor i in range(0, num_lines):\n    line = lines[0,i,:]",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "edged",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "edged = input_image_grey\nrho = 1 # 1 pixel\ntheta = 1.0*0.017 # 1 degree\nthreshold = 100\nlines = cv2.HoughLines(edged, rho, theta, threshold)\n# Fix negative angles\nnum_lines = lines.shape[1]\nfor i in range(0, num_lines):\n    line = lines[0,i,:]\n    rho = line[0]",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "rho",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "rho = 1 # 1 pixel\ntheta = 1.0*0.017 # 1 degree\nthreshold = 100\nlines = cv2.HoughLines(edged, rho, theta, threshold)\n# Fix negative angles\nnum_lines = lines.shape[1]\nfor i in range(0, num_lines):\n    line = lines[0,i,:]\n    rho = line[0]\n    theta = line[1]",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "theta",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "theta = 1.0*0.017 # 1 degree\nthreshold = 100\nlines = cv2.HoughLines(edged, rho, theta, threshold)\n# Fix negative angles\nnum_lines = lines.shape[1]\nfor i in range(0, num_lines):\n    line = lines[0,i,:]\n    rho = line[0]\n    theta = line[1]\n    if rho < 0:",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "threshold",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "threshold = 100\nlines = cv2.HoughLines(edged, rho, theta, threshold)\n# Fix negative angles\nnum_lines = lines.shape[1]\nfor i in range(0, num_lines):\n    line = lines[0,i,:]\n    rho = line[0]\n    theta = line[1]\n    if rho < 0:\n        rho *= -1.0",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "lines",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "lines = cv2.HoughLines(edged, rho, theta, threshold)\n# Fix negative angles\nnum_lines = lines.shape[1]\nfor i in range(0, num_lines):\n    line = lines[0,i,:]\n    rho = line[0]\n    theta = line[1]\n    if rho < 0:\n        rho *= -1.0\n        theta -= np.pi",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "num_lines",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "num_lines = lines.shape[1]\nfor i in range(0, num_lines):\n    line = lines[0,i,:]\n    rho = line[0]\n    theta = line[1]\n    if rho < 0:\n        rho *= -1.0\n        theta -= np.pi\n        line[0] = rho\n        line[1] = theta",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "img_with_all_lines",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "img_with_all_lines = np.copy(input_image)\ndrawLines(img_with_all_lines, lines)\ncv2.imshow(\"Hough lines\", img_with_all_lines)\ncv2.waitKey()\ncv2.imwrite(\"all_lines.jpg\", img_with_all_lines)\n# Find 4 lines with unique rho & theta:\nnum_lines_to_find = 4\nfiltered_lines = np.zeros([1, num_lines_to_find, 2])\nif lines.shape[1] < num_lines_to_find:\n    print(\"ERROR: Not enough lines detected!\")",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "num_lines_to_find",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "num_lines_to_find = 4\nfiltered_lines = np.zeros([1, num_lines_to_find, 2])\nif lines.shape[1] < num_lines_to_find:\n    print(\"ERROR: Not enough lines detected!\")\n# Save the first line\nfiltered_lines[0,0,:] = lines[0,0,:]\nprint(\"Line 1: rho = %.1f theta = %.3f\" % (filtered_lines[0,0,0], filtered_lines[0,0,1]))\nidx = 1 # Index to store the next unique line\n# Initialize all rows the same\nfor i in range(1,num_lines_to_find):",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "filtered_lines",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "filtered_lines = np.zeros([1, num_lines_to_find, 2])\nif lines.shape[1] < num_lines_to_find:\n    print(\"ERROR: Not enough lines detected!\")\n# Save the first line\nfiltered_lines[0,0,:] = lines[0,0,:]\nprint(\"Line 1: rho = %.1f theta = %.3f\" % (filtered_lines[0,0,0], filtered_lines[0,0,1]))\nidx = 1 # Index to store the next unique line\n# Initialize all rows the same\nfor i in range(1,num_lines_to_find):\n    filtered_lines[0,i,:] = filtered_lines[0,0,:]",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "filtered_lines[0,0,:]",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "filtered_lines[0,0,:] = lines[0,0,:]\nprint(\"Line 1: rho = %.1f theta = %.3f\" % (filtered_lines[0,0,0], filtered_lines[0,0,1]))\nidx = 1 # Index to store the next unique line\n# Initialize all rows the same\nfor i in range(1,num_lines_to_find):\n    filtered_lines[0,i,:] = filtered_lines[0,0,:]\n# Filter the lines\nnum_lines = lines.shape[1]\nfor i in range(0, num_lines):\n    line = lines[0,i,:]",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "idx",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "idx = 1 # Index to store the next unique line\n# Initialize all rows the same\nfor i in range(1,num_lines_to_find):\n    filtered_lines[0,i,:] = filtered_lines[0,0,:]\n# Filter the lines\nnum_lines = lines.shape[1]\nfor i in range(0, num_lines):\n    line = lines[0,i,:]\n    rho = line[0]\n    theta = line[1]",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "num_lines",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "num_lines = lines.shape[1]\nfor i in range(0, num_lines):\n    line = lines[0,i,:]\n    rho = line[0]\n    theta = line[1]\n    # For this line, check which of the existing 4 it is similar to.\n    closeness_rho   = np.isclose(rho,   filtered_lines[0,:,0], atol = 10.0) # 10 pixels\n    closeness_theta = np.isclose(theta, filtered_lines[0,:,1], atol = np.pi/36.0) # 10 degrees\n    similar_rho = np.any(closeness_rho)\n    similar_theta = np.any(closeness_theta)",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "img_with_filtered_lines",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "img_with_filtered_lines = np.copy(input_image)\ndrawLines(img_with_filtered_lines, filtered_lines)\ncv2.imshow(\"Filtered lines\", img_with_filtered_lines)\ncv2.waitKey()\ncv2.imwrite(\"filtered_lines.jpg\", img_with_filtered_lines)",
+        "detail": "test",
         "documentation": {}
     }
 ]

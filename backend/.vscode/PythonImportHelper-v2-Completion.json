@@ -673,6 +673,14 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "kind": 6,
         "isExtraImport": true,
@@ -690,11 +698,27 @@
         "documentation": {}
     },
     {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
         "isExtraImport": true,
         "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
         "documentation": {}
     },
     {
@@ -3020,6 +3044,285 @@
     {
         "label": "BASE_DIR",
         "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nload_dotenv(dotenv_path=os.path.join(BASE_DIR, '.env'))\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure---z(_e613s_gyrf%n=zc#!6k9hr^5qm46n^0!-3cxr+7n#jk4l'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.getenv('DEBUG')\nALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "SECRET_KEY = 'django-insecure---z(_e613s_gyrf%n=zc#!6k9hr^5qm46n^0!-3cxr+7n#jk4l'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.getenv('DEBUG')\nALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "DEBUG = os.getenv('DEBUG')\nALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "ALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'product.apps.ProductConfig',",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'product.apps.ProductConfig',\n    'decryptRSA.apps.DecryptrsaConfig',\n    'JWT.apps.JwtConfig',",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n    'corsheaders.middleware.CorsMiddleware',\n    'login.middlewares.RequestRateMiddleWare'",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_CREDENTIALS",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_EXPOSE_HEADERS",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOWED_ORIGINS",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SESSION_COOKIE_SECURE",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "SESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SESSION_COOKIE_SAMESITE",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "SESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "WSGI_APPLICATION = 'backend.wsgi.application'\nAUTH_USER_MODEL = \"login.User\"\n# ------------------------------ REST FRAMEWORK ------------------------------ #\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_USER_MODEL",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "AUTH_USER_MODEL = \"login.User\"\n# ------------------------------ REST FRAMEWORK ------------------------------ #\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',\n    ),",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "REST_FRAMEWORK",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "REST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',\n    ),\n}\n# -------------------------------- CONFIG JWT -------------------------------- #",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SIMPLE_JWT",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "SIMPLE_JWT = {\n  'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),\n  'REFRESH_TOKEN_LIFETIME': timedelta(days=1),\n  'ROTATE_REFRESH_TOKENS': False,\n  'BLACKLIST_AFTER_ROTATION': True,\n  'UPDATE_LAST_LOGIN': False,\n  'ALGORITHM': 'HS256',\n  'SIGNING_KEY': SECRET_KEY,\n  'VERIFYING_KEY': None,\n  'AUDIENCE': None,",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_SECURE",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "CSRF_COOKIE_SECURE = True\nCSRF_COOKIE_HTTP_ONLY = True\nCSRF_TRUSTED_ORIGINS = [\n    'https://katieshopus.info'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_HTTP_ONLY",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "CSRF_COOKIE_HTTP_ONLY = True\nCSRF_TRUSTED_ORIGINS = [\n    'https://katieshopus.info'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': os.getenv('DB_ENGINE'),",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_TRUSTED_ORIGINS",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "CSRF_TRUSTED_ORIGINS = [\n    'https://katieshopus.info'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': os.getenv('DB_ENGINE'),\n        'NAME': os.getenv('DB_NAME_SERVER'),",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_SAMESITE",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "CSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': os.getenv('DB_ENGINE'),\n        'NAME': os.getenv('DB_NAME_SERVER'),\n        'USER': os.getenv('DB_USER_SERVER'),\n        'PASSWORD': os.getenv('DB_PASSWORD_SERVER'),\n        'HOST': os.getenv('DB_HOST_SERVER'),",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': os.getenv('DB_ENGINE'),\n        'NAME': os.getenv('DB_NAME_SERVER'),\n        'USER': os.getenv('DB_USER_SERVER'),\n        'PASSWORD': os.getenv('DB_PASSWORD_SERVER'),\n        'HOST': os.getenv('DB_HOST_SERVER'),\n        'PORT': os.getenv('DB_PORT_SERVER'),\n    }\n}",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "LANGUAGE_CODE = os.getenv('LANGUAGE_CODE')\nTIME_ZONE = os.getenv('TIME_ZONE')\nUSE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "TIME_ZONE = os.getenv('TIME_ZONE')\nUSE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "USE_I18N = os.getenv('USE_I18N')\nUSE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "USE_TZ = os.getenv('USE_TZ')\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "STATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_ROOT",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "MEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_DIRS",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "STATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_AUTO_FIELD",
+        "kind": 5,
+        "importPath": "backend.setting_host",
+        "description": "backend.setting_host",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
         "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nload_dotenv(dotenv_path=os.path.join(BASE_DIR, '.env'))\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure---z(_e613s_gyrf%n=zc#!6k9hr^5qm46n^0!-3cxr+7n#jk4l'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.getenv('DEBUG')\nALLOWED_HOSTS = []\n# Application definition",
@@ -3076,7 +3379,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"",
+        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -3085,7 +3388,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [",
+        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -3094,7 +3397,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
+        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -3103,7 +3406,7 @@
         "kind": 5,
         "importPath": "backend.settings",
         "description": "backend.settings",
-        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',",
+        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
         "detail": "backend.settings",
         "documentation": {}
     },
@@ -4354,16 +4657,7 @@
         "kind": 5,
         "importPath": "login.api.urls",
         "description": "login.api.urls",
-        "peekOfCode": "change_password_user = LoginViewSet.as_view({\n    'post' : 'change_password_user',\n})\nregister_user = RegisterUserViewSet.as_view({\n    'post': 'register_user',\n})\nurlpatterns = [\n    path('login/', login, name = \"login_user\"),\n    path('logout/', logout, name = \"logout_user\"),\n    path('user/change-password/', change_password_user, name = \"change_password_user\"),",
-        "detail": "login.api.urls",
-        "documentation": {}
-    },
-    {
-        "label": "register_user",
-        "kind": 5,
-        "importPath": "login.api.urls",
-        "description": "login.api.urls",
-        "peekOfCode": "register_user = RegisterUserViewSet.as_view({\n    'post': 'register_user',\n})\nurlpatterns = [\n    path('login/', login, name = \"login_user\"),\n    path('logout/', logout, name = \"logout_user\"),\n    path('user/change-password/', change_password_user, name = \"change_password_user\"),\n    path('register-user/', register_user, name = \"register_user\")\n]",
+        "peekOfCode": "change_password_user = LoginViewSet.as_view({\n    'post' : 'change_password_user',\n})\n# register_user = RegisterUserViewSet.as_view({\n#     'post': 'register_user',\n# })\nurlpatterns = [\n    path('login/', login, name = \"login_user\"),\n    path('logout/', logout, name = \"logout_user\"),\n    path('user/change-password/', change_password_user, name = \"change_password_user\"),",
         "detail": "login.api.urls",
         "documentation": {}
     },
@@ -4381,7 +4675,7 @@
         "kind": 6,
         "importPath": "login.api.views",
         "description": "login.api.views",
-        "peekOfCode": "class RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):\n            file_format, file_string = image_data.split(';base64,')\n            file_ext = file_format.split('/')[-1]\n            file_bytes = base64.b64decode(file_string)",
+        "peekOfCode": "class RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    authentication_classes =[]\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):\n            file_format, file_string = image_data.split(';base64,')\n            file_ext = file_format.split('/')[-1]",
         "detail": "login.api.views",
         "documentation": {}
     },
@@ -4413,11 +4707,20 @@
         "documentation": {}
     },
     {
+        "label": "register_user",
+        "kind": 2,
+        "importPath": "login.api.views",
+        "description": "login.api.views",
+        "peekOfCode": "def register_user(request):\n    list_name_file_blog = []\n    def decodeFile(image_data,is_image,is_video):\n        file_format, file_string = image_data.split(';base64,')\n        file_ext = file_format.split('/')[-1]\n        file_bytes = base64.b64decode(file_string)\n        if is_image is True:\n            name_file = 'blog' + str(uuid.uuid4()) + '.' + file_ext\n            with open( os.path.join(path_upload_image, \"blogs\" , name_file), 'wb+') as decoded_image_file:\n                decoded_image_file.write(file_bytes)",
+        "detail": "login.api.views",
+        "documentation": {}
+    },
+    {
         "label": "path_upload_image",
         "kind": 5,
         "importPath": "login.api.views",
         "description": "login.api.views",
-        "peekOfCode": "path_upload_image = str(settings.BASE_DIR)+\"/media/photos\"\npath_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):\n            file_format, file_string = image_data.split(';base64,')",
+        "peekOfCode": "path_upload_image = str(settings.BASE_DIR)+\"/media/photos\"\npath_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    authentication_classes =[]\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):",
         "detail": "login.api.views",
         "documentation": {}
     },
@@ -4426,7 +4729,7 @@
         "kind": 5,
         "importPath": "login.api.views",
         "description": "login.api.views",
-        "peekOfCode": "path_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):\n            file_format, file_string = image_data.split(';base64,')\n            file_ext = file_format.split('/')[-1]",
+        "peekOfCode": "path_upload_video = str(settings.BASE_DIR)+\"/media/videos\"\nclass RegisterUserViewSet (viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n    authentication_classes =[]\n    @action(methods = ['POST'], detail = False, url_path = 'register_user', url_name = \"post_user\")\n    def register_user(self, request, *args, **kwargs):\n        list_name_file_blog = []\n        def decodeFile(image_data,is_image,is_video):\n            file_format, file_string = image_data.split(';base64,')",
         "detail": "login.api.views",
         "documentation": {}
     },
@@ -5002,7 +5305,16 @@
         "kind": 5,
         "importPath": "product.api.query_raw",
         "description": "product.api.query_raw",
-        "peekOfCode": "QUERY_SQL_GET_PRODUCT_DETAIL_NOT_USER = \"\"\"\n    SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_product`.`description`, `product_photo_product`.`data`, \n            `product_price`.`price`, `product_price`.`sale`, \n            `product_product`.`description`,\n            (\n                SELECT COUNT(U0.`id`) AS `heart_count` \n                FROM `blog_product_heart` U0 \n                WHERE U0.`product_id_id` = `product_product`.`id`",
+        "peekOfCode": "QUERY_SQL_GET_PRODUCT_DETAIL_NOT_USER = \"\"\"\n SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_product`.`description`,\n            `product_price`.`price`, `product_price`.`sale`, \n            `product_product`.`description`,\n            (\n                SELECT COUNT(U0.`id`) AS `heart_count` \n                FROM `blog_product_heart` U0 \n                WHERE U0.`product_id_id` = `product_product`.`id`",
+        "detail": "product.api.query_raw",
+        "documentation": {}
+    },
+    {
+        "label": "QUERY_SQL_GET_LIST_PRODUCT_DETAIL_NOT_USER",
+        "kind": 5,
+        "importPath": "product.api.query_raw",
+        "description": "product.api.query_raw",
+        "peekOfCode": "QUERY_SQL_GET_LIST_PRODUCT_DETAIL_NOT_USER = \"\"\"\n    SELECT  `product_product`.`id`, `product_product`.`slug`, \n            `product_product`.`name`, `product_product`.`sex`, \n            `product_photo_product`.`data`, \n            `product_price`.`price`, `product_price`.`sale`\n    FROM `product_product` , `product_photo_product` , `product_price` \n    WHERE \n        (\n            `product_product`.`id` = `product_photo_product`.`product_id_id`\n            AND `product_product`.`id` = `product_price`.`product_id_id`",
         "detail": "product.api.query_raw",
         "documentation": {}
     },
@@ -5191,16 +5503,25 @@
         "kind": 6,
         "importPath": "product.api.serializers",
         "description": "product.api.serializers",
-        "peekOfCode": "class PhotoProductSerializer(ModelSerializer):\n    class Meta:\n        model = Photo_product\n        fields = ['id']\nclass ProductSerializer(serializers.Serializer):\n    data = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()",
+        "peekOfCode": "class PhotoProductSerializer(ModelSerializer):\n    class Meta:\n        model = Photo_product\n        fields = ['id']\nclass ProductDetailSerializer(serializers.Serializer):\n    file_media_product = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()",
         "detail": "product.api.serializers",
         "documentation": {}
     },
     {
-        "label": "ProductSerializer",
+        "label": "ProductDetailSerializer",
         "kind": 6,
         "importPath": "product.api.serializers",
         "description": "product.api.serializers",
-        "peekOfCode": "class ProductSerializer(serializers.Serializer):\n    data = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()\n    sex = serializers.IntegerField()\n    sale = serializers.FloatField()",
+        "peekOfCode": "class ProductDetailSerializer(serializers.Serializer):\n    file_media_product = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()\n    sex = serializers.IntegerField()\n    sale = serializers.FloatField()",
+        "detail": "product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "ProductCheckoutSerializer",
+        "kind": 6,
+        "importPath": "product.api.serializers",
+        "description": "product.api.serializers",
+        "peekOfCode": "class ProductCheckoutSerializer(serializers.Serializer):  \n    slug=serializers.CharField()\n    name = serializers.CharField()\n    sex = serializers.IntegerField()\n    sale = serializers.FloatField()\n    data = serializers.CharField()\n    price = serializers.FloatField()\nclass CategorySerializer(ModelSerializer):\n    class Meta:\n        model = Category",
         "detail": "product.api.serializers",
         "documentation": {}
     },
@@ -5227,7 +5548,16 @@
         "kind": 6,
         "importPath": "product.api.serializers",
         "description": "product.api.serializers",
-        "peekOfCode": "class CategoryWithNumberProductSerializer(serializers.Serializer):\n    id =  UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()\n    number_product = serializers.IntegerField()",
+        "peekOfCode": "class CategoryWithNumberProductSerializer(serializers.Serializer):\n    id =  UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()\n    number_product = serializers.IntegerField()\nclass ProductSerializer(serializers.Serializer):\n    data = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()",
+        "detail": "product.api.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "ProductSerializer",
+        "kind": 6,
+        "importPath": "product.api.serializers",
+        "description": "product.api.serializers",
+        "peekOfCode": "class ProductSerializer(serializers.Serializer):\n    data = serializers.CharField()\n    status_heart =  serializers.BooleanField()\n    description = serializers.CharField()\n    price = serializers.FloatField()\n    id = UUIDField()\n    slug=serializers.CharField()\n    name = serializers.CharField()\n    sex = serializers.IntegerField()\n    sale = serializers.FloatField()",
         "detail": "product.api.serializers",
         "documentation": {}
     },
@@ -5272,7 +5602,7 @@
         "kind": 5,
         "importPath": "product.api.urls",
         "description": "product.api.urls",
-        "peekOfCode": "search_product_category = Productviewset.as_view({\n    'get' : 'search_product_category',\n    #'post' : 'post_product'\n})\nproduct_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'",
+        "peekOfCode": "search_product_category = Productviewset.as_view({\n    'get' : 'search_product_category',\n    #'post' : 'post_product'\n})\nproduct_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nget_list_product = Productviewset.as_view({\n    'get' : 'get_list_product',",
         "detail": "product.api.urls",
         "documentation": {}
     },
@@ -5281,7 +5611,16 @@
         "kind": 5,
         "importPath": "product.api.urls",
         "description": "product.api.urls",
-        "peekOfCode": "product_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #",
+        "peekOfCode": "product_catogory = Productviewset.as_view({\n    'get' : 'get_product_category',\n    #'post' : 'post_product'\n})\nget_list_product = Productviewset.as_view({\n    'get' : 'get_list_product',\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})",
+        "detail": "product.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "get_list_product",
+        "kind": 5,
+        "importPath": "product.api.urls",
+        "description": "product.api.urls",
+        "peekOfCode": "get_list_product = Productviewset.as_view({\n    'get' : 'get_list_product',\n})\nproduct_heart = ProductHeartViewSet.as_view({\n    'get' : 'get_product_heart'\n})\n# ---------------------------------------------------------------------------- #\n#                                     URLS                                     #\n# ---------------------------------------------------------------------------- #\nurlpatterns = [",
         "detail": "product.api.urls",
         "documentation": {}
     },
@@ -5299,7 +5638,7 @@
         "kind": 5,
         "importPath": "product.api.urls",
         "description": "product.api.urls",
-        "peekOfCode": "urlpatterns = [\n    path('category/',category, name = \"get_category\"), # get categories\n    path('category-tree/',category_tree, name = \"category_tree\"), # get categories  \n    path('product/',product,name=\"get_product\"), # get all products or product with product_slug\n    path('product/search/',search_product,name=\"search_product\"),\n    path('product/search-product-category/',search_product_category,name=\"search_product_category\"),\n    path('product-category/',product_catogory,name=\"get_product_category\"),# get all products or product with category_slug\n    path('product-heart/',product_heart , name = \"get_product_heart\") # get product liked\n]",
+        "peekOfCode": "urlpatterns = [\n    path('category/',category, name = \"get_category\"), # get categories\n    path('category-tree/',category_tree, name = \"category_tree\"), # get categories  \n    path('product/',product,name=\"get_product\"), # get all products or product with product_slug\n    path('product/search/',search_product,name=\"search_product\"),\n    path('product/search-product-category/',search_product_category,name=\"search_product_category\"),\n    path('product-category/',product_catogory,name=\"get_product_category\"),# get all products or product with category_slug\n    path('product-heart/',product_heart , name = \"get_product_heart\") , # get product liked,\n    path('product-list/',get_list_product , name = \"get_product_heart\") # get product liked,\n]",
         "detail": "product.api.urls",
         "documentation": {}
     },

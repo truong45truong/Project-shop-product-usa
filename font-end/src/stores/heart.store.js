@@ -11,24 +11,28 @@ export const heart = {
     state: initialState,
     getters: {
         getData: state => state.data,
-        isLoading : state => state.content,
+        isLoading : state => state.isLoading,
         getNumberProduct : state => state.numberProduct,
         getIsHaveData : state => state.isHaveData
     },
     actions: {
-        async actionGetData({commit}){
+        async actionGetData({commit,state}){
+            if (state.isLoangding == true) return;
             return await ProductAction.actionGetProductHeart().then(res => {
                 console.log("product heart",res)
                 commit('getDataaSuccess',{data : Array.from(res)})
               })
         },
-        async actionUnlikeItems({commit}){
+        async actionUnlikeItems({commit,state}){
+            if (state.isLoangding == true) return;
             return commit('unlikeItems')
         },
-        async actionlikeItems({commit}){
+        async actionlikeItems({commit,state}){
+            if (state.isLoangding == true) return;
             return commit('likeItems')
         },
-        actionExitHeart({commit}){
+        actionExitHeart({commit,state}){
+            if (state.isLoangding == true) return;
             commit('exitHeartSuccess')
         },
     },
@@ -42,9 +46,11 @@ export const heart = {
         },
         unlikeItems(state){
             state.numberProduct = state.numberProduct - 1;
+            state.isLoading = false;
         },
         likeItems(state){
             state.numberProduct = state.numberProduct + 1;
+            state.isLoading = false;
         },
         exitHeartSuccess(state){
             state.data =  [];

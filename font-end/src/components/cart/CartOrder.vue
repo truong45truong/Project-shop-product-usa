@@ -21,8 +21,8 @@
           </div>
         </div>
         <div class="container-cart d-flex justify-content-center row m-0">
-          <div v-for="product,index in products" class="card col-lg-6 mt-1">
-              <product-cart
+          <div v-for="product,index in products" class="card col-lg-6 mt-1"> 
+              <product-cart :dataProductSelect="dataProductSelect"
                 :slug ="product.product_slug" :name="product.product_name"
                 :category="product.category_name" :photo="product.photo_product"
                 :price="product.product_price" :sale='product.product_sale'
@@ -53,7 +53,8 @@ export default ({
         request_cancel: false,
         transport: false,
         products: false,
-        indexOrder: false
+        indexOrder: false,
+        dataProductSelect : '',
     },
     components : {
       ProductCart,

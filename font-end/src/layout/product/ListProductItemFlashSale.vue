@@ -176,6 +176,18 @@ export default ({
 {
 
 }
+@media only screen and (max-width: 524px){
+  .flash-sale-top {
+    border:none;
+
+  }
+  .flash-sale-top:hover,
+  .flash-sale-top:focus-visible{
+    --_p: var(--s);
+    outline: var(--b) solid #0000;
+    outline-offset: .6em;
+  }
+}
 @media only screen and (max-width: 424px)
 {   
     .flash-sale-inside {

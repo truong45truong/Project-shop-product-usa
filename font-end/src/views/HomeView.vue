@@ -1,5 +1,6 @@
 
 <template>
+  <div v-if="isLogin" class="position-fixed over-bg-login h-100 w-100"></div>
   <menu-header @hideListItemHeart="activeShowListHeart" @hideCart="activeShowCart"
               @hideChangePassword = "activeChangePassword"  />
   <main >
@@ -8,16 +9,18 @@
       </notice-carefully>
     </div>
     <banner-home />
-    <list-product-item-flash-sale ref="list_product_item_flash_sale" />
+    <list-product-item-flash-sale ref="list_product_item_flash_sal" class=" mb-5" />
     <list-product-item ref="list_product_item" />
     <list-item-heart v-if="isShowListHeart" class="h-100" @hideListItemHeart="activeShowListHeart" @removeProductHeart="fromHomeViewChangeStatutsHeart"
     :isShowComponent="isShowListHeart"
     />
     <shopping-cart-layout v-if="isShowCart" class="h-100" @hideCart="activeShowCart" 
     :isShowComponent="isShowCart" />
+    <notice-menu />
   </main>
   <footer-layout />
   <change-password @hide = "activeChangePassword" v-if="isShowChangePassword" />
+  <chat-box-layout />
 </template>
 
 <script>
@@ -32,15 +35,37 @@ import ListItemHeart from '../layout/product/ListItemHeart.vue'
 import ShoppingCartLayout from '../layout/cart/ShoppingCartLayout.vue'
 import ChangePassword from './../components/login/ChangePassword.vue'
 import FilterAndSortLayout from './../layout/others/FilterAndSortLayout.vue'
+import NoticeMenu from './../components/other/NoticeMenu.vue'
+import ChatBoxLayout from './../layout/chatbox/ChatBoxLayout.vue'
 import { mapGetters} from 'vuex'
+import {useRoute} from 'vue-router'
+
+
 export default {
   name: "HomeView",
+  setup() {
+        const route = useRoute();
+        return { route };
+  },
   async created() {
-    if(this.get_authenticated){
+    if (this.get_authenticated) {
       await this.$store.dispatch('heart/actionGetData')
-    if (this.get_is_data_cart == false) {
-      await this.$store.dispatch('cart/actionGetData')
-    }
+      if (this.get_is_data_cart == false) {
+        await this.$store.dispatch('cart/actionGetData')
+        if(this.$router.currentRoute._value.query.nextCart == 'true'){
+            this.activeShowCart(true)
+        } else 
+        if(this.$router.currentRoute._value.query.nextHeart == 'true'){
+          this.activeShowListHeart(true)
+        }
+      }
+    }else {
+      if(this.$router.currentRoute._value.query.nextCart == 'true'){
+        console.log("this.$router",this.route.query)
+        this.$router.push({ name : 'sign-in' , query : {
+          nextPage : String(window.location.href).replace("http://127.0.0.1:8080/",'')
+        }})
+      }
     }
   },
   data: () => ({
@@ -57,7 +82,9 @@ export default {
     NoticeCarefully,
     ListItemHeart,
     ShoppingCartLayout,
-    ChangePassword
+    ChangePassword,
+    NoticeMenu,
+    ChatBoxLayout
   },
   computed: {
     ...mapGetters('notice', {
@@ -70,11 +97,24 @@ export default {
     }),
     ...mapGetters('auth', {
 			get_authenticated: 'isAuthenticated',
+      isLogin : 'isShowLogin',
+
 		}),
   },
   methods : {
     activeShowListHeart( status ){
-      this.isShowListHeart = status;
+      if (this.get_authenticated != true) {
+        this.$store.dispatch('notice/actionTypeNotice', { content: 'Đăng nhập để vào yêu thích', type: 'addtocart' })
+        this.$store.dispatch('notice/activateShowMenu')
+      } else {
+        if(status == false){
+            let listQuery = {...this.$router.currentRoute._value.query}
+            console.log('listQuery',listQuery)
+            delete listQuery.nextHeart
+            this.$router.push({ query: {...listQuery} });
+          }
+          this.isShowListHeart = status;
+      }
     },
     fromHomeViewChangeStatutsHeart(product_slug){
       const listProductItem = this.$refs.list_product_item;
@@ -85,11 +125,16 @@ export default {
         this.$store.dispatch('notice/actionTypeNotice',{content : 'Đăng nhập để vào giỏ hàng',type : 'addtocart'})
         this.$store.dispatch('notice/activateShowMenu')
       } else {
+        if(status == false){
+            let listQuery = {...this.$router.currentRoute._value.query}
+            console.log('listQuery',listQuery)
+            delete listQuery.nextCart
+            this.$router.push({ query: {...listQuery} });
+          }
         this.isShowCart = status;
       }
     },
     activeChangePassword( status ){
-      console.log("activeChangePassword", status)
       this.isShowChangePassword = status;
     },
     handleScroll(event) {
@@ -109,5 +154,8 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 99999;
 }
-
+.over-bg-login  {
+  background-color: rgba(0, 0, 0,0.4);
+  z-index: 999;
+}
 </style>
