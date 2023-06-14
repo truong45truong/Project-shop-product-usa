@@ -27,7 +27,7 @@ load_dotenv(dotenv_path=os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = 'django-insecure---z(_e613s_gyrf%n=zc#!6k9hr^5qm46n^0!-3cxr+7n#jk4l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']
 
@@ -155,12 +155,12 @@ CSRF_COOKIE_SAMESITE = "None"
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE'),
-        'NAME': os.getenv('DB_NAME_SERVER'),
-        'USER': os.getenv('DB_USER_SERVER'),
-        'PASSWORD': os.getenv('DB_PASSWORD_SERVER'),
-        'HOST': os.getenv('DB_HOST_SERVER'),
-        'PORT': os.getenv('DB_PORT_SERVER'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'truong45truong$db_shop',
+        'USER': 'truong45truong',
+        'PASSWORD': 'Sklearn100$',
+        'HOST': 'truong45truong.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
 
@@ -187,14 +187,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = os.getenv('LANGUAGE_CODE')
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = os.getenv('TIME_ZONE')
+TIME_ZONE = 'UTC'
 
-USE_I18N = os.getenv('USE_I18N')
+USE_I18N = True
 
-USE_TZ = os.getenv('USE_TZ')
-
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

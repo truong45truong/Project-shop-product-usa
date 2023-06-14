@@ -681,6 +681,14 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "kind": 6,
         "isExtraImport": true,
@@ -698,11 +706,27 @@
         "documentation": {}
     },
     {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
         "isExtraImport": true,
         "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
         "documentation": {}
     },
     {
@@ -3788,6 +3812,285 @@
     {
         "label": "BASE_DIR",
         "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nload_dotenv(dotenv_path=os.path.join(BASE_DIR, '.env'))\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure---z(_e613s_gyrf%n=zc#!6k9hr^5qm46n^0!-3cxr+7n#jk4l'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "SECRET_KEY = 'django-insecure---z(_e613s_gyrf%n=zc#!6k9hr^5qm46n^0!-3cxr+7n#jk4l'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "ALLOWED_HOSTS = ['truong45truong.pythonanywhere.com']\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'product.apps.ProductConfig',",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'product.apps.ProductConfig',\n    'decryptRSA.apps.DecryptrsaConfig',\n    'JWT.apps.JwtConfig',",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n    'corsheaders.middleware.CorsMiddleware',\n    'login.middlewares.RequestRateMiddleWare'",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_CREDENTIALS",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_EXPOSE_HEADERS",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOWED_ORIGINS",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SESSION_COOKIE_SECURE",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "SESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SESSION_COOKIE_SAMESITE",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "SESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [\n                    BASE_DIR / 'templates',\n                ],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "WSGI_APPLICATION = 'backend.wsgi.application'\nAUTH_USER_MODEL = \"login.User\"\n# ------------------------------ REST FRAMEWORK ------------------------------ #\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_USER_MODEL",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "AUTH_USER_MODEL = \"login.User\"\n# ------------------------------ REST FRAMEWORK ------------------------------ #\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',\n    ),",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "REST_FRAMEWORK",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "REST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n        'login.api.authenticate.CustomAuthentication',\n    ),\n}\n# -------------------------------- CONFIG JWT -------------------------------- #",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "SIMPLE_JWT",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "SIMPLE_JWT = {\n  'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),\n  'REFRESH_TOKEN_LIFETIME': timedelta(days=1),\n  'ROTATE_REFRESH_TOKENS': False,\n  'BLACKLIST_AFTER_ROTATION': True,\n  'UPDATE_LAST_LOGIN': False,\n  'ALGORITHM': 'HS256',\n  'SIGNING_KEY': SECRET_KEY,\n  'VERIFYING_KEY': None,\n  'AUDIENCE': None,",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_SECURE",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "CSRF_COOKIE_SECURE = True\nCSRF_COOKIE_HTTP_ONLY = True\nCSRF_TRUSTED_ORIGINS = [\n    'https://katieshopus.info'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_HTTP_ONLY",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "CSRF_COOKIE_HTTP_ONLY = True\nCSRF_TRUSTED_ORIGINS = [\n    'https://katieshopus.info'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_TRUSTED_ORIGINS",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "CSRF_TRUSTED_ORIGINS = [\n    'https://katieshopus.info'\n]\nCSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'truong45truong$db_shop',",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_COOKIE_SAMESITE",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "CSRF_COOKIE_SAMESITE = \"None\"\n# Database\n# https://docs.djangoproject.com/en/4.0/ref/settings/#databases\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'truong45truong$db_shop',\n        'USER': 'truong45truong',\n        'PASSWORD': 'Sklearn100$',\n        'HOST': 'truong45truong.mysql.pythonanywhere-services.com',",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'truong45truong$db_shop',\n        'USER': 'truong45truong',\n        'PASSWORD': 'Sklearn100$',\n        'HOST': 'truong45truong.mysql.pythonanywhere-services.com',\n        'PORT': '3306',\n    }\n}",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "LANGUAGE_CODE = 'en-us'\nTIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "TIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.0/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "STATIC_URL = 'static/'\nMEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_ROOT",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "MEDIA_ROOT = BASE_DIR\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_DIRS",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "STATICFILES_DIRS = [\n    os.path.join(BASE_DIR,'static'),\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_AUTO_FIELD",
+        "kind": 5,
+        "importPath": "backend.backend.setting_host",
+        "description": "backend.backend.setting_host",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "backend.backend.setting_host",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
         "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\nload_dotenv(dotenv_path=os.path.join(BASE_DIR, '.env'))\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure---z(_e613s_gyrf%n=zc#!6k9hr^5qm46n^0!-3cxr+7n#jk4l'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = os.getenv('DEBUG')\nALLOWED_HOSTS = []\n# Application definition",
@@ -5338,7 +5641,7 @@
         "kind": 6,
         "importPath": "backend.login.models",
         "description": "backend.login.models",
-        "peekOfCode": "class User(AbstractUser):\n    id       = uuid4()\n    photo    = models.ImageField(upload_to =  'media/photos/user', height_field = None, width_field = None, max_length = None)\n    name     = models.CharField( max_length=200 )\n    password = models.CharField( max_length = 200)\n    email    = models.EmailField(max_length = 254)\n    level = models.IntegerField()\n    token_permission_infor_user = models.UUIDField(default=uuid.uuid4 , unique=True)\n    USERNAME_FIELD = 'username'\n    def __str__(self):",
+        "peekOfCode": "class User(AbstractUser):\n    id       = uuid4()\n    photo    = models.ImageField(upload_to =  'media/photos/user', height_field = None, width_field = None, max_length = None)\n    name     = models.CharField( max_length=200 )\n    password = models.CharField( max_length = 200)\n    email    = models.EmailField(max_length = 254)\n    level = models.IntegerField( null = True)\n    token_permission_infor_user = models.UUIDField(default=uuid.uuid4 , unique=True)\n    USERNAME_FIELD = 'username'\n    def __str__(self):",
         "detail": "backend.login.models",
         "documentation": {}
     },
@@ -5365,7 +5668,7 @@
         "kind": 5,
         "importPath": "backend.login.models",
         "description": "backend.login.models",
-        "peekOfCode": "path_root = str(settings.BASE_DIR)+\"/media/photos\"\n# Create your models here.\nclass User(AbstractUser):\n    id       = uuid4()\n    photo    = models.ImageField(upload_to =  'media/photos/user', height_field = None, width_field = None, max_length = None)\n    name     = models.CharField( max_length=200 )\n    password = models.CharField( max_length = 200)\n    email    = models.EmailField(max_length = 254)\n    level = models.IntegerField()\n    token_permission_infor_user = models.UUIDField(default=uuid.uuid4 , unique=True)",
+        "peekOfCode": "path_root = str(settings.BASE_DIR)+\"/media/photos\"\n# Create your models here.\nclass User(AbstractUser):\n    id       = uuid4()\n    photo    = models.ImageField(upload_to =  'media/photos/user', height_field = None, width_field = None, max_length = None)\n    name     = models.CharField( max_length=200 )\n    password = models.CharField( max_length = 200)\n    email    = models.EmailField(max_length = 254)\n    level = models.IntegerField( null = True)\n    token_permission_infor_user = models.UUIDField(default=uuid.uuid4 , unique=True)",
         "detail": "backend.login.models",
         "documentation": {}
     },
