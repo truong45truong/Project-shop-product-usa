@@ -12,6 +12,7 @@ from rest_framework import status
 from product.models import Category,Product
 from login.models import User
 from . import query_raw
+from . import data_processing
 from .query_raw import HandleProductCategory
 import json
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -79,6 +80,7 @@ class ProductHeartViewSet(viewsets.ViewSet):
                             ).values(
                                 'name','prices__price','photo_products__data','slug' , 'prices__sale'
                             )
+            queryset , numberProduct = data_processing.handleRawQuery(queryset)
             serializer = ProductHeartSerializer(queryset,many=True)
             return Response({'data' : serializer.data})
         except Exception as e:
@@ -104,7 +106,6 @@ class Productviewset(viewsets.ViewSet):
             filter_limit_price_up = json.loads(request.GET['up'])
             filter_limit_price_down = json.loads(request.GET['down'])
             
-            print('categories_slug',categories_slug)
             handleRawQuerySql = HandleProductCategory(rawQuerySql)    
             if limit_search == 'false':
                 handleRawQuerySql.searchProductWithKeyValue(key_search,False)
@@ -123,7 +124,6 @@ class Productviewset(viewsets.ViewSet):
                 handleRawQuerySql.addFilterWithKey(False,False,filter_limit_price_down,'')
                 
             rawQuerySql = handleRawQuerySql.getQuery()
-            print(rawQuerySql)
         except Exception as e:
             print('ERROE',e)
             response.data =  { 
@@ -143,10 +143,12 @@ class Productviewset(viewsets.ViewSet):
                 return response
             
             queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
+            queryset , numberProduct = data_processing.handleRawQuery(queryset)
+
             serializer = ProductSerializer(queryset,many=True)
             
             querysetCategory = Category.objects.raw(rawQuerySqlSearchCategory)
-            serializerCategory = CategoryWithNumberProductSerializer(querysetCategory,many = True)
+            serializerCategory = CategoryWithNumberProductSerializer(queryset,many = True)
             response.data = { 
                 'products' : serializer.data  , 'number_product_in_category' : serializerCategory.data ,
                 'error' : { 'value' : None , 'type' : None }, 'status' : status.HTTP_200_OK
@@ -176,7 +178,6 @@ class Productviewset(viewsets.ViewSet):
             handleRawQuerySqlCategory = HandleProductCategory(rawQuerySqlSearchCategory)  
             handleRawQuerySqlCategory.searchProductWithKeyValue(key_search,4)
             rawQuerySqlSearchCategory = handleRawQuerySqlCategory.getQuery()
-            print('rawQuerySqlSearchCategory',rawQuerySqlSearchCategory)
         except:
             response.data =  { 
                 'success' : "search product with category failure"  , 'status' : status.HTTP_404_NOT_FOUND ,
@@ -195,6 +196,8 @@ class Productviewset(viewsets.ViewSet):
                 return response
             
             queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
+            queryset , numberProduct = data_processing.handleRawQuery(queryset)
+
             serializer = ProductSerializer(queryset,many=True)
             
             querysetCategory = Category.objects.raw(rawQuerySqlSearchCategory)
@@ -247,7 +250,6 @@ class Productviewset(viewsets.ViewSet):
                         handleRawQuerySql.addFilterWithKey('category',False,False,child.slug)
 
             rawQuerySql=handleRawQuerySql.getQuery()
-            print('rawQuerySql',rawQuerySql)
             category = Category.objects.get(slug = category_slug)
         except Exception as e:
             print(e)
@@ -261,11 +263,14 @@ class Productviewset(viewsets.ViewSet):
             # ----------------------------- check information ---------------------------- #
             queryset = Product.objects.raw(rawQuerySql,[category.tree_id,category.lft,category.rght])
             queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
+            queryset , numberProduct = data_processing.handleRawQuery(queryset)
+
             serializer = ProductSerializer(queryset,many=True)
             response.data = { 'products' : serializer.data  , 'error' : { 'value' : None , 'type' : None }, 'status' : status.HTTP_200_OK}
             response.status_code = status.HTTP_200_OK
             return response
-        except:
+        except Exception as e:
+            print(e)
             response.data = { 
                 'products' : "Information wrong"  , 'status' : status.HTTP_404_NOT_FOUND ,
                 'error' : { 'value' : "wrong information" , 'type' : "GPC-0002" }
@@ -299,6 +304,8 @@ class Productviewset(viewsets.ViewSet):
             else:
                 queryset = Product.objects.raw(rawQuerySqlProductSlug,[slug])
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
+                queryset , numberProduct = data_processing.handleRawQuery(queryset)
+
                 serializer = ProductDetailSerializer(queryset,many=True)
                 return Response({"products" : serializer.data })
                 
@@ -312,16 +319,19 @@ class Productviewset(viewsets.ViewSet):
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
             else:
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
+            queryset , numberProduct = data_processing.handleRawQuery(queryset)
         else:
             if slug:
                 if  ' ' in slug:
                     return Response({"products" : False , "error" : "slug_product Wrong"})
                 queryset = Product.objects.raw(rawQuerySqlProductSlug,[slug])
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
+                queryset , numberProduct = data_processing.handleRawQuery(queryset)
                 serializer = ProductDetailSerializer(queryset,many=True)
                 return Response({"products" : serializer.data })
             else:
                 queryset = Product.objects.raw(rawQuerySql,[user_get.id])
+                queryset , numberProduct = data_processing.handleRawQuery(queryset)
 
         serializer = ProductSerializer(queryset,many=True)
         return Response({"products" : serializer.data})
@@ -333,7 +343,7 @@ class Productviewset(viewsets.ViewSet):
         try:
             listSlugProduct = request.GET['list_slug_product']
             queryset = Product.objects.raw(rawQuerySql,[listSlugProduct])         
-
+            queryset , numberProduct = data_processing.handleRawQuery(queryset)
             serializer = ProductCheckoutSerializer(queryset,many=True)
             response.data = {
                'data' : serializer.data

@@ -20,7 +20,7 @@
 <script>
 import ImageSendComment from './../../components/blog/ImageSendComment.vue'
 import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel'
-
+import { URL_PATH_SERVER } from '../../common/constants'
 export default {
     name: 'ListMediaComment',
     props: {
@@ -39,6 +39,7 @@ export default {
     data() {
         return {
             data_src: [],
+            URL_PATH_SERVER : URL_PATH_SERVER ,
             settings: {
                 itemsToShow: 3,
                 snapAlign: 'center',
@@ -57,6 +58,7 @@ export default {
                     snapAlign: 'start',
                 },
             },
+
         }
     },
     computed: {
@@ -65,7 +67,7 @@ export default {
         let list_media = this.data_files.split(",")
         for (let index of list_media) {
             let media = index.split(":")
-            this.data_src.push({ src : "http://127.0.0.1:8000/" + media[0] ,
+            this.data_src.push({ src : URL_PATH_SERVER + '/' + media[0] ,
                                  type : parseInt(media[1])
          })
         }

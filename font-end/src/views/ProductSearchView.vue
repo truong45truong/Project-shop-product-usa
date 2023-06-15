@@ -29,6 +29,8 @@
   import ChangePassword from './../components/login/ChangePassword.vue'
   import NoticeMenu from './../components/other/NoticeMenu.vue'
   import { mapGetters } from 'vuex';
+  import {DOMAIN} from './../common/constants'
+
   export default {
     name: "ProductSearchView",
     async created() {
@@ -46,7 +48,7 @@
         }else {
           if(this.$router.currentRoute._value.query.nextCart == 'true'){
             this.$router.push({ name : 'sign-in' , query : {
-              nextPage : String(window.location.href).replace("http://127.0.0.1:8080/",'')
+              nextPage : String(window.location.href).replace(DOMAIN,'')
             }})
           }
       }

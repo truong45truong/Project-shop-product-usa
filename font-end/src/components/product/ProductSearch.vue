@@ -2,7 +2,7 @@
     <div class="d-flex flex-column align-items-center justify-content-between border  layout-product-search" @click="nextPageDetailProduct">
         <div class="row">
             <div class="col-6">
-                    <img class="img-product-item text-center" :src="'http://127.0.0.1:8000/' + `${photo}`" alt="name">
+                    <img class="img-product-item text-center" :src="URL_PATH_SERVER + '/' + `${photo}`" alt="name">
                 </div>
             <div class="col-6 d-flex flex-column align-items-center justify-content-center">
                 <div class="text-center">
@@ -19,7 +19,7 @@
 </template>
   
 <script>
-import { mapGetters } from 'vuex'
+import { URL_PATH_SERVER } from '../../common/constants';
 export default ({
     name: 'ProductSearch',
     props: {
@@ -31,7 +31,7 @@ export default ({
     },
 
     data: () => ({
-
+        URL_PATH_SERVER : URL_PATH_SERVER ,
     }),
 
     methods: {

@@ -28,6 +28,8 @@
   import NoticeMenu from './../components/other/NoticeMenu.vue'
   import CheckoutLayout from './../layout/main/CheckoutLayout.vue'
   import { mapGetters } from 'vuex'
+  import {DOMAIN} from './../common/constants'
+
   export default {
     name: "CheckoutView",
     async created() {
@@ -46,7 +48,7 @@
       if(this.$router.currentRoute._value.query.nextCart == 'true' 
       || this.$router.currentRoute._value.query.nextHeart == 'true'){
         this.$router.push({ name : 'sign-in' , query : {
-          nextPage : String(window.location.href).replace("http://127.0.0.1:8080/",'')
+          nextPage : String(window.location.href).replace(DOMAIN,'')
         }})
       }
     }

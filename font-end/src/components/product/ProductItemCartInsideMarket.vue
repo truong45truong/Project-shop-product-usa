@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-column align-items-center justify-content-center h-100 infor-item-box border border-2 w-100">
         <div class="h-100 d-flex flex-column align-items-center justify-content-center">
-            <img class="img-product-item text-center" :src="'http://127.0.0.1:8000/'+`${photo}`" alt="name">
+            <img class="img-product-item text-center" :src="URL_PATH_SERVER + '/'+`${photo}`" alt="name">
         </div>
         <div :class="[isShowDetail ? 'none-hover-border' : 'hover-border ']" @click="isShowProduct" @mouseover="isShowHoverPrice" @mouseleave="isNoneHoverPrice">
 
@@ -33,7 +33,7 @@
 </template>
   
 <script>
-
+import { URL_PATH_SERVER } from '../../common/constants';
 export default ({
     name: 'ProductItemCartInsideMarket',
     props: {
@@ -50,6 +50,7 @@ export default ({
         isShowDetail : false,
         isHoverPrice : false,
         status_heart : false,
+        URL_PATH_SERVER : URL_PATH_SERVER ,
     }),
     methods : {
         isShowProduct(){

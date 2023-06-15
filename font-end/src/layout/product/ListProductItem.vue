@@ -49,9 +49,9 @@
                         />
                 </div>
             </div>
-            <div class="row" >
+            <div v-if="listProductItem.length > 0" class="row" >
                 <Carousel v-if="!toMarket || isShowLoginStore == true" :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
-                    <Slide v-if="listProductItem.length > 0" v-for="index in arrayMarket" :key="index" :class="'mx-1 shawdo'">
+                    <Slide v-for="index in arrayMarket" :key="index" :class="'mx-1 shawdo'">
                         <product-item :slug="listProductItem[index].slug" :photo="listProductItem[index].data" :name="listProductItem[index].name" 
                         :sale='listProductItem[index].sale' :price="listProductItem[index].price" :status="listProductItem[index].status_heart" 
                         :hearts="listProductItem[index].count_heart"
@@ -79,6 +79,7 @@ import CartInsideMarketLayout from '../cart/CartInsideMarketLayout.vue'
 import ProductItemCartInsideMarket from '../../components/product/ProductItemCartInsideMarket.vue'
 import 'vue3-carousel/dist/carousel.css'
 import 'vue3-carousel/dist/carousel.js'
+import { URL_PATH_SERVER , DOMAIN} from '../../common/constants'
 export default ({
     name: 'ListProductItemFlashSale',
     components: {
@@ -102,6 +103,7 @@ export default ({
 	},
     data: () => ({
         listProductItem : [],
+        URL_PATH_SERVER : URL_PATH_SERVER ,
         toMarket : false ,
         isInforUser : false,
         inforUser : false,
@@ -134,7 +136,7 @@ export default ({
     methods: {
         loginMarket(){
             this.$router.push({ name : 'sign-in' , query : {
-            nextPage : String(window.location.href).replace("http://127.0.0.1:8080/",'')
+            nextPage : String(window.location.href).replace(DOMAIN,'')
             }})
         },
         toTheMaket(){
@@ -171,7 +173,7 @@ export default ({
             if( this.inforUser == false){
                 await actionUser.getInforUser().then(async (response) => {
                     this.inforUser = {
-                        photo : 'http://127.0.0.1:8000' + response.user.photo,
+                        photo : URL_PATH_SERVER  + response.user.photo,
                         address : response.user.address,
                         phones : response.user.phones,
                         name : response.user.name,
@@ -191,10 +193,10 @@ export default ({
     },
     async created(){
         await ProductApiService.get().then(res => {
-            console.log(res)
+            console.log('array_market',res)
             this.listProductItem = Array.from(res.data.products)
             for( let i = 0 ; i < 7 ; i++){
-                this.arrayMarket.push(Math.floor(Math.random() * 11));
+                this.arrayMarket.push(Math.floor(Math.random() * 1));
             }
         })
     },

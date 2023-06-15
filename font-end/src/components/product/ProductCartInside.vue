@@ -1,6 +1,6 @@
 <template>
     <div v-if="isDelete == false" class="d-flex flex-row align-items-center w-100 row">
-        <div class="col-sm-4 col-6 col-infor-item text-center"><img class="img-cart-market" :src="'http://127.0.0.1:8000/'+`${photo_product}`" alt=""></div>
+        <div class="col-sm-4 col-6 col-infor-item text-center"><img class="img-cart-market" :src="URL_PATH_SERVER + '/'+`${photo_product}`" alt=""></div>
         <div class="col-lg-6 col-6 col-infor-item name-product-cart d-flex flex-column align-items-center text-center">
             <span class="text-name-product-cart"> {{product_name}}</span>
             <div class="text-price-product-cart"> <b>{{price_total}} vnđ</b> </div>
@@ -16,8 +16,7 @@
 </template>
   
 <script>
-import SlideImageProduct from './../other/SlideImageProduct.vue'
-
+import { URL_PATH_SERVER } from '../../common/constants'
 export default ({
     name: 'ProductCartInside',
     props: {
@@ -37,6 +36,7 @@ export default ({
         isDelete: false,
         numberQuantity: 1,
         price_total : 0,
+        URL_PATH_SERVER : URL_PATH_SERVER ,
     }),
     
     methods: {

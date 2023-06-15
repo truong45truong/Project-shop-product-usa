@@ -156,6 +156,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import { actionUser } from '../../common/user.service'
 import { OrderAction } from '../../common/order.service'
+
 export default ({
     name: 'InforUserLayout',
     props: {

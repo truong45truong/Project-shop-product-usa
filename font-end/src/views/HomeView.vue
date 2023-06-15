@@ -39,6 +39,7 @@ import NoticeMenu from './../components/other/NoticeMenu.vue'
 import ChatBoxLayout from './../layout/chatbox/ChatBoxLayout.vue'
 import { mapGetters} from 'vuex'
 import {useRoute} from 'vue-router'
+import {DOMAIN} from './../common/constants'
 
 
 export default {
@@ -63,7 +64,7 @@ export default {
       if(this.$router.currentRoute._value.query.nextCart == 'true'){
         console.log("this.$router",this.route.query)
         this.$router.push({ name : 'sign-in' , query : {
-          nextPage : String(window.location.href).replace("http://127.0.0.1:8080/",'')
+          nextPage : String(window.location.href).replace(DOAMIN,'')
         }})
       }
     }

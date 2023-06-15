@@ -4,7 +4,7 @@
             <div class="d-flex container-comment">
                 <div class="d-flex flex-column layout-avatar">
                     <img v-if="index.user_profile != null" class="img-author-comment" 
-                        :src="'http://127.0.0.1:8000/' + `${index.user_profile}`"
+                        :src="URL_PATH_SERVER + '/' + `${index.user_profile}`"
                         alt="Resized Image" 
                     />
                     <img v-if="index.user_profile == null" class="img-author-comment" 
@@ -79,7 +79,7 @@
             <div class="bg-white mt-2" id="comment-user-blog">
                 <div class="d-flex  w-100">
                     <div class="d-flex">
-                        <img v-if="authenticated" class="img-author-comment" :src="'http://127.0.0.1:8000/' + `${getProfilePhoto}`" alt="Resized Image" />
+                        <img v-if="authenticated" class="img-author-comment" :src="URL_PATH_SERVER + '/' + `${getProfilePhoto}`" alt="Resized Image" />
                     </div>
                     <div class="content-comment w-100">
                         <div v-if="userOfCommentSelected != false" class="d-flex align-items-center justify-content-between mb-1">
@@ -198,6 +198,7 @@ import ImageSendComment from './../../components/blog/ImageSendComment.vue'
 import OptionExpandComment from './../../components/blog/OptionExpandComment.vue'
 import EditComment from './../../components/blog/EditComment.vue'
 import ListMediaComment from './ListMediaComment.vue'
+import { URL_PATH_SERVER } from '../../common/constants'
 export default {
     name: 'ListComment',
     props: {
@@ -230,6 +231,7 @@ export default {
             isOptionExpand: false,
             isEditComment: false,
             fileUpload: [],
+            URL_PATH_SERVER : URL_PATH_SERVER ,
             inforCustomer : {
                 sex : null,
                 phoneNumber : '',
@@ -529,7 +531,7 @@ export default {
                     let img_div_flex_2 = document.createElement("img")
                     img_div_flex_2.setAttribute('class', 'img-author-comment')
                     if(index.user_profile != null) {
-                        img_div_flex_2.setAttribute('src', "http://127.0.0.1:8000/" + index.user_profile)
+                        img_div_flex_2.setAttribute('src', URL_PATH_SERVER + '/' + index.user_profile)
 
                     }else {
                         img_div_flex_2.setAttribute('src', "/src/assets/images/user.png")
@@ -948,7 +950,7 @@ export default {
         }
     },
     created() {
-        this.profilePhoto = "http://127.0.0.1:8000" + this.getProfilePhoto
+        this.profilePhoto = URL_PATH_SERVER  + this.getProfilePhoto
         this.comments = this.listComments
     },
     mounted(){

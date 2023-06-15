@@ -43,7 +43,7 @@
                         <Slide v-for="slide in get_is_order_selected_product.data" :key="slide">
                             <div class="carousel__item">
                                 <img class="slide-selected-product"
-                                    :src="'http://127.0.0.1:8000/' + `${slide.photo_product}`" alt="">
+                                    :src="URL_PATH_SERVER + '/' + `${slide.photo_product}`" alt="">
                             </div>
                         </Slide>
 
@@ -70,6 +70,7 @@ import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel'
 import { mapGetters, mapActions } from 'vuex'
 import ProductOrder from './../product/ProductOrder.vue'
 import OrderSelectedProductExpand from './OrderSelectedProductExpand.vue'
+import { URL_PATH_SERVER } from '../../common/constants'
 export default ({
     name: 'OrderSelectedProduct',
     props: {

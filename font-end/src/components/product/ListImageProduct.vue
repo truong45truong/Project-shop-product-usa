@@ -2,7 +2,7 @@
     <Carousel :settings="settings" :breakpoints="breakpoints">
         <Slide v-for="slide in dataImage" :key="slide">
             <div class="carousel__item">
-                <img class="slide-dp-image" :src="'http://127.0.0.1:8000/' + `${slide}`" alt="">
+                <img class="slide-dp-image" :src="URL_PATH_SERVER + '/' + `${slide}`" alt="">
             </div>
         </Slide>
     
@@ -15,6 +15,7 @@
     
 <script>
 import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel'
+import { URL_PATH_SERVER } from '../../common/constants';
 export default ({
     name: 'ListImageProduct',
     props: {
@@ -31,6 +32,7 @@ export default ({
             itemsToShow: 2,
             snapAlign: 'center',
         },
+        URL_PATH_SERVER : URL_PATH_SERVER ,
 
         breakpoints: {
             400: {

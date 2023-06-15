@@ -6,7 +6,7 @@
             <font-awesome-icon v-if="status_heart" class="my-2 icon-heart" icon="fa-solid fa-heart" @click="postHeart" />
         </div>
         <div class="h-100 d-flex flex-column align-items-center justify-content-center">
-            <img class="img-product-item text-center" :src="'http://127.0.0.1:8000/'+`${photo}`" alt="name">
+            <img class="img-product-item text-center" :src="URL_PATH_SERVER + '/'+`${photo}`" alt="name">
         </div>
         <div v-if="sale > 0" class="d-flex flex-column sale-product-category" :class="[isShowDetail ? 'ribbon-sale-hide' : 'ribbon-sale' ]">
             <div class="content-sale">
@@ -48,9 +48,9 @@
 </template>
   
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import {ProductAction} from './../../common/product.service'
-import { useRoute } from 'vue-router';
+import { URL_PATH_SERVER } from '../../common/constants';
 export default ({
     name: 'ProductItem',
     props: {
@@ -72,6 +72,7 @@ export default ({
         numberHeart : false ,
         price_total : 0,
         linkDetailProduct: '',
+        URL_PATH_SERVER : URL_PATH_SERVER
     }),
     filters: {
       formatNumber(price) {

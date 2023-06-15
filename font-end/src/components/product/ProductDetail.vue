@@ -10,7 +10,7 @@
         </div>
         <div class="row shadow position-relative">
             <div class="col-sm-4 position-relative">
-                <img class="img-detail-product" :src="'http://127.0.0.1:8000/' + `${imgs[0]}`" alt="">
+                <img class="img-detail-product" :src="URL_PATH_SERVER + '/' + `${imgs[0]}`" alt="">
                 <div v-if="data.sale > 0" class="promoribon"><br>
                   <img class="img-sale" src="./../../assets/images/sale-product-detail.png" alt="">
                   <p class="text-white m-0">Sale</p>
@@ -105,6 +105,7 @@ import ListComment from './../../layout/blog/ListComment.vue'
 import ListBlog from './../../layout/blog/ListBlog.vue'
 import lzwCompress from 'lzwcompress';
 import ListImageProduct from './ListImageProduct.vue'
+import { URL_PATH_SERVER } from '../../common/constants';
 export default {
     name: "DetailProduct",
     setup() {
@@ -136,7 +137,8 @@ export default {
         checkShowMoreDescribe : false,
         showMoreDescribe : false,
         price_total : 0,
-        imgs : ''
+        imgs : '',
+        URL_PATH_SERVER : URL_PATH_SERVER ,
     }),
     async created() {
       await ProductApiService.get({

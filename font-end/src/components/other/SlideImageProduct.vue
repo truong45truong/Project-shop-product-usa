@@ -1,12 +1,13 @@
 <template>
      <div class="h-100 d-flex align-items-center justify-content-center layout-img-product shadow col-4 position-relative" >
-            <img v-for=" i in [1,2,3]" class="product-cart-img text-center" :src="'http://127.0.0.1:8000/' + `${photos}`" alt="name" @click="showDetail">
+            <img v-for=" i in [1,2,3]" class="product-cart-img text-center" :src="URL_PATH_SERVER + '/' + `${photos}`" alt="name" @click="showDetail">
             <!-- <font-awesome-icon class="icon-prev-slide" icon="fa-solid fa-circle-chevron-left" />
             <font-awesome-icon class="icon-next-slide" icon="fa-solid fa-circle-chevron-right" /> -->
     </div>
 </template>
   
 <script>
+import { URL_PATH_SERVER } from '../../common/constants'
 export default ({
     name: 'SlideImageProduct',
     props : {

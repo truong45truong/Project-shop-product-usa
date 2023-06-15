@@ -14,7 +14,7 @@
           </p>
         </div>
       </div>
-      <img class="img-product-category text-center" :src="'http://127.0.0.1:8000/' + `${photo}`" alt="name">
+      <img class="img-product-category text-center" :src="URL_PATH_SERVER + '/' + `${photo}`" alt="name">
       <div class="row">
         <div class="name-product-category">
                   <p class="text-dark mx-2 mb-3">
@@ -67,6 +67,7 @@
   
 <script>
 import { mapGetters } from 'vuex'
+import { URL_PATH_SERVER } from '../../common/constants';
 export default ({
     name: 'ProductCategory',
     props: {
@@ -86,6 +87,7 @@ export default ({
     data: () => ({
       price_total : 0,
       price_product : 0,
+      URL_PATH_SERVER : URL_PATH_SERVER ,
     }),
     computed: {
 		...mapGetters('auth', {

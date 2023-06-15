@@ -60,6 +60,7 @@
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
 import ListComment from './../../layout/blog/ListComment.vue'
 import {blogAction} from './../../common/blog.service'
+import { URL_PATH_SERVER } from './../../common/constants'
 export default {
     name: 'BlogItem',
     props: {
@@ -121,7 +122,7 @@ export default {
         let list_photo = this.photo_blogs.split(",")
         for (let index of list_photo) {
             let media = index.split(":")
-            this.data_src.push({ src : "http://127.0.0.1:8000/" + media[0] ,
+            this.data_src.push({ src : URL_PATH_SERVER + '/' + media[0] ,
                                  type : parseInt(media[1])
          })
         }

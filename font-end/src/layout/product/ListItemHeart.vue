@@ -32,7 +32,7 @@
                     <div v-for="item in dataItem" class="mt-0 shadow my-2 bg-list">
                         <div class="d-flex flex-row align-items-center">
                             <div class="col-item-list-heart text-center"><img class="img-cart-market"
-                                    :src="'http://127.0.0.1:8000/' + `${item.photo_products__data}`" alt=""></div>
+                                    :src="URL_PATH_SERVER + '/' + `${item.photo_products__data}`" alt=""></div>
                             <div
                                 class="col-item-list-heart  name-product-cart d-flex flex-column align-items-center text-center">
                                 <span class="text-name-product-cart"> {{ item.name }}</span>
@@ -41,7 +41,7 @@
                                         {{ item.prices__sale }}%</b> </div>
                             </div>
                             <div class="col-item-list-heart d-flex justify-content-around">
-                                <a class="btn btn-warning"  :href="'http://127.0.0.1:8080/product/' + item.slug">Chi tiết</a>
+                                <a class="btn btn-warning"  :href="URL_PATH_SERVER + '/' + item.slug">Chi tiết</a>
                             </div>
                             <div class="col-item-list-heart d-flex justify-content-center">
                                 <div class="ms-2 d-flex align-items-center btn-unheart-item"
@@ -79,6 +79,7 @@
 import { ProductAction } from '../../common/product.service'
 import { mapGetters, mapActions } from 'vuex'
 import ProductItemHeart from '../../components/product/ProductItemHeart.vue'
+import { URL_PATH_SERVER } from '../../common/constants';
 export default {
     name: "ListItemHeart",
     props: {
@@ -91,7 +92,8 @@ export default {
         dataItem: false,
         isShowGrid: true,
         isShowList: false,
-        checkReponsive : false
+        checkReponsive : false,
+        URL_PATH_SERVER : URL_PATH_SERVER ,
     }),
     components: {
         ProductItemHeart,

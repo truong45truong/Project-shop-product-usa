@@ -19,6 +19,7 @@
   import {actionNew} from '../../common/new.service'
   import banner1 from '@/assets/images/banner-1-1.jpg';
   import banner2 from '@/assets/images/banner-1-1.jpg';
+  import { URL_PATH_SERVER } from '../../common/constants';
   import 'vue3-carousel/dist/carousel.css'
     import 'vue3-carousel/dist/carousel.js'
   export default defineComponent({
@@ -39,6 +40,7 @@
         itemsToShow: 3,
         snapAlign: 'center',
       },
+      URL_PATH_SERVER : URL_PATH_SERVER ,
       // breakpoints are mobile first
       // any settings not specified will fallback to the carousel settings
       breakpoints: {
@@ -62,7 +64,7 @@
       await actionNew.get_new().then(res => {
         let array =[]
         for (let slide of res.data){
-          array.push({src : 'http://127.0.0.1:8000' + slide.photo_news[0].data})
+          array.push({src : URL_PATH_SERVER + slide.photo_news[0].data})
         }
         this.slides = array
       })

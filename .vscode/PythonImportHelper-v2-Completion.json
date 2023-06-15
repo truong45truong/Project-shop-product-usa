@@ -2341,6 +2341,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -4147,7 +4163,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True",
+        "peekOfCode": "ROOT_URLCONF = 'backend.urls'\nCORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info',\n]\nSESSION_COOKIE_SECURE = True",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -4156,7 +4172,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"",
+        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info',\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -4165,7 +4181,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [",
+        "peekOfCode": "CORS_EXPOSE_HEADERS = [\"Content-Type\", \"X-CSRFToken\"]\nCORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info',\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -4174,7 +4190,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info'\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
+        "peekOfCode": "CORS_ALLOWED_ORIGINS = [\n    \"http://localhost:5173\",\n    'http://127.0.0.1:8080',\n    'http://127.0.0.1:3000',\n    'https://katieshopus.info',\n]\nSESSION_COOKIE_SECURE = True\nSESSION_COOKIE_SAMESITE = \"None\"\nTEMPLATES = [\n    {",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -5592,6 +5608,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.login.migrations.0011_alter_user_level",
+        "description": "backend.login.migrations.0011_alter_user_level",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('login', '0010_user_level'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='user',\n            name='level',\n            field=models.IntegerField(null=True),\n        ),",
+        "detail": "backend.login.migrations.0011_alter_user_level",
+        "documentation": {}
+    },
+    {
         "label": "UserAdmin",
         "kind": 6,
         "importPath": "backend.login.admin",
@@ -6057,6 +6082,15 @@
         "description": "backend.order.models",
         "peekOfCode": "class DetailOrder(models.Model):\n    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)\n    status = models.BooleanField()\n    quantity = models.IntegerField()\n    order_id = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True,related_name='detail_orders')\n    product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)",
         "detail": "backend.order.models",
+        "documentation": {}
+    },
+    {
+        "label": "handleRawQuery",
+        "kind": 2,
+        "importPath": "backend.product.api.data_processing",
+        "description": "backend.product.api.data_processing",
+        "peekOfCode": "def handleRawQuery(queryset):\n    product_dict = dict()\n    for i in queryset:\n        if i['id'] not in product_dict:\n            product_dict[i['id']] = {\n                'data' : i['data'] ,\n                'status_heart' : i['status_heart'],\n                'description' : i['description'],\n                'price' : i['price'],\n                'slug' : i['slug'],",
+        "detail": "backend.product.api.data_processing",
         "documentation": {}
     },
     {
