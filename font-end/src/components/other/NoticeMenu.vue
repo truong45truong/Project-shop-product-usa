@@ -34,7 +34,7 @@ export default ({
             
         }
     },
-    mounted(){
+    async mounted(){
         return new Promise((resolve) => {
             const checkValue = () => {
                 if (this.get_activate === false) {

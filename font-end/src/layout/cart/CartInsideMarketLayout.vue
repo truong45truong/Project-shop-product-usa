@@ -132,6 +132,28 @@ export default ({
         phoneSelected : false
     }),
     methods: {
+        async buyProduct(){
+          localStorage.setItem("history_page", window.location.href);
+          await OrderAction.createOrderWaitingBePaid({
+              params : {
+                  phone_id : false,
+                  address_id : false,
+                  transport_id : false,
+                  voucher_id : false,
+                  products : [{
+                    slug : this.data.slug ,
+                    quantity: 1
+                  }]
+              }
+          }).then(res => {
+              console.log("name order",res)
+              this.$router.push({
+                  name : 'checkout' , query : {
+                      name : res.name_order
+                  }
+              })
+          })
+          },
         showListItem(){
             this.isShowListItem = true;
             this.isShowGridItem = false

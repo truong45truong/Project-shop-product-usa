@@ -51,6 +51,7 @@
 import { mapGetters } from 'vuex'
 import {ProductAction} from './../../common/product.service'
 import { URL_PATH_SERVER } from '../../common/constants';
+import {ActionHistory} from './../../common/historyAction.service'
 export default ({
     name: 'ProductItem',
     props: {
@@ -89,7 +90,13 @@ export default ({
     methods : {
 
         nextPageDetailProduct(){
+            ActionHistory.updateActionHistory({
+                params : {
+                    products_selected : [this.slug]
+                }
+            })
             this.$router.push('/product/'+ this.slug)
+            
         },
         isShowProduct(){
             this.isShowDetail = !this.isShowDetail

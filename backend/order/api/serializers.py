@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer,SerializerMethodField,ListSerializer,UUIDField
-from order.models import Order, Transport , DetailOrder
+from order.models import Order, Transport , DetailOrder , Payment
 from rest_framework import serializers
     
 class TransportSerializer(serializers.Serializer):
@@ -55,3 +55,8 @@ class DetailOrderModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = DetailOrder
         fields = "__all__"
+class PaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Payment
+        fields = ['total_price' , 'cod' , 'created_at']
+        

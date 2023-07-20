@@ -150,9 +150,9 @@
                     <div v-if="get_is_order_selected_product.numberProduct > 0" class="total-price-layout text-center py-1 ms-2 mt-2">
                         {{ get_is_order_selected_product.totalPrice  +  get_is_order_selected_product.transport.price }} <span>vnđ</span>
                     </div>
-                    <button v-if="get_is_order_selected_product.numberProduct > 0" class="button-57 ms-2 mt-3" role="button"><span class="text">Mua Ngay</span><span>Click để
-                            chuyển
-                            trang</span>
+                    <button v-if="get_is_order_selected_product.numberProduct > 0" class="button-57 ms-2 mt-3" role="button" @click="buyProduct">
+                        <span class="text">Mua Ngay</span>
+                        <span>Click để chuyển trang</span>
                     </button>
                 </div>
             </div>
@@ -167,6 +167,7 @@ import  { ApiService } from './../../common/api.service'
 import { mapGetters, mapActions } from 'vuex'
 import { actionUser } from './../../common/user.service'
 import ProductOrder from './../product/ProductOrder.vue'
+import {OrderAction} from './../../common/order.service'
 export default ({
     name: 'OrderSelectedProductExpand',
     props: {
@@ -202,6 +203,36 @@ export default ({
         }),
     },
     methods: {
+        async buyProduct(){
+            console.log(this.get_is_order_selected_product)
+            let listProductSLugSelected = []
+            for (let productSelected of this.get_is_order_selected_product.data){
+                listProductSLugSelected.push({
+                    slug : productSelected.product_slug ,
+                    quantity : productSelected.product_quantity
+                })
+            }
+            var voucher_id = false
+            if (this.get_is_order_selected_product.voucher != false){
+                voucher_id = get_is_order_selected_product.voucher.voucher.id
+            }
+            await OrderAction.createOrderWaitingBePaid({
+                params : {
+                    phone_id : this.get_is_order_selected_product.address.phone.id,
+                    address_id : this.get_is_order_selected_product.address.address.id,
+                    transport_id : this.get_is_order_selected_product.transport.id,
+                    voucher_id : voucher_id,
+                    products : listProductSLugSelected
+                }
+            }).then(res => {
+                this.$router.push({
+                    name : 'checkout' , query : {
+                        name : res.name_order
+                    }
+                })
+            })
+
+        },
         async loadData(type) {
             switch (type) {
                 case 1:

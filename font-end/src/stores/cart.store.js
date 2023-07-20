@@ -39,6 +39,7 @@ export const cart = {
                   token_permission_infor_user: localStorage.getItem('token_permission_infor_user')
                 }
               }).then(res => {
+                console.log("order cart",res)
                 commit('getDataSuccess',{data : Array.from(res.success) , numberProduct : res.number_product , isOrderToday : res.check_order_today})
               }).catch(error => {
                 console.log("ERROR GET DATAT" , error)

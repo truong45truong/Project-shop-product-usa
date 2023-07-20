@@ -10,7 +10,16 @@
     </div>
     <banner-home />
     <list-product-item-flash-sale ref="list_product_item_flash_sal" class=" mb-5" />
-    <list-product-item ref="list_product_item" />
+    <list-product-item ref="list_product_item mb-5" />
+    <div class="container list-product-layout flash-sale-top mt-5 p-5">
+      <div class="row p-5 bg-dark">
+        <div class="d-flex align-items-center">
+          <font-awesome-icon icon="fa-solid fa-bag-shopping" class="text-white icon-recommend" />
+          <h5 class="text-white m-0 mx-3"> <b>Dành cho bạn </b></h5>
+        </div>
+      </div>
+      <product-recommend />
+    </div>
     <list-item-heart v-if="isShowListHeart" class="h-100" @hideListItemHeart="activeShowListHeart" @removeProductHeart="fromHomeViewChangeStatutsHeart"
     :isShowComponent="isShowListHeart"
     />
@@ -40,7 +49,7 @@ import ChatBoxLayout from './../layout/chatbox/ChatBoxLayout.vue'
 import { mapGetters} from 'vuex'
 import {useRoute} from 'vue-router'
 import {DOMAIN} from './../common/constants'
-
+import ProductRecommend from './../layout/product/ProductRecommend.vue'
 
 export default {
   name: "HomeView",
@@ -85,7 +94,8 @@ export default {
     ShoppingCartLayout,
     ChangePassword,
     NoticeMenu,
-    ChatBoxLayout
+    ChatBoxLayout,
+    ProductRecommend
   },
   computed: {
     ...mapGetters('notice', {
@@ -158,5 +168,8 @@ export default {
 .over-bg-login  {
   background-color: rgba(0, 0, 0,0.4);
   z-index: 999;
+}
+.icon-recommend {
+  font-size: 24px;
 }
 </style>

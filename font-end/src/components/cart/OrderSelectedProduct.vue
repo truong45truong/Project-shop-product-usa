@@ -28,7 +28,7 @@
                             <div class="total-price-layout text-center py-1 ms-2">
                                 {{ get_is_order_selected_product.totalPrice }} <span>vnđ</span>
                             </div>
-                            <button class="button-5 my-2 mx-2">
+                            <button class="button-5 my-2 mx-2" @click="buyProduct">
                                 Mua Ngay
                             </button>
                         </div>
@@ -71,6 +71,7 @@ import { mapGetters, mapActions } from 'vuex'
 import ProductOrder from './../product/ProductOrder.vue'
 import OrderSelectedProductExpand from './OrderSelectedProductExpand.vue'
 import { URL_PATH_SERVER } from '../../common/constants'
+import {OrderAction} from './../../common/order.service'
 export default ({
     name: 'OrderSelectedProduct',
     props: {
@@ -125,6 +126,37 @@ export default ({
         }),
     },
     methods: {
+        async buyProduct(){
+            let listProductSLugSelected = []
+            for (let productSelected of this.get_is_order_selected_product.data){
+                listProductSLugSelected.push({
+                    slug : productSelected.product_slug ,
+                    quantity : productSelected.product_quantity
+                })
+            }
+            console.log('listProductSLugSelected',listProductSLugSelected)
+            var voucher_id = false
+            if (this.get_is_order_selected_product.voucher != false){
+                voucher_id = this.get_is_order_selected_product.voucher.voucher.id
+            }
+            await OrderAction.createOrderWaitingBePaid({
+                params : {
+                    phone_id : this.get_is_order_selected_product.address.phone.id,
+                    address_id : this.get_is_order_selected_product.address.address.id,
+                    transport_id : this.get_is_order_selected_product.transport.id,
+                    voucher_id : voucher_id,
+                    products : listProductSLugSelected
+                }
+            }).then(res => {
+                console.log("name order",res)
+                this.$router.push({
+                    name : 'checkout' , query : {
+                        name : res.name_order
+                    }
+                })
+            })
+
+        },
         showDetailTotalSelectedProduct() {
             this.isShowDetailTotalSelectProduct = !this.isShowDetailTotalSelectProduct
         },

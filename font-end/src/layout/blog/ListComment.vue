@@ -883,7 +883,6 @@ export default {
         },
         removeFileUpload(index){
             this.fileUpload.splice(index, 1)
-            console.log('this.fileUpload',index)
         },
         setPositionMedia(cmt){
             let cmt_main = document.getElementById(cmt)

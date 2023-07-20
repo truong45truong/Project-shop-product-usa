@@ -64,7 +64,7 @@
               </button>
             </div>
             <div class="col-sm-6 mt-3 d-flex flex-column">
-              <button class="button-48 m-auto" @click="nextCheckout">
+              <button class="button-48 m-auto" @click="buyProduct">
                 <span class="text"> Mua Ngay</span>
               </button>
             </div>
@@ -106,6 +106,7 @@ import ListBlog from './../../layout/blog/ListBlog.vue'
 import lzwCompress from 'lzwcompress';
 import ListImageProduct from './ListImageProduct.vue'
 import { URL_PATH_SERVER } from '../../common/constants';
+import {OrderAction} from './../../common/order.service'
 export default {
     name: "DetailProduct",
     setup() {
@@ -186,6 +187,29 @@ export default {
 		    }),
     },
     methods: {
+        async buyProduct(){
+          localStorage.setItem("history_page", window.location.href);
+          await OrderAction.createOrderWaitingBePaid({
+              params : {
+                  phone_id : false,
+                  address_id : false,
+                  transport_id : false,
+                  voucher_id : false,
+                  products : [{
+                    slug : this.data.slug ,
+                    quantity: 1
+                  }]
+              }
+          }).then(res => {
+              console.log("name order",res)
+              this.$router.push({
+                  name : 'checkout' , query : {
+                      name : res.name_order
+                  }
+              })
+          })
+
+      },
       showSelectedVoucher(){
         this.isShowSelectedVoucher = !this.isShowSelectedVoucher
       },

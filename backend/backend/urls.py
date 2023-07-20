@@ -24,6 +24,7 @@ from rest_framework_simplejwt.views import (
 from django.conf import settings
 urlpatterns = [
     path('',include('login.urls')),
+    path('api/',include('dashboard.urls')),
     path('admin/', admin.site.urls),
     path('api/',include('product.api.urls')),
     path('api/',include('login.api.urls')),
@@ -36,6 +37,7 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/',include('decryptRSA.urls')),
     path('api/',include('blog_product.api.urls')),
+    path('',include('historyAction.urls'))
     
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

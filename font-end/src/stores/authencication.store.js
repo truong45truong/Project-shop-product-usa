@@ -1,9 +1,6 @@
 import { actionUser } from "../common/user.service";
-import { actionJWT } from "../common/jwt.service";
 import { ApiService } from "./../common/api.service";
-import { Buffer } from "buffer";
 import { Crypto } from "./../security";
-import { decryptRsaApiService } from "./../common/decrypt.rsa.service";
 
 const user = localStorage.getItem("user");
 const photo = localStorage.getItem("userProfile");

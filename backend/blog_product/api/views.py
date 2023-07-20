@@ -453,15 +453,16 @@ def get_comment_child(request):
 @permission_classes([])
 @authentication_classes([])
 def get_comment_product(request):
+    start_limit = request.GET['start_limit']
+    end_limit = request.GET['end_limit']
     try:
         jwtToken = request.COOKIES.get('refresh_token')
         refresh_token = RefreshToken(jwtToken)
         decoded_token = refresh_token.payload
-        start_limit = request.GET['start_limit']
-        end_limit = request.GET['end_limit']
         user_get = User.objects.get(id = decoded_token['user_id'])
         rawSql =  query_raw.QUERY_GET_COMMENT_PRODUCT_WITH_USER
-    except:
+        print('start_limit',start_limit)
+    except :
         user_get = False
         rawSql = query_raw.QUERY_GET_COMMENT_PRODUCT_NOT_USER
     response = Response()

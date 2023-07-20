@@ -13,6 +13,9 @@ export default ({
     props : {
         photos : '',
     },
+    data : () => ({
+        URL_PATH_SERVER : URL_PATH_SERVER
+    }),
     computed: {
         
 	},

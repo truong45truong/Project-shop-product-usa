@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import viewsets
 from rest_framework import status
-
+from .method_orthers import handleDecodeFile,removeImage
 from login.models import User,PhoneUser,Address
 
 import json
@@ -50,6 +50,82 @@ class InforUserViewSet (viewsets.ModelViewSet):
             response.data = { 
                 'user' : "Information wrong"  , 'status' : status.HTTP_404_NOT_FOUND ,
                 'error' : { 'value' : "wrong user" , 'type' : "GIU-0002" }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+    @action(methods = ["POST"], detail = False, url_path = "upload_photo", url_name = "upload_photo")
+    def upload_photo(self,request,*args, **kwargs):
+        try:
+            data_request= json.loads(request.body.decode('utf-8'))
+            # ---------------------------- check params input ---------------------------- #
+            jwtToken = request.COOKIES.get('refresh_token')
+            # decrypt token jwt
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            response = Response()
+        except:
+            response.data =  { 
+                'success' : "get infor user failure"  , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : "Params input wrong" , 'type' : "GIU-0001" }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        
+        try: 
+            # ----------------------------- check information ---------------------------- #
+            user_current = User.objects.get(id = decoded_token['user_id'])
+            if user_current.photo:
+                if removeImage(str(user_current.photo)) == False:
+                    response.data = { 
+                        'user' : "Information wrong"  , 'status' : status.HTTP_404_NOT_FOUND ,
+                        'error' : { 'value' : "wrong user" , 'type' : "GIU-0002" }
+                    }
+                    response.status_code = status.HTTP_404_NOT_FOUND
+                    return response
+            file_decode = handleDecodeFile(data_request['params']['file']['data'])
+            user_current.photo = file_decode['file']
+            user_current.save()
+            response.data = { 'photo' : file_decode['file']  , 'error' : { 'value' : None , 'type' : None }, 'status' : status.HTTP_200_OK}
+            response.status_code = status.HTTP_200_OK
+            return response
+        except:
+            response.data = { 
+                'user' : "Information wrong"  , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : "wrong user" , 'type' : "GIU-0002" }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+    @action(methods = ["POST"], detail = False, url_path = "upload_information", url_name = "upload_information")
+    def upload_information(self,request,*args, **kwargs):
+        try:
+            data_request= json.loads(request.body.decode('utf-8'))
+            # ---------------------------- check params input ---------------------------- #
+            jwtToken = request.COOKIES.get('refresh_token')
+            # decrypt token jwt
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            response = Response()
+        except:
+            response.data =  { 
+                'success' : "update info user failure"  , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : "Params input wrong" , 'type' : "UIU-0001" }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        
+        try: 
+            # ----------------------------- check information ---------------------------- #
+            user_current = User.objects.get(id = decoded_token['user_id'])
+            user_current.name =  data_request['params']['name']
+            user_current.email =  data_request['params']['email']
+            user_current.save()
+            response.data = { 'error' : { 'value' : None , 'type' : None }, 'status' : status.HTTP_200_OK}
+            response.status_code = status.HTTP_200_OK
+            return response
+        except:
+            response.data = { 
+                'success' : "update info user failure" , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : "wrong user" , 'type' : "UIU-0002" }
             }
             response.status_code = status.HTTP_404_NOT_FOUND
             return response
@@ -136,7 +212,45 @@ class PhoneUserViewSet(viewsets.ModelViewSet):
                 'error' : { 'value' : 'Information wrong' , 'type' : 'CPU-0002' }
             }, status.HTTP_404_NOT_FOUND)
 
-    
+    @action(method = ['POST'], detail = False , url_path='set_default_phone_user', url_name='set_default_phone_user')
+    def set_default_phone_user(self , request , *args, **kwargs):
+        try:
+            # ---------------------------- check params input ---------------------------- #
+            data_request= json.loads(request.body.decode('utf-8'))
+            phone_id = data_request['params']['phone_id']
+            # decryption token jwt
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+        except : 
+            return Response({ 
+                'phone' : 'set default phone wrong'  , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : 'Params input wrong' , 'type' : 'SDPU-0001' }
+            },status.HTTP_404_NOT_FOUND)
+        
+        try:
+            # ----------------------------- check information ---------------------------- #
+            user = User.objects.get(id=decoded_token['user_id'])
+            list_phone_status_true = PhoneUser.objects.filter(user_id = user)
+            for item in list_phone_status_true:
+                phone_status_true = PhoneUser.objects.get(id = item.id)
+                
+                if str(phone_status_true.id) == phone_id:
+                    phone_status_true.status = True
+                    print(phone_status_true.status,phone_status_true.id , phone_id)
+                else:
+                    phone_status_true.status = False
+                phone_status_true.save()
+            return Response({
+                'status' : status.HTTP_200_OK
+            }, status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response({ 
+                'phone' : 'set default phone wrong'  , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : 'Information wrong' , 'type' : 'SDPU-0002' }
+            }, status.HTTP_404_NOT_FOUND)
+
     # ---------------------------------------------------------------------------- #
     #                          METHOD DELETE PHONE OF USER                         #
     # ---------------------------------------------------------------------------- #
@@ -150,6 +264,7 @@ class PhoneUserViewSet(viewsets.ModelViewSet):
             jwtToken = request.COOKIES.get('refresh_token')
             refresh_token = RefreshToken(jwtToken)
             decoded_token = refresh_token.payload
+            print('phone_user_id',phone_user_id)
         except:
             return Response({ 
                 'phone' : 'Delete phone wrong'  , 'status' : status.HTTP_404_NOT_FOUND ,
@@ -290,6 +405,44 @@ class AddressUserViewset (viewsets.ModelViewSet):
             return Response({ 
                 'phone' : 'Create address wrong'  , 'status' : status.HTTP_404_NOT_FOUND ,
                 'error' : { 'value' : 'Information wrong' , 'type' : 'CAU-0002' }
+            }, status.HTTP_404_NOT_FOUND)
+    @action(method = ['POST'], detail = False , url_path='set_default_address_user', url_name='set_default_address_user')
+    def set_default_address_user(self , request , *args, **kwargs):
+        try:
+            # ---------------------------- check params input ---------------------------- #
+            data_request= json.loads(request.body.decode('utf-8'))
+            address_id = data_request['params']['address_id']
+            # decryption token jwt
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+        except : 
+            return Response({ 
+                'address' : 'set default address wrong'  , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : 'Params input wrong' , 'type' : 'SDAU-0001' }
+            },status.HTTP_404_NOT_FOUND)
+        
+        try:
+            # ----------------------------- check information ---------------------------- #
+            user = User.objects.get(id=decoded_token['user_id'])
+            list_address = Address.objects.filter(user_id = user)
+            for item in list_address:
+                address = Address.objects.get(id = item.id)
+                
+                if str(address.id) == address_id:
+                    address.status = True
+                    print(address.status,address.id , address_id)
+                else:
+                    address.status = False
+                address.save()
+            return Response({
+                'status' : status.HTTP_200_OK
+            }, status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            return Response({ 
+                'phone' : 'set default address wrong'  , 'status' : status.HTTP_404_NOT_FOUND ,
+                'error' : { 'value' : 'Information wrong' , 'type' : 'SDAU-0002' }
             }, status.HTTP_404_NOT_FOUND)
     
     # ---------------------------------------------------------------------------- #

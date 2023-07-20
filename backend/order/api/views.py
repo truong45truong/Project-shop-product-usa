@@ -1,18 +1,25 @@
-from .serializers import OrderHandleDataSerializer ,ProductSerializer ,TransportModelSerializer
+from .serializers import OrderHandleDataSerializer ,ProductSerializer ,TransportModelSerializer , OrderSerializer , PaymentSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import viewsets
 from rest_framework import status
-from order.models import Order , Transport , DetailOrder
+from order.models import Order , Transport , DetailOrder , Qrcode ,Payment
 from product.models import Product , Price ,Photo_product
 from login.models import User , Address , PhoneUser 
+from flashSaleProduct.models import Voucher , DetailVoucher
 from datetime import datetime
 from rest_framework_simplejwt.tokens import RefreshToken
 from uuid import uuid4
 import json
 from . import data_processing,raw_query
+import shutil
+from datetime import  timedelta
+import random
+import string
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+        return ''.join(random.choice(chars) for _ in range(size))
 
 # ---------------------------------------------------------------------------- #
 #                             GENERAL USAGE METHOD                             #
@@ -52,6 +59,88 @@ class OrderViewSet (viewsets.ModelViewSet):
     serializer_class = OrderHandleDataSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
+
+    # ---------------------------------------------------------------------------- #
+    #                           METHOD GET ORDER CHECKOUT                          #
+    # ---------------------------------------------------------------------------- #
+    @action(method=["GET"],detail=False,url_path="get_order_checkout",url_name="get_order_checkout")
+    def get_order_checkout(self, request,*args, **kwargs):
+        response = Response()
+        try:
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            nameOrder = request.GET['nameOrder']
+        except:
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Params wrong" , "type" : "GOC-0001"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        try:
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            queryRaw = raw_query.QUERY_SQL_GET_ALL_PRODUCT_ORDER_FOR_USER
+            queryset = Order.objects.raw(queryRaw , [nameOrder , curent_user.id ])
+            queryset,numberProduct = data_processing.handleRawQuery(queryset)
+            serializer = OrderHandleDataSerializer(queryset,many = True) 
+            response.data = {
+                "success" : serializer.data , "status" : status.HTTP_200_OK ,
+                "numberProduct" : numberProduct
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Infomation wrong" , "type" : "GOC-0002"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+    @action(method=["GET"],detail=False,url_path="get_product_order",url_name="get_product_order")
+    def get_product_order(self, request,*args, **kwargs):
+        response = Response()
+        try:
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            nameOrder = request.GET['nameOrder']
+        except:
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Params wrong" , "type" : "GOC-0001"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        try:
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            queryRaw = raw_query.QUERY_SQL_GET_ALL_PRODUCT_ORDER_INFOR
+            queryset = Order.objects.raw(queryRaw , [nameOrder , curent_user.id ])
+            queryset,numberProduct = data_processing.handleRawQuery(queryset)
+            serializer = OrderHandleDataSerializer(queryset,many = True) 
+            response.data = {
+                "success" : serializer.data , "status" : status.HTTP_200_OK ,
+                "numberProduct" : numberProduct
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Infomation wrong" , "type" : "GOC-0002"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
     # ---------------------------------------------------------------------------- #
     #                               METHOD GET ORDER                               #
     # ---------------------------------------------------------------------------- #
@@ -78,6 +167,465 @@ class OrderViewSet (viewsets.ModelViewSet):
         else:
             return Response({"success":[], "number_product" : 0 , "check_order_today" : check_order_today})
     
+    # ---------------------------------------------------------------------------- #
+    #                         GET ALL ORDER BE WAITING PAID                        #
+    # ---------------------------------------------------------------------------- #
+
+    @action(method=["GET"],detail=False,url_path="get_all_order_be_waiting_paid_for_user",url_name="get_all_order_be_waiting_paid_for_user")
+    def get_all_order_be_waiting_paid_for_user(self, request,*args, **kwargs):
+        response = Response()
+        try:
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+        except:
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Params wrong" , "type" : "GAOBWFU-0001"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        try:
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            queryset = Order.objects.filter(is_payment = False , status = True , user_id = curent_user)
+            serializer = OrderSerializer(queryset , many = True)
+            response.data = {
+                "success" : serializer.data , "status" : status.HTTP_200_OK 
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Infomation wrong" , "type" : "GAOBWFU-0002"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+    @action(method=["GET"],detail=False,url_path="get_order_be_paymented_for_user",url_name="get_order_be_paymented_for_user")
+    def get_order_be_paymented_for_user(self, request,*args, **kwargs):
+        response = Response()
+        try:
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+
+        except:
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Params wrong" , "type" : "GAOBWFU-0001"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        try:
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            queryset = Order.objects.filter(
+                is_payment = True , status = True , 
+                user_id = curent_user 
+            )
+            # queryset_payment = Payment.objects.get(order_id =  queryset[0].id)
+            serializer = OrderSerializer(queryset , many = True)
+            # serializer_payment = PaymentSerializer(queryset_payment , many = False)
+            response.data = {
+                "success" : serializer.data , 
+                "status" : status.HTTP_200_OK 
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Infomation wrong" , "type" : "GAOBWFU-0002"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+    @action(method=["GET"],detail=False,url_path="get_info_order",url_name="get_info_order")
+    def get_info_order(self, request,*args, **kwargs):
+        response = Response()
+        try:
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            name_order = request.GET.get('name_order')
+        except:
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Params wrong" , "type" : "GAOBWFU-0001"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        try:
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            queryset = Order.objects.filter(
+                name = name_order , user_id = curent_user
+            )
+            isPayment = False
+            try:
+                queryset_payment = Payment.objects.get(order_id =  queryset[0].id)
+                serializer_payment = PaymentSerializer(queryset_payment , many = False)
+                isPayment = True
+            except:
+                pass
+            
+            serializer = OrderSerializer(queryset , many = True)
+            if isPayment:
+                response.data = {
+                    "order" : serializer.data , 
+                    'payment' : serializer_payment.data ,
+                    "status" : status.HTTP_200_OK 
+                }
+            else:
+                response.data = {
+                    "order" : serializer.data , 
+                    'payment' : False,
+                    "status" : status.HTTP_200_OK 
+                }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Infomation wrong" , "type" : "GAOBWFU-0002"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+    # ---------------------------------------------------------------------------- #
+    #                         CREATE ORDER WAITING BE PAID                         #
+    # ---------------------------------------------------------------------------- #
+
+    @action(method=["POST"],detail=False,url_path="create_order_waiting_be_paid",url_name="create_order_waiting_be_paid")
+    def create_order_waiting_be_paid(self, request,*args, **kwargs):
+        # ------------------------------ GLOBAL VARIABLE ----------------------------- #
+        orderWaitingBePaid = False
+        def isHaveinVoucher(listProductSlug , listDetailVoucher,voucher):
+            price = 0
+            for productSlug in listProductSlug:
+                for productVoucher in listDetailVoucher:
+                    if productVoucher.product_id.slug == productSlug.product_id.slug:
+                        productPrice = Product.objects.get(slug = productVoucher.product_id.slug)
+                        priceProduct = Price.objects.get(product_id = productPrice )
+                        priceActiveVoucher = ( priceProduct.price_total *  voucher.sale )/100
+                        if priceActiveVoucher > voucher.limited_price:
+                            price += voucher.limited_price
+                        else:
+                            price += priceActiveVoucher
+            return price
+        
+        try:
+            data_request= json.loads(request.body.decode('utf-8'))
+            products = data_request['params']['products']
+            address_id = data_request['params']['address_id']
+            phone_id = data_request['params']['phone_id']
+            transport_id = data_request['params']['transport_id']
+            voucher_id = data_request['params']['voucher_id']
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            response = Response()
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Params wrong" , "type" : "COWBP-0001"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        try:
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            if address_id != False :
+                addressSelected =  Address.objects.get(id = address_id , user_id = curent_user)
+            else:
+                addressSelected =  Address.objects.get(status = True, user_id = curent_user)
+            if phone_id != False:
+                phoneSelected = PhoneUser.objects.get(id = phone_id)
+            else:
+                phoneSelected = PhoneUser.objects.get(status = True, user_id = curent_user)
+            if transport_id != False:
+                transportSelected = Transport.objects.get(id = transport_id)
+            else:
+                transportSelected = Transport.objects.all().order_by('price').first()
+            print('transportSelected',transportSelected)
+            qr_code = Qrcode.objects.create()
+            qr_code.name=curent_user.email
+            qr_code.save()
+
+            print(str(id_generator()) + '-' + str(id_generator()))
+            orderWaitingBePaid = Order.objects.create(
+                name = str(id_generator()) + '-' + str(id_generator()),
+                datetime = datetime.now(),
+                receiver = phoneSelected.name,
+                address_receiver = addressSelected.address_content ,
+                phone_receiver = phoneSelected.phone ,
+                status = True ,
+                note = 'no',
+                logs = 'no',
+                cancel = False ,
+                is_payment = False ,
+                request_cancel = False ,
+                user_id = curent_user,
+                transport_id = transportSelected,
+                qr_code_id = qr_code
+            )
+            totalPrice = 0
+            for product in products:
+                productSelected = Product.objects.get(slug = product['slug'])
+                priceProduct = Price.objects.get(product_id = productSelected)
+                detailOrder = False
+                try:
+                    detailOrder = DetailOrder.objects.create(
+                        product_id = productSelected , 
+                        order_id = orderWaitingBePaid, 
+                        status = False ,
+                        quantity = int(product['quantity'])
+                    )
+                    detailOrder.save()
+                    print('detailOrder',detailOrder.order_id)
+
+                except Exception as e:
+                    print(e)
+                    if detailOrder != False:
+                        detailOrder.delete()
+                totalPrice = totalPrice + priceProduct.price_total * detailOrder.quantity
+            if voucher_id != False:
+                voucher = Voucher.objects.get(id = voucher_id)
+                listDetailVoucher = DetailVoucher.objects.filter(voucher_id = voucher)
+                listProductSlug = DetailOrder.objects.filter(order_id=orderWaitingBePaid)
+                totalPrice  -=  isHaveinVoucher(listProductSlug,listDetailVoucher,voucher)
+            orderWaitingBePaid.total_price = totalPrice
+            orderWaitingBePaid.save()
+
+            response.data = {
+                "name_order" : orderWaitingBePaid.name , "status" : status.HTTP_200_OK
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            print(e)
+            if orderWaitingBePaid != False:
+                orderWaitingBePaid.delete()
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Information wrong" , "type" : "COWBP-0002"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+    
+    # ---------------------------------------------------------------------------- #
+    #                                UPDATE RECEIVER                               #
+    # ---------------------------------------------------------------------------- #
+
+    @action(method=["POST"],detail=False,url_path="update_receiver",url_name="update_receiver")
+    def update_receiver(self, request,*args, **kwargs):
+        try:
+            data_request= json.loads(request.body.decode('utf-8'))
+            receiver = data_request['params']['receiver']
+            phoneReceiver = data_request['params']['phone_receiver']
+            nameOrder = data_request['params']['name_order']
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            response = Response()
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Params wrong" , "type" : "COWBP-0001"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        try:
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            orderWaitingBePaid = Order.objects.get(name = nameOrder , user_id = curent_user)
+            orderWaitingBePaid.receiver = receiver
+            orderWaitingBePaid.phone_receiver = phoneReceiver
+            orderWaitingBePaid.save()
+            response.data = {
+                "success" : True , "status" : status.HTTP_200_OK
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Information wrong" , "type" : "COWBP-0002"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+    
+    # ---------------------------------------------------------------------------- #
+    #                            UPDATE ADDRESS RECEIVER                           #
+    # ---------------------------------------------------------------------------- #
+    @action(method=["POST"],detail=False,url_path="update_address_receiver",url_name="update_address_receiver")
+    def update_address_receiver(self, request,*args, **kwargs):
+        try:
+            data_request= json.loads(request.body.decode('utf-8'))
+            addressReceiver = data_request['params']['address_receiver']
+            nameOrder = data_request['params']['name_order']
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            response = Response()
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Params wrong" , "type" : "COWBP-0001"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        try:
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            orderWaitingBePaid = Order.objects.get(name = nameOrder , user_id = curent_user)
+            orderWaitingBePaid.address_receiver = addressReceiver
+            orderWaitingBePaid.save()
+            response.data = {
+                "success" : True , "status" : status.HTTP_200_OK
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Information wrong" , "type" : "COWBP-0002"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+    
+    # ---------------------------------------------------------------------------- #
+    #                            UPDATE TRANSPORT ORDER                            #
+    # ---------------------------------------------------------------------------- #
+    @action(method=["POST"],detail=False,url_path="update_transport_order",url_name="update_transport_order")
+    def update_transport_order(self, request,*args, **kwargs):
+        try:
+            data_request= json.loads(request.body.decode('utf-8'))
+            transportId = data_request['params']['transport_id']
+            nameOrder = data_request['params']['name_order']
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            response = Response()
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Params wrong" , "type" : "UTOBP-0001"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        try:
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            transport = Transport.objects.get(id = transportId)
+            orderWaitingBePaid = Order.objects.get(name = nameOrder , user_id = curent_user)
+            orderWaitingBePaid.transport_id = transport
+            orderWaitingBePaid.save()
+            response.data = {
+                "success" : True , "status" : status.HTTP_200_OK
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Information wrong" , "type" : "UTOBP-0002"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+
+    # ---------------------------------------------------------------------------- #
+    #                                UPDATE VOUCHER                                #
+    # ---------------------------------------------------------------------------- #
+
+    @action(method=["POST"],detail=False,url_path="update_voucher_order",url_name="update_voucher_order")
+    def update_voucher_order(self, request,*args, **kwargs):
+        def isHaveinVoucher(listProductSlug , listDetailVoucher,voucher):
+            price = 0
+            for productSlug in listProductSlug:
+                for productVoucher in listDetailVoucher:
+                    if productVoucher.product_id.slug == productSlug.product_id.slug:
+                        productPrice = Product.objects.get(slug = productVoucher.product_id.slug)
+                        priceProduct = Price.objects.get(product_id = productPrice )
+                        priceActiveVoucher = ( priceProduct.price_total *  voucher.sale )/100
+                        if priceActiveVoucher > voucher.limited_price:
+                            price += voucher.limited_price
+                        else:
+                            price += priceActiveVoucher
+            return price
+        try:
+            data_request= json.loads(request.body.decode('utf-8'))
+            voucher_id = data_request['params']['voucher_id']
+            nameOrder = data_request['params']['name_order']
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            response = Response()
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Params wrong" , "type" : "UVOBP-0001"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        try:
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            orderWaitingBePaid = Order.objects.get(name = nameOrder , user_id = curent_user)
+            voucher = Voucher.objects.get(id = voucher_id)
+            listDetailVoucher = DetailVoucher.objects.filter(voucher_id = voucher)
+            listProductSlug = DetailOrder.objects.filter(order_id=orderWaitingBePaid)
+            totalPrice =  isHaveinVoucher(listProductSlug,listDetailVoucher,voucher)
+
+        
+            response.data = {
+                "success" : totalPrice*1000 , "status" : status.HTTP_200_OK
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Information wrong" , "type" : "UVOBP-0002"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+
     # ---------------------------------------------------------------------------- #
     #                              METHOD ADD TO CART                              #
     # ---------------------------------------------------------------------------- #
@@ -145,6 +693,7 @@ class OrderViewSet (viewsets.ModelViewSet):
             jwtToken = request.COOKIES.get('refresh_token')
             refresh_token = RefreshToken(jwtToken)
             decoded_token = refresh_token.payload
+            print("addto cart")
         except :
             return Response({
                 "success":False , 'status' : status.HTTP_404_NOT_FOUND ,
@@ -172,6 +721,7 @@ class OrderViewSet (viewsets.ModelViewSet):
             })
         # ------------------- check the order is available today ------------------ #
         order_id = checkTheOrderIsAvailebleToDay(curent_user,now)
+        print('order_id',order_id)
         if order_id != False:
             # ------------------ check detail order is available product ----------------- #
             checkDetailProduct,check_detail_order = checkDetailOrderIsAvailableProduct(product,order_id)
@@ -199,6 +749,7 @@ class OrderViewSet (viewsets.ModelViewSet):
                     status = False ,
                     note = 'no',
                     logs = 'no',
+                    is_payment = False,
                     total_price = price_product[0].price_total,
                     cancel = False ,
                     request_cancel = False ,
@@ -206,7 +757,7 @@ class OrderViewSet (viewsets.ModelViewSet):
                     transport_id = transport[0]
                 )
                 order_new.save()
-                print(order_new)
+                print('order_new',order_new.status)
                 try:
                     detailproduct = DetailOrder.objects.create(
                     product_id = product , 
@@ -444,3 +995,61 @@ class OrderViewSet (viewsets.ModelViewSet):
                 "sucess" : False , "status" : status.HTTP_404_NOT_FOUND ,
                 "error" : { "value" : "Information wrong" , "type" : "CPIC-0002"}
             })
+    
+    @action(method=["POST"],detail=False,url_path="update_payment_order",url_name="update_payment_order")
+    def update_payment_order(self, request,*args, **kwargs):
+        try:
+            data_request= json.loads(request.body.decode('utf-8'))
+            total_price = data_request['params']['total_price']
+            type_payment = data_request['params']['type']
+            nameOrder = data_request['params']['name_order']
+            jwtToken = request.COOKIES.get('refresh_token')
+            refresh_token = RefreshToken(jwtToken)
+            decoded_token = refresh_token.payload
+            response = Response()
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Params wrong" , "type" : "COWBP-0001"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response
+        try:
+            curent_user = User.objects.get(id = decoded_token['user_id'])
+            orderWaitingBePaid = Order.objects.get(name = nameOrder , user_id = curent_user)
+            orderWaitingBePaid.is_payment = True
+            orderWaitingBePaid.save()
+            if type_payment :
+                payment  = Payment.objects.create(
+                    order_id = orderWaitingBePaid ,
+                    type = True ,
+                    total_price = total_price,
+                    cod = True ,
+                )
+                payment.save()
+            else:
+                payment  = Payment.objects.create(
+                    order_id = orderWaitingBePaid ,
+                    type = False ,
+                    total_price = total_price,
+                    cod = False ,
+                )
+                payment.save()
+            response.data = {
+                "success" : True , "status" : status.HTTP_200_OK
+            }
+            response.status_code = status.HTTP_200_OK
+            return response
+        except Exception as e:
+            print(e)
+            response.data = {
+                "success" : False , "status" : status.HTTP_404_NOT_FOUND ,
+                "error" : {
+                    "value" : "Information wrong" , "type" : "COWBP-0002"
+                }
+            }
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return response

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order,Transport,DetailOrder
+from .models import Order,Transport,DetailOrder,Qrcode , Payment
 # Register your models here.
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id' , 'name' , 'user_id' ,'status','total_price' ,'cancel')
@@ -12,3 +12,5 @@ admin.site.register(DetailOrder,DetailOrderAdmin)
 class TransportAdmin(admin.ModelAdmin):
     list_display = ('id','slug' , 'name' ,'price')
 admin.site.register(Transport,TransportAdmin)
+admin.site.register(Qrcode)
+admin.site.register(Payment)

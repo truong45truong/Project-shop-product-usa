@@ -304,7 +304,6 @@ class Productviewset(viewsets.ViewSet):
             else:
                 queryset = Product.objects.raw(rawQuerySqlProductSlug,[slug])
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
-                queryset , numberProduct = data_processing.handleRawQuery(queryset)
 
                 serializer = ProductDetailSerializer(queryset,many=True)
                 return Response({"products" : serializer.data })
@@ -317,16 +316,17 @@ class Productviewset(viewsets.ViewSet):
                     return Response({"products" : False , "error" : "slug_product Wrong"})
                 queryset = Product.objects.raw(rawQuerySqlProductSlug,[slug])
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
+                serializer = ProductDetailSerializer(queryset,many=True)
+                return Response({"products" : serializer.data })
             else:
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
-            queryset , numberProduct = data_processing.handleRawQuery(queryset)
+                queryset , numberProduct = data_processing.handleRawQuery(queryset)
         else:
             if slug:
                 if  ' ' in slug:
                     return Response({"products" : False , "error" : "slug_product Wrong"})
                 queryset = Product.objects.raw(rawQuerySqlProductSlug,[slug])
                 queryset = [{**vars(obj), 'status_heart': False } for obj in queryset]
-                queryset , numberProduct = data_processing.handleRawQuery(queryset)
                 serializer = ProductDetailSerializer(queryset,many=True)
                 return Response({"products" : serializer.data })
             else:

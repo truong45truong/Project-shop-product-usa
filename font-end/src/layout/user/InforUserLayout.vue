@@ -2,7 +2,7 @@
     <div class="row d-flex d-flex-column align-items-center justify-content-center mt-2 mx-2">
         <font-awesome-icon icon="fa-regular fa-circle-xmark" class="icon-hide fs-2 text-dark" @click="$emit('hide')" />
         <div class="w-75 d-flex flex-column align-items-center mt-3">
-            <!-- <img class="img-infor-user" :src="photo" :alt="photo"> -->
+            <img class="img-infor-user" :src="photo" :alt="photo">
             <p class="mt-2">{{ name }}</p>
         </div>
         <div class="d-flex">

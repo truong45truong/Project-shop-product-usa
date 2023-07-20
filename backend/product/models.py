@@ -15,14 +15,14 @@ class Category(MPTTModel):
     
 class Product(models.Model):
     id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    slug = models.CharField(null=False,max_length=50)
-    name=models.CharField(max_length=50,null=False)
+    slug = models.CharField(null=False,max_length=256)
+    name=models.CharField(max_length=256,null=False)
     sex = models.IntegerField(null=True)
     description=models.TextField(null=True)
     category_id=models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
-
+    quantity = models.IntegerField(null=False)
     def __str__(self):
-        return self.name
+        return self.slug
 
 class Price(models.Model):
     id =  models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

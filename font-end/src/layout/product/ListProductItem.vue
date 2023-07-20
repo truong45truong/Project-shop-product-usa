@@ -51,10 +51,10 @@
             </div>
             <div v-if="listProductItem.length > 0" class="row" >
                 <Carousel v-if="!toMarket || isShowLoginStore == true" :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
-                    <Slide v-for="index in arrayMarket" :key="index" :class="'mx-1 shawdo'">
-                        <product-item :slug="listProductItem[index].slug" :photo="listProductItem[index].data" :name="listProductItem[index].name" 
-                        :sale='listProductItem[index].sale' :price="listProductItem[index].price" :status="listProductItem[index].status_heart" 
-                        :hearts="listProductItem[index].count_heart"
+                    <Slide v-for="item in listProductItem" :key="item" :class="'mx-1 shawdo'">
+                        <product-item :slug="item.slug" :photo="item.data" :name="item.name" 
+                        :sale='item.sale' :price="item.price" :status="item.status_heart" 
+                        :hearts="item.count_heart"
                         />
                     </Slide>
                     <template #addons>
@@ -195,9 +195,6 @@ export default ({
         await ProductApiService.get().then(res => {
             console.log('array_market',res)
             this.listProductItem = Array.from(res.data.products)
-            for( let i = 0 ; i < 7 ; i++){
-                this.arrayMarket.push(Math.floor(Math.random() * 1));
-            }
         })
     },
     mounted() {

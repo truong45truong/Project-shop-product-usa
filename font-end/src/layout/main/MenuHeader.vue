@@ -64,8 +64,9 @@
                         </div> 
                         <div v-if="isShowUser" class="position-absolute bg-white rounded w-menu-user shadow top-100 p-2 py-4 text-center">
                             <!-- <p class="text-dark action-menu-user" >Thông tin cá nhân</p> -->
+                            <p class="text-dark action-menu-user" @click="nextProfile">Thông tin</p>
                             <p class="text-dark action-menu-user" @click="showChangePassword">Đổi mật khẩu</p>
-                            <p class="text-dark action-menu-user mb-0" @click="logoutUser()">Đăng xuất</p>
+                            <p class="text-dark action-menu-user mb-0" @click="logoutUser">Đăng xuất</p>
                         </div>
 
                     </div>
@@ -212,6 +213,9 @@ export default {
         },1000),
         hideSearchLayour(){
             this.isShowSearch = false
+        },
+        nextProfile(){
+            this.$router.push({ name : 'profile' })
         }
     },
     computed: {
